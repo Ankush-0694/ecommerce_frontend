@@ -1,32 +1,24 @@
 import { gql } from "@apollo/client";
 
-const getProductsQuery = gql`
-  {
-    products {
-      id
-      productName
-      productDescription
-      productPrice
-    }
-  }
-`;
-
-const addProductMutation = gql`
-  mutation(
+const addOrderMutation = gql`
+  mutation (
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
+    $quantity: Int!
   ) {
-    addProduct(
+    addOrder(
       productName: $productName
       productDescription: $productDescription
       productPrice: $productPrice
+      quantity: $quantity
     ) {
       productName
       productDescription
       productPrice
+      quantity
     }
   }
 `;
 
-export { getProductsQuery, addProductMutation };
+export { addOrderMutation };

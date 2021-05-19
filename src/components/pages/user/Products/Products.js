@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { getProductsQuery } from "../../../../queries/queries";
+import { getProductsQuery } from "../../../../queries/productQueries";
 
 const Products = () => {
   const obj = useQuery(getProductsQuery);
@@ -13,11 +14,13 @@ const Products = () => {
         {!loading ? (
           data.products.map((product) => {
             return (
-              <li key={product.id} style={{ padding: "10px" }}>
-                {product.productName} {"-"} {product.productDescription}
-                {"-"}
-                {product.productPrice}
-              </li>
+              <Link key={product.id} to={`/products/:${product.id}`}>
+                <li style={{ padding: "10px" }}>
+                  {product.productName} {"-"} {product.productDescription}
+                  {"-"}
+                  {product.productPrice}
+                </li>
+              </Link>
             );
           })
         ) : (
