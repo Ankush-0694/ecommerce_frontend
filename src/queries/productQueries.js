@@ -23,7 +23,7 @@ const getSingleProduct = gql`
 `;
 
 const addProductMutation = gql`
-  mutation(
+  mutation (
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
@@ -41,7 +41,7 @@ const addProductMutation = gql`
 `;
 
 const uploadFileMutaion = gql`
-  mutation($file: Upload!) {
+  mutation ($file: Upload!) {
     uploadFile(file: $file) {
       file
     }

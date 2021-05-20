@@ -76,7 +76,7 @@ const Signup = () => {
 
         <div className="container-log-btn">
           <button type="submit" name="btn_submit" className="log-form-btn">
-            Login
+            Signup
           </button>
         </div>
       </form>

@@ -1,8 +1,19 @@
 import React from "react";
+import MyButtonComponent from "../Design/buttonComponent";
 
 const Login = () => {
+  const myFunction = (e) => {
+    alert("yeah my button component on click");
+  };
+  const myStyle = {
+    background: "red",
+  };
+
   return (
     <div>
+      <MyButtonComponent userFunction={myFunction} userStyle={myStyle}>
+        Hi This is my component Button
+      </MyButtonComponent>
       <form>
         <div className="group log-input">
           <input type="text" id="email" name="email" placeholder="Email" />
