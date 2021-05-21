@@ -12,7 +12,7 @@ const getProductsQuery = gql`
 `;
 
 const getSingleProduct = gql`
-  query GetProduct($id: ID) {
+  query ($id: ID!) {
     product(id: $id) {
       id
       productName

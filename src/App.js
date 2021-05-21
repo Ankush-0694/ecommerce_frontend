@@ -11,7 +11,7 @@ import SingleProduct from "./components/pages/user/Products/SingleProduct";
 import AddProduct from "./components/pages/vendor/Product/AddProduct";
 import Checkout from "./components/pages/user/Checkout/Checkout";
 
-const link = createUploadLink({ uri: "http://localhost:4001/graphql" });
+const link = createUploadLink({ uri: "http://localhost:4010" });
 
 const client = new ApolloClient({
   link,

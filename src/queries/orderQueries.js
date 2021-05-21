@@ -21,4 +21,16 @@ const addOrderMutation = gql`
   }
 `;
 
-export { addOrderMutation };
+const getOrdersQuery = gql`
+  {
+    orders {
+      id
+      productName
+      productDescription
+      productPrice
+      quantity
+    }
+  }
+`;
+
+export { addOrderMutation, getOrdersQuery };

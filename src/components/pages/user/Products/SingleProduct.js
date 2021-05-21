@@ -5,12 +5,13 @@ import { getSingleProduct } from "../../../../queries/productQueries";
 
 const SingleProduct = (props) => {
   const productid = props.match.params.id.split(":")[1];
-  //   console.log(productid);
+  console.log(productid);
 
   const obj = useQuery(getSingleProduct, {
     variables: { id: productid },
   });
   const { loading, error, data } = obj;
+  console.log(data);
   //   console.log(data);
   let productData;
   if (!loading) {
