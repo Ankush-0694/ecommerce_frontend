@@ -9,6 +9,7 @@ const Checkout = (props) => {
   const productid = props.match.params.id.split(":")[1];
 
   const { addressFormData, setAddressFormData } = useAddAddressHook();
+  const { pincode, fullName } = addressFormData;
 
   const obj = useQuery(getSingleProduct, {
     variables: { id: productid },
@@ -25,30 +26,43 @@ const Checkout = (props) => {
   }
 
   const onChange = (e) => {
+    let value = e.target.value;
+
     setAddressFormData({
       ...addressFormData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     });
   };
 
   const quantity = 1;
-
   const onSubmit = (e) => {
     e.preventDefault();
+
+    /////change of types of values in address object
+
+    addressFormData["pincode"] = Number(addressFormData["pincode"]);
+    addressFormData["phoneNumber"] = Number(addressFormData["phoneNumber"]);
+
+    ////change of types of values in address object
+
     console.log(addressFormData);
+
     const dataToStore = {
       // addressFormData,
       productName: productData.productName,
       productDescription: productData.productDescription,
       productPrice: productData.productPrice,
       quantity: quantity,
+      address: addressFormData,
     };
+
     addOrder({
       variables: {
         productName: productData.productName,
         productDescription: productData.productDescription,
         productPrice: Number(productData.productPrice),
         quantity: Number(quantity),
+        address: addressFormData, // here we may need to specify type of every key of address object
       },
       //   refetchQueries: [{ query: getBooksQuery }],
     });
