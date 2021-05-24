@@ -11,7 +11,7 @@ const MyTextInput = ({
   name,
   value,
   label,
-  userStyle,
+  userstyle,
   onChange,
   children,
 }) => {
@@ -23,8 +23,9 @@ const MyTextInput = ({
       value={value}
       label={label}
       onChange={onChange}
-      userStyle={userStyle}
+      userstyle={userstyle}
       variant="outlined"
+      fullWidth
     />
   );
 };
