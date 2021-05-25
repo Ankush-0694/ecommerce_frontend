@@ -26,11 +26,21 @@ const Signup = () => {
   };
 
   return (
-    <div style={{ background: "white" }}>
+    <div>
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}
-          style={{ width: "50%", height: "50vh", margin: "auto" }}>
+          style={{
+            width: "50%",
+            height: "50vh",
+            margin: "auto",
+            maxWidth: "550px",
+          }}>
+          <div style={{ color: "black", width: "100%" }}>
+            <h2 style={{ textAlign: "center", marginTop: "-20px" }}>
+              LOGO OR NAME
+            </h2>
+          </div>
           <div>
             <MyTextInput
               type="text"
@@ -59,7 +69,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="group log-input">
+          <div>
             <MyTextInput
               type="password"
               id="password"
@@ -75,7 +85,7 @@ const Signup = () => {
 
           <br></br>
 
-          <div className="container-log-btn">
+          <div style={{ textAlign: "center" }}>
             <MyButtonComponent type="submit">Signup</MyButtonComponent>
           </div>
         </form>

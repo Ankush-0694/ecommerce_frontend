@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { getProductsQuery } from "../../../../queries/productQueries";
-import { getOrdersQuery } from "../../../../queries/orderQueries";
+import { ProductHelper } from "./ProductHelper";
+import { MyGridContainer } from "../../../Design/MyGrid";
 
 const Products = () => {
   const obj = useQuery(getProductsQuery);
@@ -12,24 +13,22 @@ const Products = () => {
   // const { error: error1, loading: loading1, data: orderData } = obj2;
   console.log(data);
   return (
-    <div>
-      <ul id="Product-list">
+    <div style={{ margin: "20px" }}>
+      <MyGridContainer container justify="center" spacing={4}>
         {!loading ? (
           data.products.map((product) => {
             return (
-              <Link key={product.id} to={`/products/:${product.id}`}>
-                <li style={{ padding: "10px" }}>
-                  {product.productName} {"-"} {product.productDescription}
-                  {"-"}
-                  {product.productPrice}
-                </li>
-              </Link>
+              <ProductHelper
+                key={product.id}
+                details={product}
+                link={`/products/:${product.id}`}
+              />
             );
           })
         ) : (
           <p>Loading</p>
         )}
-      </ul>
+      </MyGridContainer>
     </div>
   );
 };

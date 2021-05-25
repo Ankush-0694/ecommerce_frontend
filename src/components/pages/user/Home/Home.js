@@ -1,17 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import { makeStyles } from "@material-ui/core/styles";
 import { MyFullScreenBox } from "../../../Design/FullScreenBox";
+import Products from "../Products/Products";
 
 const Home = () => {
   return (
-    <MyFullScreenBox display="flex" width="100%" height="100vh">
-      <div style={{ margin: "auto" }}>
-        1. Box (margin: auto) - Welcome to the Website and{" "}
-        <Link to="Products">products</Link>
-      </div>
-    </MyFullScreenBox>
+    <div>
+      <MyFullScreenBox display="flex" width="100%" height="50vh">
+        <h1 style={{ margin: "auto" }}>Welcome to the Website</h1>
+      </MyFullScreenBox>
+      <MyFullScreenBox display="flex" width="100%">
+        <h1 style={{ margin: "auto" }}>Products</h1>
+      </MyFullScreenBox>
+      <MyFullScreenBox display="flex" width="100%" height="50vh">
+        <Products />
+      </MyFullScreenBox>
+    </div>
   );
 };
 

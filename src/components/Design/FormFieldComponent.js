@@ -5,6 +5,17 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+// still need to figure how to change border color and fontsize etc...  // border radius - 50px is awesome
+// using themeprovider and withStyles ( both are in a single video)
+
+const useStyles = makeStyles({
+  root: {
+    margin: "10px 0px",
+  },
+});
+
 const MyTextInput = ({
   type,
   id,
@@ -15,6 +26,7 @@ const MyTextInput = ({
   onChange,
   children,
 }) => {
+  const classes = useStyles();
   return (
     <TextField
       type={type}
@@ -26,6 +38,11 @@ const MyTextInput = ({
       userstyle={userstyle}
       variant="outlined"
       fullWidth
+      className={classes.root}
+      size="medium"
+      inputProps={{
+        style: { color: "black" },
+      }} // input props are  to overide pre defined css
     />
   );
 };
