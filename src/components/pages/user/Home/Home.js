@@ -14,7 +14,7 @@ const Home = () => {
         <h1 style={{ margin: "auto" }}>Products</h1>
       </MyFullScreenBox>
       <MyFullScreenBox display="flex" width="100%" height="50vh">
-        {/* <Products /> */}
+        <Products />
       </MyFullScreenBox>
     </div>
   );

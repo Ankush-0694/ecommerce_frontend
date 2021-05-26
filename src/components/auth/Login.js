@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MyButtonComponent } from "../Design/ButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
+  const history = useHistory();
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const { isAuthenticated, setisAuthenticated } = props;
+  // console.log(setisAuthenticated);
+
+  // console.log(props);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("auth");
+      history.push("/");
+    }
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
+
+  const onChange = (e) => {
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post(
+      "http://localhost:4000/auth/login",
+      userDetails
+    );
+
+    console.log(res.data); // this is token object
+
+    if (res.data.token) {
+      setisAuthenticated(true); //load User
+      localStorage.setItem("token", res.data.token);
+    }
+  };
   return (
     <div>
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
+          onSubmit={onSubmit}
           style={{
             width: "50%",
             height: "50vh",
@@ -25,7 +66,7 @@ const Login = () => {
               id="email"
               name="email"
               label="Email"
-              // onChange=""
+              onChange={onChange}
             />
           </div>
           <div>
@@ -34,7 +75,7 @@ const Login = () => {
               id="password"
               name="password"
               label="Password"
-              // onChange=""
+              onChange={onChange}
             />
           </div>
           <div>
