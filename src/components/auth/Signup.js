@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import MyButtonComponent from "../Design/ButtonComponent";
+import { MyButtonComponent } from "../Design/ButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
 
@@ -86,7 +86,12 @@ const Signup = () => {
           <br></br>
 
           <div style={{ textAlign: "center" }}>
-            <MyButtonComponent type="submit">Signup</MyButtonComponent>
+            <MyButtonComponent
+              color="primary"
+              variant="contained"
+              type="submit">
+              Signup
+            </MyButtonComponent>
           </div>
         </form>
       </MyFullScreenBox>

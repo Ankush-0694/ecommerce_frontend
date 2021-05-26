@@ -1,5 +1,5 @@
 import React from "react";
-import MyButtonComponent from "../Design/ButtonComponent";
+import { MyButtonComponent } from "../Design/ButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
 
@@ -45,7 +45,12 @@ const Login = () => {
           </div>
           <br></br>
           <div className="container-log-btn" style={{ textAlign: "center" }}>
-            <MyButtonComponent type="submit">Login</MyButtonComponent>
+            <MyButtonComponent
+              color="primary"
+              variant="contained"
+              type="submit">
+              Login
+            </MyButtonComponent>
           </div>
         </form>
       </MyFullScreenBox>

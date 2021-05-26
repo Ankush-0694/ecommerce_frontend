@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core"; // need to make My Design file
 
 import { MyCardContainer } from "../../../Design/MyCardComponents/CardContainer";
 import { MyCardContent } from "../../../Design/MyCardComponents/CardContent";
