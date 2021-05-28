@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { getSingleProduct } from "../../../../queries/productQueries";
+import ProductReviewForm from "./ProductReviewForm";
 
 const SingleProduct = (props) => {
   const productid = props.match.params.id.split(":")[1];
@@ -31,6 +32,7 @@ const SingleProduct = (props) => {
       ) : (
         <p>Loading...</p>
       )}
+      <ProductReviewForm productId={productid} />
     </div>
   );
 };

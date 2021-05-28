@@ -47,6 +47,32 @@ const MyTextInput = ({
   );
 };
 
+const MyMultilineInput = ({
+  id,
+  label,
+  rows,
+  variant,
+  type,
+  name,
+  value,
+  onChange,
+}) => {
+  return (
+    <TextField
+      id={id}
+      type={type}
+      name={name}
+      label={label}
+      value={value}
+      onChange={onChange}
+      fullWidth
+      multiline
+      rows={rows}
+      variant={variant}
+    />
+  );
+};
+
 const MyCheckbox = ({ name, label }) => {
   return (
     <FormControlLabel
@@ -60,4 +86,4 @@ const MyCheckbox = ({ name, label }) => {
   );
 };
 
-export { MyTextInput, MyCheckbox };
+export { MyTextInput, MyCheckbox, MyMultilineInput };
