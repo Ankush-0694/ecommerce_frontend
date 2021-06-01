@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { getProductsQuery } from "../../../../queries/productQueries";
-import { ProductHelper } from "./ProductHelper";
+import { ProductCard } from "./ProductCard";
 import { MyGridContainer } from "../../../Design/MyGrid";
 
 const Products = () => {
@@ -18,7 +18,7 @@ const Products = () => {
         {!loading ? (
           data.products.map((product) => {
             return (
-              <ProductHelper
+              <ProductCard
                 key={product.id}
                 details={product}
                 link={`/products/:${product.id}`}

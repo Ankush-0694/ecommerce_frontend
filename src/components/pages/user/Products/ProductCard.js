@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductHelper = ({ details, link }) => {
+const ProductCard = ({ details, link }) => {
   const classes = useStyles();
   const { productName, productDescription, productPrice } = details;
 
@@ -66,4 +66,4 @@ const ProductHelper = ({ details, link }) => {
   );
 };
 
-export { ProductHelper };
+export { ProductCard };

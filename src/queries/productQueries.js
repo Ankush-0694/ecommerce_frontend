@@ -18,6 +18,10 @@ const getSingleProduct = gql`
       productName
       productDescription
       productPrice
+      reviews {
+        review
+        rating
+      }
     }
   }
 `;
@@ -40,6 +44,17 @@ const addProductMutation = gql`
   }
 `;
 
+const addProductReviewMutation = gql`
+  mutation ($productid: ID, $review: String!, $rating: Int) {
+    addReview(productid: $productid, review: $review, rating: $rating) {
+      reviews {
+        review
+        rating
+      }
+    }
+  }
+`;
+
 const uploadFileMutaion = gql`
   mutation ($file: Upload!) {
     uploadFile(file: $file) {
@@ -53,4 +68,5 @@ export {
   addProductMutation,
   getSingleProduct,
   uploadFileMutaion,
+  addProductReviewMutation,
 };
