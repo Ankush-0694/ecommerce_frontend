@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 
-import { MyMultilineInput } from "../../../Design/FormFieldComponent";
-import { MyButtonComponent } from "../../../Design/ButtonComponent";
-import { MyRatingComponent } from "../../../Design/MyRatingComponent";
+import { MyMultilineInput } from "../../../../Design/FormFieldComponent";
+import { MyButtonComponent } from "../../../../Design/ButtonComponent";
+import { MyRatingComponent } from "../../../../Design/MyRatingComponent";
 
 import {
   addProductReviewMutation,
-  getProductsQuery,
   getSingleProduct,
-} from "../../../../queries/productQueries";
+} from "../../../../../queries/productQueries";
 
 const ProductReviewForm = ({ productid }) => {
   const [addReview, { data: newData }] = useMutation(addProductReviewMutation, {
@@ -47,21 +46,21 @@ const ProductReviewForm = ({ productid }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div style={{ margin: "10px", maxWidth: "60%" }}>
+      <div style={{ margin: "10px" }}>
         <MyMultilineInput
           id="outlined-multiline-static"
           label="Enter Your Review"
           multiline
-          rows={4}
+          rows={3}
           variant="outlined"
           name="review"
           onChange={onChange}
           value={review}
         />
-        <div>
+        <div style={{ marginTop: "10px" }}>
           <MyRatingComponent value={ratingValue} setValue={setRatingValue} />
         </div>
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ marginTop: "5px" }}>
           <MyButtonComponent color="primary" variant="contained" type="submit">
             Add Review
           </MyButtonComponent>

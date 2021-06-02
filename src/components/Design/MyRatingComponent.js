@@ -5,7 +5,7 @@ import { Rating } from "@material-ui/lab";
 const MyRatingComponent = ({ value, setValue, readOnly }) => {
   return (
     <Box component="fieldset" mb={3} borderColor="transparent">
-      <Typography component="legend">Rating</Typography>
+      {/* <Typography component="legend">Rating</Typography> */}
       <Rating
         name="simple-controlled"
         value={value}

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { MyFullScreenBox } from "../../../Design/FullScreenBox";
-import Products from "../Products/Products";
+import Products from "../Products/AllProducts/Products";
 
 const Home = () => {
   return (

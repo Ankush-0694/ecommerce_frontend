@@ -7,7 +7,7 @@ import Home from "./components/pages/user/Home/Home";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 // import Products from "./components/pages/user/Products/Products";
-import SingleProduct from "./components/pages/user/Products/SingleProduct";
+import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import AddProduct from "./components/pages/vendor/Product/AddProduct";
 import Checkout from "./components/pages/user/Checkout/Checkout";
 import PrivateRoute from "./components/routing/PrivateRoute";

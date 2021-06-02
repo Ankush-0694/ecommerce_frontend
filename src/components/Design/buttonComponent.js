@@ -7,6 +7,10 @@ const MyButtonComponent = ({
   type,
   color,
   variant,
+  fullWidth,
+  size,
+  component,
+  to,
 }) => {
   return (
     <Button
@@ -15,6 +19,10 @@ const MyButtonComponent = ({
       style={userStyle}
       type={type}
       color={color}
+      fullWidth={fullWidth}
+      size={size}
+      component={component}
+      to={to}
       className="my-button-component">
       {children}
     </Button>

@@ -1,5 +1,5 @@
 import React from "react";
-import { MyRatingComponent } from "../../../Design/MyRatingComponent";
+import { MyRatingComponent } from "../../../../Design/MyRatingComponent";
 
 const ProductReviews = ({ reviews }) => {
   console.log(reviews);
@@ -8,8 +8,9 @@ const ProductReviews = ({ reviews }) => {
       {reviews.map((review, index) => {
         return (
           <div key={index}>
-            {review.review}
+            <div style={{ margin: "10px 0" }}>{review.review}</div>
             <MyRatingComponent value={review.rating} readOnly={true} />
+            <hr></hr>
           </div>
         );
       })}

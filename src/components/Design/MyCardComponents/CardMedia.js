@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyCardMedia = ({ height, title, image }) => {
+const MyCardMedia = ({ height, title, image, width }) => {
   const classes = useStyles();
   return (
     <CardMedia

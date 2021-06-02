@@ -1,9 +1,8 @@
-import { supportsResultCaching } from "@apollo/client/cache/inmemory/entityStore";
 import { Grid } from "@material-ui/core";
 
-const MyGridItem = ({ children, xs, sm, md }) => {
+const MyGridItem = ({ children, xs, sm, md, userStyle }) => {
   return (
-    <Grid item xs={xs} sm={sm} md={md}>
+    <Grid item xs={xs} sm={sm} md={md} style={userStyle}>
       {children}
     </Grid>
   );
