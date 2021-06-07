@@ -1,7 +1,10 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { getSingleProduct } from "../../../../../queries/productQueries";
+import {
+  getCartQuery,
+  getSingleProduct,
+} from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./ProductReviewForm";
 import ProductReviews from "./ProductReviews";
 import { MyGridContainer } from "../../../../Design/MyGrid";
@@ -10,7 +13,8 @@ import { MyTypography } from "../../../../Design/MyTypography";
 import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
 import { MyFullScreenBox } from "../../../../Design/FullScreenBox";
-import { MyButtonComponent } from "../../../../Design/ButtonComponent";
+import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
+import { addToCartMutation } from "../../../../../queries/Product/productMutations";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -26,6 +30,15 @@ const SingleProduct = (props) => {
   const productid = props.match.params.id.split(":")[1];
   console.log(productid);
 
+  const [
+    addToCart,
+    { error: cartError, loading: cartLoading, data: cartData },
+  ] = useMutation(addToCartMutation, {
+    refetchQueries: [{ query: getCartQuery }],
+  });
+
+  console.log(cartData);
+
   const obj = useQuery(getSingleProduct, {
     variables: { id: productid },
   });
@@ -37,8 +50,25 @@ const SingleProduct = (props) => {
     productData = data.product;
   }
 
+  const onClickAddCart = (e) => {
+    console.log("clicked");
+    e.preventDefault();
+    addToCart({
+      variables: {
+        productName: productData.productName,
+        productDescription: productData.productDescription,
+        productPrice: productData.productPrice,
+      },
+    });
+    if (error) {
+      console.log(" error happpend " + error);
+    } else {
+      alert("added to cart");
+    }
+  };
+
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div style={{ marginTop: "10px", padding: "20px" }}>
       {!loading ? (
         <MyGridContainer justify="center" spacing={4}>
           <MyGridItem xs={8} sm={4}>
@@ -65,7 +95,8 @@ const SingleProduct = (props) => {
               <MyButtonComponent
                 variant="outlined"
                 size="medium"
-                color="secondary">
+                color="secondary"
+                userFunction={onClickAddCart}>
                 ADD TO CART
               </MyButtonComponent>
               <span style={{ margin: "0 10px" }}></span>

@@ -1,31 +1,4 @@
 import { gql } from "@apollo/client";
-
-const getProductsQuery = gql`
-  {
-    products {
-      id
-      productName
-      productDescription
-      productPrice
-    }
-  }
-`;
-
-const getSingleProduct = gql`
-  query ($id: ID!) {
-    product(id: $id) {
-      id
-      productName
-      productDescription
-      productPrice
-      reviews {
-        review
-        rating
-      }
-    }
-  }
-`;
-
 const addProductMutation = gql`
   mutation (
     $productName: String!
@@ -55,6 +28,24 @@ const addProductReviewMutation = gql`
   }
 `;
 
+const addToCartMutation = gql`
+  mutation (
+    $productName: String!
+    $productDescription: String!
+    $productPrice: Int!
+  ) {
+    addToCart(
+      productName: $productName
+      productDescription: $productDescription
+      productPrice: $productPrice
+    ) {
+      productName
+      productDescription
+      productPrice
+    }
+  }
+`;
+
 const uploadFileMutaion = gql`
   mutation ($file: Upload!) {
     uploadFile(file: $file) {
@@ -64,9 +55,8 @@ const uploadFileMutaion = gql`
 `;
 
 export {
-  getProductsQuery,
   addProductMutation,
-  getSingleProduct,
   uploadFileMutaion,
   addProductReviewMutation,
+  addToCartMutation,
 };

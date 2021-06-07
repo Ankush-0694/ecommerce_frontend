@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import {
   addProductMutation,
   uploadFileMutaion,
-} from "../../../../queries/productQueries";
+} from "../../../../queries/Product/productMutations";
 
 const Products = () => {
   const [addProduct, { data }] = useMutation(addProductMutation);

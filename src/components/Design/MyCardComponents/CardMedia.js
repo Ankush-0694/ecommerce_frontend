@@ -11,13 +11,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyCardMedia = ({ height, title, image, width }) => {
+const MyCardMedia = ({ height, title, image, style }) => {
   const classes = useStyles();
   return (
     <CardMedia
       height={height}
       title={title}
       image={image}
+      style={style}
       component="img"
       className={classes.cardMedia}
     />
@@ -25,3 +26,4 @@ const MyCardMedia = ({ height, title, image, width }) => {
 };
 
 export { MyCardMedia };
+//classes.cardMedia

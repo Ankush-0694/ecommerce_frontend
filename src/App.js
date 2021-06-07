@@ -13,6 +13,7 @@ import Checkout from "./components/pages/user/Checkout/Checkout";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 import setAuthToken from "./components/util/setAuthToken";
+import Cart from "./components/pages/user/Cart/Cart";
 
 const link = createUploadLink({ uri: "http://localhost:4010" });
 
@@ -60,6 +61,7 @@ function App() {
               )}
             />
             <Route exact path="/Signup" component={Signup} />
+            <Route exact path="/cart" component={Cart} />
             {/* <Route exact path="/Products" component={Products} /> */}
             <Route exact path="/Products/:id" component={SingleProduct} />
             <Route exact path="/checkout/:id" component={Checkout} />

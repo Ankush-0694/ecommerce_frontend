@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { getProductsQuery } from "../../../../../queries/productQueries";
+import { getProductsQuery } from "../../../../../queries/Product/productQueries";
 import { ProductCard } from "./ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 

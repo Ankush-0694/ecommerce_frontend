@@ -1,19 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Button } from "@material-ui/core"; // need to make My Design file
-
 import { MyCardContainer } from "../../../../Design/MyCardComponents/CardContainer";
 import { MyCardContent } from "../../../../Design/MyCardComponents/CardContent";
 import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
 import { MyCardActions } from "../../../../Design/MyCardComponents/CardActions";
 import { MyGridItem } from "../../../../Design/MyGrid";
-
 import { makeStyles } from "@material-ui/core/styles";
-import { findByLabelText } from "@testing-library/dom";
 import { MyTypography } from "../../../../Design/MyTypography";
-import { TrendingUpRounded } from "@material-ui/icons";
-import { MyButtonComponent } from "../../../../Design/ButtonComponent";
+import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
+
+import { addToCartMutation } from "../../../../../queries/Product/productMutations";
+import { useMutation } from "@apollo/client";
+import { getCartQuery } from "../../../../../queries/Product/productQueries";
 
 const useStyles = makeStyles((theme) => ({
   cardPricing: {
@@ -33,6 +32,31 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = ({ details, link }) => {
   const classes = useStyles();
   const { id, productName, productDescription, productPrice } = details;
+
+  const [addToCart, { error, loading, data: cartData }] = useMutation(
+    addToCartMutation,
+    {
+      refetchQueries: [{ query: getCartQuery }],
+    }
+  );
+  console.log(cartData);
+
+  const onClickAddCart = (e) => {
+    console.log("clicked");
+    e.preventDefault();
+    addToCart({
+      variables: {
+        productName,
+        productDescription,
+        productPrice,
+      },
+    });
+    if (error) {
+      console.log(" error happpend " + error);
+    } else {
+      alert("added to cart");
+    }
+  };
 
   return (
     <MyGridItem xs={8} sm={4} md={3}>
@@ -62,7 +86,8 @@ const ProductCard = ({ details, link }) => {
             fullWidth={true}
             variant="outlined"
             size="small"
-            color="primary">
+            color="primary"
+            userFunction={onClickAddCart}>
             ADD TO CART
           </MyButtonComponent>
           <MyButtonComponent

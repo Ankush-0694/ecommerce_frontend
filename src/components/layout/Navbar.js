@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import { MyNavbar } from "../Design/MyNavbar";
 import { MyTypography } from "../Design/MyTypography";
-import { MyButtonComponent } from "../Design/ButtonComponent";
+import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyIconButton } from "../Design/MyIconButton";
 import { MyMenuAppBar } from "../Design/MyMenuAppBar";
 import { MyMenuItem } from "../Design/MyMenuItem";
@@ -50,6 +50,13 @@ const Navbar = () => {
             <MyMenuAppBar onClose={handleClose} open={open} anchorEl={anchorEl}>
               <MyMenuItem onClick={handleClose}>
                 <Link
+                  to="/cart"
+                  style={{ textDecoration: "none", color: "Black" }}>
+                  Cart
+                </Link>
+              </MyMenuItem>
+              <MyMenuItem onClick={handleClose}>
+                <Link
                   to="/signup"
                   style={{ textDecoration: "none", color: "Black" }}>
                   Signup
@@ -68,7 +75,14 @@ const Navbar = () => {
           <div>
             <MyButtonComponent color="inherit">
               <Link
-                to="Signup"
+                to="/cart"
+                style={{ textDecoration: "none", color: "white" }}>
+                Cart
+              </Link>
+            </MyButtonComponent>
+            <MyButtonComponent color="inherit">
+              <Link
+                to="/Signup"
                 style={{ textDecoration: "none", color: "white" }}>
                 Signup
               </Link>

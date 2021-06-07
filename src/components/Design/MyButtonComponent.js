@@ -11,6 +11,7 @@ const MyButtonComponent = ({
   size,
   component,
   to,
+  disabled,
 }) => {
   return (
     <Button
@@ -23,6 +24,7 @@ const MyButtonComponent = ({
       size={size}
       component={component}
       to={to}
+      disabled={disabled}
       className="my-button-component">
       {children}
     </Button>

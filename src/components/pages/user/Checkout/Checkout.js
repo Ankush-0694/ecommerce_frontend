@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { getSingleProduct } from "../../../../queries/productQueries";
-import { addOrderMutation } from "../../../../queries/orderQueries";
+import { getSingleProduct } from "../../../../queries/Product/productQueries";
+import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import useAddAddressHook from "./useAddressHook";
+import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
+import ProductDetails from "./Helper/ProductDetails";
+import PriceDetails from "./Helper/PriceDetails";
 
 const Checkout = (props) => {
   const productid = props.match.params.id.split(":")[1];
 
+  const [quantity, setQuantity] = useState(1);
+
   const { addressFormData, setAddressFormData } = useAddAddressHook();
-  const { pincode, fullName } = addressFormData;
 
   const obj = useQuery(getSingleProduct, {
     variables: { id: productid },
@@ -34,7 +38,6 @@ const Checkout = (props) => {
     });
   };
 
-  const quantity = 1;
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -64,31 +67,44 @@ const Checkout = (props) => {
         quantity: Number(quantity),
         address: addressFormData, // here we may need to specify type of every key of address object
       },
-      //   refetchQueries: [{ query: getBooksQuery }],
     });
     console.log(dataToStore);
     console.log("submited");
   };
   return (
-    // <div>
-    //   When a user click buy now on prodcut in homepage or cart then it will
-    //   redirect to this Page here user will enter the address and other details
-    //  like quantity
-    //   then he will directed to payment section
-    // </div>
-    <div>
-      {!loading && (
-        <div>
-          {" "}
-          {productData.productName}
-          <br></br> {productData.productDescription}
-          <br></br>
-          {productData.productPrice}
-        </div>
-      )}
+    <div style={{ padding: 20 }}>
+      <MyGridContainer justify="center" spacing={4}>
+        <MyGridItem xs={6} sm={5} className="product-details">
+          {/* here we can add a modal which will show all the products in checkou when clicked */}
+          {!loading && (
+            <ProductDetails
+              productData={productData}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+          )}
+        </MyGridItem>
+        <MyGridItem xs={8} sm={4} className="price-details">
+          {!loading && (
+            <PriceDetails
+              productPrice={productData.productPrice}
+              quantity={quantity}
+            />
+          )}
+        </MyGridItem>
+      </MyGridContainer>
+      {/*  */}
+      <div className="grid-container2">
+        <div className="added-address-xs12"></div>
+        <div className="add-new-address-using-modal-xs12"></div>
+      </div>
       <br></br>
-      Add delivery Address
-      <br></br>
+      <div>
+        Show some pre added address as options to choose then option to add
+        delivery address (see the example like flipkart)
+      </div>
+      <h4>Add delivery Address </h4>
+
       <div>
         <br></br>
         <form id="add-address" onSubmit={onSubmit}>

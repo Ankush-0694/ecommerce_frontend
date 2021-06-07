@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 
 import { MyMultilineInput } from "../../../../Design/FormFieldComponent";
-import { MyButtonComponent } from "../../../../Design/ButtonComponent";
+import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { MyRatingComponent } from "../../../../Design/MyRatingComponent";
 
-import {
-  addProductReviewMutation,
-  getSingleProduct,
-} from "../../../../../queries/productQueries";
+import { getSingleProduct } from "../../../../../queries/Product/productQueries";
+
+import { addProductReviewMutation } from "../../../../../queries/Product/productMutations";
 
 const ProductReviewForm = ({ productid }) => {
   const [addReview, { data: newData }] = useMutation(addProductReviewMutation, {

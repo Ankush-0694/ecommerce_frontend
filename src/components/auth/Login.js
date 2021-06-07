@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MyButtonComponent } from "../Design/ButtonComponent";
+import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
 import axios from "axios";
