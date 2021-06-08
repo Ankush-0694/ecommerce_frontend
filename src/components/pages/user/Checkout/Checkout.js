@@ -3,10 +3,11 @@ import { useQuery } from "@apollo/client";
 import { getSingleProduct } from "../../../../queries/Product/productQueries";
 import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
-import useAddAddressHook from "./useAddressHook";
+import useAddAddressHook from "./Helpers/useAddressHook";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import ProductDetails from "./Helper/ProductDetails";
-import PriceDetails from "./Helper/PriceDetails";
+import ProductDetails from "./Helpers/ProductDetails";
+import PriceDetails from "./Helpers/PriceDetails";
+import { MyTypography } from "../../../Design/MyTypography";
 
 const Checkout = (props) => {
   const productid = props.match.params.id.split(":")[1];
@@ -72,16 +73,21 @@ const Checkout = (props) => {
     console.log("submited");
   };
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: "20px" }}>
       <MyGridContainer justify="center" spacing={4}>
-        <MyGridItem xs={6} sm={5} className="product-details">
+        <MyGridItem xs={8} sm={6} className="product-details">
+          <MyTypography variant="h4" component="h2">
+            Orders Summary
+          </MyTypography>
           {/* here we can add a modal which will show all the products in checkou when clicked */}
           {!loading && (
-            <ProductDetails
-              productData={productData}
-              quantity={quantity}
-              setQuantity={setQuantity}
-            />
+            <div>
+              <ProductDetails
+                productData={productData}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
+            </div>
           )}
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">

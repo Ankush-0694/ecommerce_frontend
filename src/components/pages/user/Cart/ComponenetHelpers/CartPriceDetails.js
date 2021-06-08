@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PriceDetails = ({ productPrice, quantity }) => {
+const CartPriceDetails = ({ productPrice, quantity }) => {
   const classes = useStyles();
 
   let totalPrice = productPrice * quantity;
@@ -42,12 +42,12 @@ const PriceDetails = ({ productPrice, quantity }) => {
 
             {/* 2nd row */}
 
-            <>
+            <MyTableRow>
               <MyTableCell component="th" scope="row">
                 Price(1 Item)
               </MyTableCell>
               <MyTableCell align="right">{productPrice}</MyTableCell>
-            </>
+            </MyTableRow>
 
             {/* 3rd row */}
 
@@ -74,13 +74,4 @@ const PriceDetails = ({ productPrice, quantity }) => {
     </div>
   );
 };
-export default PriceDetails;
-
-// <List>
-//   <ListItem>
-//     <ListItemText primary="Single-line item" />
-//   </ListItem>
-//   <ListItemSecondaryAction>
-//     <ListItemText primary="Single-line item" />
-//   </ListItemSecondaryAction>
-// </List>;
+export default CartPriceDetails;
