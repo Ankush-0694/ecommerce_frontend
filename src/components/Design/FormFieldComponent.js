@@ -35,7 +35,7 @@ const MyTextInput = ({
       value={value}
       label={label}
       onChange={onChange}
-      userstyle={userstyle}
+      style={userstyle}
       variant="outlined"
       fullWidth
       className={classes.root}

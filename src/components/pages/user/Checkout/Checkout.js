@@ -3,15 +3,19 @@ import { useQuery } from "@apollo/client";
 import { getSingleProduct } from "../../../../queries/Product/productQueries";
 import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
-import useAddAddressHook from "./Helpers/useAddressHook";
+import useAddAddressHook from "./ComponentHelpers/useAddressHook";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import ProductDetails from "./Helpers/ProductDetails";
-import PriceDetails from "./Helpers/PriceDetails";
+import ProductDetails from "./ComponentHelpers/ProductDetails";
+import PriceDetails from "./ComponentHelpers/PriceDetails";
 import { MyTypography } from "../../../Design/MyTypography";
+import AddressForm from "./ComponentHelpers/AddressForm";
+import AddressList from "./ComponentHelpers/AddressList";
+import { CheckoutStyles } from "./CssHelpers/CheckoutStyles";
+import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 
 const Checkout = (props) => {
+  const classes = CheckoutStyles();
   const productid = props.match.params.id.split(":")[1];
-
   const [quantity, setQuantity] = useState(1);
 
   const { addressFormData, setAddressFormData } = useAddAddressHook();
@@ -27,7 +31,7 @@ const Checkout = (props) => {
   // console.log(data);
   let productData;
   if (!loading) {
-    productData = data.product;
+    productData = data.getProductById;
   }
 
   const onChange = (e) => {
@@ -72,6 +76,20 @@ const Checkout = (props) => {
     console.log(dataToStore);
     console.log("submited");
   };
+
+  const addressData = [
+    {
+      fullName: "Ankush Kumar",
+      city: "Moradabad",
+      state: "Uttar Pradesh",
+    },
+    {
+      fullName: "Ankush Kumar",
+      city: "Moradabad",
+      state: "Uttar Pradesh",
+    },
+  ];
+
   return (
     <div style={{ padding: "20px" }}>
       <MyGridContainer justify="center" spacing={4}>
@@ -79,9 +97,14 @@ const Checkout = (props) => {
           <MyTypography variant="h4" component="h2">
             Orders Summary
           </MyTypography>
-          {/* here we can add a modal which will show all the products in checkou when clicked */}
+
           {!loading && (
             <div>
+              <ProductDetails
+                productData={productData}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
               <ProductDetails
                 productData={productData}
                 quantity={quantity}
@@ -91,65 +114,57 @@ const Checkout = (props) => {
           )}
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">
-          {!loading && (
-            <PriceDetails
-              productPrice={productData.productPrice}
-              quantity={quantity}
-            />
-          )}
+          <div className={classes.priceDetailsContainer}>
+            {!loading && (
+              <PriceDetails
+                productPrice={productData.productPrice}
+                quantity={quantity}
+              />
+            )}
+          </div>
+          <div className={classes.PlaceOrderbtn}>
+            <MyButtonComponent variant="contained" color="default">
+              Place Your order
+            </MyButtonComponent>
+          </div>
         </MyGridItem>
       </MyGridContainer>
+      <hr></hr>
       {/*  */}
-      <div className="grid-container2">
-        <div className="added-address-xs12"></div>
-        <div className="add-new-address-using-modal-xs12"></div>
-      </div>
+      <MyGridContainer justify="center">
+        <MyGridItem xs={10}>
+          <div style={{ border: "1px solid black" }}>
+            <div className={classes.DeliveryAddressHeading}>
+              <MyTypography variant="h4" component="h3">
+                Delivery Address
+              </MyTypography>
+            </div>
+
+            <div className="addressList">
+              <MyGridContainer>
+                {addressData.map((data) => {
+                  return <AddressList data={data} />;
+                })}
+              </MyGridContainer>
+            </div>
+          </div>
+
+          <hr></hr>
+        </MyGridItem>
+        <MyGridItem xs={10}>
+          <div style={{ border: "1px solid black" }}>
+            <div className={classes.DeliveryAddressHeading}>
+              <MyTypography variant="h5" component="h3">
+                Add Delivery Address
+              </MyTypography>
+            </div>
+            <div className={classes.addressFromContainer}>
+              <AddressForm onChange={onChange} onSubmit={onSubmit} />
+            </div>
+          </div>
+        </MyGridItem>
+      </MyGridContainer>
       <br></br>
-      <div>
-        Show some pre added address as options to choose then option to add
-        delivery address (see the example like flipkart)
-      </div>
-      <h4>Add delivery Address </h4>
-
-      <div>
-        <br></br>
-        <form id="add-address" onSubmit={onSubmit}>
-          <div className="field">
-            <label>Full Name</label>
-            <input name="fullName" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>Phone Number</label>
-            <input name="phoneNumber" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>Pincode</label>
-            <input name="pincode" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>State</label>
-            <input name="state" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>City</label>
-            <input name="city" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>House No.</label>
-            <input name="HouseNo" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>Area , Colony</label>
-            <input name="area" onChange={onChange} type="text" />
-          </div>
-          <div className="field">
-            <label>Add Nearby / Landmark</label>
-            <input name="landmark" onChange={onChange} type="text" />
-          </div>
-
-          <button>Place Your order</button>
-        </form>
-      </div>
     </div>
   );
 };

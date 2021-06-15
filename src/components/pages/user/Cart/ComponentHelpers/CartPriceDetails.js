@@ -35,6 +35,11 @@ const CartPriceDetails = ({ productPrice, quantity }) => {
           <MyTypography variant="h6" component="h6" className={classes.title}>
             Price Details
           </MyTypography>
+          <hr
+            style={{
+              backgroundColor: "black",
+              marginBottom: "0",
+            }}></hr>
         </div>
         <MyTable className={classes.table} aria-label="simple table">
           <MyTableBody>

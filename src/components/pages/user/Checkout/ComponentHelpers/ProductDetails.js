@@ -4,27 +4,10 @@ import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../Design/MyTypography";
 import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyGridContainer, MyGridItem } from "../../../../Design/MyGrid";
-
-const useStyles = makeStyles({
-  productDiv: {
-    //child selector
-    "& > *": {
-      margin: "10px 0",
-    },
-  },
-  MediaImg: {
-    width: "100%",
-    minWidth: "130px",
-  },
-  inputCss: {
-    width: "50px",
-    margin: "10px",
-    textAlign: "center",
-  },
-});
+import { ProductDetailsStyles } from "../CssHelpers/ProductDetailsStyles";
 
 const ProductDetails = ({ productData, quantity, setQuantity }) => {
-  const classes = useStyles();
+  const classes = ProductDetailsStyles();
   return (
     <div className={classes.productDiv}>
       <MyGridContainer
@@ -58,6 +41,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
             <MyButtonComponent
               variant="contained"
               color="primary"
+              className={classes.quantityButton}
               disabled={quantity <= 1 && true}
               userFunction={() => {
                 setQuantity(quantity - 1);
@@ -66,7 +50,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
             </MyButtonComponent>
             {/* <MyButtonComponent variant="outlined" userstyle={{ padding: "0" }}> */}
             <input
-              className={classes.inputCss}
+              className={classes.quantityInput}
               value={quantity}
               onChange={(e) => {
                 setQuantity(e.target.value);
@@ -76,6 +60,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
 
             <MyButtonComponent
               variant="contained"
+              className={classes.quantityButton}
               userFunction={() => {
                 setQuantity(quantity + 1);
               }}

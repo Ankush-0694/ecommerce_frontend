@@ -16,7 +16,7 @@ const Products = () => {
     <div style={{ margin: "20px" }}>
       <MyGridContainer container justify="center" spacing={4}>
         {!loading ? (
-          data.products.map((product) => {
+          data.getAllProducts.map((product) => {
             return (
               <ProductCard
                 key={product.id}

@@ -47,7 +47,7 @@ const SingleProduct = (props) => {
   //   console.log(data);
   let productData;
   if (!loading) {
-    productData = data.product;
+    productData = data.getProductById;
   }
 
   const onClickAddCart = (e) => {

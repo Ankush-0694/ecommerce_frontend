@@ -8,7 +8,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 // import Products from "./components/pages/user/Products/Products";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
-import AddProduct from "./components/pages/vendor/Product/AddProduct";
+import AddProduct from "./components/pages/vendor/Product/VendorProduct";
 import Checkout from "./components/pages/user/Checkout/Checkout";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -24,11 +24,6 @@ const client = new ApolloClient({
 
 function App() {
   const [isAuthenticated, setisAuthenticated] = useState(false);
-
-  // const loadUser = () => {
-  //   // first we need to use loadUser Api to get the user details and findout where to store it
-  //   setisAuthenticated(true);
-  // };
 
   if (localStorage.getItem("token")) {
     console.log("token exist");

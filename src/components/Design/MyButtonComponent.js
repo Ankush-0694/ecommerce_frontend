@@ -12,6 +12,7 @@ const MyButtonComponent = ({
   component,
   to,
   disabled,
+  className,
 }) => {
   return (
     <Button
@@ -25,7 +26,7 @@ const MyButtonComponent = ({
       component={component}
       to={to}
       disabled={disabled}
-      className="my-button-component">
+      className={className}>
       {children}
     </Button>
   );
