@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
 import { MyTypography } from "../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { MyPaper } from "../../../../Design/MyPaper";
-import { CartItemStyles } from "../CssHelpers/CartItemStyles";
+import { CartItemStyles } from "../CSS/CartItemStyles";
 
-const CartItem = ({ cartItemData }) => {
+const CartItem = ({ cartItemData, setQuantityById }) => {
   const classes = CartItemStyles();
+
+  const { id, productName, productPrice, productDescription, quantity } =
+    cartItemData;
+
+  const [quantityCount, setQuantityCount] = useState(quantity);
+
+  useEffect(() => {
+    //eslint
+    if (quantityCount > 0) {
+      setQuantityById(id, quantityCount);
+    }
+  }, [quantityCount]);
+
   return (
     <MyPaper elevation={3} className={classes.cartItem}>
       <div style={{ width: "30%", padding: "10px" }}>
@@ -24,13 +37,13 @@ const CartItem = ({ cartItemData }) => {
         <div>
           <MyTypography variant="h6" component="h6">
             {" "}
-            {cartItemData.productName}
+            {productName}
           </MyTypography>
           <MyTypography variant="body1" component="p">
-            {cartItemData.productDescription}
+            {productDescription}
           </MyTypography>
           <MyTypography variant="h6" component="h6">
-            Price - ₹{cartItemData.productPrice}
+            Price - ₹{productPrice}
           </MyTypography>
           <div>
             <MyButtonComponent
@@ -47,15 +60,28 @@ const CartItem = ({ cartItemData }) => {
             variant="contained"
             color="primary"
             style={{ outline: "none" }}
+            disabled={quantityCount <= 1 && true}
+            onClick={(e) => {
+              setQuantityCount(quantityCount - 1);
+            }}
             className={classes.quantityButton}>
             -
           </MyButtonComponent>
 
-          <input className={classes.quantityInput} value={1} />
+          <input
+            className={classes.quantityInput}
+            value={quantityCount}
+            // onChange={(e) => {
+            //   setQuantityCount(Number(e.target.value));
+            // }}
+          />
 
           <MyButtonComponent
             variant="contained"
             color="primary"
+            onClick={(e) => {
+              setQuantityCount(quantityCount + 1);
+            }}
             className={classes.quantityButton}>
             +
           </MyButtonComponent>

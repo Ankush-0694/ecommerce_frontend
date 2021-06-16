@@ -2,7 +2,7 @@ import React from "react";
 import { MyGridItem } from "../../../../Design/MyGrid";
 import { MyHomeIcon } from "../../../../Design/MyIcons";
 import { MyTypography } from "../../../../Design/MyTypography";
-import { AddressListStyles } from "../CssHelpers/AddressListStyles";
+import { AddressListStyles } from "../CSS/AddressListStyles";
 
 const AddressList = ({ data }) => {
   const classes = AddressListStyles();

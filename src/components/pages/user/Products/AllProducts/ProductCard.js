@@ -10,9 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MyTypography } from "../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 
-import { addToCartMutation } from "../../../../../queries/Product/productMutations";
+import { addToCartMutation } from "../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
-import { getCartQuery } from "../../../../../queries/Product/productQueries";
+import { getCartQuery } from "../../../../../queries/Cart/cartQueries";
 
 const useStyles = makeStyles((theme) => ({
   cardPricing: {

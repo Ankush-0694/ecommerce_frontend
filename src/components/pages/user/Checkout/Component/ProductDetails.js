@@ -4,7 +4,7 @@ import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../Design/MyTypography";
 import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyGridContainer, MyGridItem } from "../../../../Design/MyGrid";
-import { ProductDetailsStyles } from "../CssHelpers/ProductDetailsStyles";
+import { ProductDetailsStyles } from "../CSS/ProductDetailsStyles";
 
 const ProductDetails = ({ productData, quantity, setQuantity }) => {
   const classes = ProductDetailsStyles();
@@ -43,7 +43,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
               color="primary"
               className={classes.quantityButton}
               disabled={quantity <= 1 && true}
-              userFunction={() => {
+              onClick={() => {
                 setQuantity(quantity - 1);
               }}>
               -
@@ -61,7 +61,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
             <MyButtonComponent
               variant="contained"
               className={classes.quantityButton}
-              userFunction={() => {
+              onClick={() => {
                 setQuantity(quantity + 1);
               }}
               color="primary">

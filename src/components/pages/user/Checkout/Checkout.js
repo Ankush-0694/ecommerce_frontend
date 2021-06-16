@@ -3,14 +3,14 @@ import { useQuery } from "@apollo/client";
 import { getSingleProduct } from "../../../../queries/Product/productQueries";
 import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
-import useAddAddressHook from "./ComponentHelpers/useAddressHook";
+import useAddAddressHook from "./Component/useAddressHook";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import ProductDetails from "./ComponentHelpers/ProductDetails";
-import PriceDetails from "./ComponentHelpers/PriceDetails";
+import ProductDetails from "./Component/ProductDetails";
+import PriceDetails from "./Component/PriceDetails";
 import { MyTypography } from "../../../Design/MyTypography";
-import AddressForm from "./ComponentHelpers/AddressForm";
-import AddressList from "./ComponentHelpers/AddressList";
-import { CheckoutStyles } from "./CssHelpers/CheckoutStyles";
+import AddressForm from "./Component/AddressForm";
+import AddressList from "./Component/AddressList";
+import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 
 const Checkout = (props) => {
@@ -79,11 +79,13 @@ const Checkout = (props) => {
 
   const addressData = [
     {
+      id: 1,
       fullName: "Ankush Kumar",
       city: "Moradabad",
       state: "Uttar Pradesh",
     },
     {
+      id: 2,
       fullName: "Ankush Kumar",
       city: "Moradabad",
       state: "Uttar Pradesh",
@@ -143,7 +145,7 @@ const Checkout = (props) => {
             <div className="addressList">
               <MyGridContainer>
                 {addressData.map((data) => {
-                  return <AddressList data={data} />;
+                  return <AddressList key={data.id} data={data} />;
                 })}
               </MyGridContainer>
             </div>

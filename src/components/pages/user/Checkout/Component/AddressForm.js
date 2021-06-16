@@ -5,7 +5,7 @@ import {
 } from "../../../../Design/FormFieldComponent";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 
-import { AddressFormStyles } from "../CssHelpers/AddressFormStyles";
+import { AddressFormStyles } from "../CSS/AddressFormStyles";
 
 const AddressForm = ({ onChange, onSubmit }) => {
   const classes = AddressFormStyles();
@@ -21,7 +21,7 @@ const AddressForm = ({ onChange, onSubmit }) => {
             <MyTextInput name="phoneNumber" label="Phone Number" />
           </div>
         </div>
-        <div class={classes.addressInputContainer}>
+        <div className={classes.addressInputContainer}>
           <div className="field">
             <MyTextInput name="pincode" label="Pincode" />
           </div>

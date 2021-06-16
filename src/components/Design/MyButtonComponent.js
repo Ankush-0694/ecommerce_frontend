@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 
 const MyButtonComponent = ({
-  userFunction,
+  onClick,
   userStyle,
   children,
   type,
@@ -17,7 +17,7 @@ const MyButtonComponent = ({
   return (
     <Button
       variant={variant}
-      onClick={userFunction}
+      onClick={onClick}
       style={userStyle}
       type={type}
       color={color}

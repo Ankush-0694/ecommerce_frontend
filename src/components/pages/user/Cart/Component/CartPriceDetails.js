@@ -17,10 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CartPriceDetails = ({ productPrice, quantity }) => {
+const CartPriceDetails = ({ quantity, itemCount, totalPrice }) => {
   const classes = useStyles();
 
-  let totalPrice = productPrice * quantity;
   let deliveryCharge;
   if (totalPrice < 500) {
     deliveryCharge = 40;
@@ -49,9 +48,9 @@ const CartPriceDetails = ({ productPrice, quantity }) => {
 
             <MyTableRow>
               <MyTableCell component="th" scope="row">
-                Price(1 Item)
+                Price({itemCount} Item)
               </MyTableCell>
-              <MyTableCell align="right">{productPrice}</MyTableCell>
+              <MyTableCell align="right">{totalPrice}</MyTableCell>
             </MyTableRow>
 
             {/* 3rd row */}
@@ -67,7 +66,7 @@ const CartPriceDetails = ({ productPrice, quantity }) => {
 
             <MyTableRow>
               <MyTableCell component="th" scope="row">
-                Total Price
+                Total Amount
               </MyTableCell>
               <MyTableCell align="right">
                 {totalPrice + deliveryCharge}

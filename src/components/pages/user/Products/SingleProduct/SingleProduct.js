@@ -1,10 +1,7 @@
 import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import {
-  getCartQuery,
-  getSingleProduct,
-} from "../../../../../queries/Product/productQueries";
+import { getSingleProduct } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./ProductReviewForm";
 import ProductReviews from "./ProductReviews";
 import { MyGridContainer } from "../../../../Design/MyGrid";
@@ -14,7 +11,8 @@ import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
 import { MyFullScreenBox } from "../../../../Design/FullScreenBox";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { addToCartMutation } from "../../../../../queries/Product/productMutations";
+import { addToCartMutation } from "../../../../../queries/Cart/cartMutations";
+import { getCartQuery } from "../../../../../queries/Cart/cartQueries";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -96,7 +94,7 @@ const SingleProduct = (props) => {
                 variant="outlined"
                 size="medium"
                 color="secondary"
-                userFunction={onClickAddCart}>
+                onClick={onClickAddCart}>
                 ADD TO CART
               </MyButtonComponent>
               <span style={{ margin: "0 10px" }}></span>

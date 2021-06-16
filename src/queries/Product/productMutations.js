@@ -28,24 +28,6 @@ const addProductReviewMutation = gql`
   }
 `;
 
-const addToCartMutation = gql`
-  mutation (
-    $productName: String!
-    $productDescription: String!
-    $productPrice: Int!
-  ) {
-    addToCart(
-      productName: $productName
-      productDescription: $productDescription
-      productPrice: $productPrice
-    ) {
-      productName
-      productDescription
-      productPrice
-    }
-  }
-`;
-
 const uploadFileMutaion = gql`
   mutation ($file: Upload!) {
     uploadFile(file: $file) {
@@ -54,9 +36,4 @@ const uploadFileMutaion = gql`
   }
 `;
 
-export {
-  addProductMutation,
-  uploadFileMutaion,
-  addProductReviewMutation,
-  addToCartMutation,
-};
+export { addProductMutation, uploadFileMutaion, addProductReviewMutation };

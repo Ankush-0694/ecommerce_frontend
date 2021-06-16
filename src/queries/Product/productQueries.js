@@ -26,15 +26,4 @@ const getSingleProduct = gql`
   }
 `;
 
-const getCartQuery = gql`
-  {
-    getCart {
-      id
-      productName
-      productDescription
-      productPrice
-    }
-  }
-`;
-
-export { getProductsQuery, getSingleProduct, getCartQuery };
+export { getProductsQuery, getSingleProduct };
