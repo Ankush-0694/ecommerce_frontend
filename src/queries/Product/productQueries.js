@@ -19,6 +19,8 @@ const getSingleProduct = gql`
       productDescription
       productPrice
       reviews {
+        id
+        productID
         review
         rating
       }

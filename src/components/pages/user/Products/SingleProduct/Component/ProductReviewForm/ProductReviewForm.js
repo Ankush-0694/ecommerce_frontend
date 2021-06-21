@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-
-import { MyMultilineInput } from "../../../../Design/FormFieldComponent";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { MyRatingComponent } from "../../../../Design/MyRatingComponent";
-
-import { getSingleProduct } from "../../../../../queries/Product/productQueries";
-
-import { addProductReviewMutation } from "../../../../../queries/Product/productMutations";
+import { MyMultilineInput } from "../../../../../../Design/FormFieldComponent";
+import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
+import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
+import { getSingleProduct } from "../../../../../../../queries/Product/productQueries";
+import { addReviewMutation } from "../../../../../../../queries/Review/ReviewMutations";
 
 const ProductReviewForm = ({ productid }) => {
-  const [addReview, { data: newData }] = useMutation(addProductReviewMutation, {
+  const [addReview, { data: newData }] = useMutation(addReviewMutation, {
     refetchQueries: [{ query: getSingleProduct, variables: { id: productid } }],
   });
 
@@ -30,7 +27,7 @@ const ProductReviewForm = ({ productid }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const newReview = {
-      productid: productid,
+      productID: productid,
       review: review,
       rating: Number(ratingValue),
     };
@@ -41,6 +38,7 @@ const ProductReviewForm = ({ productid }) => {
     setReviewFormData({
       review: "",
     });
+    setRatingValue(0);
   };
 
   return (

@@ -4,14 +4,14 @@ import { useMutation } from "@apollo/client";
 import {
   MyTextInput,
   MyMultilineInput,
-} from "../../../../Design/FormFieldComponent";
+} from "../../../../../Design/FormFieldComponent";
 
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 
 import {
   addProductMutation,
   // uploadFileMutaion,
-} from "../../../../../queries/Product/productMutations";
+} from "../../../../../../queries/Product/productMutations";
 
 const AddProduct = () => {
   const [addProduct, { data }] = useMutation(addProductMutation);

@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+
 const addProductMutation = gql`
   mutation (
     $productName: String!
@@ -17,17 +18,6 @@ const addProductMutation = gql`
   }
 `;
 
-const addProductReviewMutation = gql`
-  mutation ($productid: ID, $review: String!, $rating: Int) {
-    addReview(productid: $productid, review: $review, rating: $rating) {
-      reviews {
-        review
-        rating
-      }
-    }
-  }
-`;
-
 const uploadFileMutaion = gql`
   mutation ($file: Upload!) {
     uploadFile(file: $file) {
@@ -36,4 +26,4 @@ const uploadFileMutaion = gql`
   }
 `;
 
-export { addProductMutation, uploadFileMutaion, addProductReviewMutation };
+export { addProductMutation, uploadFileMutaion };

@@ -1,11 +1,11 @@
 import React from "react";
-import { AllProductStyles } from "../CSS/AllProductStyles";
-import { MyTypography } from "../../../../Design/MyTypography";
-import { MyPaper } from "../../../../Design/MyPaper";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
+import { AllProductStyles } from "../../CSS/AllProductStyles";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import { MyPaper } from "../../../../../Design/MyPaper";
+import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
 
-const AllProducts = ({ data }) => {
+const VendorAllProducts = ({ data }) => {
   const classes = AllProductStyles();
   console.log(data);
 
@@ -58,4 +58,4 @@ const AllProducts = ({ data }) => {
   );
 };
 
-export default AllProducts;
+export default VendorAllProducts;

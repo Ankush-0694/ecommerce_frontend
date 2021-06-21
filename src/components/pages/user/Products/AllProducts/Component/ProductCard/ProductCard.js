@@ -1,36 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import { MyCardContainer } from "../../../../Design/MyCardComponents/CardContainer";
-import { MyCardContent } from "../../../../Design/MyCardComponents/CardContent";
-import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
-import { MyCardActions } from "../../../../Design/MyCardComponents/CardActions";
-import { MyGridItem } from "../../../../Design/MyGrid";
-import { makeStyles } from "@material-ui/core/styles";
-import { MyTypography } from "../../../../Design/MyTypography";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-
-import { addToCartMutation } from "../../../../../queries/Cart/cartMutations";
+import { MyCardContainer } from "../../../../../../Design/MyCardComponents/CardContainer";
+import { MyCardContent } from "../../../../../../Design/MyCardComponents/CardContent";
+import { MyCardMedia } from "../../../../../../Design/MyCardComponents/CardMedia";
+import { MyCardActions } from "../../../../../../Design/MyCardComponents/CardActions";
+import { MyGridItem } from "../../../../../../Design/MyGrid";
+import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
+import { addToCartMutation } from "../../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
-import { getCartQuery } from "../../../../../queries/Cart/cartQueries";
-
-const useStyles = makeStyles((theme) => ({
-  cardPricing: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
-  },
-  cardDescription: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
-  },
-}));
+import { getCartQuery } from "../../../../../../../queries/Cart/cartQueries";
+import { ProductCardStyles } from "../../CSS/ProductCardStyles";
 
 const ProductCard = ({ details, link }) => {
-  const classes = useStyles();
+  const classes = ProductCardStyles();
   const { id, productName, productDescription, productPrice } = details;
 
   const [addToCart, { error, loading, data: cartData }] = useMutation(

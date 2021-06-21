@@ -1,6 +1,6 @@
 import React from "react";
-import { MyTypography } from "../../../../Design/MyTypography";
-import { makeStyles } from "../../../../Design/MyUseStyles";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import { makeStyles } from "../../../../../Design/MyUseStyles";
 import { Paper } from "@material-ui/core";
 import {
   MyTable,
@@ -8,7 +8,7 @@ import {
   MyTableCell,
   MyTableContainer,
   MyTableRow,
-} from "../../../../Design/MyTableComponents";
+} from "../../../../../Design/MyTableComponents";
 
 const useStyles = makeStyles((theme) => ({
   title: {

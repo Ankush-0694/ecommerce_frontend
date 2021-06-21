@@ -1,10 +1,10 @@
 import React from "react";
-import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { MyTypography } from "../../../../Design/MyTypography";
-import { makeStyles } from "../../../../Design/MyUseStyles";
-import { MyGridContainer, MyGridItem } from "../../../../Design/MyGrid";
-import { ProductDetailsStyles } from "../CSS/ProductDetailsStyles";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
+import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import { makeStyles } from "../../../../../Design/MyUseStyles";
+import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
+import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 
 const ProductDetails = ({ productData, quantity, setQuantity }) => {
   const classes = ProductDetailsStyles();
@@ -48,7 +48,6 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
               }}>
               -
             </MyButtonComponent>
-            {/* <MyButtonComponent variant="outlined" userstyle={{ padding: "0" }}> */}
             <input
               className={classes.quantityInput}
               value={quantity}
@@ -56,7 +55,6 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
                 setQuantity(e.target.value);
               }}
             />
-            {/* </MyButtonComponent> */}
 
             <MyButtonComponent
               variant="contained"
@@ -66,6 +64,14 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
               }}
               color="primary">
               +
+            </MyButtonComponent>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <MyButtonComponent
+              variant="contained"
+              color="secondary"
+              size="small">
+              Remove
             </MyButtonComponent>
           </div>
         </MyGridItem>

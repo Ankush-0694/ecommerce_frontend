@@ -6,9 +6,9 @@ import { Box } from "@material-ui/core";
 //we can give them these children height and width to change the size of
 // centerlised component
 
-const MyFullScreenBox = ({ display, width, height, children }) => {
+const MyFullScreenBox = ({ display, width, height, children, style }) => {
   return (
-    <Box display={display} width={width} height={height}>
+    <Box display={display} width={width} height={height} style={style}>
       {children}
     </Box>
   );

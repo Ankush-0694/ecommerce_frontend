@@ -2,10 +2,10 @@ import React from "react";
 import {
   MyMultilineInput,
   MyTextInput,
-} from "../../../../Design/FormFieldComponent";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
+} from "../../../../../Design/FormFieldComponent";
+import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 
-import { AddressFormStyles } from "../CSS/AddressFormStyles";
+import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 
 const AddressForm = ({ onChange, onSubmit }) => {
   const classes = AddressFormStyles();
@@ -13,7 +13,7 @@ const AddressForm = ({ onChange, onSubmit }) => {
   return (
     <div className="addressFormDiv">
       <form id="add-address" onSubmit={onSubmit}>
-        <div class={classes.addressInputContainer}>
+        <div className={classes.addressInputContainer}>
           <div className="field">
             <MyTextInput name="fullName" label="Full Name" />
           </div>
@@ -29,7 +29,7 @@ const AddressForm = ({ onChange, onSubmit }) => {
             <MyTextInput name="state" label="State" />
           </div>
         </div>
-        <div class={classes.addressInputContainer}>
+        <div className={classes.addressInputContainer}>
           <div className="field">
             <MyTextInput name="city" label="City" />
           </div>
@@ -38,7 +38,7 @@ const AddressForm = ({ onChange, onSubmit }) => {
           </div>
         </div>
 
-        <div class={classes.addressInputContainer}>
+        <div className={classes.addressInputContainer}>
           <MyMultilineInput
             name="area"
             label="Area"

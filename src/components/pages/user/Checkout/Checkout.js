@@ -3,19 +3,24 @@ import { useQuery } from "@apollo/client";
 import { getSingleProduct } from "../../../../queries/Product/productQueries";
 import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
-import useAddAddressHook from "./Component/useAddressHook";
+import useAddAddressHook from "./useAddressHook";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import ProductDetails from "./Component/ProductDetails";
-import PriceDetails from "./Component/PriceDetails";
+import ProductDetails from "./Component/ProductDetails/ProductDetails";
+import PriceDetails from "./Component/PriceDetails/PriceDetails";
 import { MyTypography } from "../../../Design/MyTypography";
-import AddressForm from "./Component/AddressForm";
-import AddressList from "./Component/AddressList";
+import AddressForm from "./Component/AddressForm/AddressForm";
+import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 
 const Checkout = (props) => {
   const classes = CheckoutStyles();
+  console.log(props.match.params.id.split(":"));
+
   const productid = props.match.params.id.split(":")[1];
+
+  const productIdArray = props.match.params.id.split(":");
+
   const [quantity, setQuantity] = useState(1);
 
   const { addressFormData, setAddressFormData } = useAddAddressHook();
@@ -102,11 +107,6 @@ const Checkout = (props) => {
 
           {!loading && (
             <div>
-              <ProductDetails
-                productData={productData}
-                quantity={quantity}
-                setQuantity={setQuantity}
-              />
               <ProductDetails
                 productData={productData}
                 quantity={quantity}

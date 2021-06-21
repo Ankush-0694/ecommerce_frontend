@@ -16,11 +16,13 @@ import setAuthToken from "./components/util/setAuthToken";
 import Cart from "./components/pages/user/Cart/Cart";
 
 const link = createUploadLink({ uri: "http://localhost:4010" });
+const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache,
 });
+console.log(cache);
 
 function App() {
   const [isAuthenticated, setisAuthenticated] = useState(false);

@@ -2,8 +2,8 @@ import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { getSingleProduct } from "../../../../../queries/Product/productQueries";
-import ProductReviewForm from "./ProductReviewForm";
-import ProductReviews from "./ProductReviews";
+import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
+import ProductReviewList from "./Component/ProductReviewList/ProductReviewList";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 import { MyGridItem } from "../../../../Design/MyGrid";
 import { MyTypography } from "../../../../Design/MyTypography";
@@ -128,7 +128,9 @@ const SingleProduct = (props) => {
         {!loading ? (
           <MyGridContainer justify="center">
             <MyGridItem xs={8}>
-              <ProductReviews reviews={productData.reviews} />
+              {productData.reviews.map((review, index) => {
+                return <ProductReviewList key={index} review={review} />;
+              })}
             </MyGridItem>
           </MyGridContainer>
         ) : (

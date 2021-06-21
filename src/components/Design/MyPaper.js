@@ -1,8 +1,8 @@
 import { Paper } from "@material-ui/core";
 
-const MyPaper = ({ children, elevation, className }) => {
+const MyPaper = ({ children, elevation, className, style }) => {
   return (
-    <Paper className={className} elevation={elevation}>
+    <Paper className={className} elevation={elevation} style={style}>
       {children}
     </Paper>
   );

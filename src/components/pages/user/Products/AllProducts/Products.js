@@ -1,17 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { getProductsQuery } from "../../../../../queries/Product/productQueries";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "./Component/ProductCard/ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 
 const Products = () => {
   const obj = useQuery(getProductsQuery);
-  // const obj2 = useQuery(getOrdersQuery);
 
   const { error, loading, data } = obj;
-  // const { error: error1, loading: loading1, data: orderData } = obj2;
   console.log(data);
+
+  if (error) {
+    return <div>Error onccrued</div>;
+  }
   return (
     <div style={{ margin: "20px" }}>
       <MyGridContainer container justify="center" spacing={4}>

@@ -2,29 +2,13 @@ import React, { useState, useEffect } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
-  const history = useHistory();
   const [userDetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
   });
-  const { isAuthenticated, setisAuthenticated } = props;
-  // console.log(setisAuthenticated);
-
-  // console.log(props);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("auth");
-      history.push("/");
-    }
-    // eslint-disable-next-line
-  }, [isAuthenticated]);
+  const { email, password } = userDetails;
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -32,17 +16,11 @@ const Login = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
-      "http://localhost:4000/auth/login",
-      userDetails
-    );
 
-    console.log(res.data); // this is token object
-
-    if (res.data.token) {
-      setisAuthenticated(true); //load User
-      localStorage.setItem("token", res.data.token);
-    }
+    setUserDetails({
+      email: "",
+      password: "",
+    });
   };
   return (
     <div>
@@ -66,6 +44,7 @@ const Login = (props) => {
               id="email"
               name="email"
               label="Email"
+              value={email}
               onChange={onChange}
             />
           </div>
@@ -75,6 +54,7 @@ const Login = (props) => {
               id="password"
               name="password"
               label="Password"
+              value={password}
               onChange={onChange}
             />
           </div>

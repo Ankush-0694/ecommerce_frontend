@@ -1,9 +1,8 @@
 import React from "react";
-// import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
 import { MyFullScreenBox } from "../../../Design/FullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
-import AddProduct from "./Component/AddProduct";
-import AllProducts from "./Component/AllProducts";
+import AddProduct from "./Component/AddProduct/AddProduct";
+import VendorAllProducts from "./Component/VendorAllProducts/VendorAllProducts";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
 
@@ -64,7 +63,7 @@ const Products = () => {
             </MyTypography>
             <div>
               {dummyData.map((data) => {
-                return <AllProducts data={data} />;
+                return <VendorAllProducts data={data} />;
               })}
             </div>
           </div>

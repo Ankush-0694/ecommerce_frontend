@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { getCartQuery } from "../../../../queries/Cart/cartQueries";
-import CartItem from "./Component/CartItem";
-import CartPriceDetails from "./Component/CartPriceDetails";
+import CartItem from "./Component/CartItem/CartItem";
+import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
 
-const Cart = () => {
+const Cart = ({ history }) => {
   const classes = CartStyles();
 
   //to Get data from cart
@@ -92,7 +92,10 @@ const Cart = () => {
               color="primary"
               variant="contained"
               fullWidth
-              className={classes.placeOrderbtn}>
+              className={classes.placeOrderbtn}
+              onClick={() => {
+                // history.push("/checkout/:60b0306fccc9709b72aa8fd1");
+              }}>
               Place Order
             </MyButtonComponent>
           </div>

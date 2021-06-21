@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MyCardMedia } from "../../../../Design/MyCardComponents/CardMedia";
-import { MyTypography } from "../../../../Design/MyTypography";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { MyPaper } from "../../../../Design/MyPaper";
-import { CartItemStyles } from "../CSS/CartItemStyles";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyPaper } from "../../../../../Design/MyPaper";
+import { CartItemStyles } from "../../CSS/CartItemStyles";
 
 const CartItem = ({ cartItemData, setQuantityById }) => {
   const classes = CartItemStyles();
