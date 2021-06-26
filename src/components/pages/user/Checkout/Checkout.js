@@ -25,14 +25,14 @@ const Checkout = (props) => {
 
   const { addressFormData, setAddressFormData } = useAddAddressHook();
 
-  const obj = useQuery(getSingleProduct, {
+  const singleProductObject = useQuery(getSingleProduct, {
     variables: { id: productid },
   });
+  const { loading, error, data } = singleProductObject;
 
   const [addOrder, { data: OrderData }] = useMutation(addOrderMutation);
   console.log(OrderData);
 
-  const { loading, error, data } = obj;
   // console.log(data);
   let productData;
   if (!loading) {

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
+import { createAdminMutation } from "../../queries/admin/adminMutation";
+import { useMutation } from "@apollo/client";
 
-const Signup = () => {
+const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
@@ -12,17 +13,41 @@ const Signup = () => {
     password: "",
   });
 
+  // console.log(props.history.location.pathname.split("/")[1]);
+  const identity = props.history.location.pathname.split("/")[1];
+
+  const [createAdmin, createAdminObject] = useMutation(createAdminMutation);
+  const { error, loading, data } = createAdminObject;
+
+  const { firstName, lastName, email, password } = userDetails;
+
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
-      "http://localhost:4000/auth/signup",
-      userDetails
-    );
-    console.log(res.data);
+    if (identity === "admin") {
+      createAdmin({
+        variables: {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      });
+    } else if (identity === "vendor") {
+      console.log("this is vendor user");
+    } else {
+      console.log("this is user");
+    }
+
+    setUserDetails({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -37,9 +62,7 @@ const Signup = () => {
             maxWidth: "550px",
           }}>
           <div style={{ color: "black", width: "100%" }}>
-            <h2 style={{ textAlign: "center", marginTop: "-20px" }}>
-              LOGO OR NAME
-            </h2>
+            <h2 style={{ textAlign: "center", marginTop: "-20px" }}>SIGN UP</h2>
           </div>
           <div>
             <MyTextInput
@@ -47,6 +70,7 @@ const Signup = () => {
               id="firstName"
               name="firstName"
               label="First Name"
+              value={firstName}
               onChange={onChange}
             />
           </div>
@@ -56,6 +80,7 @@ const Signup = () => {
               id="lastName"
               name="lastName"
               label="Last Name"
+              value={lastName}
               onChange={onChange}
             />
           </div>
@@ -65,6 +90,7 @@ const Signup = () => {
               id="email"
               name="email"
               label="Email"
+              value={email}
               onChange={onChange}
             />
           </div>
@@ -75,13 +101,14 @@ const Signup = () => {
               id="password"
               name="password"
               label="Password"
+              value={password}
               onChange={onChange}
             />
           </div>
 
-          <div>
+          {/* <div>
             <MyCheckbox name="remember Me" label="Remember Me" />
-          </div>
+          </div> */}
 
           <br></br>
 

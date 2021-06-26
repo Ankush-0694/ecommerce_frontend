@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
+import { useMutation } from "@apollo/client";
+import { adminLoginMutation } from "../../queries/admin/adminMutation";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -10,18 +12,41 @@ const Login = (props) => {
   });
   const { email, password } = userDetails;
 
+  // const identity = props.history.location.pathname.split("/")[1];
+
+  const [adminLogin, { error, loading, data }] = useMutation(
+    adminLoginMutation,
+    {
+      onCompleted: (data) => {
+        const token = data.adminLogin.token;
+        localStorage.setItem("token", token);
+        console.log(token);
+      },
+    }
+  );
+
+  if (error) {
+    return <div>Error Occured</div>;
+  }
+
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    adminLogin({
+      variables: {
+        email,
+        password,
+      },
+    });
     setUserDetails({
       email: "",
       password: "",
     });
   };
+
   return (
     <div>
       <MyFullScreenBox display="flex" width="100%" height="100vh">
@@ -34,9 +59,7 @@ const Login = (props) => {
             maxWidth: "550px",
           }}>
           <div style={{ color: "black", width: "100%" }}>
-            <h2 style={{ textAlign: "center", marginTop: "-20px" }}>
-              LOGO OR NAME
-            </h2>
+            <h2 style={{ textAlign: "center", marginTop: "-20px" }}>LOGIN</h2>
           </div>
           <div>
             <MyTextInput
@@ -58,9 +81,9 @@ const Login = (props) => {
               onChange={onChange}
             />
           </div>
-          <div>
+          {/* <div>
             <MyCheckbox name="remember Me" label="Remember Me" />
-          </div>
+          </div> */}
           <div>
             <a href="#">Forgot Password</a>
           </div>

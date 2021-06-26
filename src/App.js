@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/user/Home/Home";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -10,54 +8,35 @@ import { createUploadLink } from "apollo-upload-client";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import AddProduct from "./components/pages/vendor/Product/VendorProduct";
 import Checkout from "./components/pages/user/Checkout/Checkout";
-import PrivateRoute from "./components/routing/PrivateRoute";
-
-import setAuthToken from "./components/util/setAuthToken";
+// import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
+import Signup from "./components/auth/Signup";
+import Login from "./components/auth/Login";
 
-const link = createUploadLink({ uri: "http://localhost:4010" });
+const link = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   link,
   cache,
 });
+
 console.log(cache);
 
-function App() {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
-
-  if (localStorage.getItem("token")) {
-    console.log("token exist");
-    const token = localStorage.getItem("token");
-    setAuthToken(token);
-    // setisAuthenticated(true); //loadUser
-  }
-
+const App = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Navbar />
         <div>
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={Home}
-              isAuthenticated={isAuthenticated}
-            />
-            <Route
-              exact
-              path="/login"
-              render={(props) => (
-                <Login
-                  {...props}
-                  isAuthenticated={isAuthenticated}
-                  setisAuthenticated={setisAuthenticated}
-                />
-              )}
-            />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/Signup" component={Signup} />
+            <Route exact path="/admin/login" component={Login} />
+            <Route exact path="/admin/Signup" component={Signup} />
+            <Route exact path="/vendor/login" component={Login} />
+            <Route exact path="/vendor/Signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
             {/* <Route exact path="/Products" component={Products} /> */}
             <Route exact path="/Products/:id" component={SingleProduct} />
@@ -68,6 +47,6 @@ function App() {
       </BrowserRouter>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
