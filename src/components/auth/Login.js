@@ -4,6 +4,7 @@ import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
 import { useMutation } from "@apollo/client";
 import { adminLoginMutation } from "../../queries/admin/adminMutation";
+import { isLoggedInVar } from "../../clientSchema/ReactiveVaribles";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -20,6 +21,7 @@ const Login = (props) => {
       onCompleted: (data) => {
         const token = data.adminLogin.token;
         localStorage.setItem("token", token);
+        isLoggedInVar(true);
         console.log(token);
       },
     }

@@ -8,10 +8,7 @@ import {
 
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 
-import {
-  addProductMutation,
-  // uploadFileMutaion,
-} from "../../../../../../queries/Product/productMutations";
+import { addProductMutation } from "../../../../../../queries/Product/productMutations";
 
 const AddProduct = () => {
   const [addProduct, { data }] = useMutation(addProductMutation);
@@ -42,11 +39,12 @@ const AddProduct = () => {
         productPrice: Number(productFormData.productPrice),
       },
     });
+
     e.preventDefault();
   };
   return (
     <div>
-      <form id="add-Product">
+      <form id="add-Product" onSubmit={onSubmit}>
         <div className="field">
           <MyTextInput
             name="productName"
@@ -74,7 +72,7 @@ const AddProduct = () => {
           />
         </div>
         <div style={{ textAlign: "center" }}>
-          <MyButtonComponent variant="contained" color="primary">
+          <MyButtonComponent type="submit" variant="contained" color="primary">
             Add Product
           </MyButtonComponent>
         </div>

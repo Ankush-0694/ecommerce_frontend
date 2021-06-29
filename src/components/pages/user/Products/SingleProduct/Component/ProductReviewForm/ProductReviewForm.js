@@ -7,11 +7,12 @@ import { getSingleProduct } from "../../../../../../../queries/Product/productQu
 import { addReviewMutation } from "../../../../../../../queries/Review/ReviewMutations";
 
 const ProductReviewForm = ({ productid }) => {
-  const [addReview, { data: newData }] = useMutation(addReviewMutation, {
+  const [addReview, { data: newReviewData }] = useMutation(addReviewMutation, {
     refetchQueries: [{ query: getSingleProduct, variables: { id: productid } }],
   });
+  // const [addReview, { data: newReviewData }] = useMutation(addReviewMutation);
 
-  console.log(newData);
+  console.log(newReviewData);
 
   const [reviewFormData, setReviewFormData] = useState({
     review: "",
@@ -34,7 +35,33 @@ const ProductReviewForm = ({ productid }) => {
     console.log(newReview);
     addReview({
       variables: newReview,
+      // update: (cache, { data: { addReview } }) => {
+      //   let productData = cache.readQuery({
+      //     query: getSingleProduct,
+      //     variables: {
+      //       id: productid,
+      //     },
+      //   });
+
+      //   console.log(addReview);
+
+      //   let reviewsData = productData.getProductById.reviews;
+      //   reviewsData = [...reviewsData, addReview];
+      //   console.log(reviewsData);
+      //   console.log(productData);
+
+      //   cache.writeQuery(
+      //     {
+      //       query: getSingleProduct,
+      //       variables: {
+      //         id: productid,
+      //       },
+      //     },
+      //     productData
+      //   );
+      // },
     });
+
     setReviewFormData({
       review: "",
     });

@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { makeVar, useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { getSingleProduct } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
@@ -64,6 +64,9 @@ const SingleProduct = (props) => {
       alert("added to cart");
     }
   };
+  const userVar = makeVar([]);
+
+  console.log(userVar());
 
   return (
     <div style={{ marginTop: "10px", padding: "20px" }}>

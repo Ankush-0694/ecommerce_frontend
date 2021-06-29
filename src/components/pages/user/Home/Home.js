@@ -1,10 +1,17 @@
 import React from "react";
 import HomeSlider from "./Component/HomeSlider/HomeSlider";
-
 import { MyFullScreenBox } from "../../../Design/FullScreenBox";
 import Products from "../Products/AllProducts/Products";
 
 const Home = () => {
+  // this should not here
+  // const userVar = makeVar({});
+  // const { error, loading, data } = useQuery(getMeQuery);
+  // if (!loading) {
+  //   userVar(data.getMe);
+  // }
+  // console.log(userVar());
+
   return (
     <div>
       <div style={{ backgroundColor: "black" }}>
