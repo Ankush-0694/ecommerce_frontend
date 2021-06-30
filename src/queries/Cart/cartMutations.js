@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+
 const addToCartMutation = gql`
   mutation (
     $productName: String!

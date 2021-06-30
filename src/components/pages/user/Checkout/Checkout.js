@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { getSingleProduct } from "../../../../queries/Product/productQueries";
 import { addOrderMutation } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
-import useAddAddressHook from "./useAddressHook";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
 import ProductDetails from "./Component/ProductDetails/ProductDetails";
 import PriceDetails from "./Component/PriceDetails/PriceDetails";
@@ -12,6 +11,7 @@ import AddressForm from "./Component/AddressForm/AddressForm";
 import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
+import { GET_ALL_ADDRESS } from "../../../../queries/address/addressQueries";
 
 const Checkout = (props) => {
   const classes = CheckoutStyles();
@@ -23,7 +23,8 @@ const Checkout = (props) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const { addressFormData, setAddressFormData } = useAddAddressHook();
+  const [current, setCurrent] = useState(null);
+  console.log(current);
 
   const singleProductObject = useQuery(getSingleProduct, {
     variables: { id: productid },
@@ -33,69 +34,35 @@ const Checkout = (props) => {
   const [addOrder, { data: OrderData }] = useMutation(addOrderMutation);
   console.log(OrderData);
 
-  // console.log(data);
   let productData;
   if (!loading) {
     productData = data.getProductById;
   }
 
-  const onChange = (e) => {
-    let value = e.target.value;
-
-    setAddressFormData({
-      ...addressFormData,
-      [e.target.name]: value,
-    });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    /////change of types of values in address object
-
-    addressFormData["pincode"] = Number(addressFormData["pincode"]);
-    addressFormData["phoneNumber"] = Number(addressFormData["phoneNumber"]);
-
-    ////change of types of values in address object
-
-    console.log(addressFormData);
-
-    const dataToStore = {
-      // addressFormData,
-      productName: productData.productName,
-      productDescription: productData.productDescription,
-      productPrice: productData.productPrice,
-      quantity: quantity,
-      address: addressFormData,
-    };
-
+  const OnPlaceOrder = (e) => {
     addOrder({
       variables: {
         productName: productData.productName,
         productDescription: productData.productDescription,
         productPrice: Number(productData.productPrice),
         quantity: Number(quantity),
-        address: addressFormData, // here we may need to specify type of every key of address object
       },
     });
-    console.log(dataToStore);
     console.log("submited");
   };
 
-  const addressData = [
-    {
-      id: 1,
-      fullName: "Ankush Kumar",
-      city: "Moradabad",
-      state: "Uttar Pradesh",
-    },
-    {
-      id: 2,
-      fullName: "Ankush Kumar",
-      city: "Moradabad",
-      state: "Uttar Pradesh",
-    },
-  ];
+  const {
+    error: getAddressError,
+    loading: getAddressLoading,
+    data: addressData,
+  } = useQuery(GET_ALL_ADDRESS);
+
+  if (getAddressError) {
+    return <div>Error while Fetching addresses</div>;
+  }
+  if (getAddressLoading) {
+    return <div>Loading Adresses...</div>;
+  }
 
   return (
     <div style={{ padding: "20px" }}>
@@ -144,8 +111,15 @@ const Checkout = (props) => {
 
             <div className="addressList">
               <MyGridContainer>
-                {addressData.map((data) => {
-                  return <AddressList key={data.id} data={data} />;
+                {addressData.getAllAddress.map((data) => {
+                  return (
+                    <AddressList
+                      key={data.id}
+                      data={data}
+                      current={current}
+                      setCurrent={setCurrent}
+                    />
+                  );
                 })}
               </MyGridContainer>
             </div>
@@ -157,11 +131,11 @@ const Checkout = (props) => {
           <div style={{ border: "1px solid black" }}>
             <div className={classes.DeliveryAddressHeading}>
               <MyTypography variant="h5" component="h3">
-                Add Delivery Address
+                {!current ? "Add Delivery Address" : "Update Delivery Address"}
               </MyTypography>
             </div>
             <div className={classes.addressFromContainer}>
-              <AddressForm onChange={onChange} onSubmit={onSubmit} />
+              <AddressForm current={current} setCurrent={setCurrent} />
             </div>
           </div>
         </MyGridItem>

@@ -14,4 +14,15 @@ const useAddAddressHook = () => {
   return { addressFormData, setAddressFormData };
 };
 
-export default useAddAddressHook;
+const emptyAddressState = {
+  fullName: "",
+  phoneNumber: "",
+  pincode: "",
+  state: "",
+  city: "",
+  HouseNo: "",
+  area: "",
+  landmark: "",
+};
+
+export { useAddAddressHook, emptyAddressState };

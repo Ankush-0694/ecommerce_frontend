@@ -5,9 +5,9 @@ import { MyPaper } from "../../../../../Design/MyPaper";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
 
-const VendorAllProducts = ({ data }) => {
+const VendorAllProducts = ({ data, setCurrent }) => {
   const classes = AllProductStyles();
-  console.log(data);
+  const { productName, productPrice, productDescription } = data;
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -26,16 +26,19 @@ const VendorAllProducts = ({ data }) => {
             <div>
               <MyTypography variant="h6" component="h6">
                 {" "}
-                {data.productName}
+                {productName}
               </MyTypography>
               <MyTypography variant="body1" component="p">
-                {data.productDescription}
+                {productDescription}
               </MyTypography>
               <MyTypography variant="h6" component="h6">
-                Price - ₹{data.productPrice}
+                Price - ₹{productPrice}
               </MyTypography>
               <div>
                 <MyButtonComponent
+                  onClick={() => {
+                    setCurrent(data);
+                  }}
                   variant="contained"
                   color="primary"
                   size="small"

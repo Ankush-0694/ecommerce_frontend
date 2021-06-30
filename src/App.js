@@ -2,34 +2,24 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/user/Home/Home";
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  makeVar,
-  useQuery,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 // import Products from "./components/pages/user/Products/Products";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
-import AddProduct from "./components/pages/vendor/Product/VendorProduct";
 import Checkout from "./components/pages/user/Checkout/Checkout";
 // import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import { getMeQuery } from "./queries/admin/adminQueries";
 import { IS_LOGGED_IN, typeDefs } from "./clientSchema/clientSchema";
-import { isLoggedInVar } from "./clientSchema/ReactiveVaribles";
+import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const cache = new InMemoryCache();
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem("token");
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -65,7 +55,7 @@ const App = () => {
             {/* <Route exact path="/Products" component={Products} /> */}
             <Route exact path="/Products/:id" component={SingleProduct} />
             <Route exact path="/checkout/:id" component={Checkout} />
-            <Route exact path="/Vendor/addProducts" component={AddProduct} />
+            <Route exact path="/Vendor/addProducts" component={VendorProduct} />
           </Switch>
         </div>
       </BrowserRouter>

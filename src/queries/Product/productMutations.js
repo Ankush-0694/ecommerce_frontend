@@ -18,6 +18,27 @@ const addProductMutation = gql`
   }
 `;
 
+const updateProductMutation = gql`
+  mutation (
+    $productID: ID!
+    $productName: String!
+    $productDescription: String!
+    $productPrice: Int!
+  ) {
+    updateProduct(
+      productID: $productID
+      productName: $productName
+      productDescription: $productDescription
+      productPrice: $productPrice
+    ) {
+      id
+      productName
+      productDescription
+      productPrice
+    }
+  }
+`;
+
 const uploadFileMutaion = gql`
   mutation ($file: Upload!) {
     uploadFile(file: $file) {
@@ -26,4 +47,4 @@ const uploadFileMutaion = gql`
   }
 `;
 
-export { addProductMutation, uploadFileMutaion };
+export { addProductMutation, updateProductMutation };

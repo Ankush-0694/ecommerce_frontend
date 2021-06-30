@@ -1,4 +1,6 @@
-import React from "react";
+import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { getProductsQuery } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/FullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import AddProduct from "./Component/AddProduct/AddProduct";
@@ -6,8 +8,11 @@ import VendorAllProducts from "./Component/VendorAllProducts/VendorAllProducts";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
 
-const Products = () => {
+const VendorProduct = () => {
   const classes = VendorProductStyles();
+
+  const [current, setCurrent] = useState(null);
+
   const dummyData = [
     {
       productName: "Shirt",
@@ -35,6 +40,16 @@ const Products = () => {
       productDescription: "This is a very good Product",
     },
   ];
+  const { error, loading, data } = useQuery(getProductsQuery);
+
+  console.log(data);
+
+  if (error) {
+    return <div>Error onccrued</div>;
+  }
+  if (loading) {
+    return <div>Loading..</div>;
+  }
 
   return (
     <div>
@@ -42,13 +57,7 @@ const Products = () => {
         <MyFullScreenBox display="flex" width="50%" height="90vh">
           <div style={{ margin: "auto", width: "70%" }}>
             <div>
-              <MyTypography
-                variant="h4"
-                component="h6"
-                style={{ textAlign: "center" }}>
-                Add Product
-              </MyTypography>
-              <AddProduct />
+              <AddProduct current={current} setCurrent={setCurrent} />
             </div>
           </div>
         </MyFullScreenBox>
@@ -62,8 +71,14 @@ const Products = () => {
               Products
             </MyTypography>
             <div>
-              {dummyData.map((data) => {
-                return <VendorAllProducts data={data} />;
+              {data.getAllProducts.map((data) => {
+                return (
+                  <VendorAllProducts
+                    key={data.id}
+                    data={data}
+                    setCurrent={setCurrent}
+                  />
+                );
               })}
             </div>
           </div>
@@ -73,4 +88,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default VendorProduct;

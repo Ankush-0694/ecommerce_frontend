@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Dropzone from "react-dropzone";
 import { useMutation } from "@apollo/client";
 import {
@@ -7,21 +7,41 @@ import {
 } from "../../../../../Design/FormFieldComponent";
 
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import {
+  addProductMutation,
+  updateProductMutation,
+} from "../../../../../../queries/Product/productMutations";
 
-import { addProductMutation } from "../../../../../../queries/Product/productMutations";
+const AddProduct = ({ current, setCurrent }) => {
+  const [addProduct, { data: addProductData }] =
+    useMutation(addProductMutation);
+  console.log(addProductData);
 
-const AddProduct = () => {
-  const [addProduct, { data }] = useMutation(addProductMutation);
-  // const [uploadFile, obj] = useMutation(uploadFileMutaion);
+  const [updateProduct, { data: updateProductData }] = useMutation(
+    updateProductMutation
+  );
 
-  console.log(data);
-  // console.log(obj);
   const [productFormData, setProductFormData] = useState({
     productName: "",
     productDescription: "",
     productPrice: "",
-    // productImage: [],
   });
+
+  const { productName, productDescription, productPrice } = productFormData;
+  console.log(productFormData);
+
+  useEffect(() => {
+    if (current !== null) {
+      setProductFormData(current);
+    } else {
+      setProductFormData({
+        productName: "",
+        productDescription: "",
+        productPrice: "",
+      });
+    }
+  }, [current]);
 
   const onChange = (e) => {
     setProductFormData({
@@ -32,23 +52,49 @@ const AddProduct = () => {
 
   const onSubmit = (e) => {
     console.log(productFormData);
-    addProduct({
-      variables: {
-        productName: productFormData.productName,
-        productDescription: productFormData.productDescription,
-        productPrice: Number(productFormData.productPrice),
-      },
+
+    if (!current) {
+      addProduct({
+        variables: {
+          productName: productFormData.productName,
+          productDescription: productFormData.productDescription,
+          productPrice: Number(productFormData.productPrice),
+        },
+      });
+    } else {
+      // console.log(productFormData);
+      updateProduct({
+        variables: {
+          productID: productFormData.id,
+          productName: productFormData.productName,
+          productDescription: productFormData.productDescription,
+          productPrice: Number(productFormData.productPrice),
+        },
+      });
+    }
+
+    setProductFormData({
+      productName: "",
+      productDescription: "",
+      productPrice: "",
     });
+
+    setCurrent(null);
 
     e.preventDefault();
   };
+
   return (
     <div>
+      <MyTypography variant="h4" component="h6" style={{ textAlign: "center" }}>
+        {!current ? "Add Product" : "Edit Product"}
+      </MyTypography>
       <form id="add-Product" onSubmit={onSubmit}>
         <div className="field">
           <MyTextInput
             name="productName"
             onChange={onChange}
+            value={productName}
             type="text"
             label="Product Name"
           />
@@ -58,6 +104,7 @@ const AddProduct = () => {
             rows={3}
             variant="outlined"
             name="productDescription"
+            value={productDescription}
             onChange={onChange}
             label="Product Description"
             type="text"
@@ -66,6 +113,7 @@ const AddProduct = () => {
         <div className="field">
           <MyTextInput
             name="productPrice"
+            value={productPrice}
             onChange={onChange}
             label="Product Price"
             type="text"
@@ -73,7 +121,18 @@ const AddProduct = () => {
         </div>
         <div style={{ textAlign: "center" }}>
           <MyButtonComponent type="submit" variant="contained" color="primary">
-            Add Product
+            {!current ? "Add Product" : "Edit Product"}
+          </MyButtonComponent>
+        </div>
+        <div style={{ textAlign: "center", margin: "10px" }}>
+          <MyButtonComponent
+            onClick={() => {
+              setCurrent(null);
+            }}
+            type="submit"
+            variant="contained"
+            color="secondary">
+            Clear
           </MyButtonComponent>
         </div>
       </form>
