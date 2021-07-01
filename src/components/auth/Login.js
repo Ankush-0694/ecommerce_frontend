@@ -3,7 +3,7 @@ import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
 import { useMutation } from "@apollo/client";
-import { adminLoginMutation } from "../../queries/admin/adminMutation";
+import { adminLoginMutation } from "../../queries/admin/adminMutations";
 import { isLoggedInVar } from "../../clientSchema/ReactiveVaribles";
 
 const Login = (props) => {

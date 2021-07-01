@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
 import { MyFullScreenBox } from "../Design/FullScreenBox";
-import { createAdminMutation } from "../../queries/admin/adminMutation";
+import { createAdminMutation } from "../../queries/admin/adminMutations";
 import { useMutation } from "@apollo/client";
 
 const Signup = (props) => {

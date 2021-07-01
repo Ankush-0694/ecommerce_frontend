@@ -14,7 +14,7 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import { IS_LOGGED_IN, typeDefs } from "./clientSchema/clientSchema";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
-
+import Dashboard from "./components/pages/admin/Dashboard/Dashboard";
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const cache = new InMemoryCache();
 
@@ -33,6 +33,7 @@ const client = new ApolloClient({
   cache,
   typeDefs,
 });
+
 console.log(client);
 
 console.log(cache.data.data);
@@ -56,6 +57,7 @@ const App = () => {
             <Route exact path="/Products/:id" component={SingleProduct} />
             <Route exact path="/checkout/:id" component={Checkout} />
             <Route exact path="/Vendor/addProducts" component={VendorProduct} />
+            <Route path="/admin/Dashboard" component={Dashboard} />
           </Switch>
         </div>
       </BrowserRouter>

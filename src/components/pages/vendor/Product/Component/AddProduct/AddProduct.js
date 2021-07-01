@@ -129,7 +129,6 @@ const AddProduct = ({ current, setCurrent }) => {
             onClick={() => {
               setCurrent(null);
             }}
-            type="submit"
             variant="contained"
             color="secondary">
             Clear

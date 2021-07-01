@@ -1,3 +1,3 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-export { makeStyles };
+export { makeStyles, useTheme };

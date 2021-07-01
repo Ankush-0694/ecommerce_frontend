@@ -12,4 +12,16 @@ const getMeQuery = gql`
   }
 `;
 
-export { getMeQuery };
+const GET_ALL_USERS = gql`
+  query ($role: String!) {
+    getAllUsers(role: $role) {
+      id
+      email
+      firstName
+      lastName
+      role
+    }
+  }
+`;
+
+export { getMeQuery, GET_ALL_USERS };

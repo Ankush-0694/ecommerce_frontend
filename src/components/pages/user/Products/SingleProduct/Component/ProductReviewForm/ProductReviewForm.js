@@ -35,31 +35,31 @@ const ProductReviewForm = ({ productid }) => {
     console.log(newReview);
     addReview({
       variables: newReview,
-      // update: (cache, { data: { addReview } }) => {
-      //   let productData = cache.readQuery({
-      //     query: getSingleProduct,
-      //     variables: {
-      //       id: productid,
-      //     },
-      //   });
+      update: (cache, { data: { addReview } }) => {
+        let productData = cache.readQuery({
+          query: getSingleProduct,
+          variables: {
+            id: productid,
+          },
+        });
 
-      //   console.log(addReview);
+        // console.log(addReview);
 
-      //   let reviewsData = productData.getProductById.reviews;
-      //   reviewsData = [...reviewsData, addReview];
-      //   console.log(reviewsData);
-      //   console.log(productData);
+        let reviewsData = productData.getProductById.reviews;
+        reviewsData = [...reviewsData, addReview];
+        console.log(reviewsData);
+        console.log(productData);
 
-      //   cache.writeQuery(
-      //     {
-      //       query: getSingleProduct,
-      //       variables: {
-      //         id: productid,
-      //       },
-      //     },
-      //     productData
-      //   );
-      // },
+        cache.writeQuery(
+          {
+            query: getSingleProduct,
+            variables: {
+              id: productid,
+            },
+          },
+          productData
+        );
+      },
     });
 
     setReviewFormData({
