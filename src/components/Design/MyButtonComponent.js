@@ -1,4 +1,14 @@
 import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+  buttonStyle: {
+    "&:focus": {
+      border: "none",
+      outline: "none",
+    },
+  },
+});
 
 const MyButtonComponent = ({
   onClick,
@@ -14,8 +24,10 @@ const MyButtonComponent = ({
   disabled,
   className,
 }) => {
+  const classes = useStyles();
   return (
     <Button
+      disableRipple
       variant={variant}
       onClick={onClick}
       style={userStyle}
@@ -26,7 +38,7 @@ const MyButtonComponent = ({
       component={component}
       to={to}
       disabled={disabled}
-      className={className}>
+      className={`${className} ${classes.buttonStyle}`}>
       {children}
     </Button>
   );

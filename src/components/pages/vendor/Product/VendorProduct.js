@@ -40,6 +40,7 @@ const VendorProduct = () => {
       productDescription: "This is a very good Product",
     },
   ];
+
   const { error, loading, data } = useQuery(getProductsQuery);
 
   console.log(data);

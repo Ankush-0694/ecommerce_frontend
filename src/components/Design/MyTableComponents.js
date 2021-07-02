@@ -1,3 +1,4 @@
+import { TableHead } from "@material-ui/core";
 import {
   Table,
   TableBody,
@@ -7,16 +8,27 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-const MyTableContainer = ({ children, component }) => {
-  return <TableContainer component={component}>{children}</TableContainer>;
+const MyTableContainer = ({ className, children, component }) => {
+  return (
+    <TableContainer className={className} component={component}>
+      {children}
+    </TableContainer>
+  );
 };
 
-const MyTable = ({ children, className, ariaLabel }) => {
+const MyTable = ({ stickyHeader, children, className, ariaLabel }) => {
   return (
-    <Table className={className} aria-label={ariaLabel}>
+    <Table
+      stickyHeader={stickyHeader ? true : false}
+      className={className}
+      aria-label={ariaLabel}>
       {children}
     </Table>
   );
+};
+
+const MyTableHead = ({ children }) => {
+  return <TableHead>{children}</TableHead>;
 };
 
 const MyTableBody = ({ children }) => {
@@ -27,12 +39,24 @@ const MyTableRow = ({ children }) => {
   return <TableRow>{children}</TableRow>;
 };
 
-const MyTableCell = ({ children, component, scope, align, size }) => {
+const MyTableCell = ({ style, children, component, scope, align, size }) => {
   return (
-    <TableCell component={component} scope={scope} align={align} size={size}>
+    <TableCell
+      component={component}
+      scope={scope}
+      align={align}
+      style={style}
+      size={size}>
       {children}
     </TableCell>
   );
 };
 
-export { MyTable, MyTableContainer, MyTableRow, MyTableBody, MyTableCell };
+export {
+  MyTable,
+  MyTableContainer,
+  MyTableRow,
+  MyTableBody,
+  MyTableCell,
+  MyTableHead,
+};

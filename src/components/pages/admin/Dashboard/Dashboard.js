@@ -10,6 +10,7 @@ import SideDrawer from "./Component/SideDrawer/SideDrawer";
 import { DashboardStyles } from "./CSS/DashboardStyles";
 import AdminNavbar from "../../../layout/AdminNavbar";
 import CreateVendor from "./Component/DrawerContent/CreateVendor/CreateVendor";
+import ProductList from "./Component/DrawerContent/ProductListComponent/ProductList";
 
 const ResponsiveDrawer = () => {
   const classes = DashboardStyles();
@@ -25,10 +26,7 @@ const ResponsiveDrawer = () => {
     <div className={classes.root}>
       <CssBaseline />
       <AdminNavbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-      <nav
-        className={classes.drawer}
-        aria-label="mailbox folders"
-        style={{ zIndex: "-100" }}>
+      <nav className={classes.drawer} aria-label="mailbox folders">
         <Hidden smUp implementation="css">
           <Drawer
             variant="temporary"
@@ -55,10 +53,15 @@ const ResponsiveDrawer = () => {
           </Drawer>
         </Hidden>
       </nav>
-      <div style={{ flexGrow: 2 }}>
+      <div style={{ flexGrow: 2, height: "20vh" }}>
+        {window.location.href.split("/").pop() === "dashboard" && (
+          <div>Make a welcome thing or something for admin page</div>
+        )}
+
         <Route path="/admin/dashboard/customers" component={Customers} />
         <Route path="/admin/dashboard/vendors" component={Vendors} />
         <Route path="/admin/dashboard/createVendor" component={CreateVendor} />
+        <Route path="/admin/dashboard/products" component={ProductList} />
       </div>
     </div>
   );

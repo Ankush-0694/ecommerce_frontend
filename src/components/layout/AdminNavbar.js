@@ -28,7 +28,10 @@ const AdminNavbar = ({ mobileOpen, setMobileOpen }) => {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar
+      position="fixed"
+      className={classes.appBar}
+      style={{ zIndex: "10000" }}>
       <Toolbar>
         <IconButton
           color="inherit"
