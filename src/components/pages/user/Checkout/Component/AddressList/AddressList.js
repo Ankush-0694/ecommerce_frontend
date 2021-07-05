@@ -24,8 +24,6 @@ const AddressList = ({ data, current, setCurrent }) => {
   const [deleteAddress, { data: deleteAddressData }] =
     useMutation(DELETE_ADDRESS);
 
-  console.log(deleteAddressData);
-
   return (
     <>
       <MyGridItem xs={8}>

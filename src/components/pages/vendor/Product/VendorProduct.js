@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { getProductsQuery } from "../../../../queries/Product/productQueries";
-import { MyFullScreenBox } from "../../../Design/FullScreenBox";
+import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import AddProduct from "./Component/AddProduct/AddProduct";
 import VendorAllProducts from "./Component/VendorAllProducts/VendorAllProducts";
@@ -13,44 +13,20 @@ const VendorProduct = () => {
 
   const [current, setCurrent] = useState(null);
 
-  const dummyData = [
-    {
-      productName: "Shirt",
-      productPrice: 3000,
-      productDescription: "This is a very good Product",
-    },
-    {
-      productName: "Shirt",
-      productPrice: 3000,
-      productDescription: "This is a very good Product",
-    },
-    {
-      productName: "Shirt",
-      productPrice: 3000,
-      productDescription: "This is a very good Product",
-    },
-    {
-      productName: "Shirt",
-      productPrice: 3000,
-      productDescription: "This is a very good Product",
-    },
-    {
-      productName: "Shirt",
-      productPrice: 3000,
-      productDescription: "This is a very good Product",
-    },
-  ];
+  const {
+    error: getProductError,
+    loading: getProductLoading,
+    data: getProductData,
+  } = useQuery(getProductsQuery);
 
-  const { error, loading, data } = useQuery(getProductsQuery);
-
-  console.log(data);
-
-  if (error) {
+  if (getProductError) {
     return <div>Error onccrued</div>;
   }
-  if (loading) {
+  if (getProductLoading) {
     return <div>Loading..</div>;
   }
+
+  const productData = getProductData.getAllProducts;
 
   return (
     <div>
@@ -72,7 +48,7 @@ const VendorProduct = () => {
               Products
             </MyTypography>
             <div>
-              {data.getAllProducts.map((data) => {
+              {productData.map((data) => {
                 return (
                   <VendorAllProducts
                     key={data.id}

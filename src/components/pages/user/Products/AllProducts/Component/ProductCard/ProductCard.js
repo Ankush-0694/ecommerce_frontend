@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MyCardContainer } from "../../../../../../Design/MyCardComponents/CardContainer";
-import { MyCardContent } from "../../../../../../Design/MyCardComponents/CardContent";
-import { MyCardMedia } from "../../../../../../Design/MyCardComponents/CardMedia";
-import { MyCardActions } from "../../../../../../Design/MyCardComponents/CardActions";
+import { MyCardContainer } from "../../../../../../Design/MyCardComponents";
+import { MyCardContent } from "../../../../../../Design/MyCardComponents";
+import { MyCardMedia } from "../../../../../../Design/MyCardComponents";
+import { MyCardActions } from "../../../../../../Design/MyCardComponents";
 import { MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
@@ -16,16 +16,14 @@ const ProductCard = ({ details, link }) => {
   const classes = ProductCardStyles();
   const { id, productName, productDescription, productPrice } = details;
 
-  const [addToCart, { error, loading, data: cartData }] = useMutation(
+  const [addToCart, { error, data: cartData }] = useMutation(
     addToCartMutation,
     {
       refetchQueries: [{ query: getCartQuery }],
     }
   );
-  console.log(cartData);
 
   const onClickAddCart = (e) => {
-    console.log("clicked");
     e.preventDefault();
     addToCart({
       variables: {
@@ -35,7 +33,7 @@ const ProductCard = ({ details, link }) => {
       },
     });
     if (error) {
-      console.log(" error happpend " + error);
+      throw error;
     } else {
       alert("added to cart");
     }
@@ -70,7 +68,7 @@ const ProductCard = ({ details, link }) => {
             variant="outlined"
             size="small"
             color="primary"
-            userFunction={onClickAddCart}>
+            onClick={onClickAddCart}>
             ADD TO CART
           </MyButtonComponent>
           <MyButtonComponent

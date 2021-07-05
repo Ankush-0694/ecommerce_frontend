@@ -12,6 +12,7 @@ import AdminNavbar from "../../../layout/AdminNavbar";
 import CreateVendor from "./Component/DrawerContent/CreateVendor/CreateVendor";
 import ProductList from "./Component/DrawerContent/ProductListComponent/ProductList";
 
+// this dashboard could be created using verical tab component in material ui
 const ResponsiveDrawer = () => {
   const classes = DashboardStyles();
   const theme = useTheme();
@@ -53,14 +54,13 @@ const ResponsiveDrawer = () => {
           </Drawer>
         </Hidden>
       </nav>
-      <div style={{ flexGrow: 2, height: "20vh" }}>
+      <div style={{ flexGrow: 2 }}>
         {window.location.href.split("/").pop() === "dashboard" && (
           <div>Make a welcome thing or something for admin page</div>
         )}
 
         <Route path="/admin/dashboard/customers" component={Customers} />
         <Route path="/admin/dashboard/vendors" component={Vendors} />
-        <Route path="/admin/dashboard/createVendor" component={CreateVendor} />
         <Route path="/admin/dashboard/products" component={ProductList} />
       </div>
     </div>

@@ -43,7 +43,9 @@ const Customers = () => {
 
   const dataToRender = AllUsersData.getAllUsers;
 
+  // these specify the columns of the table
   const columns = [
+    { id: "SNo.", label: "S.No.", minWidth: 170 },
     { id: "firstname", label: "FirstName", minWidth: 170 },
     { id: "lastname", label: "LastName", minWidth: 170 },
     {
@@ -81,8 +83,14 @@ const Customers = () => {
               </MyTableRow>
             </MyTableHead>
             <MyTableBody>
-              {dataToRender.map((customer) => {
-                return <UserList key={customer.id} customerData={customer} />;
+              {dataToRender.map((customer, index) => {
+                return (
+                  <UserList
+                    key={customer.id}
+                    customerData={customer}
+                    serialNo={index}
+                  />
+                );
               })}
             </MyTableBody>
           </MyTable>

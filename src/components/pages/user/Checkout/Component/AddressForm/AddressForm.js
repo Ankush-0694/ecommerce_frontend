@@ -7,7 +7,7 @@ import {
 import {
   MyMultilineInput,
   MyTextInput,
-} from "../../../../../Design/FormFieldComponent";
+} from "../../../../../Design/MyFormFieldComponent";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 import { emptyAddressState, useAddAddressHook } from "./useAddressHook";
@@ -30,8 +30,6 @@ const AddressForm = ({ current, setCurrent }) => {
   const [addAddress, { data: addAddressData }] = useMutation(ADD_ADDRESS);
   const [updateAddress, { data: updateAddressData }] =
     useMutation(UPDATE_ADDRESS);
-
-  // console.log(updateAddressData);
 
   useEffect(() => {
     if (current !== null) {

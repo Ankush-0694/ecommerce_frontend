@@ -12,10 +12,15 @@ import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_ALL_ADDRESS } from "../../../../queries/address/addressQueries";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {
+  AccordionSummary,
+  Accordion,
+  AccordionDetails,
+} from "@material-ui/core";
 
 const Checkout = (props) => {
   const classes = CheckoutStyles();
-  console.log(props.match.params.id.split(":"));
 
   const productid = props.match.params.id.split(":")[1];
 
@@ -23,21 +28,39 @@ const Checkout = (props) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [current, setCurrent] = useState(null);
-  console.log(current);
+  const [current, setCurrent] = useState(null); // to know the form state is add or update
 
-  const singleProductObject = useQuery(getSingleProduct, {
+  const {
+    error: getProductError,
+    loading: getProductLoading,
+    data: getProductData,
+  } = useQuery(getSingleProduct, {
     variables: { id: productid },
   });
-  const { loading, error, data } = singleProductObject;
 
-  const [addOrder, { data: OrderData }] = useMutation(addOrderMutation);
-  console.log(OrderData);
+  const {
+    error: getAddressError,
+    loading: getAddressLoading,
+    data: addressData,
+  } = useQuery(GET_ALL_ADDRESS);
 
-  let productData;
-  if (!loading) {
-    productData = data.getProductById;
+  const [addOrder, { data: addOrderData }] = useMutation(addOrderMutation);
+
+  if (getProductError) {
+    return <div>Error while Fetching products</div>;
   }
+  if (getProductLoading) {
+    return <div>Loading Products...</div>;
+  }
+
+  if (getAddressError) {
+    return <div>Error while Fetching addresses</div>;
+  }
+  if (getAddressLoading) {
+    return <div>Loading Adresses...</div>;
+  }
+
+  const productData = getProductData.getProductById; // this data will be render
 
   const OnPlaceOrder = (e) => {
     addOrder({
@@ -48,21 +71,7 @@ const Checkout = (props) => {
         quantity: Number(quantity),
       },
     });
-    console.log("submited");
   };
-
-  const {
-    error: getAddressError,
-    loading: getAddressLoading,
-    data: addressData,
-  } = useQuery(GET_ALL_ADDRESS);
-
-  if (getAddressError) {
-    return <div>Error while Fetching addresses</div>;
-  }
-  if (getAddressLoading) {
-    return <div>Loading Adresses...</div>;
-  }
 
   return (
     <div style={{ padding: "20px" }}>
@@ -72,24 +81,20 @@ const Checkout = (props) => {
             Orders Summary
           </MyTypography>
 
-          {!loading && (
-            <div>
-              <ProductDetails
-                productData={productData}
-                quantity={quantity}
-                setQuantity={setQuantity}
-              />
-            </div>
-          )}
+          <div>
+            <ProductDetails
+              productData={productData}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+          </div>
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
-            {!loading && (
-              <PriceDetails
-                productPrice={productData.productPrice}
-                quantity={quantity}
-              />
-            )}
+            <PriceDetails
+              productPrice={productData.productPrice}
+              quantity={quantity}
+            />
           </div>
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent variant="contained" color="default">
@@ -138,6 +143,27 @@ const Checkout = (props) => {
               <AddressForm current={current} setCurrent={setCurrent} />
             </div>
           </div>
+
+          {/* <div className={classes.root}>
+            <Accordion>
+              <AccordionSummary
+                className={classes.AddDeliveryAddressHeading}
+                expandIcon={<ExpandMoreIcon color="secondary" />}
+                aria-controls="panel1a-content"
+                id="panel1a-header">
+                <MyTypography variant="h5" component="h3">
+                  {!current
+                    ? "Add Delivery Address"
+                    : "Update Delivery Address"}
+                </MyTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className={classes.addressFromContainer}>
+                  <AddressForm current={current} setCurrent={setCurrent} />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          </div> */}
         </MyGridItem>
       </MyGridContainer>
       <br></br>

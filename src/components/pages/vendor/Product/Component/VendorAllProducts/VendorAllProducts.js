@@ -3,7 +3,7 @@ import { AllProductStyles } from "../../CSS/AllProductStyles";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 
 const VendorAllProducts = ({ data, setCurrent }) => {
   const classes = AllProductStyles();

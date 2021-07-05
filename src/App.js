@@ -58,6 +58,7 @@ const App = () => {
             <Route exact path="/checkout/:id" component={Checkout} />
             <Route exact path="/Vendor/addProducts" component={VendorProduct} />
             <Route path="/admin/Dashboard" component={Dashboard} />
+            <Route render={() => <h1>Invalid URL</h1>} />
           </Switch>
         </div>
       </BrowserRouter>

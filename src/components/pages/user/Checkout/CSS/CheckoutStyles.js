@@ -1,6 +1,20 @@
 import { makeStyles } from "../../../../Design/MyUseStyles";
 
-const CheckoutStyles = makeStyles({
+const CheckoutStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    border: "1px solid black",
+    marginTop: "10px",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+  AddDeliveryAddressHeading: {
+    backgroundColor: "#003c8f",
+    color: "white",
+    paddingLeft: "10px",
+  },
   DeliveryAddressHeading: {
     backgroundColor: "#003c8f",
     color: "white",
@@ -22,7 +36,8 @@ const CheckoutStyles = makeStyles({
   },
   addressFromContainer: {
     padding: "20px",
+    width: "100%",
   },
-});
+}));
 
 export { CheckoutStyles };

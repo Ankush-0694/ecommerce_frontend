@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import Dropzone from "react-dropzone";
 import { useMutation } from "@apollo/client";
 import {
   MyTextInput,
   MyMultilineInput,
-} from "../../../../../Design/FormFieldComponent";
-
+} from "../../../../../Design/MyFormFieldComponent";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import {
@@ -14,22 +12,12 @@ import {
 } from "../../../../../../queries/Product/productMutations";
 
 const AddProduct = ({ current, setCurrent }) => {
-  const [addProduct, { data: addProductData }] =
-    useMutation(addProductMutation);
-  console.log(addProductData);
-
-  const [updateProduct, { data: updateProductData }] = useMutation(
-    updateProductMutation
-  );
-
   const [productFormData, setProductFormData] = useState({
     productName: "",
     productDescription: "",
     productPrice: "",
   });
-
   const { productName, productDescription, productPrice } = productFormData;
-  console.log(productFormData);
 
   useEffect(() => {
     if (current !== null) {
@@ -43,6 +31,13 @@ const AddProduct = ({ current, setCurrent }) => {
     }
   }, [current]);
 
+  const [addProduct, { data: addProductData }] =
+    useMutation(addProductMutation);
+
+  const [updateProduct, { data: updateProductData }] = useMutation(
+    updateProductMutation
+  );
+
   const onChange = (e) => {
     setProductFormData({
       ...productFormData,
@@ -51,8 +46,6 @@ const AddProduct = ({ current, setCurrent }) => {
   };
 
   const onSubmit = (e) => {
-    console.log(productFormData);
-
     if (!current) {
       addProduct({
         variables: {
@@ -140,30 +133,3 @@ const AddProduct = ({ current, setCurrent }) => {
 };
 
 export default AddProduct;
-
-// const onDrop = (file) => {
-//   console.log(file);
-//   // uploadFile({
-//   //   variables: {
-//   //     file: file,
-//   //   },
-//   // });
-// };
-// const imageUpload = (e) => {
-//   console.log(e.target.files);
-// };
-// {
-//   /* <Dropzone onDrop={onDrop}>
-//             {({ getRootProps, getInputProps }) => (
-//               <section>
-//                 <div {...getRootProps()}>
-//                   <input {...getInputProps()} />
-//                   <p>Drag 'n' drop some files here, or click to select files</p>
-//                 </div>
-//               </section>
-//             )}
-//           </Dropzone> */
-// }
-// {
-//   /* <input type="file" onChange={imageUpload} /> */
-// }

@@ -5,60 +5,40 @@ import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
-import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
+// import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
 
-const Cart = ({ history }) => {
+const Cart = () => {
   const classes = CartStyles();
 
   //to Get data from cart
-  const obj = useQuery(getCartQuery);
-  const { error, loading, data: cartDataObject } = obj;
+  const {
+    error: getCartError,
+    loading: getCartLoading,
+    data: getCartData,
+  } = useQuery(getCartQuery);
 
-  // storing cartData array
-  let cartData;
-  if (!loading) {
-    cartData = cartDataObject.getCart;
+  if (getCartError) {
+    return <div>Error occured During getting cart</div>;
   }
-  console.log(cartData);
+  if (getCartLoading) {
+    return <div>Fetching cart data, please wait...</div>;
+  }
 
-  // mutation to chaning the quantity of cart item
-  const [
-    updateCartQuantity,
-    { error: updateError, loading: updateLoading, data: updateCartData },
-  ] = useMutation(updateCartQuantityMutation);
-
-  // , {
-  //   refetchQueries: [{ query: getCartQuery }],
-  // }
-
-  //updating quantity to the cart
-  const setQuantityById = (id, quantity) => {
-    updateCartQuantity({
-      variables: {
-        cartID: id,
-        quantity: quantity,
-      },
-    });
-  };
+  // storing cartData array // this data will be render
+  const cartData = getCartData.getCart;
 
   //No of product
   let itemCount = 0;
-  if (!loading) {
-    itemCount = cartData.length;
-    console.log(itemCount);
-  }
+  itemCount = cartData.length;
 
-  //calculating total price
+  //calculating total price (there will be different quantity for every product)
   let totalPrice = 0;
-  if (!loading) {
-    let sum = 0;
-    const cartItems = cartData;
-    cartItems.forEach((item) => {
-      sum += item.productPrice * item.quantity;
-    });
-    totalPrice = sum;
-  }
-  console.log(totalPrice);
+  let sum = 0;
+  const cartItems = cartData;
+  cartItems.forEach((item) => {
+    sum += item.productPrice * item.quantity;
+  });
+  totalPrice = sum;
 
   return (
     <div>
@@ -69,20 +49,11 @@ const Cart = ({ history }) => {
       <div className={classes.cartContainer}>
         <div className={classes.item1}>
           <h3 className={classes.productHeading}>Products</h3>
-
-          {!loading ? (
-            cartData.map((cartItemData) => {
-              return (
-                <CartItem
-                  key={cartItemData.id}
-                  cartItemData={cartItemData}
-                  setQuantityById={setQuantityById}
-                />
-              );
-            })
-          ) : (
-            <p>loading</p>
-          )}
+          {cartData.map((cartItemData) => {
+            return (
+              <CartItem key={cartItemData.id} cartItemData={cartItemData} />
+            );
+          })}
         </div>
 
         <div className={classes.item2}>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { CartItemStyles } from "../../CSS/CartItemStyles";
+import { updateCartQuantityMutation } from "../../../../../../queries/Cart/cartMutations";
+import { useMutation } from "@apollo/client";
 
-const CartItem = ({ cartItemData, setQuantityById }) => {
+const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
 
   const { id, productName, productPrice, productDescription, quantity } =
@@ -13,9 +15,25 @@ const CartItem = ({ cartItemData, setQuantityById }) => {
 
   const [quantityCount, setQuantityCount] = useState(quantity);
 
+  // mutation to chaning the quantity of cart item
+  const [
+    updateCartQuantity,
+    { error: updateError, loading: updateLoading, data: updateCartData },
+  ] = useMutation(updateCartQuantityMutation);
+
+  //updating quantity to the cart
+  const setQuantityById = (id, quantity) => {
+    updateCartQuantity({
+      variables: {
+        cartID: id,
+        quantity: quantity,
+      },
+    });
+  };
+
   useEffect(() => {
     //eslint
-    if (quantityCount > 0) {
+    if (quantityCount > 0 && quantityCount != "") {
       setQuantityById(id, quantityCount);
     }
   }, [quantityCount]);
@@ -71,6 +89,8 @@ const CartItem = ({ cartItemData, setQuantityById }) => {
           <input
             className={classes.quantityInput}
             value={quantityCount}
+            // for doing onChange we need to handle the situation when input is empty,
+            // we need to make sure that req does not send to server if input is empty
             // onChange={(e) => {
             //   setQuantityCount(Number(e.target.value));
             // }}

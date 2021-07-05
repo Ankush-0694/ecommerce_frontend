@@ -5,30 +5,34 @@ import { ProductCard } from "./Component/ProductCard/ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 
 const Products = () => {
-  const obj = useQuery(getProductsQuery);
+  const {
+    error: getProductsError,
+    loading: getProductsLoading,
+    data: getProductsData,
+  } = useQuery(getProductsQuery);
 
-  const { error, loading, data } = obj;
-  console.log(data);
-
-  if (error) {
+  if (getProductsError) {
     return <div>Error onccrued</div>;
   }
+  if (getProductsLoading) {
+    return <div>Loading.....</div>;
+  }
+
+  // data to render
+  const productData = getProductsData.getAllProducts;
+
   return (
     <div style={{ margin: "20px" }}>
       <MyGridContainer container justify="center" spacing={4}>
-        {!loading ? (
-          data.getAllProducts.map((product) => {
-            return (
-              <ProductCard
-                key={product.id}
-                details={product}
-                link={`/products/:${product.id}`}
-              />
-            );
-          })
-        ) : (
-          <p>Loading</p>
-        )}
+        {productData.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              details={product}
+              link={`/products/:${product.id}`}
+            />
+          );
+        })}
       </MyGridContainer>
     </div>
   );

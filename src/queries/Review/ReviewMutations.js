@@ -22,6 +22,7 @@ const updateReviewMutation = gql`
   }
 `;
 
+// No need to pass product id, may be need to delete to reference in product schema
 const deleteReviewMutation = gql`
   mutation ($id: ID, $productID: ID) {
     deleteReview(id: $id, productID: $productID) {

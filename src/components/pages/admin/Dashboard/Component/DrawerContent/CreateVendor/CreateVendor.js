@@ -4,11 +4,11 @@ import { useMutation } from "@apollo/client";
 import {
   MyTextInput,
   MyMultilineInput,
-} from "../../../../../../Design/FormFieldComponent";
+} from "../../../../../../Design/MyFormFieldComponent";
 
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyFullScreenBox } from "../../../../../../Design/FullScreenBox";
+import { MyFullScreenBox } from "../../../../../../Design/MyFullScreenBox";
 
 const CreateVendor = () => {
   const [vendorDetails, setVendorDetails] = useState({
@@ -34,8 +34,8 @@ const CreateVendor = () => {
 
   return (
     <div>
-      <MyFullScreenBox display="flex" width="100%" height="90vh">
-        <div style={{ margin: "auto", width: "60%" }}>
+      <MyFullScreenBox display="flex" width="100%">
+        <div style={{ margin: "auto", width: "50%" }}>
           <div>
             <div>
               <MyTypography
@@ -55,35 +55,15 @@ const CreateVendor = () => {
                     label="Vendor's Email"
                   />
                 </div>
-                {/* <div className="field">
-                  <MyMultilineInput
-                    rows={3}
-                    variant="outlined"
-                    name="productDescription"
-                    value={productDescription}
-                    onChange={onChange}
-                    label="Product Description"
-                    type="text"
-                  />
-                </div> */}
-                {/* <div className="field">
-                  <MyTextInput
-                    name="productPrice"
-                    value={productPrice}
-                    onChange={onChange}
-                    label="Product Price"
-                    type="text"
-                  />
-                </div> */}
-                <div style={{ textAlign: "center" }}>
+
+                <div style={{ textAlign: "center", margin: "10px" }}>
                   <MyButtonComponent
                     type="submit"
                     variant="contained"
                     color="primary">
                     Create Vendor
                   </MyButtonComponent>
-                </div>
-                <div style={{ textAlign: "center", margin: "10px" }}>
+                  <span style={{ margin: "10px" }}></span>
                   <MyButtonComponent
                     variant="contained"
                     color="secondary"
@@ -105,30 +85,3 @@ const CreateVendor = () => {
 };
 
 export default CreateVendor;
-
-// const onDrop = (file) => {
-//   console.log(file);
-//   // uploadFile({
-//   //   variables: {
-//   //     file: file,
-//   //   },
-//   // });
-// };
-// const imageUpload = (e) => {
-//   console.log(e.target.files);
-// };
-// {
-//   /* <Dropzone onDrop={onDrop}>
-//             {({ getRootProps, getInputProps }) => (
-//               <section>
-//                 <div {...getRootProps()}>
-//                   <input {...getInputProps()} />
-//                   <p>Drag 'n' drop some files here, or click to select files</p>
-//                 </div>
-//               </section>
-//             )}
-//           </Dropzone> */
-// }
-// {
-//   /* <input type="file" onChange={imageUpload} /> */
-// }

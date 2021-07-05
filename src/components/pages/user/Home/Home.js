@@ -1,6 +1,6 @@
 import React from "react";
 import HomeSlider from "./Component/HomeSlider/HomeSlider";
-import { MyFullScreenBox } from "../../../Design/FullScreenBox";
+import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import Products from "../Products/AllProducts/Products";
 
 const Home = () => {

@@ -13,6 +13,8 @@ import {
   MyTableCell,
   MyTableRow,
 } from "../../../../../../Design/MyTableComponents";
+import CreateVendor from "../CreateVendor/CreateVendor";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -43,6 +45,7 @@ const Vendors = () => {
   const dataToRender = AllUsersData.getAllUsers;
 
   const columns = [
+    { id: "SNo.", label: "S.No.", minWidth: 170 },
     { id: "firstname", label: "FirstName", minWidth: 170 },
     { id: "lastname", label: "LastName", minWidth: 170 },
     {
@@ -59,6 +62,11 @@ const Vendors = () => {
 
   return (
     <div>
+      <div style={{ margin: "20px" }}>
+        <CreateVendor />
+      </div>
+
+      <Divider />
       <div style={{ textAlign: "center", padding: "20px 0px" }}>
         <MyTypography variant="h3" component="h2">
           Vendors
@@ -80,8 +88,14 @@ const Vendors = () => {
               </MyTableRow>
             </MyTableHead>
             <MyTableBody>
-              {dataToRender.map((customer) => {
-                return <UserList key={customer.id} customerData={customer} />;
+              {dataToRender.map((customer, index) => {
+                return (
+                  <UserList
+                    key={customer.id}
+                    customerData={customer}
+                    serialNo={index}
+                  />
+                );
               })}
             </MyTableBody>
           </MyTable>

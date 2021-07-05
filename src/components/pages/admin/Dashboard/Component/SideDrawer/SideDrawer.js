@@ -29,11 +29,7 @@ const SideDrawer = ({ history }) => {
       url: "/admin/dashboard/vendors",
       icon: "emoji_people_Icon",
     },
-    {
-      Name: "Create Vendor",
-      url: "/admin/dashboard/createVendor",
-      icon: "add_Icon",
-    },
+
     {
       Name: "Products",
       url: "/admin/dashboard/products",

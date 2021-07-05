@@ -1,5 +1,5 @@
 import React from "react";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents/CardMedia";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { makeStyles } from "../../../../../Design/MyUseStyles";

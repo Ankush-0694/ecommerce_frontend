@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
-import { MyTextInput, MyCheckbox } from "../Design/FormFieldComponent";
-import { MyFullScreenBox } from "../Design/FullScreenBox";
+import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
+import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
 import { adminLoginMutation } from "../../queries/admin/adminMutations";
 import { isLoggedInVar } from "../../clientSchema/ReactiveVaribles";
@@ -15,7 +15,7 @@ const Login = (props) => {
 
   // const identity = props.history.location.pathname.split("/")[1];
 
-  const [adminLogin, { error, loading, data }] = useMutation(
+  const [adminLogin, { data: adminLoginData }] = useMutation(
     adminLoginMutation,
     {
       onCompleted: (data) => {
@@ -27,10 +27,6 @@ const Login = (props) => {
     }
   );
 
-  if (error) {
-    return <div>Error Occured</div>;
-  }
-
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
@@ -39,7 +35,7 @@ const Login = (props) => {
     e.preventDefault();
     adminLogin({
       variables: {
-        email,
+        email: email,
         password,
       },
     });
