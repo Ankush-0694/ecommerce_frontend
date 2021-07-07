@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const createAdminMutation = gql`
+const CREATE_ADMIN = gql`
   mutation (
     $email: String!
     $firstName: String!
@@ -24,7 +24,7 @@ const createAdminMutation = gql`
   }
 `;
 
-const adminLoginMutation = gql`
+const ADMIN_LOGIN = gql`
   mutation ($email: String!, $password: String!) {
     adminLogin(email: $email, password: $password) {
       token
@@ -32,4 +32,4 @@ const adminLoginMutation = gql`
   }
 `;
 
-export { createAdminMutation, adminLoginMutation };
+export { CREATE_ADMIN, ADMIN_LOGIN };

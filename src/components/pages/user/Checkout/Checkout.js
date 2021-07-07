@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { getSingleProduct } from "../../../../queries/Product/productQueries";
-import { addOrderMutation } from "../../../../queries/Order/orderMutations";
+import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
+import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
 import ProductDetails from "./Component/ProductDetails/ProductDetails";
@@ -34,7 +34,7 @@ const Checkout = (props) => {
     error: getProductError,
     loading: getProductLoading,
     data: getProductData,
-  } = useQuery(getSingleProduct, {
+  } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id: productid },
   });
 
@@ -44,7 +44,7 @@ const Checkout = (props) => {
     data: addressData,
   } = useQuery(GET_ALL_ADDRESS);
 
-  const [addOrder, { data: addOrderData }] = useMutation(addOrderMutation);
+  const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
   if (getProductError) {
     return <div>Error while Fetching products</div>;
@@ -104,7 +104,9 @@ const Checkout = (props) => {
         </MyGridItem>
       </MyGridContainer>
       <hr></hr>
-      {/*  */}
+
+      {/* Delivery Address List  */}
+
       <MyGridContainer justify="center">
         <MyGridItem xs={10}>
           <div style={{ border: "1px solid black" }}>
@@ -129,9 +131,11 @@ const Checkout = (props) => {
               </MyGridContainer>
             </div>
           </div>
-
           <hr></hr>
         </MyGridItem>
+
+        {/* Address Form  */}
+
         <MyGridItem xs={10}>
           <div style={{ border: "1px solid black" }}>
             <div className={classes.DeliveryAddressHeading}>

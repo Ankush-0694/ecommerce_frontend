@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { getProductsQuery } from "../../../../../queries/Product/productQueries";
-import { ProductCard } from "./Component/ProductCard/ProductCard";
+import { GET_ALL_PRODUCTS } from "../../../../../queries/Product/productQueries";
+import ProductCard from "./Component/ProductCard/ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 
 const Products = () => {
@@ -9,7 +9,7 @@ const Products = () => {
     error: getProductsError,
     loading: getProductsLoading,
     data: getProductsData,
-  } = useQuery(getProductsQuery);
+  } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductsError) {
     return <div>Error onccrued</div>;

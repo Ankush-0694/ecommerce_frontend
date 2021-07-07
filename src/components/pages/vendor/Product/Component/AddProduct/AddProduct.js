@@ -7,9 +7,13 @@ import {
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import {
-  addProductMutation,
-  updateProductMutation,
+  ADD_PRODUCT,
+  UPDATE_PRODUCT,
 } from "../../../../../../queries/Product/productMutations";
+import {
+  getProductsQuery,
+  GET_ALL_PRODUCTS,
+} from "../../../../../../queries/Product/productQueries";
 
 const AddProduct = ({ current, setCurrent }) => {
   const [productFormData, setProductFormData] = useState({
@@ -31,12 +35,10 @@ const AddProduct = ({ current, setCurrent }) => {
     }
   }, [current]);
 
-  const [addProduct, { data: addProductData }] =
-    useMutation(addProductMutation);
+  const [addProduct, { data: addProductData }] = useMutation(ADD_PRODUCT);
 
-  const [updateProduct, { data: updateProductData }] = useMutation(
-    updateProductMutation
-  );
+  const [updateProduct, { data: updateProductData }] =
+    useMutation(UPDATE_PRODUCT);
 
   const onChange = (e) => {
     setProductFormData({
@@ -52,6 +54,18 @@ const AddProduct = ({ current, setCurrent }) => {
           productName: productFormData.productName,
           productDescription: productFormData.productDescription,
           productPrice: Number(productFormData.productPrice),
+        },
+        // addProduct is the data which comes in response to mutation, with same name as the mutation
+        update: (cache, { data: { addProduct } }) => {
+          const data = cache.readQuery({ query: GET_ALL_PRODUCTS });
+          // need to newData var because we need to add a
+          // new instance of all data , we can not use data var direclty
+          let dataToUpdate = data.getAllProducts;
+          dataToUpdate = [...dataToUpdate, addProduct];
+          cache.writeQuery({
+            query: GET_ALL_PRODUCTS,
+            data: { ...data, getAllProducts: { dataToUpdate } },
+          });
         },
       });
     } else {

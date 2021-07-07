@@ -3,7 +3,7 @@ import React from "react";
 
 const MyMenuItem = React.forwardRef((props, ref) => {
   return (
-    <MenuItem ref={ref} onClick={props.onClick}>
+    <MenuItem ref={ref} style={{ padding: 0 }} onClick={props.onClick}>
       {props.children}
     </MenuItem>
   );

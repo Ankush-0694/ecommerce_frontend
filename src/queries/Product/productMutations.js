@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const addProductMutation = gql`
+const ADD_PRODUCT = gql`
   mutation (
     $productName: String!
     $productDescription: String!
@@ -18,7 +18,7 @@ const addProductMutation = gql`
   }
 `;
 
-const updateProductMutation = gql`
+const UPDATE_PRODUCT = gql`
   mutation (
     $productID: ID!
     $productName: String!
@@ -39,12 +39,23 @@ const updateProductMutation = gql`
   }
 `;
 
-const uploadFileMutaion = gql`
-  mutation ($file: Upload!) {
-    uploadFile(file: $file) {
-      file
+const DELETE_PRODUCT = gql`
+  mutation ($productID: ID!) {
+    deleteProduct(productID: $productID) {
+      id
+      productName
+      productDescription
+      productPrice
     }
   }
 `;
 
-export { addProductMutation, updateProductMutation };
+// const uploadFileMutaion = gql`
+//   mutation ($file: Upload!) {
+//     uploadFile(file: $file) {
+//       file
+//     }
+//   }
+// `;
+
+export { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT };

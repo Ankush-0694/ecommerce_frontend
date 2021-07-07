@@ -1,15 +1,13 @@
 import React from "react";
 import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { deleteReviewMutation } from "../../../../../../../queries/Review/ReviewMutations";
-import { getSingleProduct } from "../../../../../../../queries/Product/productQueries";
+import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutations";
 import { useMutation } from "@apollo/client";
 
 const ProductReviewList = ({ reviewData, currentReview, setCurrentReview }) => {
   const { id, productID, rating, review } = reviewData;
 
-  const [deleteReview, { data: deleteReviewData }] =
-    useMutation(deleteReviewMutation);
+  const [deleteReview, { data: deleteReviewData }] = useMutation(DELETE_REVIEW);
 
   const onDeleteReview = () => {
     deleteReview({

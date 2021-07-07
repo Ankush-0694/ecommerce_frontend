@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { MyCardContainer } from "../../../../../../Design/MyCardComponents";
 import { MyCardContent } from "../../../../../../Design/MyCardComponents";
 import { MyCardMedia } from "../../../../../../Design/MyCardComponents";
@@ -7,35 +7,44 @@ import { MyCardActions } from "../../../../../../Design/MyCardComponents";
 import { MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { addToCartMutation } from "../../../../../../../queries/Cart/cartMutations";
+import { ADD_TO_CART } from "../../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
-import { getCartQuery } from "../../../../../../../queries/Cart/cartQueries";
+import { GET_CART } from "../../../../../../../queries/Cart/cartQueries";
 import { ProductCardStyles } from "../../CSS/ProductCardStyles";
 
-const ProductCard = ({ details, link }) => {
+const ProductCard = ({ details, link, history }) => {
   const classes = ProductCardStyles();
   const { id, productName, productDescription, productPrice } = details;
 
-  const [addToCart, { error, data: cartData }] = useMutation(
-    addToCartMutation,
-    {
-      refetchQueries: [{ query: getCartQuery }],
-    }
-  );
+  const [addToCart, { error: addToCartError, data: addedCartData }] =
+    useMutation(ADD_TO_CART);
 
   const onClickAddCart = (e) => {
     e.preventDefault();
+
+    //  giving warning  when we try to add same product to cart item which is already in cart
+    // will solved when we handle duplication in backend
     addToCart({
       variables: {
         productName,
         productDescription,
         productPrice,
       },
+      update: (cache, { data: addedCartData }) => {
+        const data = cache.readQuery({ query: GET_CART });
+        // need to newData var because we need to add a
+        // new instance of all data , we can not use data var direclty
+        let dataToUpdate = data.getCart;
+        dataToUpdate = [...dataToUpdate, addedCartData];
+
+        cache.writeQuery({
+          query: GET_CART,
+          data: { ...data, getCart: { dataToUpdate } },
+        });
+      },
     });
-    if (error) {
-      throw error;
-    } else {
-      alert("added to cart");
+    if (!addToCartError) {
+      // history.push("/cart"); // can send a state message like added to cart and show it on cart page to as an alert
     }
   };
 
@@ -84,4 +93,4 @@ const ProductCard = ({ details, link }) => {
   );
 };
 
-export { ProductCard };
+export default withRouter(ProductCard);

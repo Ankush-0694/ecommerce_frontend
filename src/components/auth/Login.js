@@ -3,7 +3,7 @@ import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
-import { adminLoginMutation } from "../../queries/admin/adminMutations";
+import { ADMIN_LOGIN } from "../../queries/admin/adminMutations";
 import { isLoggedInVar } from "../../clientSchema/ReactiveVaribles";
 
 const Login = (props) => {
@@ -15,17 +15,14 @@ const Login = (props) => {
 
   // const identity = props.history.location.pathname.split("/")[1];
 
-  const [adminLogin, { data: adminLoginData }] = useMutation(
-    adminLoginMutation,
-    {
-      onCompleted: (data) => {
-        const token = data.adminLogin.token;
-        localStorage.setItem("token", token);
-        isLoggedInVar(true);
-        console.log(token);
-      },
-    }
-  );
+  const [adminLogin, { data: adminLoginData }] = useMutation(ADMIN_LOGIN, {
+    onCompleted: (data) => {
+      const token = data.adminLogin.token;
+      localStorage.setItem("token", token);
+      isLoggedInVar(true);
+      console.log(token);
+    },
+  });
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });

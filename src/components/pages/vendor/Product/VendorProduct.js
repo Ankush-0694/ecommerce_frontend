@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { getProductsQuery } from "../../../../queries/Product/productQueries";
+import { GET_ALL_PRODUCTS } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import AddProduct from "./Component/AddProduct/AddProduct";
@@ -17,7 +17,7 @@ const VendorProduct = () => {
     error: getProductError,
     loading: getProductLoading,
     data: getProductData,
-  } = useQuery(getProductsQuery);
+  } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductError) {
     return <div>Error onccrued</div>;
@@ -48,15 +48,18 @@ const VendorProduct = () => {
               Products
             </MyTypography>
             <div>
-              {productData.map((data) => {
-                return (
-                  <VendorAllProducts
-                    key={data.id}
-                    data={data}
-                    setCurrent={setCurrent}
-                  />
-                );
-              })}
+              {productData
+                .slice(0)
+                .reverse()
+                .map((data) => {
+                  return (
+                    <VendorAllProducts
+                      key={data.id}
+                      data={data}
+                      setCurrent={setCurrent}
+                    />
+                  );
+                })}
             </div>
           </div>
         </MyFullScreenBox>

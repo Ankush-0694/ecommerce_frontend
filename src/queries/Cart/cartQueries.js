@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const getCartQuery = gql`
+const GET_CART = gql`
   {
     getCart {
       id
@@ -12,4 +12,4 @@ const getCartQuery = gql`
   }
 `;
 
-export { getCartQuery };
+export { GET_CART };

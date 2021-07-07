@@ -34,9 +34,7 @@ const client = new ApolloClient({
   typeDefs,
 });
 
-console.log(client);
-
-console.log(cache.data.data);
+//
 
 const App = () => {
   return (

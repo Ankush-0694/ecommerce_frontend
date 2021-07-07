@@ -55,16 +55,27 @@ const ResponsiveDrawer = () => {
         </Hidden>
       </nav>
       <div style={{ flexGrow: 2 }}>
-        {window.location.href.split("/").pop() === "dashboard" && (
-          <div>Make a welcome thing or something for admin page</div>
-        )}
+        {/* Used IIFE's to use IF else syntax in the jsx */}
+        {(() => {
+          if (
+            window.location.href.split("/").pop() === "dashboard" ||
+            window.location.href.split("/").pop() === ""
+          ) {
+            return <div>Make a welcome thing or something for admin page</div>;
+          }
+        })()}
 
-        <Route path="/admin/dashboard/customers" component={Customers} />
-        <Route path="/admin/dashboard/vendors" component={Vendors} />
-        <Route path="/admin/dashboard/products" component={ProductList} />
+        <Route exact path="/admin/dashboard/customers" component={Customers} />
+        <Route exact path="/admin/dashboard/vendors" component={Vendors} />
+        <Route exact path="/admin/dashboard/products" component={ProductList} />
       </div>
     </div>
   );
 };
 
 export default ResponsiveDrawer;
+
+// window.location.href.split("/").pop() === "dashboard" ||
+//               (window.location.href.split("/").pop() === "" && (
+//                 <div>Make a welcome thing or something for admin page</div>
+//               ));

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
-import { createAdminMutation } from "../../queries/admin/adminMutations";
+import { CREATE_ADMIN } from "../../queries/admin/adminMutations";
 import { useMutation } from "@apollo/client";
 
 const Signup = (props) => {
@@ -16,8 +16,7 @@ const Signup = (props) => {
   // console.log(props.history.location.pathname.split("/")[1]);
   const identity = props.history.location.pathname.split("/")[1];
 
-  const [createAdmin, { data: createAdminData }] =
-    useMutation(createAdminMutation);
+  const [createAdmin, { data: createAdminData }] = useMutation(CREATE_ADMIN);
 
   const { firstName, lastName, email, password } = userDetails;
 

@@ -2,6 +2,7 @@ import React from "react";
 import HomeSlider from "./Component/HomeSlider/HomeSlider";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import Products from "../Products/AllProducts/Products";
+import MultiCarousel from "./MultiCarousel";
 
 const Home = () => {
   // this should not here
@@ -21,10 +22,15 @@ const Home = () => {
         <MyFullScreenBox display="flex" width="100%">
           <h1 style={{ margin: "auto" }}>Products</h1>
         </MyFullScreenBox>
-        <MyFullScreenBox display="flex" width="100%" height="50vh">
-          {/* https://material-ui.com/components/grid-list/ */}
+        <MyFullScreenBox display="flex" width="100%">
           <Products />
         </MyFullScreenBox>
+        <section
+          style={{
+            margin: "20px",
+          }}>
+          <MultiCarousel />
+        </section>
       </div>
     </div>
   );

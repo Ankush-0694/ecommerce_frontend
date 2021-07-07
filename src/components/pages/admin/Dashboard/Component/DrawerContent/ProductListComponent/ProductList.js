@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import { ProductStyles } from "../../../CSS/ProductListStyle";
 import { useQuery } from "@apollo/client";
-import { getProductsQuery } from "../../../../../../../queries/Product/productQueries";
+import { GET_ALL_PRODUCTS } from "../../../../../../../queries/Product/productQueries";
 import {
   ListItem,
   ListItemText,
@@ -25,7 +25,7 @@ const ProductList = () => {
     error: getProductsDataError,
     loading: getProductsDataLoading,
     data: getProductsData,
-  } = useQuery(getProductsQuery);
+  } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductsDataError) {
     return <div>Error while Fetching Product Data</div>;
@@ -53,7 +53,10 @@ const ProductList = () => {
         <List className={classes.root}>
           {dataToRender.map((item) => {
             return (
-              <ListItem alignItems="center" className={classes.listItem}>
+              <ListItem
+                key={item.id}
+                alignItems="center"
+                className={classes.listItem}>
                 <ListItemAvatar>
                   <Avatar
                     className={classes.avatar}

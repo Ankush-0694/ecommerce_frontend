@@ -11,11 +11,11 @@ import {
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 import { emptyAddressState, useAddAddressHook } from "./useAddressHook";
+import { GET_ALL_ADDRESS } from "../../../../../../queries/address/addressQueries";
 
 const AddressForm = ({ current, setCurrent }) => {
   const classes = AddressFormStyles();
   const { addressFormData, setAddressFormData } = useAddAddressHook();
-
   const {
     fullName,
     phoneNumber,
@@ -28,9 +28,12 @@ const AddressForm = ({ current, setCurrent }) => {
   } = addressFormData;
 
   const [addAddress, { data: addAddressData }] = useMutation(ADD_ADDRESS);
+
   const [updateAddress, { data: updateAddressData }] =
     useMutation(UPDATE_ADDRESS);
 
+  // To check ,current is empty or not ,
+  // if it is not then we set the form data to current
   useEffect(() => {
     if (current !== null) {
       setAddressFormData(current);
@@ -50,15 +53,27 @@ const AddressForm = ({ current, setCurrent }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    /////change of types of values in address object
 
+    /////change of types of values in address object
     addressFormData["pincode"] = Number(addressFormData["pincode"]);
     addressFormData["phoneNumber"] = Number(addressFormData["phoneNumber"]);
 
-    ////change of types of values in address object
+    // add Or update based on the current value
     if (current === null) {
       addAddress({
         variables: addressFormData,
+
+        update: (cache, { data: addAddressData }) => {
+          const data = cache.readQuery({ query: GET_ALL_ADDRESS }); // read only data
+          // need to newData var because we need to add a
+          // new instance of all data , we can not use data var direclty
+          let dataToUpdate = data.getAllAddress;
+          dataToUpdate = [...dataToUpdate, addAddressData];
+          cache.writeQuery({
+            query: GET_ALL_ADDRESS,
+            data: { ...data, getAllAddress: { dataToUpdate } },
+          });
+        },
       });
     } else {
       updateAddress({
@@ -145,6 +160,7 @@ const AddressForm = ({ current, setCurrent }) => {
             onChange={onChange}
           />
         </div>
+        {/* button to add or update the delivery address */}
         <div className={classes.SaveAddressbtnDiv}>
           <MyButtonComponent
             type="submit"
@@ -153,6 +169,7 @@ const AddressForm = ({ current, setCurrent }) => {
             {!current ? "Save Delivery Address" : "Update Delivery Address"}
           </MyButtonComponent>
         </div>
+
         <div className={classes.SaveAddressbtnDiv}>
           <MyButtonComponent
             onClick={() => {

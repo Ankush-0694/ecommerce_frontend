@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const addOrderMutation = gql`
+const ADD_ORDER = gql`
   mutation (
     $productName: String!
     $productDescription: String!
@@ -33,4 +33,4 @@ const addOrderMutation = gql`
   }
 `;
 
-export { addOrderMutation };
+export { ADD_ORDER };

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const addReviewMutation = gql`
+const ADD_REVIEW = gql`
   mutation ($productID: ID, $review: String!, $rating: Int) {
     addReview(productID: $productID, review: $review, rating: $rating) {
       id
@@ -11,7 +11,7 @@ const addReviewMutation = gql`
   }
 `;
 
-const updateReviewMutation = gql`
+const UPDATE_REVIEW = gql`
   mutation ($id: ID, $review: String!, $rating: Int) {
     updateReview(id: $id, review: $review, rating: $rating) {
       id
@@ -23,7 +23,7 @@ const updateReviewMutation = gql`
 `;
 
 // No need to pass product id, may be need to delete to reference in product schema
-const deleteReviewMutation = gql`
+const DELETE_REVIEW = gql`
   mutation ($id: ID, $productID: ID) {
     deleteReview(id: $id, productID: $productID) {
       id
@@ -34,4 +34,4 @@ const deleteReviewMutation = gql`
   }
 `;
 
-export { addReviewMutation, updateReviewMutation, deleteReviewMutation };
+export { ADD_REVIEW, UPDATE_REVIEW, DELETE_REVIEW };

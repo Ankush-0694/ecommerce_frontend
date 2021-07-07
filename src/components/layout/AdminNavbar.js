@@ -5,7 +5,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "../Design/MyUseStyles";
 import IconButton from "@material-ui/core/IconButton";
-
+import { MyButtonComponent } from "../Design/MyButtonComponent";
+import { withRouter } from "react-router";
 const drawerWidth = 250;
 const NavbarStyles = makeStyles((theme) => ({
   appBar: {
@@ -21,7 +22,7 @@ const NavbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminNavbar = ({ mobileOpen, setMobileOpen }) => {
+const AdminNavbar = ({ mobileOpen, setMobileOpen, history }) => {
   const classes = NavbarStyles();
 
   const handleDrawerToggle = () => {
@@ -41,12 +42,20 @@ const AdminNavbar = ({ mobileOpen, setMobileOpen }) => {
           className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
-          Admin AppBar
-        </Typography>
+
+        <MyButtonComponent
+          onClick={() => {
+            history.push("/admin/dashboard");
+          }}
+          variant="filled"
+          userStyle={{ color: "white", textTransform: "capitalize" }}>
+          <Typography variant="h6" noWrap>
+            Admin Dashboard
+          </Typography>
+        </MyButtonComponent>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default AdminNavbar;
+export default withRouter(AdminNavbar);

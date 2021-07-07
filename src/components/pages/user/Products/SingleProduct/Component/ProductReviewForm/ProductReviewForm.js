@@ -3,10 +3,10 @@ import { useMutation } from "@apollo/client";
 import { MyMultilineInput } from "../../../../../../Design/MyFormFieldComponent";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
-import { getSingleProduct } from "../../../../../../../queries/Product/productQueries";
+import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";
 import {
-  addReviewMutation,
-  updateReviewMutation,
+  ADD_REVIEW,
+  UPDATE_REVIEW,
 } from "../../../../../../../queries/Review/ReviewMutations";
 
 const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
@@ -28,11 +28,13 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
     }
   }, [currentReview]);
 
-  const [addReview, { data: newReviewData }] = useMutation(addReviewMutation, {
-    refetchQueries: [{ query: getSingleProduct, variables: { id: productid } }],
+  const [addReview, { data: newReviewData }] = useMutation(ADD_REVIEW, {
+    refetchQueries: [
+      { query: GET_SINGLE_PRODUCT, variables: { id: productid } },
+    ],
   });
   const [updateReview, { data: updatedReviewData }] =
-    useMutation(updateReviewMutation);
+    useMutation(UPDATE_REVIEW);
 
   const onChange = (e) => {
     setReviewFormData({ ...reviewFormData, [e.target.name]: e.target.value });
@@ -115,6 +117,8 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
 };
 
 export default ProductReviewForm;
+
+// https://stackoverflow.com/questions/64396559/unhandled-rejection-error-cannot-assign-to-read-only-property-getposts-of-o
 
 // update: (cache, { data: { addReview } }) => {
 //   let productData = cache.readQuery({

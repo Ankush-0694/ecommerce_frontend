@@ -6,6 +6,7 @@ import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { AddressListStyles } from "../../CSS/AddressListStyles";
 import { useMutation } from "@apollo/client";
 import { DELETE_ADDRESS } from "../../../../../../queries/address/addressMutations";
+import { GET_ALL_ADDRESS } from "../../../../../../queries/address/addressQueries";
 
 const AddressList = ({ data, current, setCurrent }) => {
   const classes = AddressListStyles();
@@ -21,8 +22,32 @@ const AddressList = ({ data, current, setCurrent }) => {
     landmark,
   } = data;
 
-  const [deleteAddress, { data: deleteAddressData }] =
+  const [deleteAddress, { data: deletedAddressData }] =
     useMutation(DELETE_ADDRESS);
+
+  const onDeleteAddress = () => {
+    deleteAddress({
+      variables: {
+        id,
+      },
+      update: (cache, { data: deletedAddressData }) => {
+        const data = cache.readQuery({ query: GET_ALL_ADDRESS });
+        // need to newData var because we need to add a
+        // new instance of all data , we can not use data var direclty
+        let dataToUpdate = data.getAllAddress;
+        // filtering the data to delete given returned data
+        dataToUpdate = dataToUpdate.filter((addressItem) => {
+          return addressItem.id !== deletedAddressData.id;
+        });
+
+        cache.writeQuery({
+          query: GET_ALL_ADDRESS,
+          data: { ...data, getAllAddress: { dataToUpdate } },
+        });
+      },
+    });
+    setCurrent(null);
+  };
 
   return (
     <>
@@ -46,14 +71,7 @@ const AddressList = ({ data, current, setCurrent }) => {
             Edit
           </MyButtonComponent>
           <MyButtonComponent
-            onClick={() => {
-              deleteAddress({
-                variables: {
-                  id,
-                },
-              });
-              setCurrent(null);
-            }}
+            onClick={onDeleteAddress}
             color="secondary"
             className={classes.EditBtn}>
             Delete

@@ -4,8 +4,12 @@ import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { CartItemStyles } from "../../CSS/CartItemStyles";
-import { updateCartQuantityMutation } from "../../../../../../queries/Cart/cartMutations";
+import {
+  DELETE_CART,
+  UPDATE_CART_QUANTITY,
+} from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
+import { GET_CART } from "../../../../../../queries/Cart/cartQueries";
 
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
@@ -19,7 +23,13 @@ const CartItem = ({ cartItemData }) => {
   const [
     updateCartQuantity,
     { error: updateError, loading: updateLoading, data: updateCartData },
-  ] = useMutation(updateCartQuantityMutation);
+  ] = useMutation(UPDATE_CART_QUANTITY);
+
+  //Delete Cart Mutation
+  const [
+    deleteCart,
+    { error: deleteError, loading: deleteLoading, data: deletedCartData },
+  ] = useMutation(DELETE_CART);
 
   //updating quantity to the cart
   const setQuantityById = (id, quantity) => {
@@ -27,6 +37,27 @@ const CartItem = ({ cartItemData }) => {
       variables: {
         cartID: id,
         quantity: quantity,
+      },
+    });
+  };
+
+  const onRemoveCart = () => {
+    deleteCart({
+      variables: {
+        cartID: id,
+      },
+      update: (cache, { data: { deleteCart } }) => {
+        const data = cache.readQuery({ query: GET_CART });
+        // need to newData var because we need to add a
+        // new instance of all data , we can not use data var direclty
+        let dataToUpdate = data.getCart;
+        dataToUpdate = dataToUpdate.filter((singleCartItem) => {
+          return singleCartItem.id !== deleteCart.id;
+        });
+        cache.writeQuery({
+          query: GET_CART,
+          data: { ...data, getCart: { dataToUpdate } },
+        });
       },
     });
   };
@@ -68,7 +99,8 @@ const CartItem = ({ cartItemData }) => {
               variant="contained"
               color="secondary"
               size="small"
-              className={classes.remove_btn}>
+              className={classes.remove_btn}
+              onClick={onRemoveCart}>
               Remove
             </MyButtonComponent>
           </div>
@@ -89,6 +121,9 @@ const CartItem = ({ cartItemData }) => {
           <input
             className={classes.quantityInput}
             value={quantityCount}
+            onChange={() => {
+              console.log("Will Handle it Later");
+            }}
             // for doing onChange we need to handle the situation when input is empty,
             // we need to make sure that req does not send to server if input is empty
             // onChange={(e) => {

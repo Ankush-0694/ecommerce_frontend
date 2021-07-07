@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import React from "react";
 import { MyNavbar } from "../Design/MyNavbar";
 import { MyTypography } from "../Design/MyTypography";
@@ -7,7 +6,7 @@ import { MyIconButton } from "../Design/MyIconButton";
 import { MyMenuAppBar } from "../Design/MyMenuAppBar";
 import { MyMenuItem } from "../Design/MyMenuItem";
 import { MyMenuIcon } from "../Design/MyIcons";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 //these 2 imports should not be here
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -17,9 +16,23 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  MenuLinkStyle: {
+    "&:hover": {
+      textDecoration: "none",
+    },
+    textDecoration: "none",
+    color: "Black",
+    padding: "6px 16px",
+  },
+  NavbarLink: {
+    "&:hover": {
+      background: "white",
+      color: "black",
+    },
+  },
 }));
 
-const Navbar = () => {
+const Navbar = ({ history }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -33,11 +46,12 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <MyNavbar>
       <MyTypography variant="h6" className={classes.title}>
         <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-          News
+          Ecommerce
         </Link>
       </MyTypography>
       {/*  */}
@@ -49,23 +63,17 @@ const Navbar = () => {
             </MyIconButton>
             <MyMenuAppBar onClose={handleClose} open={open} anchorEl={anchorEl}>
               <MyMenuItem onClick={handleClose}>
-                <Link
-                  to="/cart"
-                  style={{ textDecoration: "none", color: "Black" }}>
+                <Link to="/cart" className={classes.MenuLinkStyle}>
                   Cart
                 </Link>
               </MyMenuItem>
               <MyMenuItem onClick={handleClose}>
-                <Link
-                  to="/signup"
-                  style={{ textDecoration: "none", color: "Black" }}>
+                <Link to="/signup" className={classes.MenuLinkStyle}>
                   Signup
                 </Link>
               </MyMenuItem>
               <MyMenuItem onClick={handleClose}>
-                <Link
-                  to="/Login"
-                  style={{ textDecoration: "none", color: "Black" }}>
+                <Link to="/Login" className={classes.MenuLinkStyle}>
                   Login
                 </Link>
               </MyMenuItem>
@@ -73,26 +81,29 @@ const Navbar = () => {
           </div>
         ) : (
           <div>
-            <MyButtonComponent color="inherit">
-              <Link
-                to="/cart"
-                style={{ textDecoration: "none", color: "white" }}>
-                Cart
-              </Link>
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/cart");
+              }}
+              color="inherit">
+              Cart
             </MyButtonComponent>
-            <MyButtonComponent color="inherit">
-              <Link
-                to="/Signup"
-                style={{ textDecoration: "none", color: "white" }}>
-                Signup
-              </Link>
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/signup");
+              }}
+              color="inherit">
+              Signup
             </MyButtonComponent>
-            <MyButtonComponent color="inherit">
-              <Link
-                to="/Login"
-                style={{ textDecoration: "none", color: "white" }}>
-                Login
-              </Link>
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/login");
+              }}
+              color="inherit">
+              Login
             </MyButtonComponent>
           </div>
         )}
@@ -101,4 +112,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

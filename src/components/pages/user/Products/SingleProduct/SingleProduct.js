@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeVar, useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { getSingleProduct } from "../../../../../queries/Product/productQueries";
+import { GET_SINGLE_PRODUCT } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
 import ProductReviewList from "./Component/ProductReviewList/ProductReviewList";
 import { MyGridContainer } from "../../../../Design/MyGrid";
@@ -11,8 +11,8 @@ import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyCardMedia } from "../../../../Design/MyCardComponents";
 import { MyFullScreenBox } from "../../../../Design/MyFullScreenBox";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
-import { addToCartMutation } from "../../../../../queries/Cart/cartMutations";
-import { getCartQuery } from "../../../../../queries/Cart/cartQueries";
+import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
+import { GET_CART } from "../../../../../queries/Cart/cartQueries";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -33,14 +33,14 @@ const SingleProduct = (props) => {
     error: getProductError,
     loading: getProductLoading,
     data: getProductData,
-  } = useQuery(getSingleProduct, {
+  } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id: productid },
   });
 
   const [addToCart, { error: addToCartError, data: cartData }] = useMutation(
-    addToCartMutation,
+    ADD_TO_CART,
     {
-      refetchQueries: [{ query: getCartQuery }],
+      refetchQueries: [{ query: GET_CART }],
     }
   );
 

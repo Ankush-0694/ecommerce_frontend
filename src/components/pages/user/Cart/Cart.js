@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { getCartQuery } from "../../../../queries/Cart/cartQueries";
+import { GET_CART } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
@@ -15,7 +15,7 @@ const Cart = () => {
     error: getCartError,
     loading: getCartLoading,
     data: getCartData,
-  } = useQuery(getCartQuery);
+  } = useQuery(GET_CART);
 
   if (getCartError) {
     return <div>Error occured During getting cart</div>;
