@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 const SingleProduct = (props) => {
   const classes = useStyles();
   const productid = props.match.params.id.split(":")[1];
+  const { history } = props;
 
   const [currentReview, setCurrentReview] = useState(null);
 
@@ -37,12 +38,10 @@ const SingleProduct = (props) => {
     variables: { id: productid },
   });
 
-  const [addToCart, { error: addToCartError, data: cartData }] = useMutation(
-    ADD_TO_CART,
-    {
-      refetchQueries: [{ query: GET_CART }],
-    }
-  );
+  const [
+    addToCart,
+    { error: addToCartError, loading: addToCartLoading, data: cartData },
+  ] = useMutation(ADD_TO_CART);
 
   if (getProductError) {
     return <div>Error in getting Product.. </div>;
@@ -53,20 +52,53 @@ const SingleProduct = (props) => {
 
   // data To Render
   const productData = getProductData.getProductById;
-  const { productName, productDescription, productPrice } = productData;
+  const { id, productName, productDescription, productPrice } = productData;
 
-  const onClickAddCart = (e) => {
-    e.preventDefault();
+  // to add product into cart , will use both on addCart and buy Now
+  //  giving warning  when we try to add same product to cart item which is already in cart
+  // will solved when we handle duplication in backend,
+  // and also many warnings
+  const addToCartFunction = () => {
     addToCart({
       variables: {
-        ...productData,
+        productID: id,
+        productName,
+        productDescription,
+        productPrice,
       },
+      // update: (cache, { data: addedCartData }) => {
+      //   const data = cache.readQuery({ query: GET_CART });
+      //   // need to newData var because we need to add a
+      //   // new instance of all data , we can not use data var direclty
+      //   let dataToUpdate = data.getCart;
+      //   dataToUpdate = [...dataToUpdate, addedCartData];
+
+      //   cache.writeQuery({
+      //     query: GET_CART,
+      //     data: { ...data, getCart: { dataToUpdate } },
+      //   });
+      // },
     });
+
     if (addToCartError) {
       throw addToCartError();
     } else {
       alert("added to cart");
     }
+  };
+
+  const onClickAddCart = (e) => {
+    e.preventDefault();
+    addToCartFunction();
+  };
+
+  const onClickBuyNow = (e) => {
+    e.preventDefault();
+
+    history.push({
+      pathname: `/checkout/:${productid}`,
+      state: [productid],
+    });
   };
 
   return (
@@ -101,18 +133,16 @@ const SingleProduct = (props) => {
               ADD TO CART
             </MyButtonComponent>
             <span style={{ margin: "0 10px" }}></span>
-            <Link
-              to={`/checkout/:${productid}`}
-              style={{
-                textDecoration: "none",
-              }}>
-              <MyButtonComponent
-                variant="contained"
-                size="medium"
-                color="primary">
-                BUY NOW
-              </MyButtonComponent>
-            </Link>
+
+            {/* Buy Now Link and button */}
+
+            <MyButtonComponent
+              variant="contained"
+              size="medium"
+              color="primary"
+              onClick={onClickBuyNow}>
+              BUY NOW
+            </MyButtonComponent>
           </div>
         </MyGridItem>
       </MyGridContainer>

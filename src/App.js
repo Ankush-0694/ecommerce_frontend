@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/user/Home/Home";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -33,8 +33,6 @@ const client = new ApolloClient({
   cache,
   typeDefs,
 });
-
-//
 
 const App = () => {
   return (

@@ -28,6 +28,8 @@ const Home = () => {
         <section
           style={{
             margin: "20px",
+            maxWidth: "80%",
+            margin: "auto",
           }}>
           <MultiCarousel />
         </section>

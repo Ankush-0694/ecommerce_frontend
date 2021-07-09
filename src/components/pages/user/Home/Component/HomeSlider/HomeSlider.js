@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { HomeSliderStyles } from "../../CSS/HomeSliderStyles";
 import { MyCarousel } from "../../../../../Design/MyCarousel";
 

@@ -53,8 +53,8 @@ const Simple = () => {
       arrows
       // autoPlay
       // autoPlaySpeed={4000}
-      className="slider"
-      containerClass="container"
+
+      containerClass="container-with-dots"
       dotListClass="dots"
       partialVisible
       // infinite

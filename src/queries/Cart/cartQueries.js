@@ -4,6 +4,7 @@ const GET_CART = gql`
   {
     getCart {
       id
+      productID
       productName
       productDescription
       productPrice

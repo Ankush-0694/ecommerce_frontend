@@ -23,9 +23,11 @@ const ProductCard = ({ details, link, history }) => {
     e.preventDefault();
 
     //  giving warning  when we try to add same product to cart item which is already in cart
-    // will solved when we handle duplication in backend
+    // will solved when we handle duplication in backend,
+    // and also many warnings
     addToCart({
       variables: {
+        productID: id,
         productName,
         productDescription,
         productPrice,
@@ -45,6 +47,8 @@ const ProductCard = ({ details, link, history }) => {
     });
     if (!addToCartError) {
       // history.push("/cart"); // can send a state message like added to cart and show it on cart page to as an alert
+    } else {
+      alert("added to Cart");
     }
   };
 
@@ -72,7 +76,7 @@ const ProductCard = ({ details, link, history }) => {
         </Link>
 
         <MyCardActions>
-          <MyButtonComponent
+          {/* <MyButtonComponent
             fullWidth={true}
             variant="outlined"
             size="small"
@@ -86,7 +90,7 @@ const ProductCard = ({ details, link, history }) => {
             size="small"
             color="primary">
             BUY NOW
-          </MyButtonComponent>
+          </MyButtonComponent> */}
         </MyCardActions>
       </MyCardContainer>
     </MyGridItem>

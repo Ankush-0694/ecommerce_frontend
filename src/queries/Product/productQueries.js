@@ -28,4 +28,15 @@ const GET_SINGLE_PRODUCT = gql`
   }
 `;
 
-export { GET_ALL_PRODUCTS, GET_SINGLE_PRODUCT };
+const GET_MULTIPLE_PRODUCTS = gql`
+  query ($productIDArray: [ID]) {
+    getMultipleProducts(productIDArray: $productIDArray) {
+      id
+      productName
+      productDescription
+      productPrice
+    }
+  }
+`;
+
+export { GET_ALL_PRODUCTS, GET_SINGLE_PRODUCT, GET_MULTIPLE_PRODUCTS };

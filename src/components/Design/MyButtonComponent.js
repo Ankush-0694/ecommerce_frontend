@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   buttonStyle: {
-    "&:focus": {
-      border: "none",
-      outline: "none",
-    },
+    // "&:focus": {
+    //   border: "none",
+    //   outline: "none",
+    // },
   },
 });
 

@@ -7,7 +7,7 @@ import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 // import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
 
-const Cart = () => {
+const Cart = ({ history }) => {
   const classes = CartStyles();
 
   //to Get data from cart
@@ -40,6 +40,18 @@ const Cart = () => {
   });
   totalPrice = sum;
 
+  const onPlaceOrder = (e) => {
+    e.preventDefault();
+    let productIDArray = [];
+    cartData.map((cartDataItem) => {
+      productIDArray.push(cartDataItem.productID);
+    });
+    history.push({
+      pathname: `/checkout/:${productIDArray}`,
+      state: [...productIDArray],
+    });
+  };
+
   return (
     <div>
       <div>
@@ -64,10 +76,8 @@ const Cart = () => {
               variant="contained"
               fullWidth
               className={classes.placeOrderbtn}
-              onClick={() => {
-                // history.push("/checkout/:60b0306fccc9709b72aa8fd1");
-              }}>
-              Place Order
+              onClick={onPlaceOrder}>
+              Checkout
             </MyButtonComponent>
           </div>
         </div>

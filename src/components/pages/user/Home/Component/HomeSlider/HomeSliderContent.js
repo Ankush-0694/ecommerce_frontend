@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { HomeSliderContentStyles } from "../../CSS/HomeSliderContentStyles";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 
 const HomeSliderContent = (props) => {
   const classes = HomeSliderContentStyles();
+
   return (
     <MyPaper
       className={classes.Project}

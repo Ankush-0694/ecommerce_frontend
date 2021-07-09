@@ -3,16 +3,19 @@ import { gql } from "@apollo/client";
 // also need to store the product Id as well Or we can only store the id
 const ADD_TO_CART = gql`
   mutation (
+    $productID: ID!
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
   ) {
     addToCart(
+      productID: $productID
       productName: $productName
       productDescription: $productDescription
       productPrice: $productPrice
     ) {
       id
+      productID
       productName
       productDescription
       productPrice

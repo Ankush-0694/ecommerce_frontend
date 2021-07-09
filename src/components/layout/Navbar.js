@@ -38,7 +38,7 @@ const Navbar = ({ history }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
-  console.log(isMobile);
+  // console.log(isMobile);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,6 +63,11 @@ const Navbar = ({ history }) => {
             </MyIconButton>
             <MyMenuAppBar onClose={handleClose} open={open} anchorEl={anchorEl}>
               <MyMenuItem onClick={handleClose}>
+                <Link to="/orders" className={classes.MenuLinkStyle}>
+                  My Orders
+                </Link>
+              </MyMenuItem>
+              <MyMenuItem onClick={handleClose}>
                 <Link to="/cart" className={classes.MenuLinkStyle}>
                   Cart
                 </Link>
@@ -81,6 +86,14 @@ const Navbar = ({ history }) => {
           </div>
         ) : (
           <div>
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/orders");
+              }}
+              color="inherit">
+              My Orders
+            </MyButtonComponent>
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {

@@ -4,7 +4,6 @@ import { InMemoryCache } from "@apollo/client/cache";
 export const isLoggedInVar = makeVar(!!localStorage.getItem("token"));
 
 export const current = makeVar(null);
-console.log(current());
 
 export const cache = new InMemoryCache({
   typePolicies: {
