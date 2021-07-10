@@ -31,7 +31,11 @@ const CartItem = ({ cartItemData }) => {
     { error: deleteError, loading: deleteLoading, data: deletedCartData },
   ] = useMutation(DELETE_CART);
 
-  //updating quantity to the cart
+  /**
+   * Set the Quantity when we click on - or +
+   * @param {string} id -an ID- The id of the cart Item.
+   * @param {string} quantity - New updated Quantity of the cart item
+   */
   const setQuantityById = (id, quantity) => {
     updateCartQuantity({
       variables: {
@@ -62,6 +66,10 @@ const CartItem = ({ cartItemData }) => {
     });
   };
 
+  // need to add method on which this use effect only call on update , not onMount
+
+  /// solution - using useRef , check stack overflow
+  //https://stackoverflow.com/questions/55075604/react-hooks-useeffect-only-on-update
   useEffect(() => {
     //eslint
     if (quantityCount > 0 && quantityCount != "") {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_MULTIPLE_PRODUCTS } from "../../../../queries/Product/productQueries";
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
@@ -12,6 +12,7 @@ import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_ALL_ADDRESS } from "../../../../queries/address/addressQueries";
+import { GET_CART } from "../../../../queries/Cart/cartQueries";
 
 const Checkout = (props) => {
   const classes = CheckoutStyles();
@@ -20,16 +21,33 @@ const Checkout = (props) => {
 
   const [current, setCurrent] = useState(null); // to know the form state is add or update
 
-  // destructuring of the props to get state property
-  // state will be an array, because cart will have mutlitple items
-  const {
-    history: {
-      location: { state: productIDArray },
-    },
-  } = props;
+  /**
+   * This Array will contains all the ids of products which are in the cart , Or a single Id which we need to buyNow
+   * @type {string[]} ID's
+   */
+  const productIDArray = props.history.location.state;
 
-  // query for getting multiple product using
-  // array of id's passing throught history state
+  /**
+   * Checking if there is mutiple id in state Array or not , we skip one query depend on that
+   * @type {Bool}
+   */
+  let mutipleProductIds = false;
+  if (productIDArray !== undefined && productIDArray.length > 1) {
+    mutipleProductIds = true;
+  }
+
+  // getting all cart item because we place order from the  cart
+  const {
+    loading: getCartLoading,
+    error: getCartError,
+    data: getCartData,
+  } = useQuery(GET_CART, {
+    skip: !mutipleProductIds, // if skip is true then this query will not be called
+  });
+
+  // We can get singleProduct also but it is okay here for now , because we are getting the product
+  /// and it is also using id to fetch
+  // don't be confused with muitpleProducts, we used it to fetch multiple product using ID array
   const {
     error: getMutipleProductError,
     loading: getMutipleProductLoading,
@@ -37,6 +55,7 @@ const Checkout = (props) => {
   } = useQuery(GET_MULTIPLE_PRODUCTS, {
     variables: {
       productIDArray,
+      skip: mutipleProductIds,
     },
   });
 
@@ -48,10 +67,10 @@ const Checkout = (props) => {
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
-  if (getMutipleProductError) {
+  if (getCartLoading || getMutipleProductLoading) {
     return <div>Error while Fetching products</div>;
   }
-  if (getMutipleProductLoading) {
+  if (getCartError || getMutipleProductError) {
     return <div>Loading Products...</div>;
   }
 
@@ -78,7 +97,16 @@ const Checkout = (props) => {
     );
   }
 
-  const productData = getMutipleProductData.getMultipleProducts; // this data will be rendered
+  /**
+   * This data will be mapped to rendered the order summary data
+   * @type {Array} - Contains Array of objects
+   */
+  let productData;
+  if (getCartData !== undefined) {
+    productData = getCartData.getCart;
+  } else {
+    productData = getMutipleProductData.getMultipleProducts;
+  }
 
   const OnPlaceOrder = (e) => {
     addOrder({
@@ -103,8 +131,6 @@ const Checkout = (props) => {
                 <ProductDetails
                   key={mappedProductData.id}
                   productData={mappedProductData}
-                  quantity={totalQuantity}
-                  setQuantity={setTotalQuantity}
                 />
               );
             })}
@@ -125,6 +151,9 @@ const Checkout = (props) => {
           </div>
         </MyGridItem>
       </MyGridContainer>
+      <div style={{ textAlign: "center", margin: "10px" }}>
+        <h3>TotalQuantity : {totalQuantity}</h3>
+      </div>
       <hr></hr>
 
       {/* Delivery Address List  */}

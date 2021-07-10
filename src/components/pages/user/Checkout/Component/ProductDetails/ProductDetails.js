@@ -6,8 +6,9 @@ import { makeStyles } from "../../../../../Design/MyUseStyles";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 
-const ProductDetails = ({ productData, quantity, setQuantity }) => {
+const ProductDetails = ({ productData }) => {
   const classes = ProductDetailsStyles();
+
   return (
     <div className={classes.productDiv}>
       <MyGridContainer
@@ -42,17 +43,17 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
               variant="contained"
               color="primary"
               className={classes.quantityButton}
-              disabled={quantity <= 1 && true}
+              // disabled={ <= 1 && true}
               onClick={() => {
-                setQuantity(quantity - 1);
+                // setTotalQuantity(totalQuantity - 1);
               }}>
               -
             </MyButtonComponent>
             <input
               className={classes.quantityInput}
-              value={quantity}
+              value={1}
               onChange={(e) => {
-                setQuantity(e.target.value);
+                // setTotalQuantity(e.target.value);
               }}
             />
 
@@ -60,7 +61,7 @@ const ProductDetails = ({ productData, quantity, setQuantity }) => {
               variant="contained"
               className={classes.quantityButton}
               onClick={() => {
-                setQuantity(quantity + 1);
+                // setTotalQuantity(totalQuantity + 1);
               }}
               color="primary">
               +
