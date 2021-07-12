@@ -4,7 +4,7 @@ import { GET_MULTIPLE_PRODUCTS } from "../../../../queries/Product/productQuerie
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import ProductDetails from "./Component/ProductDetails/ProductDetails";
+import MultipleProductDetails from "./Component/ProductDetails/MultipleProductDetails";
 import PriceDetails from "./Component/PriceDetails/PriceDetails";
 import { MyTypography } from "../../../Design/MyTypography";
 import AddressForm from "./Component/AddressForm/AddressForm";
@@ -68,10 +68,10 @@ const Checkout = (props) => {
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
   if (getCartLoading || getMutipleProductLoading) {
-    return <div>Error while Fetching products</div>;
+    return <div>Loading Fetching products</div>;
   }
   if (getCartError || getMutipleProductError) {
-    return <div>Loading Products...</div>;
+    return <div>Error on fetching Products...</div>;
   }
 
   if (getAddressError) {
@@ -127,12 +127,12 @@ const Checkout = (props) => {
 
           <div>
             {productData.map((mappedProductData) => {
-              return (
-                <ProductDetails
+              return {
+                /* <ProductDetails
                   key={mappedProductData.id}
                   productData={mappedProductData}
-                />
-              );
+                /> */
+              };
             })}
           </div>
         </MyGridItem>

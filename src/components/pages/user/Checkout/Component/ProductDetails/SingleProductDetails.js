@@ -2,11 +2,10 @@ import React from "react";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
-import { makeStyles } from "../../../../../Design/MyUseStyles";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 
-const ProductDetails = ({ productData }) => {
+const SingleProductDetails = ({ productData, quantity, setQuantity }) => {
   const classes = ProductDetailsStyles();
 
   return (
@@ -43,15 +42,15 @@ const ProductDetails = ({ productData }) => {
               variant="contained"
               color="primary"
               className={classes.quantityButton}
-              // disabled={ <= 1 && true}
+              disabled={quantity <= 1 && true}
               onClick={() => {
-                // setTotalQuantity(totalQuantity - 1);
+                setQuantity(quantity - 1);
               }}>
               -
             </MyButtonComponent>
             <input
               className={classes.quantityInput}
-              value={1}
+              value={quantity}
               onChange={(e) => {
                 // setTotalQuantity(e.target.value);
               }}
@@ -61,7 +60,7 @@ const ProductDetails = ({ productData }) => {
               variant="contained"
               className={classes.quantityButton}
               onClick={() => {
-                // setTotalQuantity(totalQuantity + 1);
+                setQuantity(quantity + 1);
               }}
               color="primary">
               +
@@ -80,4 +79,4 @@ const ProductDetails = ({ productData }) => {
     </div>
   );
 };
-export default ProductDetails;
+export default SingleProductDetails;
