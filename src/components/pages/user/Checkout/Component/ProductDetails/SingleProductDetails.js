@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
+import { withRouter } from "react-router-dom";
 
-const SingleProductDetails = ({ productData, quantity, setQuantity }) => {
+const SingleProductDetails = ({
+  productData,
+  quantity,
+  setQuantity,
+  history,
+}) => {
   const classes = ProductDetailsStyles();
 
   return (
@@ -79,4 +85,4 @@ const SingleProductDetails = ({ productData, quantity, setQuantity }) => {
     </div>
   );
 };
-export default SingleProductDetails;
+export default withRouter(SingleProductDetails);

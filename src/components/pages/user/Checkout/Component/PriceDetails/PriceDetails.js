@@ -17,16 +17,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PriceDetails = ({ productPrice, quantity }) => {
+const PriceDetails = ({ productData, quantity }) => {
   const classes = useStyles();
 
-  let totalPrice = productPrice * quantity;
-  let deliveryCharge;
-  if (totalPrice < 500) {
-    deliveryCharge = 40;
+  /* Total amount for order */
+  let totalPrice = 0;
+
+  /* No of unique items in the list */
+  let totalItems;
+
+  /* Total quantity means , sum of all individual quantity */
+  let totalQuantity = 0;
+
+  /* This means that quantity has been passed from the single Product Checkout */
+  if (quantity !== false) {
+    totalItems = 1;
+    totalQuantity = quantity;
+    totalPrice = productData.productPrice * quantity;
   } else {
-    deliveryCharge = 0;
+    /* No of product items */
+    totalItems = productData.length;
+
+    /* Need to map and sum the quantity , Hence we got the total Quantity 
+      And do the same for calculating the product price
+    */
+    productData.map((mappedProductData) => {
+      const { productPrice, quantity } = mappedProductData;
+
+      totalQuantity += quantity;
+      totalPrice = totalPrice + productPrice * quantity;
+    });
   }
+
+  let deliveryCharge = 0;
+  if (totalPrice < 500) deliveryCharge = 40;
 
   return (
     <div style={{ marginTop: "10px" }}>
@@ -44,12 +68,21 @@ const PriceDetails = ({ productPrice, quantity }) => {
 
             <MyTableRow>
               <MyTableCell component="th" scope="row">
-                Price(1 Item)
+                Price({totalItems} Item)
               </MyTableCell>
-              <MyTableCell align="right">{productPrice}</MyTableCell>
+              <MyTableCell align="right">{totalPrice}</MyTableCell>
             </MyTableRow>
 
             {/* 3rd row */}
+
+            <MyTableRow>
+              <MyTableCell component="th" scope="row">
+                Total Quantity
+              </MyTableCell>
+              <MyTableCell align="right">{totalQuantity}</MyTableCell>
+            </MyTableRow>
+
+            {/* 4th row */}
 
             <MyTableRow>
               <MyTableCell component="th" scope="row">
@@ -58,7 +91,7 @@ const PriceDetails = ({ productPrice, quantity }) => {
               <MyTableCell align="right">{deliveryCharge}</MyTableCell>
             </MyTableRow>
 
-            {/* 4th row */}
+            {/* 5th row */}
 
             <MyTableRow>
               <MyTableCell component="th" scope="row">
