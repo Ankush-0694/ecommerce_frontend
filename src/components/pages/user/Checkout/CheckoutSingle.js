@@ -21,7 +21,7 @@ const CheckoutSingle = (props) => {
   // it is total quantity of the order for single product
   const [quantity, setQuantity] = useState(1);
 
-  /* We pass this state as a prop to address container then
+  /* We pass this state as a prop to addressContainer component then
    * set it based on the choosen address using radio address list
    */
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -31,17 +31,6 @@ const CheckoutSingle = (props) => {
    * @type {string} - Contain id of the product
    */
   const productid = props.match.params.id.split(":")[1];
-
-  /** adding this use Effect to delete the cart using product id by
-   * which we can delete that single item from cart
-   * Also we will need cleanup when placing order
-   */
-  useEffect(() => {
-    // component onUnmount
-    return () => {
-      alert("are you sure");
-    };
-  }, []);
 
   // getting single cart item which is just previously added
   // replace it using getSingleProduct
@@ -102,11 +91,7 @@ const CheckoutSingle = (props) => {
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
-            PriceDetails
-            {/* <PriceDetails
-              productPrice={productData.productPrice}
-              quantity={quantity}
-            /> */}
+            <PriceDetails productData={productData} quantity={quantity} />
           </div>
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent

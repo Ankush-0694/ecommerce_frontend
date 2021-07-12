@@ -77,7 +77,7 @@ const MultipleProductDetails = ({ productData }) => {
               className={classes.quantityButton}
               disabled={quantityCount <= 1 && true}
               onClick={() => {
-                // setTotalQuantity(totalQuantity - 1);
+                setQuantityCount(quantityCount - 1);
               }}>
               -
             </MyButtonComponent>

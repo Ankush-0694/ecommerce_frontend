@@ -103,11 +103,9 @@ const CheckoutMultiple = (props) => {
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
-            PriceDetails
-            {/* <PriceDetails
-              productPrice={productData.productPrice}
-              quantity={quantity}
-            /> */}
+            {/* We are sending total Quantity false because product data is from cart
+            and we can calculate on the price details */}
+            <PriceDetails productData={productData} quantity={false} />
           </div>
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent
