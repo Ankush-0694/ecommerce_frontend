@@ -47,7 +47,7 @@ const Cart = ({ history }) => {
       productIDArray.push(cartDataItem.productID);
     });
     history.push({
-      pathname: `/checkout/:${productIDArray}`,
+      pathname: `/checkout`,
       state: [...productIDArray],
     });
   };

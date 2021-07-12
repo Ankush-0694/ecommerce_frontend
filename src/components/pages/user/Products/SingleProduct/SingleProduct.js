@@ -94,7 +94,11 @@ const SingleProduct = (props) => {
 
   const onClickBuyNow = (e) => {
     e.preventDefault();
-
+    /**
+     * adding this add to cart , because we are fetching
+     * data from into checkout
+     */
+    // addToCartFunction();
     history.push({
       pathname: `/checkout/:${productid}`,
       state: [productid],

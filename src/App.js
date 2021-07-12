@@ -15,6 +15,8 @@ import Login from "./components/auth/Login";
 import { IS_LOGGED_IN, typeDefs } from "./clientSchema/clientSchema";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 import Dashboard from "./components/pages/admin/Dashboard/Dashboard";
+import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
+import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const cache = new InMemoryCache();
 
@@ -51,7 +53,8 @@ const App = () => {
             <Route exact path="/cart" component={Cart} />
             {/* <Route exact path="/Products" component={Products} /> */}
             <Route exact path="/Products/:id" component={SingleProduct} />
-            <Route exact path="/checkout/:id" component={Checkout} />
+            <Route exact path="/checkout" component={CheckoutMultiple} />
+            <Route exact path="/checkout/:id" component={CheckoutSingle} />
             <Route exact path="/Vendor/addProducts" component={VendorProduct} />
             <Route path="/admin/Dashboard" component={Dashboard} />
             <Route render={() => <h1>Invalid URL</h1>} />

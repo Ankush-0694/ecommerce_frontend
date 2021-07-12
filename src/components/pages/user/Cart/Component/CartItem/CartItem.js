@@ -32,7 +32,7 @@ const CartItem = ({ cartItemData }) => {
   ] = useMutation(DELETE_CART);
 
   /**
-   * Set the Quantity when we click on - or +
+   * This function is called from useEffect when we change the quantity of the item
    * @param {string} id -an ID- The id of the cart Item.
    * @param {string} quantity - New updated Quantity of the cart item
    */
@@ -120,7 +120,7 @@ const CartItem = ({ cartItemData }) => {
             style={{ outline: "none" }}
             disabled={quantityCount <= 1 && true}
             onClick={(e) => {
-              setQuantityCount(quantityCount - 1);
+              setQuantityCount(quantityCount - 1); // this is updating the state , then useEffect will comes into effect
             }}
             className={classes.quantityButton}>
             -
@@ -143,7 +143,7 @@ const CartItem = ({ cartItemData }) => {
             variant="contained"
             color="primary"
             onClick={(e) => {
-              setQuantityCount(quantityCount + 1);
+              setQuantityCount(quantityCount + 1); // this is updating the state , then useEffect will comes into effect
             }}
             className={classes.quantityButton}>
             +
