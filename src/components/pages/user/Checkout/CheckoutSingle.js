@@ -10,15 +10,21 @@ import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import AddressContainer from "./AddressContainer";
 import SingleProductDetails from "./Component/ProductDetails/SingleProductDetails";
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
+import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
  * Fetching data using productid(which is passed from params)
+ * Also passed a state from the pages we came (to check if it got reloaded or user cut and paste the url into other tab)
  */
 const CheckoutSingle = (props) => {
   const classes = CheckoutStyles();
 
-  // it is total quantity of the order for single product
+  /** we check , if history.location.state have any array or not , if not then just push to cart Checkout (as flipkart)  */
+  const productIdStateArray = props.history.location.state;
+  if (!productIdStateArray) props.history.push("/checkout");
+
+  /** it is also  total quantity of the order for single product */
   const [quantity, setQuantity] = useState(1);
 
   /* We pass this state as a prop to addressContainer component then
@@ -32,8 +38,7 @@ const CheckoutSingle = (props) => {
    */
   const productid = props.match.params.id.split(":")[1];
 
-  // getting single cart item which is just previously added
-  // replace it using getSingleProduct
+  /**  getting single product item  */
   const {
     error: getSingleProductError,
     loading: getSingleProductLoading,
@@ -42,9 +47,33 @@ const CheckoutSingle = (props) => {
     variables: {
       id: productid,
     },
+    fetchPolicy:
+      "cache-first" /* cache-first is prevent network call if data is available in cache  */,
   });
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
+
+  /* We call this mutation on Mount to add the checkouted product to the cart */
+  const [addToCart, { error: addToCartError, data: cartData }] =
+    useMutation(ADD_TO_CART);
+
+  /** this useEffect will be used to add the checkout product to Cart
+   * By doing this when we don't have state passed in history it will go to the cart checkout
+   * where we find other items and this item also(same as flipkart)
+   * But do 2 things before that -  1-  no duplicate cart item , 2- use ref in cart model to get the product data
+   * by doing so we only need to pass only product id while adding to cart
+   *
+   */
+  // useEffect(() => {
+  //   addToCart({
+  //     variables: {
+  //       productID: productid,
+  //       productName: "a",
+  //       productDescription: "b",
+  //       productPrice: 123,
+  //     },
+  //   });
+  // }, []);
 
   if (getSingleProductError) {
     return <div>Error while Fetching products</div>;
@@ -59,6 +88,7 @@ const CheckoutSingle = (props) => {
    */
   let productData = getSingleProductData.getProductById;
 
+  /** Called when we click place order button */
   const OnPlaceOrder = (e) => {
     addOrder({
       variables: {
@@ -70,7 +100,6 @@ const CheckoutSingle = (props) => {
         totalPrice: 4000,
       },
     });
-    console.log(addOrderData);
   };
 
   return (
@@ -103,9 +132,7 @@ const CheckoutSingle = (props) => {
           </div>
         </MyGridItem>
       </MyGridContainer>
-      <div style={{ textAlign: "center", margin: "10px" }}>
-        {/* <h3>TotalQuantity : {totalQuantity}</h3> */}
-      </div>
+      <div style={{ textAlign: "center", margin: "10px" }}></div>
       <hr></hr>
 
       <div>

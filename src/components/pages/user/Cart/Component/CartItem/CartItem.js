@@ -14,9 +14,14 @@ import { GET_CART } from "../../../../../../queries/Cart/cartQueries";
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
 
+  /** mapped Single cart Data  */
   const { id, productName, productPrice, productDescription, quantity } =
     cartItemData;
 
+  /** State to update individual quantity of the every cart item
+   * When it changes , useEffect will run and call the setQuantity function to
+   * update quantity in the backend
+   */
   const [quantityCount, setQuantityCount] = useState(quantity);
 
   // mutation to chaning the quantity of cart item
@@ -45,6 +50,17 @@ const CartItem = ({ cartItemData }) => {
     });
   };
 
+  // need to add method on which this use effect only call on update , not onMount
+  /// solution - using useRef , check stack overflow
+  //https://stackoverflow.com/questions/55075604/react-hooks-useeffect-only-on-update
+  useEffect(() => {
+    //eslint
+    if (quantityCount > 0 && quantityCount != "") {
+      setQuantityById(id, quantityCount);
+    }
+  }, [quantityCount]);
+
+  /** Removing cart from backend by calling mutation and update the cache after that */
   const onRemoveCart = () => {
     deleteCart({
       variables: {
@@ -65,17 +81,6 @@ const CartItem = ({ cartItemData }) => {
       },
     });
   };
-
-  // need to add method on which this use effect only call on update , not onMount
-
-  /// solution - using useRef , check stack overflow
-  //https://stackoverflow.com/questions/55075604/react-hooks-useeffect-only-on-update
-  useEffect(() => {
-    //eslint
-    if (quantityCount > 0 && quantityCount != "") {
-      setQuantityById(id, quantityCount);
-    }
-  }, [quantityCount]);
 
   return (
     <MyPaper elevation={3} className={classes.cartItem}>

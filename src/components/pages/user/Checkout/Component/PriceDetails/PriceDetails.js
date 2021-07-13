@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/** This component is common to the single and  multiple checkout
+ *  We Separate the logic based on the quantity props.
+ 
+ * If Quantity is false , then we need to calculate
+ *  price for multiple product else for single product
+ */
 const PriceDetails = ({ productData, quantity }) => {
   const classes = useStyles();
 

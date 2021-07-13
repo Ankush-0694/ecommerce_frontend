@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
@@ -10,8 +10,11 @@ import { useMutation } from "@apollo/client";
 
 const MultipleProductDetails = ({ productData }) => {
   const classes = ProductDetailsStyles();
-  const { quantity, id: cartID, productID } = productData; // this is cart data, that is why it have quantity
 
+  /* This is single cart data  */
+  const { quantity, id: cartID, productID } = productData;
+
+  /* State to show quantity on UI and when it changes , we can call updateQuantity on update */
   const [quantityCount, setQuantityCount] = useState(quantity);
 
   // mutation to chaning the quantity of cart item
@@ -34,12 +37,21 @@ const MultipleProductDetails = ({ productData }) => {
     });
   };
 
+  /** Whenever quantity changes , we call the setQuantity function  */
   useEffect(() => {
     //eslint
     if (quantityCount > 0 && quantityCount != "") {
       setQuantityById(cartID, quantityCount);
     }
   }, [quantityCount]);
+
+  /** If we want to remove data from checkout  */
+
+  // const onRemove = () => {
+  //   let data = cartItemsVar();
+  //   data = data.filter((item) => item.id !== cartID);
+  //   cartItemsVar(data);
+  // };
 
   return (
     <div className={classes.productDiv}>
@@ -103,6 +115,7 @@ const MultipleProductDetails = ({ productData }) => {
             <MyButtonComponent
               variant="contained"
               color="secondary"
+              // onClick={onRemove}
               size="small">
               Remove
             </MyButtonComponent>

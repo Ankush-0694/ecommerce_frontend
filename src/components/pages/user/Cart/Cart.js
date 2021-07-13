@@ -5,6 +5,7 @@ import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
+import { cartItemsVar } from "../../../../LocalState/ReactiveVaribles";
 // import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
 
 const Cart = ({ history }) => {
@@ -31,16 +32,19 @@ const Cart = ({ history }) => {
   let itemCount = 0;
   itemCount = cartData.length;
 
-  //calculating total price (there will be different quantity for every product)
+  /**
+   * calculating total price (there will be different quantity for every product
+   */
   let totalPrice = 0;
-  let sum = 0;
   const cartItems = cartData;
   cartItems.forEach((item) => {
-    sum += item.productPrice * item.quantity;
+    totalPrice += item.productPrice * item.quantity;
   });
-  totalPrice = sum;
 
-  const onPlaceOrder = (e) => {
+  /** redirect to checkout after mapping the product ID array
+   * If there is no use product id array in the checkout multiple then must remove it
+   */
+  const onCheckout = (e) => {
     e.preventDefault();
     let productIDArray = [];
     cartData.map((cartDataItem) => {
@@ -76,7 +80,7 @@ const Cart = ({ history }) => {
               variant="contained"
               fullWidth
               className={classes.placeOrderbtn}
-              onClick={onPlaceOrder}>
+              onClick={onCheckout}>
               Checkout
             </MyButtonComponent>
           </div>

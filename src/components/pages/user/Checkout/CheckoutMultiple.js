@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { GET_MULTIPLE_PRODUCTS } from "../../../../queries/Product/productQueries";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
@@ -12,6 +11,7 @@ import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_CART } from "../../../../queries/Cart/cartQueries";
 import AddressContainer from "./AddressContainer";
 
+/* It render we checkout from using cart Page */
 const CheckoutMultiple = (props) => {
   const classes = CheckoutStyles();
 
@@ -22,7 +22,7 @@ const CheckoutMultiple = (props) => {
 
   /**
    * This Array will contains all the ids of products which are in the cart
-   * if ProductIDArray undefined then mapped from cart data
+   * Can be useful if things go south
    * @type {string[]} ID's
    */
   const productIDArray = props.history.location.state || [];
@@ -32,7 +32,9 @@ const CheckoutMultiple = (props) => {
     loading: getCartLoading,
     error: getCartError,
     data: getCartData,
-  } = useQuery(GET_CART);
+  } = useQuery(GET_CART, {
+    fetchPolicy: "cache-first",
+  }); /* cache-first is prevent network call if data is available in cache  */
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
@@ -44,12 +46,15 @@ const CheckoutMultiple = (props) => {
   }
 
   /**
-   * This data will be mapped to rendered the order summary data
+   * This data will be mapped to rendered the order summary data (it is coming from cart)
    * @type {Array} - Contains Array of objects
    */
 
   let productData = getCartData.getCart;
 
+  /**  This is called when we click on place order
+   *  We also compute the total quantity and map individual quantity with product id
+   */
   const OnPlaceOrder = (e) => {
     /**
      * Maping individual to the every product id from cart
@@ -104,7 +109,7 @@ const CheckoutMultiple = (props) => {
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
             {/* We are sending total Quantity false because product data is from cart
-            and we can calculate on the price details */}
+            and we can calculate the quantity in the price details itself for multiple products */}
             <PriceDetails productData={productData} quantity={false} />
           </div>
           <div className={classes.PlaceOrderbtn}>
@@ -117,9 +122,7 @@ const CheckoutMultiple = (props) => {
           </div>
         </MyGridItem>
       </MyGridContainer>
-      <div style={{ textAlign: "center", margin: "10px" }}>
-        {/* <h3>TotalQuantity : {totalQuantity}</h3> */}
-      </div>
+      <div style={{ textAlign: "center", margin: "10px" }}></div>
       <hr></hr>
 
       <div>
