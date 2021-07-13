@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/user/Home/Home";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 // import Products from "./components/pages/user/Products/Products";
@@ -12,12 +17,12 @@ import Checkout from "./components/pages/user/Checkout/Checkout";
 import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import { IS_LOGGED_IN, typeDefs } from "./clientSchema/clientSchema";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 import Dashboard from "./components/pages/admin/Dashboard/Dashboard";
 import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
+
 const cache = new InMemoryCache();
 
 const authLink = setContext((_, { headers }) => {
@@ -33,7 +38,6 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httplink),
   cache,
-  typeDefs,
 });
 
 const App = () => {

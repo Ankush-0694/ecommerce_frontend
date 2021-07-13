@@ -54,10 +54,9 @@ const SingleProduct = (props) => {
   const productData = getProductData.getProductById;
   const { id, productName, productDescription, productPrice } = productData;
 
-  // to add product into cart , will use both on addCart and buy Now
-  //  giving warning  when we try to add same product to cart item which is already in cart
-  // will solved when we handle duplication in backend,
-  // and also many warnings
+  /** adding item to the cart in backend then updating the cache
+   * making a alert if success
+   */
   const addToCartFunction = () => {
     addToCart({
       variables: {
@@ -87,18 +86,18 @@ const SingleProduct = (props) => {
     }
   };
 
+  /** adding item to cart */
   const onClickAddCart = (e) => {
     e.preventDefault();
     addToCartFunction();
   };
 
+  /** Checkout the Product for placing the order
+   * While redirecting , we needed to pass the productid , it will be helpful
+   * in single checkout.
+   */
   const onClickBuyNow = (e) => {
     e.preventDefault();
-    /**
-     * adding this add to cart , because we are fetching
-     * data from into checkout
-     */
-    // addToCartFunction();
     history.push({
       pathname: `/checkout/:${productid}`,
       state: [productid],

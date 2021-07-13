@@ -6,6 +6,7 @@ import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 import { withRouter } from "react-router-dom";
 
+/* Used to show order Summary on the Single checkout page */
 const SingleProductDetails = ({
   productData,
   quantity,
