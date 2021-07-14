@@ -17,8 +17,9 @@ const CheckoutMultiple = (props) => {
 
   /* We pass this state as a prop to address container then
    * set it based on the choosen address using radio address list
+   * This will contain id of address only.
    */
-  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   /**
    * This Array will contains all the ids of products which are in the cart
@@ -56,6 +57,11 @@ const CheckoutMultiple = (props) => {
    *  We also compute the total quantity and map individual quantity with product id
    */
   const OnPlaceOrder = (e) => {
+    /* If user does not select the address and try to place order */
+    if (selectedAddress === null) {
+      alert("select address first");
+      return;
+    }
     /**
      * Maping individual to the every product id from cart
      * @type {Object}
@@ -81,7 +87,7 @@ const CheckoutMultiple = (props) => {
       variables: {
         productDetailsWithQuantity: ProductDetailsWithQuantity,
         totalQuantity: Number(totalQuantity),
-        addressID: "60eab4576148bf0e74bd3159",
+        addressID: selectedAddress,
         totalPrice: 4000,
       },
     });
@@ -89,13 +95,12 @@ const CheckoutMultiple = (props) => {
 
   return (
     <div style={{ padding: "20px" }}>
+      <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
+        Order Summary
+      </MyTypography>
       <MyGridContainer justify="center" spacing={4}>
         <MyGridItem xs={8} sm={6} className="product-details">
-          <MyTypography variant="h4" component="h2">
-            Order Summary
-          </MyTypography>
-
-          <div>
+          <div style={{ maxHeight: "500px", overflow: "auto" }}>
             {productData.map((mappedProductData) => {
               return (
                 <MultipleProductDetails
@@ -126,7 +131,10 @@ const CheckoutMultiple = (props) => {
       <hr></hr>
 
       <div>
-        <AddressContainer />
+        <AddressContainer
+          selectedAddress={selectedAddress}
+          setSelectedAddress={setSelectedAddress}
+        />
       </div>
       <br></br>
     </div>

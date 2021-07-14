@@ -67,16 +67,18 @@ const CartItem = ({ cartItemData }) => {
         cartID: id,
       },
       update: (cache, { data: { deleteCart } }) => {
-        const data = cache.readQuery({ query: GET_CART });
+        let data = cache.readQuery({ query: GET_CART });
+
         // need to newData var because we need to add a
         // new instance of all data , we can not use data var direclty
         let dataToUpdate = data.getCart;
         dataToUpdate = dataToUpdate.filter((singleCartItem) => {
           return singleCartItem.id !== deleteCart.id;
         });
+
         cache.writeQuery({
           query: GET_CART,
-          data: { ...data, getCart: { dataToUpdate } },
+          data: { ...data, getCart: dataToUpdate },
         });
       },
     });

@@ -3,10 +3,16 @@ import { MyGridItem } from "../../../../../Design/MyGrid";
 import { MyHomeIcon } from "../../../../../Design/MyIcons";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 import { AddressListStyles } from "../../CSS/AddressListStyles";
 import { useMutation } from "@apollo/client";
 import { DELETE_ADDRESS } from "../../../../../../queries/address/addressMutations";
 import { GET_ALL_ADDRESS } from "../../../../../../queries/address/addressQueries";
+import { IdleTransactionSpanRecorder } from "@sentry/tracing/dist/idletransaction";
 
 const AddressList = ({ data, current, setCurrent }) => {
   const classes = AddressListStyles();
@@ -49,52 +55,116 @@ const AddressList = ({ data, current, setCurrent }) => {
     setCurrent(null);
   };
 
+  // return (
+  //   <>
+  //     <MyGridItem xs={8}>
+  //       <hr></hr>
+  //       <div style={{ float: "left", padding: "0px 10px" }}>
+  //         <MyHomeIcon />
+  //       </div>
+  // <div style={{ float: "right", padding: "0px 10px" }}>
+  // <MyButtonComponent
+  //   onClick={() => {
+  //     setCurrent(data);
+  //     window.scroll({
+  //       top: document.body.offsetHeight,
+  //       left: 0,
+  //       behavior: "smooth",
+  //     });
+  //   }}
+  //   color="primary"
+  //   className={classes.EditBtn}>
+  //   Edit
+  // </MyButtonComponent>
+  // <MyButtonComponent
+  //   onClick={onDeleteAddress}
+  //   color="secondary"
+  //   className={classes.EditBtn}>
+  //   Delete
+  // </MyButtonComponent>
+  // </div>
+  //   <div className={classes.addressDetails}>
+  //     <MyTypography variant="body1" component="p">
+  //       {fullName}
+  //     </MyTypography>
+  //     <MyTypography variant="body2" component="p">
+  //       Address - {city} {" , "}
+  //       {state}
+  //     </MyTypography>
+  //   </div>
+  //   <div className={classes.deliverHereBtnDiv}>
+  //     <MyButtonComponent
+  //       variant="outlined"
+  //       color="secondary"
+  //       className={classes.deliverBtn}>
+  //       Deliver Here
+  //     </MyButtonComponent>
+  //   </div>
+  // </MyGridItem>
+  //   </>
+  // );
+
+  const AddressLabel = () => {
+    return (
+      <>
+        <div className={classes.addressLabelDiv}>
+          <div style={{ flexGrow: 1 }}>
+            <div className={classes.addressDetails}>
+              <MyTypography variant="h6" component="p">
+                {fullName}
+              </MyTypography>
+              <MyTypography variant="body2" component="p">
+                Address - {area},{city},{state}-{pincode}
+              </MyTypography>
+              <MyTypography variant="body2" component="p">
+                Phone Number - {phoneNumber}
+              </MyTypography>
+            </div>
+            <div className={classes.deliverHereBtnDiv}>
+              {/* <MyButtonComponent
+                variant="outlined"
+                color="secondary"
+                size="small"
+                className={classes.deliverBtn}>
+                Deliver Here
+              </MyButtonComponent> */}
+            </div>
+          </div>
+          <div>
+            <MyButtonComponent
+              onClick={() => {
+                setCurrent(data);
+                window.scroll({
+                  top: document.body.offsetHeight,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }}
+              color="primary"
+              className={classes.EditBtn}>
+              Edit
+            </MyButtonComponent>
+            <MyButtonComponent
+              onClick={onDeleteAddress}
+              color="secondary"
+              className={classes.EditBtn}>
+              Delete
+            </MyButtonComponent>
+          </div>
+        </div>
+        <hr></hr>
+      </>
+    );
+  };
+
   return (
     <>
-      <MyGridItem xs={8}>
-        <hr></hr>
-        <div style={{ float: "left", padding: "0px 10px" }}>
-          <MyHomeIcon />
-        </div>
-        <div style={{ float: "right", padding: "0px 10px" }}>
-          <MyButtonComponent
-            onClick={() => {
-              setCurrent(data);
-              window.scroll({
-                top: document.body.offsetHeight,
-                left: 0,
-                behavior: "smooth",
-              });
-            }}
-            color="primary"
-            className={classes.EditBtn}>
-            Edit
-          </MyButtonComponent>
-          <MyButtonComponent
-            onClick={onDeleteAddress}
-            color="secondary"
-            className={classes.EditBtn}>
-            Delete
-          </MyButtonComponent>
-        </div>
-        <div className={classes.addressDetails}>
-          <MyTypography variant="body1" component="p">
-            {fullName}
-          </MyTypography>
-          <MyTypography variant="body2" component="p">
-            Address - {city} {" , "}
-            {state}
-          </MyTypography>
-        </div>
-        <div className={classes.deliverHereBtnDiv}>
-          <MyButtonComponent
-            variant="outlined"
-            color="secondary"
-            className={classes.deliverBtn}>
-            Deliver Here
-          </MyButtonComponent>
-        </div>
-      </MyGridItem>
+      <FormControlLabel
+        className={classes.root}
+        value={id}
+        control={<Radio />}
+        label={<AddressLabel />}
+      />
     </>
   );
 };

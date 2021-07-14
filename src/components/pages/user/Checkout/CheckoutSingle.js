@@ -30,7 +30,7 @@ const CheckoutSingle = (props) => {
   /* We pass this state as a prop to addressContainer component then
    * set it based on the choosen address using radio address list
    */
-  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   /**
    * This id passed through param by which we can fetch the product
@@ -90,13 +90,18 @@ const CheckoutSingle = (props) => {
 
   /** Called when we click place order button */
   const OnPlaceOrder = (e) => {
+    /* If user does not select the address and try to place order */
+    if (selectedAddress === null) {
+      alert("select address first");
+      return;
+    }
     addOrder({
       variables: {
         productDetailsWithQuantity: [
           { productDetails: productid, quantity: quantity },
         ],
         totalQuantity: Number(quantity),
-        addressID: "60eab4576148bf0e74bd3159",
+        addressID: selectedAddress,
         totalPrice: 4000,
       },
     });
@@ -104,12 +109,11 @@ const CheckoutSingle = (props) => {
 
   return (
     <div style={{ padding: "20px" }}>
+      <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
+        Order Summary
+      </MyTypography>
       <MyGridContainer justify="center" spacing={4}>
         <MyGridItem xs={8} sm={6} className="product-details">
-          <MyTypography variant="h4" component="h2">
-            Orders Summary
-          </MyTypography>
-
           <div>
             <SingleProductDetails
               productData={productData}
@@ -136,7 +140,10 @@ const CheckoutSingle = (props) => {
       <hr></hr>
 
       <div>
-        <AddressContainer />
+        <AddressContainer
+          selectedAddress={selectedAddress}
+          setSelectedAddress={setSelectedAddress}
+        />
       </div>
       <br></br>
     </div>

@@ -38,6 +38,18 @@ const SingleProduct = (props) => {
     variables: { id: productid },
   });
 
+  /**  We need to added the item to the cart , and we are updating the data in the cache
+   * IF cache not available then we need to fetch the data before adding to cart
+   * That is why this extra query is used , with fetchPolicy of cache-first
+   */
+  const {
+    error: getCartError,
+    loading: getCartLoading,
+    data: getCartData,
+  } = useQuery(GET_CART, {
+    fetchPolicy: "cache-first",
+  });
+
   const [
     addToCart,
     { error: addToCartError, loading: addToCartLoading, data: cartData },
@@ -65,18 +77,20 @@ const SingleProduct = (props) => {
         productDescription,
         productPrice,
       },
-      // update: (cache, { data: addedCartData }) => {
-      //   const data = cache.readQuery({ query: GET_CART });
-      //   // need to newData var because we need to add a
-      //   // new instance of all data , we can not use data var direclty
-      //   let dataToUpdate = data.getCart;
-      //   dataToUpdate = [...dataToUpdate, addedCartData];
+      update: (cache, { data: { addToCart } }) => {
+        /* There can be a possibility cart data does not come to cache yet */
+        let data = cache.readQuery({ query: GET_CART });
 
-      //   cache.writeQuery({
-      //     query: GET_CART,
-      //     data: { ...data, getCart: { dataToUpdate } },
-      //   });
-      // },
+        // need to newData var because we need to add a
+        // new instance of all data , we can not use data var direclty
+        let dataToUpdate = data.getCart;
+        dataToUpdate = [...dataToUpdate, addToCart];
+
+        cache.writeQuery({
+          query: GET_CART,
+          data: { ...data, getCart: { dataToUpdate } },
+        });
+      },
     });
 
     if (addToCartError) {
