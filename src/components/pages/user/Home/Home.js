@@ -1,18 +1,10 @@
 import React from "react";
-import HomeSlider from "./Component/HomeSlider/HomeSlider";
+import HomeSlider from "./Component/HomeTopSlider/HomeSlider";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import Products from "../Products/AllProducts/Products";
-import MultiCarousel from "./MultiCarousel";
+import FirstProductSlider from "./Component/FirstProductSlider/FirstProductSlider";
 
 const Home = () => {
-  // this should not here
-  // const userVar = makeVar({});
-  // const { error, loading, data } = useQuery(getMeQuery);
-  // if (!loading) {
-  //   userVar(data.getMe);
-  // }
-  // console.log(userVar());
-
   return (
     <div>
       <div style={{ backgroundColor: "black" }}>
@@ -22,16 +14,14 @@ const Home = () => {
         <MyFullScreenBox display="flex" width="100%">
           <h1 style={{ margin: "auto" }}>Products</h1>
         </MyFullScreenBox>
-        <MyFullScreenBox display="flex" width="100%">
-          <Products />
-        </MyFullScreenBox>
+
         <section
           style={{
             margin: "20px",
-            maxWidth: "80%",
+            maxWidth: "90%",
             margin: "auto",
           }}>
-          <MultiCarousel />
+          <FirstProductSlider />
         </section>
       </div>
     </div>
@@ -39,3 +29,8 @@ const Home = () => {
 };
 
 export default Home;
+
+/** this can be used to show all products on a single page */
+//  <MyFullScreenBox display="flex" width="100%">
+//    {/* <Products /> */}
+//  </MyFullScreenBox>;

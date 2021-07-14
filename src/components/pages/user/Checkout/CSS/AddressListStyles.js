@@ -1,13 +1,20 @@
 import { makeStyles } from "../../../../Design/MyUseStyles";
 
 const AddressListStyles = makeStyles({
+  addressLabelDiv: {
+    margin: "10px",
+    display: "flex",
+  },
   addressDetails: {
-    paddingBottom: "5px",
-    paddingLeft: "20px",
+    "&>*": {
+      marginBottom: "5px",
+    },
+    // paddingBottom: "5px",
+    // paddingLeft: "20px",
   },
   deliverHereBtnDiv: {
-    padding: "10px",
-    marginLeft: "20px",
+    // padding: "5px",s
+    // marginLeft: "20px",
   },
   deliverBtn: {
     "&:focus": {
@@ -17,6 +24,14 @@ const AddressListStyles = makeStyles({
   EditBtn: {
     "&:focus": {
       outline: "none",
+    },
+  },
+  root: {
+    width: "90%",
+    margin: 0,
+
+    "& .MuiTypography-body1": {
+      flexGrow: 1,
     },
   },
 });

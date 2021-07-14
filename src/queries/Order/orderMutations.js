@@ -27,9 +27,15 @@ const ADD_ORDER = gql`
       deliveryCharge
       paymentMode
       address {
+        id
         fullName
-        city
+        phoneNumber
+        pincode
         state
+        city
+        HouseNo
+        area
+        landmark
       }
     }
   }

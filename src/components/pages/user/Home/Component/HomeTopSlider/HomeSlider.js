@@ -39,12 +39,11 @@ const HomeSlider = () => {
     <div style={{ color: "#494949", margin: "auto", width: "95%" }}>
       <MyCarousel
         className={classes.SecondExample}
-        autoPlay={true}
-        animation="fade"
+        autoPlay={false}
+        animation="slide"
         indicators={true}
         timeout={300}
-        navButtonsAlwaysVisible={true}
-        navButtonsAlwaysInvisible={false}>
+        navButtonsAlwaysVisible={true}>
         {items.map((item, index) => {
           return <HomeSliderContent item={item} key={item.id} />;
         })}

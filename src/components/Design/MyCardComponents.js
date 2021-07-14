@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyCardActions = ({ children }) => {
+const MyCardActions = ({ children, style }) => {
   const classes = useStyles();
-  return <CardActions>{children}</CardActions>;
+  return <CardActions style={style}>{children}</CardActions>;
 };
 
 const MyCardContainer = ({ children }) => {
