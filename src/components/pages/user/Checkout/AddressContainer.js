@@ -34,6 +34,9 @@ const AddressContainer = (props) => {
     return <div>Loading Adresses...</div>;
   }
 
+  /* This data will be render in UI */
+  const addressDataToRender = addressData.getAllAddress;
+
   /** This function is used to change the value of address state id  in this component
    * Which comes from parent checkout component
    */
@@ -61,7 +64,7 @@ const AddressContainer = (props) => {
                   name="address1"
                   value={selectedAddress}
                   onChange={handleAddressRadio}>
-                  {addressData.getAllAddress.map((data) => {
+                  {addressDataToRender.map((data) => {
                     return (
                       <AddressList
                         key={data.id}

@@ -18,9 +18,9 @@ const useStyles = makeStyles({
     margin: "10px 0px",
 
     //We can change input css from here
-    // "& .MuiInputBase-input": {
-
-    // },
+    "& .MuiInputBase-input": {
+      backgroundColor: "white",
+    },
 
     //We can change label css from here
     // "& .MuiFormLabel-root": {

@@ -12,7 +12,7 @@ const Home = () => {
       </div>
       <div>
         <MyFullScreenBox display="flex" width="100%">
-          <h1 style={{ margin: "auto" }}>Products</h1>
+          <h1 style={{ margin: "20px auto" }}>Products</h1>
         </MyFullScreenBox>
 
         <section

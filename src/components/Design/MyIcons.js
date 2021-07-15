@@ -4,6 +4,7 @@ import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 const MyMenuIcon = () => {
   return <MenuIcon />;
@@ -24,6 +25,10 @@ const MyAddIcon = () => {
   return <AddIcon />;
 };
 
+const MyFiberManualRecordIcon = () => {
+  return <FiberManualRecordIcon />;
+};
+
 const MyIcon = ({ children }) => {
   return <Icon>{children}</Icon>;
 };
@@ -34,5 +39,6 @@ export {
   MyDirectionsWalkIcon,
   MyEmojiPeopleIcon,
   MyAddIcon,
+  MyFiberManualRecordIcon,
   MyIcon,
 };
