@@ -6,6 +6,7 @@ const GET_ALL_ORDERS = gql`
       id
       totalQuantity
       totalPrice
+      orderedDate
       productDetailsWithQuantity {
         productDetails {
           id
@@ -40,6 +41,7 @@ const GET_SINGLE_ORDER_BY_ID = gql`
       id
       totalQuantity
       totalPrice
+      orderedDate
       productDetailsWithQuantity {
         productDetails {
           id

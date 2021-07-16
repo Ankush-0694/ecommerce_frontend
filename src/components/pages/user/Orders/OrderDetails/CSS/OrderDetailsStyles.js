@@ -10,6 +10,13 @@ const OrderDetailsStyles = makeStyles({
   orderHeading: {
     margin: "10px",
   },
+  TotalPrice: {
+    margin: "10px 0px",
+  },
+  totalPricePaper: {
+    padding: "20px",
+    fontWeight: "700",
+  },
   addressHeading: {
     marginBottom: "10px",
   },
@@ -19,6 +26,10 @@ const OrderDetailsStyles = makeStyles({
   },
   addressDetail: {
     margin: "10px 0px",
+  },
+
+  otherItemsHeading: {
+    padding: "20px",
   },
 });
 

@@ -1,17 +1,11 @@
 import { makeStyles } from "../../../../../Design/MyUseStyles";
 
-const OrderedProductListStyles = makeStyles({
-  orderedProductLinks: {
-    width: "100%",
-    textDecoration: "none",
-    color: "black",
-    "&:hover": {
-      textDecoration: "none",
-      color: "black",
-    },
-    marginBottom: "8px",
-    padding: "16px",
-    display: "block",
+const ProductListStyles = makeStyles({
+  clickProductDiv: {
+    margin: "10px 0px",
+  },
+  productItemPaper: {
+    padding: "20px",
   },
   ImageDiv: {
     height: "75px",
@@ -22,6 +16,16 @@ const OrderedProductListStyles = makeStyles({
     height: "75px",
     width: "75px",
     objectFit: "cover",
+  },
+  productLink: {
+    width: "100%",
+    textDecoration: "none",
+    color: "black",
+    "&:hover": {
+      textDecoration: "none",
+    },
+
+    display: "block",
   },
   productName: {
     marginBottom: "5px",
@@ -34,12 +38,6 @@ const OrderedProductListStyles = makeStyles({
     maxWidth: "70%",
     fontWeight: "800",
   },
-  statusName: {
-    marginBottom: "10px",
-  },
-  statusicon: {
-    marginRight: "8px",
-  },
 });
 
-export { OrderedProductListStyles };
+export { ProductListStyles };

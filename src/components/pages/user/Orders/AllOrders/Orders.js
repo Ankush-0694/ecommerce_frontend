@@ -6,6 +6,7 @@ import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_ORDERS } from "../../../../../queries/Order/orderQueries";
 import { OrderStyles } from "./CSS/OrdersStyles";
+import OrderFilter from "./Component/FilterComponent/OrderFilter";
 
 const Orders = () => {
   const classes = OrderStyles();
@@ -42,7 +43,7 @@ const Orders = () => {
         {/* Filter  component , LEFT PART */}
 
         <div className={classes.filterContainer}>
-          <MyPaper>Hello</MyPaper>
+          <OrderFilter />
         </div>
 
         {/* Order Related , Right PART */}
@@ -63,18 +64,21 @@ const Orders = () => {
 
           {/* Order List Item component by mapping all orders */}
 
-          {orderData.map((mappedOrderData) => {
-            /** type@ {Array} */
-            const { id, productDetailsWithQuantity } = mappedOrderData;
+          {orderData
+            .slice(0)
+            .reverse()
+            .map((mappedOrderData) => {
+              /** type@ {Array} */
+              const { id, productDetailsWithQuantity } = mappedOrderData;
 
-            return (
-              <OrderedProductList
-                key={id}
-                orderID={id}
-                productData={productDetailsWithQuantity}
-              />
-            );
-          })}
+              return (
+                <OrderedProductList
+                  key={id}
+                  orderID={id}
+                  productData={productDetailsWithQuantity}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

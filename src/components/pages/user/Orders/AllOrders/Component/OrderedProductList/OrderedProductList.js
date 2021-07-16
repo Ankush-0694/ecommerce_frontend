@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
-import { MyFiberManualRecordIcon } from "../../../../../../Design/MyIcons";
 import { MyPaper } from "../../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import { OrderedProductListStyles } from "../../CSS/OrderedProductListStyles";
+import OrderStatus from "../OrderStatus/OrderStatus";
 
 /** This Component will be mapped from order Data Array and
  *
  * And then Again mapped from the product array which are in the single Order
+ *
+ * This component used in Order.js (to show all products in the orders)
+ *  and OrderDetails.js(to show others products in order(other than on which we clicked)  )
  */
 const OrderedProductList = ({ productData, orderID }) => {
   const classes = OrderedProductListStyles();
@@ -21,7 +24,7 @@ const OrderedProductList = ({ productData, orderID }) => {
         {
           /* Mapped product data has nested object  */
         }
-        const { productDetails, orderStatus } = mappedProductData;
+        const { productDetails, orderStatus, quantity } = mappedProductData;
         const {
           id: productId,
           productName,
@@ -40,8 +43,11 @@ const OrderedProductList = ({ productData, orderID }) => {
               to={`/orders/details/?${queryParameter}`}>
               <MyGridContainer className="orderItem">
                 {/* Image and Product Details Item */}
+
                 <MyGridItem xs={6}>
                   <MyGridContainer>
+                    {/* Image Item */}
+
                     <MyGridItem xs={3}>
                       <div className={classes.ImageDiv}>
                         <img
@@ -50,6 +56,7 @@ const OrderedProductList = ({ productData, orderID }) => {
                         />
                       </div>
                     </MyGridItem>
+                    {/* Product Details Grid */}
                     <MyGridItem xs={8}>
                       <div>
                         <div className={classes.productName}>{productName}</div>
@@ -58,14 +65,27 @@ const OrderedProductList = ({ productData, orderID }) => {
                           className={classes.productDesc}>
                           {productDescription}
                         </MyTypography>
+                        <MyTypography
+                          variant="body2"
+                          className={classes.productPrice}>
+                          Price - {productPrice}
+                        </MyTypography>
+
+                        <MyTypography
+                          variant="body2"
+                          className={classes.productDesc}>
+                          Quantity : {quantity}
+                        </MyTypography>
                       </div>
                     </MyGridItem>
                   </MyGridContainer>
                 </MyGridItem>
 
-                {/* Amount Paid */}
+                {/* Amount Paid on this Product */}
 
-                <MyGridItem xs={2}> ₹{productPrice} </MyGridItem>
+                <MyGridItem xs={2}>
+                  Total - ₹{productPrice * quantity}
+                </MyGridItem>
 
                 {/* Status
                   *
@@ -75,28 +95,7 @@ const OrderedProductList = ({ productData, orderID }) => {
                 <MyGridItem xs={4}>
                   {/*Status Name And The icon , */}
 
-                  <div className={classes.statusName}>
-                    <span
-                      className={classes.statusicon}
-                      style={
-                        // Just an if else using ternary operator
-                        orderStatus == "delivered"
-                          ? { color: "green" }
-                          : orderStatus == "cancelled"
-                          ? { color: "red" }
-                          : { color: "orange" }
-                      }>
-                      <MyFiberManualRecordIcon />
-                    </span>
-                    {orderStatus}
-                  </div>
-
-                  {/* Status Message */}
-
-                  <MyTypography variant="body2" className="statusMsg">
-                    {/* THis message will be depend on the status */}
-                    Your order has been delivered
-                  </MyTypography>
+                  <OrderStatus orderStatus={orderStatus} />
                 </MyGridItem>
               </MyGridContainer>
             </Link>
