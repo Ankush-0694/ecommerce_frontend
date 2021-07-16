@@ -15,6 +15,8 @@ const SingleProductDetails = ({
 }) => {
   const classes = ProductDetailsStyles();
 
+  const { productDescription, productName, productPrice } = productData;
+
   return (
     <div className={classes.productDiv}>
       <MyGridContainer
@@ -33,14 +35,17 @@ const SingleProductDetails = ({
         <MyGridItem xs={10} sm={6} md={8}>
           <div style={{ textAlign: "center" }}>
             <MyTypography variant="h6" component="h2">
-              Product Name : {productData.productName}
+              Product Name : {productName}
             </MyTypography>
             <MyTypography variant="body2" component="p">
-              Description : {productData.productDescription}
+              Description : {productDescription}
             </MyTypography>
             <MyTypography variant="body1" component="p">
-              Price : {productData.productPrice}
+              Single Item Price : {productPrice}
             </MyTypography>
+            {/* <MyTypography variant="body1" component="p">
+              Total Price : {productPrice * quantity}
+            </MyTypography> */}
           </div>
           <div
             className="set-quantity"

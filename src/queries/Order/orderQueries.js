@@ -2,14 +2,72 @@ import { gql } from "@apollo/client";
 
 const GET_ALL_ORDERS = gql`
   {
-    orders {
+    getAllOrders {
       id
-      productName
-      productDescription
-      productPrice
-      quantity
+      totalQuantity
+      totalPrice
+      orderedDate
+      productDetailsWithQuantity {
+        productDetails {
+          id
+          productName
+          productPrice
+          productDescription
+        }
+        orderStatus
+        deliveredDate
+        quantity
+      }
+      deliveryCharge
+      paymentMode
+      address {
+        id
+        fullName
+        phoneNumber
+        pincode
+        state
+        city
+        HouseNo
+        area
+        landmark
+      }
     }
   }
 `;
 
-export { GET_ALL_ORDERS };
+const GET_SINGLE_ORDER_BY_ID = gql`
+  query ($orderID: ID) {
+    getOrderById(orderID: $orderID) {
+      id
+      totalQuantity
+      totalPrice
+      orderedDate
+      productDetailsWithQuantity {
+        productDetails {
+          id
+          productName
+          productPrice
+          productDescription
+        }
+        orderStatus
+        deliveredDate
+        quantity
+      }
+      deliveryCharge
+      paymentMode
+      address {
+        id
+        fullName
+        phoneNumber
+        pincode
+        state
+        city
+        HouseNo
+        area
+        landmark
+      }
+    }
+  }
+`;
+
+export { GET_ALL_ORDERS, GET_SINGLE_ORDER_BY_ID };

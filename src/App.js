@@ -21,6 +21,8 @@ import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 import Dashboard from "./components/pages/admin/Dashboard/Dashboard";
 import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
+import Orders from "./components/pages/user/Orders/AllOrders/Orders";
+import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
 const cache = new InMemoryCache();
@@ -55,6 +57,8 @@ const App = () => {
             <Route exact path="/vendor/login" component={Login} />
             <Route exact path="/vendor/Signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/orders" component={Orders} />
+            <Route exact path="/orders/details" component={OrderDetails} />
             {/* <Route exact path="/Products" component={Products} /> */}
             <Route exact path="/Products/:id" component={SingleProduct} />
             <Route exact path="/checkout" component={CheckoutMultiple} />

@@ -18,14 +18,20 @@ const useStyles = makeStyles({
     margin: "10px 0px",
 
     //We can change input css from here
-    // "& .MuiInputBase-input": {
-
-    // },
+    "& .MuiInputBase-input": {
+      backgroundColor: "white",
+    },
 
     //We can change label css from here
     // "& .MuiFormLabel-root": {
 
     // },
+  },
+
+  MultiLineRoot: {
+    "& .MuiInputBase-root": {
+      backgroundColor: "white",
+    },
   },
 });
 
@@ -70,6 +76,7 @@ const MyMultilineInput = ({
   onChange,
   autoFocus,
 }) => {
+  const classes = useStyles();
   return (
     <TextField
       autoFocus={autoFocus}
@@ -83,16 +90,20 @@ const MyMultilineInput = ({
       multiline
       rows={rows}
       variant={variant}
+      className={classes.MultiLineRoot}
     />
   );
 };
 
-const MyCheckbox = ({ name, label }) => {
+const MyCheckbox = ({ name, label, className }) => {
   return (
     <FormControlLabel
       control={<Checkbox name={name} />}
       label={
-        <Typography variant="h6" style={{ color: "Black" }}>
+        <Typography
+          className={className}
+          variant="h6"
+          style={{ color: "Black" }}>
           {label}
         </Typography>
       }

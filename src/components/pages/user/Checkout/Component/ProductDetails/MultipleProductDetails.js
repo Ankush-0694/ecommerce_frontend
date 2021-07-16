@@ -73,11 +73,14 @@ const MultipleProductDetails = ({ productData }) => {
             <MyTypography variant="h6" component="h2">
               Product Name : {productData.productName}
             </MyTypography>
-            <MyTypography variant="body2" component="p">
+            {/* <MyTypography variant="body2" component="p">
               Description : {productData.productDescription}
+            </MyTypography> */}
+            <MyTypography variant="body1" component="p">
+              Single Item Price : {productData.productPrice}
             </MyTypography>
             <MyTypography variant="body1" component="p">
-              Price : {productData.productPrice}
+              Total Price : {productData.productPrice * quantityCount}
             </MyTypography>
           </div>
           <div
