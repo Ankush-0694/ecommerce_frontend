@@ -39,15 +39,15 @@ const VendorProduct = () => {
           </div>
         </MyFullScreenBox>
 
-        <MyFullScreenBox display="flex" width="40%">
-          <div style={{ margin: "auto" }}>
+        <div style={{ flexGrow: 1 }}>
+          <div>
             <MyTypography
               variant="h4"
               component="h5"
               style={{ textAlign: "center", padding: "10px" }}>
               Products
             </MyTypography>
-            <div>
+            <div className={classes.productListContainer}>
               {productData
                 .slice(0)
                 .reverse()
@@ -62,7 +62,7 @@ const VendorProduct = () => {
                 })}
             </div>
           </div>
-        </MyFullScreenBox>
+        </div>
       </div>
     </div>
   );
