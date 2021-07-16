@@ -5,6 +5,9 @@ const VendorProductStyles = makeStyles({
   flexcontainer: {
     display: "flex",
   },
+  productListContainer: {
+    padding: "20px",
+  },
 });
 
 export { VendorProductStyles };
