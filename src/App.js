@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/user/Home/Home";
-import {
-  ApolloClient,
-  ApolloProvider,
-  gql,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
-// import Products from "./components/pages/user/Products/Products";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
-import Checkout from "./components/pages/user/Checkout/Checkout";
 // import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
@@ -23,6 +16,7 @@ import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple"
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
+import MyToolbar from "./components/Design/MyToolbar";
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
 const cache = new InMemoryCache();
@@ -42,17 +36,29 @@ const client = new ApolloClient({
   cache,
 });
 
+/**  If user is a customer then only we show the simple Navbar
+ * We only need to do a extra user query to store a user in cache
+ * Admin Navbar used in his dashboard Page
+ */
+
+const user = "customer";
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <Navbar />
-        <div>
+        {user === "customer" && <Navbar />}
+        {/** Toolbar added to make content below app bar because
+        app bar is fixed */}
+        <MyToolbar />
+
+        {/* This styling for stop responsiveness */}
+        <div style={{ minWidth: "900px" }}>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/admin/login" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/Signup" component={Signup} />
-            <Route exact path="/admin/login" component={Login} />
             <Route exact path="/admin/Signup" component={Signup} />
             <Route exact path="/vendor/login" component={Login} />
             <Route exact path="/vendor/Signup" component={Signup} />
