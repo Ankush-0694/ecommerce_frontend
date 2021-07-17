@@ -19,7 +19,7 @@ export function MyNavbar({ children }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>{children}</Toolbar>
       </AppBar>
     </div>
