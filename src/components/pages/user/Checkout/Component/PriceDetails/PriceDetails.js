@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
  * If Quantity is false , then we need to calculate
  *  price for multiple product else for single product
  */
-const PriceDetails = ({ productData, quantity }) => {
+const PriceDetails = ({ productData, quantity, setTotalPriceOfOrder }) => {
   const classes = useStyles();
 
   /* Total amount for order */
@@ -54,6 +54,9 @@ const PriceDetails = ({ productData, quantity }) => {
       totalPrice = totalPrice + productPrice * quantity;
     });
   }
+
+  /** Passed from checkout page as a props , to store price during adding order */
+  setTotalPriceOfOrder(totalPrice);
 
   let deliveryCharge = 0;
   if (totalPrice < 500) deliveryCharge = 40;

@@ -21,6 +21,9 @@ const CheckoutMultiple = (props) => {
    */
   const [selectedAddress, setSelectedAddress] = useState(null);
 
+  /**  total Price Variable, It will pass to price details as a prop  */
+  const [totalPriceOfOrder, setTotalPriceOfOrder] = useState(0);
+
   /**
    * This Array will contains all the ids of products which are in the cart
    * Can be useful if things go south
@@ -88,7 +91,7 @@ const CheckoutMultiple = (props) => {
         productDetailsWithQuantity: ProductDetailsWithQuantity,
         totalQuantity: Number(totalQuantity),
         addressID: selectedAddress,
-        totalPrice: 4000,
+        totalPrice: totalPriceOfOrder,
       },
     });
   };
@@ -115,7 +118,11 @@ const CheckoutMultiple = (props) => {
           <div className={classes.priceDetailsContainer}>
             {/* We are sending total Quantity false because product data is from cart
             and we can calculate the quantity in the price details itself for multiple products */}
-            <PriceDetails productData={productData} quantity={false} />
+            <PriceDetails
+              productData={productData}
+              quantity={false}
+              setTotalPriceOfOrder={setTotalPriceOfOrder}
+            />
           </div>
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent
