@@ -7,6 +7,7 @@ import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 import { UPDATE_CART_QUANTITY } from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
+import { MyPaper } from "../../../../../Design/MyPaper";
 
 const MultipleProductDetails = ({ productData }) => {
   const classes = ProductDetailsStyles();
@@ -55,76 +56,76 @@ const MultipleProductDetails = ({ productData }) => {
 
   return (
     <div className={classes.productDiv}>
-      <MyGridContainer
-        justify="center"
-        spacing={2}
-        style={{ border: "1px solid black" }}>
-        <MyGridItem xs={12} sm={6} md={4}>
-          <MyCardMedia
-            height="150"
-            className={classes.MediaImg}
-            style={{ borderRadius: "10px" }}
-            title="IMAGE"
-            image="https://source.unsplash.com/collection/190727/800x450"
-          />
-        </MyGridItem>
-        <MyGridItem xs={10} sm={6} md={8}>
-          <div style={{ textAlign: "center" }}>
-            <MyTypography variant="h6" component="h2">
-              Product Name : {productData.productName}
-            </MyTypography>
-            {/* <MyTypography variant="body2" component="p">
+      <MyPaper style={{ padding: "10px" }} elevation={5}>
+        <MyGridContainer justify="center">
+          <MyGridItem xs={12} sm={6} md={3}>
+            <MyCardMedia
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              title="IMAGE"
+              image="https://source.unsplash.com/collection/190727/800x450"
+            />
+          </MyGridItem>
+          <MyGridItem xs={10} sm={6} md={9}>
+            <div style={{ textAlign: "center" }}>
+              <MyTypography variant="h6" component="h2">
+                {productData.productName}
+              </MyTypography>
+              {/* <MyTypography variant="body2" component="p">
               Description : {productData.productDescription}
             </MyTypography> */}
-            <MyTypography variant="body1" component="p">
-              Single Item Price : {productData.productPrice}
-            </MyTypography>
-            <MyTypography variant="body1" component="p">
-              Total Price : {productData.productPrice * quantityCount}
-            </MyTypography>
-          </div>
-          <div
-            className="set-quantity"
-            style={{ margin: "10px 0", textAlign: "center" }}>
-            <MyButtonComponent
-              variant="contained"
-              color="primary"
-              className={classes.quantityButton}
-              disabled={quantityCount <= 1 && true}
-              onClick={() => {
-                setQuantityCount(quantityCount - 1);
-              }}>
-              -
-            </MyButtonComponent>
-            <input
-              className={classes.quantityInput}
-              value={quantityCount}
-              onChange={(e) => {
-                // setTotalQuantity(e.target.value);
-              }}
-            />
+              <MyTypography variant="body1" component="p">
+                Single Item Price : {productData.productPrice}
+              </MyTypography>
+              <MyTypography variant="body1" component="p">
+                Total Price : {productData.productPrice * quantityCount}
+              </MyTypography>
+            </div>
+            <div
+              className="set-quantity"
+              style={{ margin: "10px 0", textAlign: "center" }}>
+              <MyButtonComponent
+                variant="contained"
+                color="primary"
+                className={classes.quantityButton}
+                disabled={quantityCount <= 1 && true}
+                onClick={() => {
+                  setQuantityCount(quantityCount - 1);
+                }}>
+                -
+              </MyButtonComponent>
+              <input
+                className={classes.quantityInput}
+                value={quantityCount}
+                onChange={(e) => {
+                  // setTotalQuantity(e.target.value);
+                }}
+              />
 
-            <MyButtonComponent
-              variant="contained"
-              className={classes.quantityButton}
-              onClick={() => {
-                setQuantityCount(quantityCount + 1);
-              }}
-              color="primary">
-              +
-            </MyButtonComponent>
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <MyButtonComponent
-              variant="contained"
-              color="secondary"
-              // onClick={onRemove}
-              size="small">
-              Remove
-            </MyButtonComponent>
-          </div>
-        </MyGridItem>
-      </MyGridContainer>
+              <MyButtonComponent
+                variant="contained"
+                className={classes.quantityButton}
+                onClick={() => {
+                  setQuantityCount(quantityCount + 1);
+                }}
+                color="primary">
+                +
+              </MyButtonComponent>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <MyButtonComponent
+                variant="contained"
+                color="secondary"
+                // onClick={onRemove}
+                size="small">
+                Remove
+              </MyButtonComponent>
+            </div>
+          </MyGridItem>
+        </MyGridContainer>
+      </MyPaper>
     </div>
   );
 };

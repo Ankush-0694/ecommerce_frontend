@@ -1,14 +1,23 @@
 import React from "react";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@material-ui/core";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-const MyListContainer = ({ children }) => {
-  return <List>{children}</List>;
+const MyListContainer = ({ className, children }) => {
+  return <List className={className}>{children}</List>;
 };
 
-const MyListItem = ({ button, onClick, children }) => {
+const MyListItem = ({ button, onClick, children, alignItems, className }) => {
   return (
-    <ListItem button={button ? true : false} onClick={onClick}>
+    <ListItem
+      alignItems={alignItems}
+      className={className}
+      button={button ? true : false}
+      onClick={onClick}>
       {children}
     </ListItem>
   );
@@ -18,8 +27,18 @@ const MyListItemIcon = ({ children }) => {
   return <ListItemIcon>{children}</ListItemIcon>;
 };
 
-const MyListItemText = ({ primary }) => {
-  return <ListItemText primary={primary} />;
+const MyListItemText = ({ primary, secondary }) => {
+  return <ListItemText primary={primary} secondary={secondary} />;
 };
 
-export { MyListContainer, MyListItem, MyListItemIcon, MyListItemText };
+const MyListItemAvatar = ({ children }) => {
+  return <ListItemAvatar>{children}</ListItemAvatar>;
+};
+
+export {
+  MyListContainer,
+  MyListItem,
+  MyListItemIcon,
+  MyListItemText,
+  MyListItemAvatar,
+};

@@ -7,10 +7,7 @@ const ProductDetailsStyles = makeStyles({
       margin: "10px 0",
     },
   },
-  MediaImg: {
-    width: "100%",
-    minWidth: "130px",
-  },
+
   quantityInput: {
     width: "50px",
     height: "30px",

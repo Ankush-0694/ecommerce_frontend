@@ -1,14 +1,13 @@
 import { makeStyles } from "../../../../Design/MyUseStyles";
 const CartItemStyles = makeStyles({
   cartItem: {
-    // border: "1px solid blue",
     margin: "10px",
     display: "flex",
     padding: "10px",
   },
-  MediaImg: {
-    // width: "100%",
-    // maxWidth: "150px",
+
+  MediaImgDiv: {
+    padding: "10px",
   },
   cartDetails: {
     margin: "10px",

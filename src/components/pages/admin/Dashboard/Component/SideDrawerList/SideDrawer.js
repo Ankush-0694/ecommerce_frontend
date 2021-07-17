@@ -11,7 +11,7 @@ import { SideDrawerStyles } from "../../CSS/SideDrawerStyles";
 import { MyIcon } from "../../../../../Design/MyIcons";
 import { Fragment } from "react";
 
-const SideDrawer = ({ history }) => {
+const SideDrawerList = ({ history }) => {
   const classes = SideDrawerStyles();
 
   /** 
@@ -67,4 +67,4 @@ const SideDrawer = ({ history }) => {
   );
 };
 
-export default withRouter(SideDrawer);
+export default withRouter(SideDrawerList);

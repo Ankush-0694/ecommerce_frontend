@@ -9,11 +9,13 @@ import {
   MyTableContainer,
   MyTableRow,
 } from "../../../../../Design/MyTableComponents";
+import MyDivider from "../../../../../Design/MyDivider";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
     color: "grey",
+    padding: "5px 0px",
   },
 }));
 
@@ -28,18 +30,14 @@ const CartPriceDetails = ({ quantity, itemCount, totalPrice }) => {
   }
 
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div>
       <MyTableContainer component={Paper}>
         <div>
           <MyTypography variant="h6" component="h6" className={classes.title}>
             Price Details
           </MyTypography>
-          <hr
-            style={{
-              backgroundColor: "black",
-              marginBottom: "0",
-            }}></hr>
         </div>
+        <MyDivider />
         <MyTable className={classes.table} aria-label="simple table">
           <MyTableBody>
             {/* 1st row */}
