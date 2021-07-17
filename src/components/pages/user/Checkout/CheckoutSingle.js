@@ -32,6 +32,9 @@ const CheckoutSingle = (props) => {
    */
   const [selectedAddress, setSelectedAddress] = useState(null);
 
+  /**  total Price Variable, It will pass to price details as a prop  */
+  const [totalPriceOfOrder, setTotalPriceOfOrder] = useState(0);
+
   /**
    * This id passed through param by which we can fetch the product
    * @type {string} - Contain id of the product
@@ -102,7 +105,7 @@ const CheckoutSingle = (props) => {
         ],
         totalQuantity: Number(quantity),
         addressID: selectedAddress,
-        totalPrice: 4000,
+        totalPrice: totalPriceOfOrder,
       },
     });
   };
@@ -124,7 +127,11 @@ const CheckoutSingle = (props) => {
         </MyGridItem>
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
-            <PriceDetails productData={productData} quantity={quantity} />
+            <PriceDetails
+              productData={productData}
+              quantity={quantity}
+              setTotalPriceOfOrder={setTotalPriceOfOrder}
+            />
           </div>
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent
