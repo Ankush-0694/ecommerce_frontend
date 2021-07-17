@@ -5,7 +5,6 @@ const ProductStyles = makeStyles({
   root: {
     width: "70%",
     margin: "auto",
-    // backgroundColor: theme.palette.background.paper,
   },
   avatar: {
     width: "100px",
@@ -21,27 +20,3 @@ const ProductStyles = makeStyles({
 });
 
 export { ProductStyles };
-
-// root: {
-//   display: "flex",
-//   flexWrap: "wrap",
-//   justifyContent: "space-around",
-//   // overflow: "hidden",
-//   // backgroundColor: theme.palette.background.paper,
-// },
-// gridList: {
-//   width: "100%",
-//   height: "90vh",
-// },
-// icon: {
-//   color: "rgba(255, 255, 255, 0.54)",
-// },
-// subHeaderStyle: {
-//   height: "auto",
-//   textAlign: "center",
-//   marginTop: "20px",
-//   color: "black",
-// },
-// overide: {
-//   background: "rgba(0, 0, 0, 0.7)",
-// },

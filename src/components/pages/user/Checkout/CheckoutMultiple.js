@@ -103,7 +103,12 @@ const CheckoutMultiple = (props) => {
       </MyTypography>
       <MyGridContainer justify="center" spacing={4}>
         <MyGridItem xs={8} sm={6} className="product-details">
-          <div style={{ maxHeight: "500px", overflow: "auto" }}>
+          <div
+            style={{
+              maxHeight: "500px",
+              overflow: "auto",
+              paddingRight: "20px",
+            }}>
             {productData.map((mappedProductData) => {
               return (
                 <MultipleProductDetails

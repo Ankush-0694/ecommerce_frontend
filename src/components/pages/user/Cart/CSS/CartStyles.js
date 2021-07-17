@@ -14,13 +14,13 @@ const CartStyles = makeStyles({
     padding: "5px",
     backgroundColor: "#DCDCDC",
     borderBottom: "1px solid black",
-    marginBottom: "20px",
+    // marginBottom: "20px",
   },
   item1: {
     width: "60%",
     border: "1px solid black",
 
-    height: "80vh",
+    height: "84vh",
     overflow: "auto",
   },
   item2: {

@@ -86,14 +86,16 @@ const CartItem = ({ cartItemData }) => {
 
   return (
     <MyPaper elevation={3} className={classes.cartItem}>
-      <div style={{ width: "30%", padding: "10px" }}>
-        <MyCardMedia
-          height="100"
-          className={classes.MediaImg}
-          style={{ borderRadius: "10px", minWidth: "100px" }}
-          title="IMAGE"
-          image="https://source.unsplash.com/collection/190727/800x450"
-        />
+      <div>
+        <div className={classes.MediaImgDiv}>
+          <MyCardMedia
+            height="100"
+            className={classes.MediaImg}
+            style={{ borderRadius: "10px", minWidth: "100px", width: "100px" }}
+            title="IMAGE"
+            image="https://source.unsplash.com/collection/190727/800x450"
+          />
+        </div>
       </div>
       <div
         className={classes.cartDetails}
