@@ -8,9 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   cardStyle: {
     maxWidth: 345,
-  },
-  cardStyle: {
-    maxWidth: 345,
     border: "1px solid black",
   },
   cardContent: {

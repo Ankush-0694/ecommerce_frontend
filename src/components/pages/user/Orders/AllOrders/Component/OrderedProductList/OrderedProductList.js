@@ -35,12 +35,12 @@ const OrderedProductList = ({ productData, orderID }) => {
         const queryParameter = `orderId=${orderID}&productId=${productId}`;
 
         return (
-          <MyPaper className="orderListItem">
+          <MyPaper className="orderListItem" key={`${productId}_${orderID}`}>
             {/** Link added to go to the Detailed page of the order */}
 
             <Link
               className={classes.orderedProductLinks}
-              to={`/orders/details/?${queryParameter}`}>
+              to={`/orders/details?${queryParameter}`}>
               <MyGridContainer className="orderItem">
                 {/* Image and Product Details Item */}
 
