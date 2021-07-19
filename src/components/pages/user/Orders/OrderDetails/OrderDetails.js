@@ -111,6 +111,7 @@ const OrderDetails = (props) => {
           if (mappedData.productDetails.id === productId) {
             return (
               <ProductList
+                key={productId}
                 productData={mappedData}
                 orderedDate={orderData.orderedDate}
               />

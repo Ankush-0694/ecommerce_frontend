@@ -39,9 +39,11 @@ const SideDrawerList = ({ history }) => {
 
   return (
     <div>
-      <div className={classes.toolbar} style={{ backgroundColor: "#3F51BB" }}>
-        Menu {/*  it will not show becasue navbar is over it */}
-      </div>
+      {/* This toolbar is neccessary to make the drawer list below navbar */}
+      <div
+        className={classes.toolbar}
+        style={{ backgroundColor: "#3F51BB" }}></div>
+
       <div>
         {listData.map((item, index) => {
           return (

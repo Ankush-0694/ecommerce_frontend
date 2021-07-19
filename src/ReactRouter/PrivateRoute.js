@@ -14,3 +14,6 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
 };
 
 export default PrivateRoute;
+
+/* For showing navbar just change the Route to RoutewithNavbar */
+// https://stackoverflow.com/questions/61855638/different-navbar-for-a-component-in-react-router

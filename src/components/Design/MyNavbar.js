@@ -9,8 +9,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+
+  /** Adding this to make admin navbar top of menu toolbar */
+  navbar: {
+    zIndex: "20000",
   },
 }));
 
@@ -19,7 +21,7 @@ export function MyNavbar({ children }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={classes.navbar}>
         <Toolbar>{children}</Toolbar>
       </AppBar>
     </div>

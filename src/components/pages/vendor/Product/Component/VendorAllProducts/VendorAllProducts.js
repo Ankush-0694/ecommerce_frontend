@@ -49,7 +49,7 @@ const VendorAllProducts = ({ data, setCurrent }) => {
               {/* Image  Grid item */}
 
               <MyGridItem xs={5}>
-                <div class={classes.imgDiv}>
+                <div className={classes.imgDiv}>
                   <MyCardMedia
                     height="100"
                     className={classes.MediaImg}
