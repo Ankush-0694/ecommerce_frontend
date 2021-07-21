@@ -5,8 +5,6 @@ import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
-import { cartItemsVar } from "../../../../LocalState/ReactiveVaribles";
-// import { updateCartQuantityMutation } from "../../../../queries/Cart/cartMutations";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();

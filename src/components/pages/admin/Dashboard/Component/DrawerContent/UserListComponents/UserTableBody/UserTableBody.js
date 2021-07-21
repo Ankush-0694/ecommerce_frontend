@@ -2,6 +2,9 @@ import React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
+/**  This is common for both vendor and customer
+ * We pass props from Customer and vendor and component
+ */
 export default function UserList({ customerData, serialNo }) {
   const { id, firstName, lastName, email, role } = customerData;
 
