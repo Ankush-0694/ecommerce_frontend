@@ -114,15 +114,6 @@ const MultipleProductDetails = ({ productData }) => {
                 +
               </MyButtonComponent>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <MyButtonComponent
-                variant="contained"
-                color="secondary"
-                // onClick={onRemove}
-                size="small">
-                Remove
-              </MyButtonComponent>
-            </div>
           </MyGridItem>
         </MyGridContainer>
       </MyPaper>

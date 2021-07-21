@@ -10,7 +10,7 @@ import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
-import Dashboard from "./components/pages/admin/Dashboard/AdminDashboard";
+import AdminDashboard from "./components/pages/admin/Dashboard/AdminDashboard";
 import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
@@ -86,11 +86,7 @@ const App = () => {
               path="/vendor/login"
               component={Login}
             />
-            <RouteWithVendorNavbar
-              exact
-              path="/vendor/Signup"
-              component={Signup}
-            />
+
             <RouteWithVendorNavbar
               exact
               path="/Vendor/addProducts"
@@ -100,14 +96,10 @@ const App = () => {
             {/* Admin Routes */}
 
             <RouteWithAdminNavbar exact path="/admin/login" component={Login} />
-            <RouteWithAdminNavbar
-              exact
-              path="/admin/signup"
-              component={Signup}
-            />
+
             <RouteWithAdminNavbar
               path="/admin/Dashboard"
-              component={Dashboard}
+              component={AdminDashboard}
             />
 
             {/* InValid Route */}

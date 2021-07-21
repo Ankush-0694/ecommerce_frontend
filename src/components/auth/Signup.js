@@ -2,51 +2,69 @@ import React, { useState } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
-import { CREATE_ADMIN } from "../../queries/admin/adminMutations";
-import { useMutation } from "@apollo/client";
+import { validateSignupForm } from "../layout/FormValidation";
 
 const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({
     firstName: "",
+    firstNameError: "",
     lastName: "",
+    lastNameError: "",
     email: "",
+    emailError: "",
     password: "",
+    passwordError: "",
   });
 
-  // console.log(props.history.location.pathname.split("/")[1]);
-  const identity = props.history.location.pathname.split("/")[1];
-
-  const [createAdmin, { data: createAdminData }] = useMutation(CREATE_ADMIN);
-
-  const { firstName, lastName, email, password } = userDetails;
+  const {
+    firstName,
+    firstNameError,
+    lastName,
+    lastNameError,
+    email,
+    emailError,
+    password,
+    passwordError,
+  } = userDetails;
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
+  /** this function is added to remove that input error when user
+   * focus on that input
+   */
+  const onFocus = (e) => {
+    let targetError = e.target.name + "Error";
+    setUserDetails({ ...userDetails, [targetError]: "" });
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (identity === "admin") {
-      createAdmin({
-        variables: {
-          firstName,
-          lastName,
-          email,
-          password,
-        },
-      });
-    } else if (identity === "vendor") {
-      console.log("this is vendor user");
-    } else {
-      console.log("this is user");
-    }
 
-    setUserDetails({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
+    /**  this is validate the fields and set the error state and return a boolean
+     * If any error found it will send the true
+     * @param userDetails To validate all fields in the state
+     * @param setUserDetails after validate the state we set the state
+     *@returns Boolean
+     */
+    const validationError = validateSignupForm(userDetails, setUserDetails);
+
+    /** If No error found then Do our task and reset the form (state)  */
+    if (!validationError) {
+      // do any task
+
+      setUserDetails({
+        firstName: "",
+        firstNameError: "",
+        lastName: "",
+        lastNameError: "",
+        email: "",
+        emailError: "",
+        password: "",
+        passwordError: "",
+      });
+    }
   };
 
   return (
@@ -71,6 +89,9 @@ const Signup = (props) => {
               label="First Name"
               value={firstName}
               onChange={onChange}
+              error={firstNameError !== ""} // Need to enable error if any error exist
+              helperText={firstNameError} // This is the error text which will be shown to user
+              onFocus={onFocus}
             />
           </div>
           <div>
@@ -81,6 +102,9 @@ const Signup = (props) => {
               label="Last Name"
               value={lastName}
               onChange={onChange}
+              error={lastNameError !== ""}
+              helperText={lastNameError}
+              onFocus={onFocus}
             />
           </div>
           <div>
@@ -91,6 +115,9 @@ const Signup = (props) => {
               label="Email"
               value={email}
               onChange={onChange}
+              error={emailError !== ""}
+              helperText={emailError}
+              onFocus={onFocus}
             />
           </div>
 
@@ -102,12 +129,11 @@ const Signup = (props) => {
               label="Password"
               value={password}
               onChange={onChange}
+              error={passwordError !== ""}
+              helperText={passwordError}
+              onFocus={onFocus}
             />
           </div>
-
-          {/* <div>
-            <MyCheckbox name="remember Me" label="Remember Me" />
-          </div> */}
 
           <br></br>
 

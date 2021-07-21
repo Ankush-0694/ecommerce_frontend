@@ -42,9 +42,9 @@ const OrderFilter = () => {
       <div className={classes.onStatusCheckbox}>
         <h6>OrderStatus</h6>
         <div className="inputFields">
-          {orderStatusFilter.map(({ name, label }) => {
+          {orderStatusFilter.map(({ name, label }, index) => {
             return (
-              <div>
+              <div key={index}>
                 <MyCheckbox
                   className={classes.checkbox}
                   label={label}
@@ -62,9 +62,9 @@ const OrderFilter = () => {
       <div className={classes.onStatusCheckbox}>
         <h6>Order Time</h6>
         <div className="inputFields">
-          {orderTimeFilter.map(({ name, label }) => {
+          {orderTimeFilter.map(({ name, label }, index) => {
             return (
-              <div>
+              <div key={index}>
                 <MyCheckbox
                   className={classes.checkbox}
                   label={label}

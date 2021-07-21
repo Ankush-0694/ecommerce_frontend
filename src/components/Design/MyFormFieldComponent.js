@@ -57,6 +57,7 @@ const MyTextInput = ({ style, onChange, ...others }) => {
         fullWidth
         className={classes.root}
         size="medium"
+
         // inputProps={{
         //   style: { color: "black" },
         // }} // input props are  to overide pre defined css

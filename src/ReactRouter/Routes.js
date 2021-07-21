@@ -15,7 +15,6 @@ const RouteWithAdminNavbar = ({
       path={path}
       {...restProps}
       render={(routeProps) => {
-        console.log(routeProps);
         return (
           <>
             <AdminNavbar {...routeProps} />
