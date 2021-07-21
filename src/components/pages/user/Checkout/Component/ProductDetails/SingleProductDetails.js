@@ -78,14 +78,6 @@ const SingleProductDetails = ({
                 +
               </MyButtonComponent>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <MyButtonComponent
-                variant="contained"
-                color="secondary"
-                size="small">
-                Remove
-              </MyButtonComponent>
-            </div>
           </MyGridItem>
         </MyGridContainer>
       </MyPaper>
