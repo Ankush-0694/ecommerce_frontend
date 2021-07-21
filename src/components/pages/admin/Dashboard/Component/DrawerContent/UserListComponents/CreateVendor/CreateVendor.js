@@ -4,11 +4,11 @@ import { useMutation } from "@apollo/client";
 import {
   MyTextInput,
   MyMultilineInput,
-} from "../../../../../../Design/MyFormFieldComponent";
+} from "../../../../../../../Design/MyFormFieldComponent";
 
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyFullScreenBox } from "../../../../../../Design/MyFullScreenBox";
+import { MyButtonComponent } from "../../../../../../../Design/MyButtonComponent";
+import { MyTypography } from "../../../../../../../Design/MyTypography";
+import { MyFullScreenBox } from "../../../../../../../Design/MyFullScreenBox";
 
 const CreateVendor = () => {
   const [vendorDetails, setVendorDetails] = useState({

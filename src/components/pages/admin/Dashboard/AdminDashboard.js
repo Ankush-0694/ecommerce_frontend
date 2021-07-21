@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Route } from "react-router-dom";
-import Customers from "./Component/DrawerContent/Customers/Customers";
-import Vendors from "./Component/DrawerContent/Vendors/Vendors";
 import SideDrawerList from "./Component/SideDrawerList/SideDrawerList";
 import { AdminDashboardStyles } from "./CSS/AdminDashboardStyles";
 import ProductList from "./Component/DrawerContent/ProductListComponent/ProductList";
 import { MySideDrawer } from "../../../Design/MySideDrawer";
+import Customers from "./Component/DrawerContent/UserListComponents/Customers/Customers";
+import Vendors from "./Component/DrawerContent/UserListComponents/Vendors/Vendors";
 
 // this dashboard could be created using verical tab component in material ui
 const AdminDashboard = () => {

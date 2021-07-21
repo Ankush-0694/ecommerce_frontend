@@ -14,7 +14,7 @@ const GET_ME = gql`
 
 const GET_ALL_USERS = gql`
   query ($role: String!) {
-    getAllUsers(role: $role) {
+    getAllUsersByRole(role: $role) {
       id
       email
       firstName

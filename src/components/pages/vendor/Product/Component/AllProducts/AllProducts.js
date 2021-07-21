@@ -9,7 +9,7 @@ import { DELETE_PRODUCT } from "../../../../../../queries/Product/productMutatio
 import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 
-const VendorAllProducts = ({ data, setCurrent }) => {
+const AllProducts = ({ data, setCurrent }) => {
   const classes = AllProductStyles();
   const { id, productName, productPrice, productDescription } = data;
   const [deleteProduct, { data: deletedProductData }] =
@@ -111,4 +111,4 @@ const VendorAllProducts = ({ data, setCurrent }) => {
   );
 };
 
-export default VendorAllProducts;
+export default AllProducts;

@@ -4,7 +4,7 @@ import { GET_ALL_PRODUCTS } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import AddProduct from "./Component/AddProduct/AddProduct";
-import VendorAllProducts from "./Component/VendorAllProducts/VendorAllProducts";
+import VendorAllProducts from "./Component/AllProducts/AllProducts";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
 
@@ -31,14 +31,6 @@ const VendorProduct = () => {
   return (
     <div>
       <div className={classes.flexcontainer}>
-        <MyFullScreenBox display="flex" width="50%" height="90vh">
-          <div style={{ margin: "auto", width: "70%" }}>
-            <div>
-              <AddProduct current={current} setCurrent={setCurrent} />
-            </div>
-          </div>
-        </MyFullScreenBox>
-
         <div style={{ flexGrow: 1 }}>
           <div>
             <MyTypography
@@ -63,6 +55,14 @@ const VendorProduct = () => {
             </div>
           </div>
         </div>
+
+        <MyFullScreenBox display="flex" width="50%" height="90vh">
+          <div style={{ margin: "auto", width: "70%" }}>
+            <div>
+              <AddProduct current={current} setCurrent={setCurrent} />
+            </div>
+          </div>
+        </MyFullScreenBox>
       </div>
     </div>
   );
