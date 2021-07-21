@@ -2,8 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { createUploadLink } from "apollo-upload-client";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 // import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
@@ -16,28 +14,19 @@ import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
 import MyToolbar from "./components/Design/MyToolbar";
+
 import {
   RouteWithAdminNavbar,
   RouteWithUserNavbar,
   RouteWithVendorNavbar,
 } from "./ReactRouter/Routes";
 
-const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
+import { authLink, errorLink, httplink } from "./ApolloLinks";
 
 const cache = new InMemoryCache();
 
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
-
 const client = new ApolloClient({
-  link: authLink.concat(httplink),
+  link: errorLink.concat(authLink.concat(httplink)),
   cache,
 });
 

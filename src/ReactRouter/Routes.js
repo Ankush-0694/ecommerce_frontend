@@ -65,6 +65,7 @@ const RouteWithUserNavbar = ({
         return (
           <>
             <Navbar {...routeProps} />
+
             <Component {...routeProps} />
           </>
         );
