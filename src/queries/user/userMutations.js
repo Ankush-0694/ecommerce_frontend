@@ -1,35 +1,30 @@
 import { gql } from "@apollo/client";
 
-const CREATE_ADMIN = gql`
+const CREATE_USER = gql`
   mutation (
     $email: String!
     $firstName: String!
     $lastName: String!
     $password: String!
+    $role: String!
   ) {
-    createAdmin(
+    createUser(
       email: $email
       firstName: $firstName
       lastName: $lastName
       password: $password
+      role: $role
     ) {
-      admin {
+      user {
         id
         email
         firstName
         lastName
         role
       }
+      ok
     }
   }
 `;
 
-const ADMIN_LOGIN = gql`
-  mutation ($email: String!, $password: String!) {
-    adminLogin(email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-export { CREATE_ADMIN, ADMIN_LOGIN };
+export { CREATE_USER };

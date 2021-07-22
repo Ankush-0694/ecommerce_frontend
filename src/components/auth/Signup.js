@@ -1,7 +1,11 @@
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { CREATE_USER } from "../../queries/user/userMutations";
+import { errorVar } from "../../ReactiveVariables";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
+import MyAlert from "../Design/MyAlert";
 import { validateSignupForm } from "../layout/FormValidation";
 
 const Signup = (props) => {
@@ -26,6 +30,12 @@ const Signup = (props) => {
     password,
     passwordError,
   } = userDetails;
+
+  const [createUser, { data, error }] = useMutation(CREATE_USER, {
+    onError: (error) => {
+      //handling the rejected promise when calling mutation
+    },
+  });
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -52,7 +62,16 @@ const Signup = (props) => {
 
     /** If No error found then Do our task and reset the form (state)  */
     if (!validationError) {
-      // do any task
+      /** Calling signup Mutation */
+      createUser({
+        variables: {
+          firstName,
+          lastName,
+          email,
+          password,
+          role: "customer", // Signup Form only for user
+        },
+      });
 
       setUserDetails({
         firstName: "",
@@ -69,6 +88,7 @@ const Signup = (props) => {
 
   return (
     <div>
+      {error && <MyAlert>{errorVar()}</MyAlert>}
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}

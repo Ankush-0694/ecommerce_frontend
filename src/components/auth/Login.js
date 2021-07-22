@@ -3,7 +3,6 @@ import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
-import { ADMIN_LOGIN } from "../../queries/admin/adminMutations";
 import { validateLoginForm } from "../layout/FormValidation";
 
 const Login = (props) => {
@@ -17,6 +16,7 @@ const Login = (props) => {
 
   const identity = props.history.location.pathname.split("/")[1];
 
+  // TODO - This should be user Login(because this same comp will be use for login of admin vendor and customer )
   // const [adminLogin, { data: adminLoginData }] = useMutation(ADMIN_LOGIN, {
   //   onCompleted: (data) => {
   //     const token = data.adminLogin.token;
