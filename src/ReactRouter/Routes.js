@@ -40,8 +40,8 @@ const RouteWithVendorNavbar = ({
       render={(routeProps) => {
         return (
           <>
-            <Navbar {...routeProps} />
             {/** add Vendor Navbar here */}
+            <Navbar {...routeProps} />
             <Component {...routeProps} />
           </>
         );

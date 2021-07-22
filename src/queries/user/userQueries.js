@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+/** To have user every time in our react app */
 const GET_ME = gql`
   {
     getMe {
@@ -12,7 +13,10 @@ const GET_ME = gql`
   }
 `;
 
-const GET_ALL_USERS = gql`
+/** For fetching user using their role field
+ * It will be used in the admin dashboard to fetch user and vendor
+ */
+const GET_ALL_USERS_BY_ROLE = gql`
   query ($role: String!) {
     getAllUsersByRole(role: $role) {
       id
@@ -24,4 +28,4 @@ const GET_ALL_USERS = gql`
   }
 `;
 
-export { GET_ME, GET_ALL_USERS };
+export { GET_ME, GET_ALL_USERS_BY_ROLE };

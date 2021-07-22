@@ -1,6 +1,7 @@
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "apollo-link-error";
+import { errorVar } from "./ReactiveVariables";
 
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
@@ -8,16 +9,14 @@ const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
   if (graphQLErrors)
     graphQLErrors.map(({ message, locations, path }) => {
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
-      console.log(response.errors);
+      // console.log(response.errors);
 
       if (message.includes("not authenticated")) {
+        // Logout User
         console.log("hello not auth");
       } else {
         console.log("dispatch");
-        return;
+        errorVar([response.errors[0].message]);
       }
     });
   if (networkError) console.log(`[Network error]: ${networkError}`);

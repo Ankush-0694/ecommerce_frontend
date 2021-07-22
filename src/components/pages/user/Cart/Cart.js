@@ -5,6 +5,8 @@ import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
+import ShowError from "../../../layout/ShowError";
+import ShowLoading from "../../../layout/ShowLoading";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();
@@ -14,13 +16,16 @@ const Cart = ({ history }) => {
     error: getCartError,
     loading: getCartLoading,
     data: getCartData,
-  } = useQuery(GET_CART);
+  } = useQuery(GET_CART, {
+    onError: () => {},
+  });
 
   if (getCartError) {
-    return <div>Error occured During getting cart</div>;
+    return <ShowError>Error while Fetching Cart </ShowError>;
   }
+
   if (getCartLoading) {
-    return <div>Fetching cart data, please wait...</div>;
+    return <ShowLoading />;
   }
 
   // storing cartData array // this data will be render

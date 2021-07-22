@@ -14,7 +14,7 @@ import {
 } from "../../../../../../../Design/MyTableComponents";
 import CreateVendor from "../CreateVendor/CreateVendor";
 import { Divider } from "@material-ui/core";
-import { GET_ALL_USERS } from "../../../../../../../../queries/admin/adminQueries";
+import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../../queries/user/userQueries";
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +31,7 @@ const Vendors = () => {
     error: getAllUsersError,
     loading: getAllUsersLoading,
     data: AllUsersData,
-  } = useQuery(GET_ALL_USERS, {
+  } = useQuery(GET_ALL_USERS_BY_ROLE, {
     variables: { role: "vendor" },
   });
 
