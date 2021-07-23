@@ -1,13 +1,9 @@
 import React from "react";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "../Design/MyUseStyles";
-import IconButton from "@material-ui/core/IconButton";
-import { MyButtonComponent } from "../Design/MyButtonComponent";
+import { makeStyles } from "../../Design/MyUseStyles";
+import { MyButtonComponent } from "../../Design/MyButtonComponent";
 import { withRouter } from "react-router";
-import { MyNavbar } from "../Design/MyNavbar";
+import { MyNavbar } from "../../Design/MyNavbar";
+import { MyTypography } from "../../Design/MyTypography";
 const drawerWidth = 250;
 const NavbarStyles = makeStyles((theme) => ({}));
 
@@ -22,9 +18,9 @@ const AdminNavbar = ({ history }) => {
         }}
         variant="filled"
         userStyle={{ color: "white", textTransform: "capitalize" }}>
-        <Typography variant="h6" noWrap>
+        <MyTypography variant="h6" noWrap>
           Admin Dashboard
-        </Typography>
+        </MyTypography>
       </MyButtonComponent>
     </MyNavbar>
   );

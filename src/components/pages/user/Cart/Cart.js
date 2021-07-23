@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_CART } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
-import ShowError from "../../../layout/ShowError";
-import ShowLoading from "../../../layout/ShowLoading";
+import ShowError from "../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();

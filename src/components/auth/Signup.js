@@ -6,7 +6,7 @@ import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import MyAlert from "../Design/MyAlert";
-import { validateSignupForm } from "../layout/FormValidation";
+import { validateSignupForm } from "../layout/ClientFormValidations/FormValidation";
 
 const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -31,11 +31,23 @@ const Signup = (props) => {
     passwordError,
   } = userDetails;
 
-  const [createUser, { data, error }] = useMutation(CREATE_USER, {
-    onError: (error) => {
-      //handling the rejected promise when calling mutation
-    },
-  });
+  const [createUser, { data, error: createUserError }] = useMutation(
+    CREATE_USER,
+    {
+      onError: (error) => {
+        //handling the rejected promise when calling mutation
+      },
+      onCompleted: (data) => {
+        /** decide where to push the user ,
+         * Login or profile page to enter first name and last Name then on Home pages
+         */
+        props.history.push({
+          // pathname:"/login",
+          // state : {}
+        });
+      },
+    }
+  );
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -88,7 +100,10 @@ const Signup = (props) => {
 
   return (
     <div>
-      {error && <MyAlert>{errorVar()}</MyAlert>}
+      {/** Using reactive variable which is set at global level and show it using Myalert
+       * Only if there are any error
+       */}
+      {createUserError && <MyAlert type="error">{errorVar()}</MyAlert>}
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}

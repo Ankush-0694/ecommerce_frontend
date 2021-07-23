@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeVar, useMutation, useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { makeVar, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { GET_SINGLE_PRODUCT } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
@@ -13,6 +13,8 @@ import { MyFullScreenBox } from "../../../../Design/MyFullScreenBox";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
 import { GET_CART } from "../../../../../queries/Cart/cartQueries";
+import MyAlert from "../../../../Design/MyAlert";
+import { errorVar } from "../../../../../ReactiveVariables";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -28,7 +30,15 @@ const SingleProduct = (props) => {
   const productid = props.match.params.id.split(":")[1];
   const { history } = props;
 
+  /** For adding and updating the data using same form */
   const [currentReview, setCurrentReview] = useState(null);
+
+  /** Make it true after Add to cart completion , and so success alert based on this state
+   * We May need to setAdded false in the myalert Component just like we did for address(setSubmitEvent)
+   * Because We may need to add items on shop page one after one
+   * Add to Cart button will be disabled when it is true
+   */
+  const [added, setAdded] = useState(false);
 
   const {
     error: getProductError,
@@ -38,22 +48,17 @@ const SingleProduct = (props) => {
     variables: { id: productid },
   });
 
-  /**  We need to added the item to the cart , and we are updating the data in the cache
-   * IF cache not available then we need to fetch the data before adding to cart
-   * That is why this extra query is used , with fetchPolicy of cache-first
-   */
-  const {
-    error: getCartError,
-    loading: getCartLoading,
-    data: getCartData,
-  } = useQuery(GET_CART, {
-    fetchPolicy: "cache-first",
-  });
-
   const [
     addToCart,
     { error: addToCartError, loading: addToCartLoading, data: cartData },
-  ] = useMutation(ADD_TO_CART);
+  ] = useMutation(ADD_TO_CART, {
+    refetchQueries: [{ query: GET_CART }],
+    onError: () => {},
+    onCompleted: () => {
+      setAdded(true);
+      // props.history.push("/cart");
+    },
+  });
 
   if (getProductError) {
     return <div>Error in getting Product.. </div>;
@@ -66,8 +71,8 @@ const SingleProduct = (props) => {
   const productData = getProductData.getProductById;
   const { id, productName, productDescription, productPrice } = productData;
 
-  /** adding item to the cart in backend then updating the cache
-   * making a alert if success
+  /** adding item to the cart in backend
+   * Used onCompleted for mutation
    */
   const addToCartFunction = () => {
     addToCart({
@@ -77,27 +82,7 @@ const SingleProduct = (props) => {
         productDescription,
         productPrice,
       },
-      update: (cache, { data: { addToCart } }) => {
-        /* There can be a possibility cart data does not come to cache yet */
-        let data = cache.readQuery({ query: GET_CART });
-
-        // need to newData var because we need to add a
-        // new instance of all data , we can not use data var direclty
-        let dataToUpdate = data.getCart;
-        dataToUpdate = [...dataToUpdate, addToCart];
-
-        cache.writeQuery({
-          query: GET_CART,
-          data: { ...data, getCart: { dataToUpdate } },
-        });
-      },
     });
-
-    if (addToCartError) {
-      throw addToCartError();
-    } else {
-      alert("added to cart");
-    }
   };
 
   /** adding item to cart */
@@ -120,6 +105,24 @@ const SingleProduct = (props) => {
 
   return (
     <div style={{ marginTop: "10px", padding: "20px" }}>
+      {/** If product successfully added to cart  */}
+
+      {added && (
+        <MyAlert type="success" setAdded={setAdded}>
+          Added To cart{" "}
+          <button
+            onClick={() => {
+              history.push("/cart");
+            }}>
+            Go To cart
+          </button>
+        </MyAlert>
+      )}
+
+      {/** If product already added to cart then error alert */}
+
+      {addToCartError && <MyAlert type="error">{errorVar()}</MyAlert>}
+
       <MyGridContainer justify="center" spacing={4}>
         <MyGridItem xs={8} sm={4}>
           <MyCardMedia
@@ -146,6 +149,7 @@ const SingleProduct = (props) => {
               variant="outlined"
               size="medium"
               color="secondary"
+              disabled={(added || addToCartError) && true} // we disabled this to prevent user click addToCart continuously
               onClick={onClickAddCart}>
               ADD TO CART
             </MyButtonComponent>

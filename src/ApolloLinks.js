@@ -7,18 +7,22 @@ const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
 /* For Top level Errors*/
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
-  if (graphQLErrors)
+  if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) => {
-      // console.log(response.errors);
-
       if (message.includes("not authenticated")) {
         // Logout User
         console.log("hello not auth");
       } else {
         console.log("dispatch");
-        errorVar([response.errors[0].message]);
+
+        /** There can multiple response error , we may need to map this
+         * reactive variable
+         */
+        if (response) errorVar([response.errors[0].message]);
       }
     });
+  }
+
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 

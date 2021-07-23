@@ -27,4 +27,13 @@ const CREATE_USER = gql`
   }
 `;
 
-export { CREATE_USER };
+/** Single Mutation  for all user types  */
+const USER_LOGIN = gql`
+  mutation ($email: String!, $password: String!) {
+    userLogin(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+export { CREATE_USER, USER_LOGIN };
