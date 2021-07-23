@@ -1,17 +1,17 @@
 import React from "react";
-import { MyNavbar } from "../Design/MyNavbar";
-import { MyTypography } from "../Design/MyTypography";
-import { MyButtonComponent } from "../Design/MyButtonComponent";
-import { MyIconButton } from "../Design/MyIconButton";
-import { MyMenuAppBar } from "../Design/MyMenuAppBar";
-import { MyMenuItem } from "../Design/MyMenuItem";
-import { MyMenuIcon } from "../Design/MyIcons";
+import { MyNavbar } from "../../Design/MyNavbar";
+import { MyTypography } from "../../Design/MyTypography";
+import { MyButtonComponent } from "../../Design/MyButtonComponent";
+import { MyIconButton } from "../../Design/MyIconButton";
+import { MyMenuAppBar } from "../../Design/MyMenuAppBar";
+import { MyMenuItem } from "../../Design/MyMenuItem";
+import { MyMenuIcon } from "../../Design/MyIcons";
 import { Link, withRouter } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 
 //these 2 imports should not be here
-import { makeStyles, useTheme, alpha } from "@material-ui/core/styles";
-import { InputBase, useMediaQuery } from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ history }) => {
+const UserNavbar = ({ history }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -181,4 +181,4 @@ const Navbar = ({ history }) => {
   );
 };
 
-export default withRouter(Navbar);
+export default withRouter(UserNavbar);

@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
 const CartPriceDetails = ({ quantity, itemCount, totalPrice }) => {
   const classes = useStyles();
 
-  let deliveryCharge;
-  if (totalPrice < 500) {
+  let deliveryCharge = 0;
+  if (totalPrice < 500 && totalPrice > 0) {
     deliveryCharge = 40;
   } else {
     deliveryCharge = 0;

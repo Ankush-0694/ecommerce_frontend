@@ -11,6 +11,7 @@ import AddressContainer from "./AddressContainer";
 import SingleProductDetails from "./Component/ProductDetails/SingleProductDetails";
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
 import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
+import MyAlert from "../../../Design/MyAlert";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
@@ -31,6 +32,13 @@ const CheckoutSingle = (props) => {
    * set it based on the choosen address using radio address list
    */
   const [selectedAddress, setSelectedAddress] = useState(null);
+
+  /** we use this state to check user clicked on submit button or not
+   * so when user clicked on submit button it became true and alert
+   *  generate if he didn't choose the address
+   * We again make this state to false , when alert get closed
+   */
+  const [submitEvent, setSubmitEvent] = useState(false);
 
   /**  total Price Variable, It will pass to price details as a prop  */
   const [totalPriceOfOrder, setTotalPriceOfOrder] = useState(0);
@@ -60,24 +68,6 @@ const CheckoutSingle = (props) => {
   const [addToCart, { error: addToCartError, data: cartData }] =
     useMutation(ADD_TO_CART);
 
-  /** this useEffect will be used to add the checkout product to Cart
-   * By doing this when we don't have state passed in history it will go to the cart checkout
-   * where we find other items and this item also(same as flipkart)
-   * But do 2 things before that -  1-  no duplicate cart item , 2- use ref in cart model to get the product data
-   * by doing so we only need to pass only product id while adding to cart
-   *
-   */
-  // useEffect(() => {
-  //   addToCart({
-  //     variables: {
-  //       productID: productid,
-  //       productName: "a",
-  //       productDescription: "b",
-  //       productPrice: 123,
-  //     },
-  //   });
-  // }, []);
-
   if (getSingleProductError) {
     return <div>Error while Fetching products</div>;
   }
@@ -93,11 +83,14 @@ const CheckoutSingle = (props) => {
 
   /** Called when we click place order button */
   const OnPlaceOrder = (e) => {
+    setSubmitEvent(true); // to use it in an alert
+
     /* If user does not select the address and try to place order */
+
     if (selectedAddress === null) {
-      alert("select address first");
       return;
     }
+
     addOrder({
       variables: {
         productDetailsWithQuantity: [
@@ -112,6 +105,12 @@ const CheckoutSingle = (props) => {
 
   return (
     <div style={{ padding: "20px" }}>
+      {/** Needee to pass the setSubmitEvent to make it again false  */}
+      {submitEvent && selectedAddress === null && (
+        <MyAlert type="error" setSubmitEvent={setSubmitEvent}>
+          Select the Address First
+        </MyAlert>
+      )}
       <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
         Order Summary
       </MyTypography>

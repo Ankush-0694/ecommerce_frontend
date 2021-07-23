@@ -10,6 +10,7 @@ import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_CART } from "../../../../queries/Cart/cartQueries";
 import AddressContainer from "./AddressContainer";
+import MyAlert from "../../../Design/MyAlert";
 
 /* It render we checkout from using cart Page */
 const CheckoutMultiple = (props) => {
@@ -23,6 +24,13 @@ const CheckoutMultiple = (props) => {
 
   /**  total Price Variable, It will pass to price details as a prop  */
   const [totalPriceOfOrder, setTotalPriceOfOrder] = useState(0);
+
+  /** we use this state to check user clicked on submit button or not
+   * so when user clicked on submit button it became true and alert
+   *  generate if he didn't choose the address
+   * We again make this state to false , when alert get closed
+   */
+  const [submitEvent, setSubmitEvent] = useState(false);
 
   /**
    * This Array will contains all the ids of products which are in the cart
@@ -61,8 +69,9 @@ const CheckoutMultiple = (props) => {
    */
   const OnPlaceOrder = (e) => {
     /* If user does not select the address and try to place order */
+
+    setSubmitEvent(true); // to use it in an alert
     if (selectedAddress === null) {
-      alert("select address first");
       return;
     }
     /**
@@ -98,6 +107,12 @@ const CheckoutMultiple = (props) => {
 
   return (
     <div style={{ padding: "20px" }}>
+      {/** Needee to pass the setSubmitEvent to make it again false  */}
+      {submitEvent && selectedAddress === null && (
+        <MyAlert type="error" setSubmitEvent={setSubmitEvent}>
+          Select the Address First
+        </MyAlert>
+      )}
       <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
         Order Summary
       </MyTypography>
@@ -133,6 +148,7 @@ const CheckoutMultiple = (props) => {
             <MyButtonComponent
               variant="contained"
               color="default"
+              // disabled={submitEvent && selectedAddress === null}
               onClick={OnPlaceOrder}>
               Place Your order
             </MyButtonComponent>

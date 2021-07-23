@@ -3,7 +3,10 @@ import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
-import { validateLoginForm } from "../layout/FormValidation";
+import { validateLoginForm } from "../layout/ClientFormValidations/FormValidation";
+import { USER_LOGIN } from "../../queries/user/userMutations";
+import MyAlert from "../Design/MyAlert";
+import { errorVar } from "../../ReactiveVariables";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -14,15 +17,26 @@ const Login = (props) => {
   });
   const { email, emailError, password, passwordError } = userDetails;
 
+  /** Fetching user identity from url then doing user login according to that */
   const identity = props.history.location.pathname.split("/")[1];
 
-  // TODO - This should be user Login(because this same comp will be use for login of admin vendor and customer )
-  // const [adminLogin, { data: adminLoginData }] = useMutation(ADMIN_LOGIN, {
-  //   onCompleted: (data) => {
-  //     const token = data.adminLogin.token;
-  //     localStorage.setItem("token", token);
-  //   },
-  // });
+  /** Mutation for User Login */
+  const [userLogin, { data: userLoginData, error: userLoginError }] =
+    useMutation(USER_LOGIN, {
+      onError: (error) => {
+        //handling the rejected promise when calling mutation
+      },
+      onCompleted: (data) => {
+        const token = data.userLogin.token;
+        localStorage.setItem("token", token);
+
+        /**This push will depend on the identity of the user
+         * If user is vendor then push to his product
+         * if admin then push to dashboard
+         */
+        // props.history.push("/");
+      },
+    });
 
   const onChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -50,12 +64,13 @@ const Login = (props) => {
     /** If No error found then Do our task and reset the form (state)  */
     if (!validationError) {
       /*  Do any task */
-      // adminLogin({
-      //   variables: {
-      //     email: email,
-      //     password,
-      //   },
-      // });
+
+      userLogin({
+        variables: {
+          email,
+          password,
+        },
+      });
 
       setUserDetails({
         email: "",
@@ -68,6 +83,10 @@ const Login = (props) => {
 
   return (
     <div>
+      {/** Using reactive variable which is set at global level and show it using Myalert
+       * Only if there are any error
+       */}
+      {userLoginError && <MyAlert type="error">{errorVar()}</MyAlert>}
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}

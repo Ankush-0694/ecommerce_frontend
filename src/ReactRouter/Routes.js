@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import AdminNavbar from "../components/layout/AdminNavbar";
-import Navbar from "../components/layout/Navbar";
+import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
+import UserNavbar from "../components/layout/Navbar/UserNavbar";
 
 const RouteWithAdminNavbar = ({
   exact,
@@ -41,7 +41,7 @@ const RouteWithVendorNavbar = ({
         return (
           <>
             {/** add Vendor Navbar here */}
-            <Navbar {...routeProps} />
+            <UserNavbar {...routeProps} />
             <Component {...routeProps} />
           </>
         );
@@ -64,7 +64,7 @@ const RouteWithUserNavbar = ({
       render={(routeProps) => {
         return (
           <>
-            <Navbar {...routeProps} />
+            <UserNavbar {...routeProps} />
 
             <Component {...routeProps} />
           </>
