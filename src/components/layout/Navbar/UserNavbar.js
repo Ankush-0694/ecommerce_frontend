@@ -8,10 +8,13 @@ import { MyMenuItem } from "../../Design/MyMenuItem";
 import { MyMenuIcon } from "../../Design/MyIcons";
 import { Link, withRouter } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 //these 2 imports should not be here
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
+import { Badge, useMediaQuery } from "@material-ui/core";
+import { useQuery } from "@apollo/client";
+import { GET_CART } from "../../../queries/Cart/cartQueries";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -64,6 +67,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// For styling  Cart Badge
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}))(Badge);
+
 const UserNavbar = ({ history }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -77,6 +90,23 @@ const UserNavbar = ({ history }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  /** Getting cart to show number of items in the cart on the navbar */
+  const {
+    error: getCartError,
+    loading: getCartLoading,
+    data,
+  } = useQuery(GET_CART);
+
+  if (getCartError) {
+    return <div>Error</div>;
+  }
+  if (getCartLoading) {
+    return <div>Loading</div>;
+  }
+
+  // No of items in the cart
+  const NumberOfCartItem = data.getCart.length;
 
   return (
     <MyNavbar>
@@ -150,14 +180,19 @@ const UserNavbar = ({ history }) => {
               color="inherit">
               My Orders
             </MyButtonComponent>
+
+            {/** added badge to the Cart Button */}
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
                 history.push("/cart");
               }}
               color="inherit">
-              Cart
+              <StyledBadge badgeContent={NumberOfCartItem} color="secondary">
+                <ShoppingCartIcon />
+              </StyledBadge>
             </MyButtonComponent>
+
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
