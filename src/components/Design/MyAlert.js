@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Slide, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { errorVar } from "../../ReactiveVariables";
+import MyToolbar from "./MyToolbar";
 
 const Alert = React.forwardRef((props, ref) => {
   return <MuiAlert ref={ref} elevation={6} variant="filled" {...props} />;
 });
 
-function TransitionRight(props) {
-  return <Slide {...props} direction="right" />;
+function Transition(props) {
+  return <Slide {...props} direction="down" />;
 }
 
 /** FOR OPEN AND CLOSE THE ALERT MESSAGE */
@@ -62,7 +63,9 @@ const MyAlert = ({ children, type, ...otherProps }) => {
   return (
     <>
       <Snackbar
-        TransitionComponent={TransitionRight}
+        style={{ marginTop: "48px" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        TransitionComponent={Transition}
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}>
