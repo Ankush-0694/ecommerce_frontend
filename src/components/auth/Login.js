@@ -34,7 +34,13 @@ const Login = (props) => {
          * If user is vendor then push to his product
          * if admin then push to dashboard
          */
-        // props.history.push("/");
+        if (identity === "admin") {
+          props.history.push("/admin/dashboard");
+        } else if (identity === "vendor") {
+          props.history.push("/vendor/products");
+        } else {
+          props.history.push("/");
+        }
       },
     });
 
@@ -69,6 +75,7 @@ const Login = (props) => {
         variables: {
           email,
           password,
+          // role: identity,
         },
       });
 

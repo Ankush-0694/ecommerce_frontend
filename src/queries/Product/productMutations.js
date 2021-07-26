@@ -50,12 +50,14 @@ const DELETE_PRODUCT = gql`
   }
 `;
 
-// const uploadFileMutaion = gql`
-//   mutation ($file: Upload!) {
-//     uploadFile(file: $file) {
-//       file
-//     }
-//   }
-// `;
+const UPLOAD_FILE = gql`
+  mutation ($file: Upload!) {
+    uploadFile(file: $file) {
+      filename
+      mimetype
+      encoding
+    }
+  }
+`;
 
-export { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT };
+export { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, UPLOAD_FILE };

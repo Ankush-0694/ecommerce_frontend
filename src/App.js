@@ -22,6 +22,7 @@ import {
 } from "./ReactRouter/Routes";
 
 import { authLink, errorLink, httplink } from "./ApolloLinks";
+import FileUpload from "./components/pages/vendor/DeleteIt/FileUpload";
 
 const cache = new InMemoryCache();
 
@@ -68,6 +69,8 @@ const App = () => {
               component={CheckoutSingle}
             />
 
+            <RouteWithUserNavbar exact path="/file" component={FileUpload} />
+
             {/* Vendor Routes */}
 
             <RouteWithVendorNavbar
@@ -78,7 +81,7 @@ const App = () => {
 
             <RouteWithVendorNavbar
               exact
-              path="/Vendor/addProducts"
+              path="/Vendor/products"
               component={VendorProduct}
             />
 
