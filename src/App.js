@@ -14,6 +14,7 @@ import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
 import MyToolbar from "./components/Design/MyToolbar";
+import FileUpload from "./components/pages/vendor/FileUpload/FileUpload";
 
 import {
   RouteWithAdminNavbar,
@@ -22,7 +23,6 @@ import {
 } from "./ReactRouter/Routes";
 
 import { authLink, errorLink, httplink } from "./ApolloLinks";
-import FileUpload from "./components/pages/vendor/DeleteIt/FileUpload";
 
 const cache = new InMemoryCache();
 
