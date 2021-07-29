@@ -50,22 +50,14 @@ const RouteWithVendorNavbar = ({
   );
 };
 
-const RouteWithUserNavbar = ({
-  exact,
-  path,
-  component: Component,
-  ...restProps
-}) => {
+const RouteWithCustomerNavbar = ({ component: Component, ...restProps }) => {
   return (
     <Route
-      exact={exact}
-      path={path}
       {...restProps}
       render={(routeProps) => {
         return (
           <>
             <UserNavbar {...routeProps} />
-
             <Component {...routeProps} />
           </>
         );
@@ -74,4 +66,4 @@ const RouteWithUserNavbar = ({
   );
 };
 
-export { RouteWithUserNavbar, RouteWithAdminNavbar, RouteWithVendorNavbar };
+export { RouteWithCustomerNavbar, RouteWithAdminNavbar, RouteWithVendorNavbar };

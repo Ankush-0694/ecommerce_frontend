@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  useQuery,
+} from "@apollo/client";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 // import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
@@ -17,12 +22,20 @@ import MyToolbar from "./components/Design/MyToolbar";
 import FileUpload from "./components/pages/vendor/FileUpload/FileUpload";
 
 import {
-  RouteWithAdminNavbar,
-  RouteWithUserNavbar,
-  RouteWithVendorNavbar,
-} from "./ReactRouter/Routes";
+  ProtectedAdminRoute,
+  ProtectedCustomerRoute,
+  ProtectedVendorRoute,
+} from "./Routing/ProtectedRoute";
 
-import { authLink, errorLink, httplink } from "./ApolloLinks";
+import {
+  RouteWithCustomerNavbar,
+  RouteWithVendorNavbar,
+  RouteWithAdminNavbar,
+} from "./Routing/Routes";
+
+import { GET_ME } from "./queries/user/userQueries";
+
+import { authLink, errorLink, httplink } from "./ApolloLinks/ApolloLinks";
 
 const cache = new InMemoryCache();
 
@@ -32,44 +45,58 @@ const client = new ApolloClient({
 });
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // how we will make it true after fetching the user or using LocalStorage
+
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
         {/** Toolbar added to make content below app bar because
         app bar is fixed */}
         <MyToolbar />
+
         {/* This styling for stop responsiveness */}
         <div style={{ minWidth: "940px" }}>
           <Switch>
             {/* Customer Routes */}
 
-            <RouteWithUserNavbar exact path="/login" component={Login} />
-            <RouteWithUserNavbar exact path="/Signup" component={Signup} />
-            <RouteWithUserNavbar exact path="/" component={Home} />
-            <RouteWithUserNavbar exact path="/cart" component={Cart} />
-            <RouteWithUserNavbar exact path="/orders" component={Orders} />
-            <RouteWithUserNavbar
+            <RouteWithCustomerNavbar exact path="/login" component={Login} />
+            <RouteWithCustomerNavbar exact path="/Signup" component={Signup} />
+            <RouteWithCustomerNavbar exact path="/" component={Home} />
+
+            <ProtectedCustomerRoute
+              exact
+              path="/cart"
+              isAuthenticated={isAuthenticated}
+              component={Cart}
+            />
+
+            <ProtectedCustomerRoute
+              exact
+              path="/orders"
+              component={Orders}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <ProtectedCustomerRoute
               exact
               path="/orders/details"
               component={OrderDetails}
             />
-            <RouteWithUserNavbar
+            <ProtectedCustomerRoute
               exact
               path="/Products/:id"
               component={SingleProduct}
             />
-            <RouteWithUserNavbar
+            <ProtectedCustomerRoute
               exact
               path="/checkout"
               component={CheckoutMultiple}
             />
-            <RouteWithUserNavbar
+            <ProtectedCustomerRoute
               exact
               path="/checkout/:id"
               component={CheckoutSingle}
             />
-
-            <RouteWithUserNavbar exact path="/file" component={FileUpload} />
 
             {/* Vendor Routes */}
 
@@ -79,17 +106,23 @@ const App = () => {
               component={Login}
             />
 
-            <RouteWithVendorNavbar
+            <ProtectedVendorRoute
               exact
               path="/Vendor/products"
               component={VendorProduct}
+            />
+
+            <ProtectedVendorRoute
+              exact
+              path="/vendor/file"
+              component={FileUpload}
             />
 
             {/* Admin Routes */}
 
             <RouteWithAdminNavbar exact path="/admin/login" component={Login} />
 
-            <RouteWithAdminNavbar
+            <ProtectedAdminRoute
               path="/admin/Dashboard"
               component={AdminDashboard}
             />

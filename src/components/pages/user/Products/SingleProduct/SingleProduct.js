@@ -14,7 +14,7 @@ import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
 import { GET_CART } from "../../../../../queries/Cart/cartQueries";
 import MyAlert from "../../../../Design/MyAlert";
-import { errorVar } from "../../../../../ReactiveVariables";
+import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
 
 const useStyles = makeStyles({
   productDiv: {

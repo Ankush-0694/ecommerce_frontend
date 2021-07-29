@@ -1,6 +1,8 @@
 import { gql } from "@apollo/client";
 
-/** To have user every time in our react app */
+/** To have user every time in our react app
+ * Need to pass token in header
+ */
 const GET_ME = gql`
   {
     getMe {

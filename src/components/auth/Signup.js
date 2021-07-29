@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { CREATE_USER } from "../../queries/user/userMutations";
-import { errorVar } from "../../ReactiveVariables";
+import { errorVar } from "../../ReactiveVariables/ReactiveVariables";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
 import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";

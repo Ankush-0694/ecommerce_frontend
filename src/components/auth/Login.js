@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/client";
 import { validateLoginForm } from "../layout/ClientFormValidations/FormValidation";
 import { USER_LOGIN } from "../../queries/user/userMutations";
 import MyAlert from "../Design/MyAlert";
-import { errorVar } from "../../ReactiveVariables";
+import { errorVar } from "../../ReactiveVariables/ReactiveVariables";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -94,6 +94,14 @@ const Login = (props) => {
        * Only if there are any error
        */}
       {userLoginError && <MyAlert type="error">{errorVar()}</MyAlert>}
+
+      {/** if we access a protected route without login then we pass a error msg in state while redirecting
+       *  And Show that message as an alert
+       */}
+      {props.location.state && props.location.state.errorMsg && (
+        <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
+      )}
+
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}

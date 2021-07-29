@@ -1,7 +1,7 @@
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "apollo-link-error";
-import { errorVar } from "./ReactiveVariables";
+import { errorVar } from "../ReactiveVariables/ReactiveVariables";
 
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
