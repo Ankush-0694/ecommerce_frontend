@@ -3,7 +3,10 @@ import { Route } from "react-router-dom";
 import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
 
-const RouteWithAdminNavbar = ({
+/** This file should be called Public routes  */
+
+/** PublicAdminRoute */
+const PublicAdminRoute = ({
   exact,
   path,
   component: Component,
@@ -26,7 +29,8 @@ const RouteWithAdminNavbar = ({
   );
 };
 
-const RouteWithVendorNavbar = ({
+/** PublicVendorRoute */
+const PublicVendorRoute = ({
   exact,
   path,
   component: Component,
@@ -50,7 +54,8 @@ const RouteWithVendorNavbar = ({
   );
 };
 
-const RouteWithCustomerNavbar = ({ component: Component, ...restProps }) => {
+/** PublicCustomerRoute */
+const PublicCustomerRoute = ({ component: Component, ...restProps }) => {
   return (
     <Route
       {...restProps}
@@ -66,4 +71,4 @@ const RouteWithCustomerNavbar = ({ component: Component, ...restProps }) => {
   );
 };
 
-export { RouteWithCustomerNavbar, RouteWithAdminNavbar, RouteWithVendorNavbar };
+export { PublicCustomerRoute, PublicAdminRoute, PublicVendorRoute };

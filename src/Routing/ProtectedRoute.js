@@ -3,6 +3,11 @@ import { Route, Redirect } from "react-router-dom";
 import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
 
+/**
+ * Need to pass user details here to check the role
+ * if role does not our given role then redirect to unAuthorized Page
+ */
+
 const ProtectedCustomerRoute = ({
   component: Component,
   isAuthenticated,
@@ -68,6 +73,7 @@ const ProtectedVendorRoute = ({
 const ProtectedAdminRoute = ({
   component: Component,
   isAuthenticated,
+  user,
   ...restProps
 }) => {
   return (
@@ -83,6 +89,9 @@ const ProtectedAdminRoute = ({
               }}
             />
           );
+        } else if (user.role !== "admin") {
+        /** Routed to unauth page if user role is not admin */
+          return <Redirect to="/unAuth" />;
         } else {
           return (
             <>
