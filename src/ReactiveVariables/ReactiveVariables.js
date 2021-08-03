@@ -4,4 +4,7 @@ import { makeVar } from "@apollo/client";
  * It will be useful to show alerts addition to the component
  * Like in signup form and login Form , adding to cart
  */
-export const errorVar = makeVar([]);
+const errorVar = makeVar([]);
+// console.log(errorVar());
+
+export { errorVar };
