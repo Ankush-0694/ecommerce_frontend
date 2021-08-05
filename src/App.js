@@ -40,11 +40,16 @@ const App = () => {
   const {
     error: getMeError,
     loading: getMeLoading,
-    data: userData,
-  } = useQuery(GET_ME);
+    data: getMeData,
+  } = useQuery(GET_ME, {
+    skip: !localStorage.getItem("token"), //we need to skip this query if there is no token
+  });
 
-  if (getMeError || getMeLoading) {
-    return <div> Sorry .....</div>;
+  if (getMeLoading) {
+    return <div>Loading User...</div>;
+  }
+  if (getMeError) {
+    return <div>Errror</div>;
   }
 
   return (
@@ -58,14 +63,27 @@ const App = () => {
         <Switch>
           {/* Customer Routes */}
 
-          <PublicCustomerRoute exact path="/login" component={Login} />
+          <PublicCustomerRoute
+            exact
+            path="/login"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            component={Login}
+          />
           <PublicCustomerRoute exact path="/Signup" component={Signup} />
-          <PublicCustomerRoute exact path="/" component={Home} />
+          <PublicCustomerRoute
+            exact
+            path="/"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            component={Home}
+          />
 
           <ProtectedCustomerRoute
             exact
             path="/cart"
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
             component={Cart}
           />
 
@@ -74,6 +92,7 @@ const App = () => {
             path="/orders"
             component={Orders}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           <ProtectedCustomerRoute
@@ -81,35 +100,46 @@ const App = () => {
             path="/orders/details"
             component={OrderDetails}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
           <ProtectedCustomerRoute
             exact
             path="/Products/:id"
             component={SingleProduct}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
           <ProtectedCustomerRoute
             exact
             path="/checkout"
             component={CheckoutMultiple}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
           <ProtectedCustomerRoute
             exact
             path="/checkout/:id"
             component={CheckoutSingle}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           {/* Vendor Routes */}
 
-          <PublicVendorRoute exact path="/vendor/login" component={Login} />
+          <PublicVendorRoute
+            exact
+            path="/vendor/login"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            component={Login}
+          />
 
           <ProtectedVendorRoute
             exact
             path="/Vendor/products"
             component={VendorProduct}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           <ProtectedVendorRoute
@@ -117,17 +147,25 @@ const App = () => {
             path="/vendor/file"
             component={FileUpload}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           {/* Admin Routes */}
 
-          <PublicAdminRoute exact path="/admin/login" component={Login} />
+          <PublicAdminRoute
+            exact
+            path="/admin/login"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            component={Login}
+          />
 
           <ProtectedAdminRoute
             path="/admin/Dashboard"
             component={AdminDashboard}
-            user={userData}
+            user={getMeData}
             isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           {/* InValid Route */}

@@ -3,7 +3,34 @@ import { Route } from "react-router-dom";
 import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
 
-/** This file should be called Public routes  */
+/** PublicCustomerRoute */
+const PublicCustomerRoute = ({
+  component: Component,
+  isAuthenticated,
+  setIsAuthenticated,
+  ...restProps
+}) => {
+  return (
+    <Route
+      {...restProps}
+      render={(routeProps) => {
+        return (
+          <>
+            <UserNavbar
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+              {...routeProps}
+            />
+            <Component
+              setIsAuthenticated={setIsAuthenticated}
+              {...routeProps}
+            />
+          </>
+        );
+      }}
+    />
+  );
+};
 
 /** PublicAdminRoute */
 const PublicAdminRoute = ({
@@ -45,23 +72,6 @@ const PublicVendorRoute = ({
         return (
           <>
             {/** add Vendor Navbar here */}
-            <UserNavbar {...routeProps} />
-            <Component {...routeProps} />
-          </>
-        );
-      }}
-    />
-  );
-};
-
-/** PublicCustomerRoute */
-const PublicCustomerRoute = ({ component: Component, ...restProps }) => {
-  return (
-    <Route
-      {...restProps}
-      render={(routeProps) => {
-        return (
-          <>
             <UserNavbar {...routeProps} />
             <Component {...routeProps} />
           </>

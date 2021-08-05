@@ -30,6 +30,13 @@ const Login = (props) => {
         const token = data.userLogin.token;
         localStorage.setItem("token", token);
 
+        /**
+         * Passed From restProps - PublicRoutes
+         *
+         * Need to set this state to make Authenticated true after Login
+         */
+        props.setIsAuthenticated(true);
+
         /**This push will depend on the identity of the user
          * If user is vendor then push to his product
          * if admin then push to dashboard
@@ -101,6 +108,9 @@ const Login = (props) => {
       {props.location.state && props.location.state.errorMsg && (
         <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
       )}
+
+      {/* Clearing the state passed from redirection to prevent it from showing error on reload */}
+      {window.history.replaceState({}, document.title)}
 
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form

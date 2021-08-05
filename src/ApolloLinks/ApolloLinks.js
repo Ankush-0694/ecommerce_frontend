@@ -18,7 +18,10 @@ const errorLink = onError(({ graphQLErrors, networkError, response }) => {
         /** There can multiple response error , we may need to map this
          * reactive variable
          */
-        if (response) errorVar([response.errors[0].message]);
+        if (response) {
+          errorVar([response.errors[0].message]);
+          console.log(errorVar());
+        }
       }
     });
   }
