@@ -77,7 +77,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const UserNavbar = ({ history }) => {
+const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -182,6 +182,7 @@ const UserNavbar = ({ history }) => {
             </MyButtonComponent>
 
             {/** added badge to the Cart Button */}
+
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
@@ -193,22 +194,46 @@ const UserNavbar = ({ history }) => {
               </StyledBadge>
             </MyButtonComponent>
 
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                history.push("/signup");
-              }}
-              color="inherit">
-              Signup
-            </MyButtonComponent>
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                history.push("/login");
-              }}
-              color="inherit">
-              Login
-            </MyButtonComponent>
+            {/** Showing signup button only if user is not logged in */}
+
+            {!isAuthenticated && (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  history.push("/signup");
+                }}
+                color="inherit">
+                Signup
+              </MyButtonComponent>
+            )}
+
+            {/** Showing Login or Logout button based on isAuthenticated */}
+
+            {!isAuthenticated ? (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  history.push("/login");
+                }}
+                color="inherit">
+                Login
+              </MyButtonComponent>
+            ) : (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  // console.log("logout by deleting token from LS");
+
+                  /** Logout - Removing token , authentication False, Redirected to User Page */
+
+                  localStorage.removeItem("token");
+                  setIsAuthenticated(false);
+                  history.push("/login");
+                }}
+                color="inherit">
+                Logout
+              </MyButtonComponent>
+            )}
           </div>
         )}
       </div>

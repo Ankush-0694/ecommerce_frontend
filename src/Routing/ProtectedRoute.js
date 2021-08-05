@@ -11,6 +11,7 @@ import UserNavbar from "../components/layout/Navbar/UserNavbar";
 const ProtectedCustomerRoute = ({
   component: Component,
   isAuthenticated,
+  setIsAuthenticated,
   ...restProps
 }) => {
   return (
@@ -29,7 +30,11 @@ const ProtectedCustomerRoute = ({
         } else {
           return (
             <>
-              <UserNavbar {...routeProps} />
+              <UserNavbar
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                {...routeProps}
+              />
               <Component {...routeProps} />
             </>
           );
@@ -89,8 +94,8 @@ const ProtectedAdminRoute = ({
               }}
             />
           );
-        } else if (user.role !== "admin") {
-        /** Routed to unauth page if user role is not admin */
+        } else if (user.getMe.role !== "admin") {
+          /** Routed to unauth page if user role is not admin */
           return <Redirect to="/unAuth" />;
         } else {
           return (
