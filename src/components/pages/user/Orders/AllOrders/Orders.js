@@ -7,6 +7,8 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_ORDERS } from "../../../../../queries/Order/orderQueries";
 import { OrderStyles } from "./CSS/OrdersStyles";
 import OrderFilter from "./Component/FilterComponent/OrderFilter";
+import ShowError from "../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 
 const Orders = () => {
   const classes = OrderStyles();
@@ -18,11 +20,11 @@ const Orders = () => {
   } = useQuery(GET_ALL_ORDERS);
 
   if (getOrdersError) {
-    return <div>Error Occured While getting Orders</div>;
+    return <ShowError>Error Occured While getting Orders</ShowError>;
   }
 
   if (getOrdersLoading) {
-    return <div>Loading Orders....</div>;
+    return <ShowLoading />;
   }
   /** This data will be rendered but before we need
    * to destructure that cause of nested productDetails

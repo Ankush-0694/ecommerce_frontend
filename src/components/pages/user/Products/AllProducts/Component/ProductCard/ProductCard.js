@@ -17,7 +17,9 @@ const ProductCard = ({ details, link, history }) => {
   const { id, productName, productDescription, productPrice } = details;
 
   const [addToCart, { error: addToCartError, data: addedCartData }] =
-    useMutation(ADD_TO_CART);
+    useMutation(ADD_TO_CART, {
+      onError: () => {},
+    });
 
   const onClickAddCart = (e) => {
     e.preventDefault();

@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "../../../../../queries/Product/productQueries";
 import ProductCard from "./Component/ProductCard/ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
+import ShowError from "../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 
 const Products = () => {
   const {
@@ -12,10 +14,10 @@ const Products = () => {
   } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductsError) {
-    return <div>Error onccrued</div>;
+    return <ShowError>Error while Fetching Products</ShowError>;
   }
   if (getProductsLoading) {
-    return <div>Loading.....</div>;
+    return <ShowLoading />;
   }
 
   // data to render

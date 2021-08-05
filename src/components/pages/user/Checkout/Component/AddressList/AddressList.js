@@ -28,8 +28,12 @@ const AddressList = ({ data, current, setCurrent }) => {
     landmark,
   } = data;
 
-  const [deleteAddress, { data: deletedAddressData }] =
-    useMutation(DELETE_ADDRESS);
+  const [deleteAddress, { data: deletedAddressData }] = useMutation(
+    DELETE_ADDRESS,
+    {
+      onError: () => {},
+    }
+  );
 
   const onDeleteAddress = () => {
     deleteAddress({

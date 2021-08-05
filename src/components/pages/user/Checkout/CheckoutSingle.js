@@ -12,6 +12,8 @@ import SingleProductDetails from "./Component/ProductDetails/SingleProductDetail
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
 import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
 import MyAlert from "../../../Design/MyAlert";
+import ShowError from "../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
@@ -62,17 +64,19 @@ const CheckoutSingle = (props) => {
       "cache-first" /* cache-first is prevent network call if data is available in cache  */,
   });
 
-  const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
+  const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER, {
+    onError: () => {},
+  });
 
   /* We call this mutation on Mount to add the checkouted product to the cart */
   const [addToCart, { error: addToCartError, data: cartData }] =
     useMutation(ADD_TO_CART);
 
   if (getSingleProductError) {
-    return <div>Error while Fetching products</div>;
+    return <ShowError>Error while Fetching products</ShowError>;
   }
   if (getSingleProductLoading) {
-    return <div>Loading Products...</div>;
+    return <ShowLoading />;
   }
 
   /**

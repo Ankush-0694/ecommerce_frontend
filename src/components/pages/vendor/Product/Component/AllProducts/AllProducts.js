@@ -12,8 +12,12 @@ import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 const AllProducts = ({ data, setCurrent }) => {
   const classes = AllProductStyles();
   const { id, productName, productPrice, productDescription } = data;
-  const [deleteProduct, { data: deletedProductData }] =
-    useMutation(DELETE_PRODUCT);
+  const [deleteProduct, { data: deletedProductData }] = useMutation(
+    DELETE_PRODUCT,
+    {
+      onError: () => {},
+    }
+  );
 
   const onDeleteProduct = (e) => {
     deleteProduct({

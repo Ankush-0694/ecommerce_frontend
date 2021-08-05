@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "../../../../../../../queries/Product/productQueries";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import ProductListItem from "./ProductListItem";
+import ShowError from "../../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../../layout/LoadingComponent/ShowLoading";
 
 const ProductList = () => {
   const {
@@ -12,10 +14,10 @@ const ProductList = () => {
   } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductsDataError) {
-    return <div>Error while Fetching Product Data</div>;
+    return <ShowError>Error while Fetching Product Data</ShowError>;
   }
   if (getProductsDataLoading) {
-    return <div>Product are loading.....</div>;
+    return <ShowLoading />;
   }
 
   const productData = getProductsData.getAllProducts;

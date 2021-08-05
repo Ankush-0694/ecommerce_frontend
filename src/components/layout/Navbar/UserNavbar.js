@@ -98,15 +98,12 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
     data,
   } = useQuery(GET_CART);
 
-  if (getCartError) {
-    return <div>Error</div>;
-  }
-  if (getCartLoading) {
-    return <div>Loading</div>;
-  }
-
-  // No of items in the cart
-  const NumberOfCartItem = data.getCart.length;
+  // if (getCartError) {
+  //   return <div>Error</div>;
+  // }
+  // if (getCartLoading) {
+  //   return <div>Loading</div>;
+  // }
 
   return (
     <MyNavbar>
@@ -189,9 +186,17 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
                 history.push("/cart");
               }}
               color="inherit">
-              <StyledBadge badgeContent={NumberOfCartItem} color="secondary">
-                <ShoppingCartIcon />
-              </StyledBadge>
+              {/* If error just show the text */}
+              {getCartError && <>Cart</>}
+
+              {/* Showing cart count only when query success */}
+              {!getCartLoading && !getCartError && (
+                <StyledBadge
+                  badgeContent={data.getCart.length}
+                  color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              )}
             </MyButtonComponent>
 
             {/** Showing signup button only if user is not logged in */}

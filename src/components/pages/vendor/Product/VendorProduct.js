@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { GET_ALL_PRODUCTS } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
+import ShowError from "../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import AddProduct from "./Component/AddProduct/AddProduct";
 import VendorAllProducts from "./Component/AllProducts/AllProducts";
 
@@ -20,10 +22,10 @@ const VendorProduct = () => {
   } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductError) {
-    return <div>Error onccrued</div>;
+    return <ShowError>Error while Fetching Products</ShowError>;
   }
   if (getProductLoading) {
-    return <div>Loading..</div>;
+    return <ShowLoading />;
   }
 
   const productData = getProductData.getAllProducts;

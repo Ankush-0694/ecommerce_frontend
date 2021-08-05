@@ -27,10 +27,16 @@ const AddressForm = ({ current, setCurrent }) => {
     landmark,
   } = addressFormData;
 
-  const [addAddress, { data: addAddressData }] = useMutation(ADD_ADDRESS);
+  const [addAddress, { data: addAddressData }] = useMutation(ADD_ADDRESS, {
+    onError: () => {},
+  });
 
-  const [updateAddress, { data: updateAddressData }] =
-    useMutation(UPDATE_ADDRESS);
+  const [updateAddress, { data: updateAddressData }] = useMutation(
+    UPDATE_ADDRESS,
+    {
+      onError: () => {},
+    }
+  );
 
   // To check ,current is empty or not ,
   // if it is not then we set the form data to current

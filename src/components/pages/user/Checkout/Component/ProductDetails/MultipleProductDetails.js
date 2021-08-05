@@ -22,7 +22,9 @@ const MultipleProductDetails = ({ productData }) => {
   const [
     updateCartQuantity,
     { error: updateError, loading: updateLoading, data: updateCartData },
-  ] = useMutation(UPDATE_CART_QUANTITY);
+  ] = useMutation(UPDATE_CART_QUANTITY, {
+    onError: () => {},
+  });
 
   /**
    * This function is called from useEffect when we change the quantity of the item

@@ -5,7 +5,7 @@ import { errorVar } from "../ReactiveVariables/ReactiveVariables";
 
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
-/* For Top level Errors*/
+/* For handling Errors at Top level */
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) => {

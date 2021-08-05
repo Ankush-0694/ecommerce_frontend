@@ -15,6 +15,8 @@ import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
 import { GET_CART } from "../../../../../queries/Cart/cartQueries";
 import MyAlert from "../../../../Design/MyAlert";
 import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
+import ShowError from "../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -61,10 +63,10 @@ const SingleProduct = (props) => {
   });
 
   if (getProductError) {
-    return <div>Error in getting Product.. </div>;
+    return <ShowError>Error While Fetching Product.. </ShowError>;
   }
   if (getProductLoading) {
-    return <div>Fetching Products</div>;
+    return <ShowLoading />;
   }
 
   // data To Render
