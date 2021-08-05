@@ -21,7 +21,7 @@ const Cart = ({ history }) => {
   });
 
   if (getCartError) {
-    return <ShowError>Error while Fetching Cart </ShowError>;
+    return <ShowError>Error while Fetching Cart</ShowError>;
   }
 
   if (getCartLoading) {

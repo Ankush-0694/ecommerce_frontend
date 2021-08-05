@@ -15,6 +15,8 @@ import {
 import CreateVendor from "../CreateVendor/CreateVendor";
 import { Divider } from "@material-ui/core";
 import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../../queries/user/userQueries";
+import ShowError from "../../../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../../../layout/LoadingComponent/ShowLoading";
 
 const useStyles = makeStyles({
   root: {
@@ -36,10 +38,10 @@ const Vendors = () => {
   });
 
   if (getAllUsersError) {
-    return <div>Error Occured</div>;
+    return <ShowError>Error while Fetching Vendors</ShowError>;
   }
   if (getAllUsersLoading) {
-    return <div>Loading .... Getting Vendors</div>;
+    return <ShowLoading />;
   }
 
   const dataToRender = AllUsersData.getAllUsersByRole;

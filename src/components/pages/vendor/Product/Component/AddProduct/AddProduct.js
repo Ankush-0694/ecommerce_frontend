@@ -35,10 +35,16 @@ const AddProduct = ({ current, setCurrent }) => {
     }
   }, [current]);
 
-  const [addProduct, { data: addProductData }] = useMutation(ADD_PRODUCT);
+  const [addProduct, { data: addProductData }] = useMutation(ADD_PRODUCT, {
+    onError: () => {},
+  });
 
-  const [updateProduct, { data: updateProductData }] =
-    useMutation(UPDATE_PRODUCT);
+  const [updateProduct, { data: updateProductData }] = useMutation(
+    UPDATE_PRODUCT,
+    {
+      onError: () => {},
+    }
+  );
 
   const onChange = (e) => {
     setProductFormData({

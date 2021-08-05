@@ -12,6 +12,8 @@ import {
 import { MyMultiCarousel } from "../../../../../Design/MyMultiItemCarousel";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../Design/MyTypography";
+import ShowError from "../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 
 const useStyles = makeStyles({
   itemContainerDiv: {
@@ -40,10 +42,10 @@ const FirstProductSlider = () => {
   } = useQuery(GET_ALL_PRODUCTS);
 
   if (getProductsError) {
-    return <div>Error onccrued</div>;
+    return <ShowError>Error while Fetching Products</ShowError>;
   }
   if (getProductsLoading) {
-    return <div>Loading.....</div>;
+    return <ShowLoading />;
   }
 
   // data to render

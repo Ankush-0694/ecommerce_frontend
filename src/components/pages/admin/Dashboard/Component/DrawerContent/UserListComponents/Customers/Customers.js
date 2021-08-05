@@ -13,6 +13,8 @@ import {
   MyTableRow,
 } from "../../../../../../../Design/MyTableComponents";
 import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../../queries/user/userQueries";
+import ShowError from "../../../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../../../layout/LoadingComponent/ShowLoading";
 
 const useStyles = makeStyles({
   root: {
@@ -35,10 +37,10 @@ const Customers = () => {
   });
 
   if (getAllUsersError) {
-    return <div>Error Occured</div>;
+    return <ShowError>Error while fetching customers</ShowError>;
   }
   if (getAllUsersLoading) {
-    return <div>Loading .... Getting Users</div>;
+    return <ShowLoading />;
   }
 
   const dataToRender = AllUsersData.getAllUsersByRole;

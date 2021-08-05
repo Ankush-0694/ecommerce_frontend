@@ -11,6 +11,8 @@ import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_CART } from "../../../../queries/Cart/cartQueries";
 import AddressContainer from "./AddressContainer";
 import MyAlert from "../../../Design/MyAlert";
+import ShowError from "../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 
 /* It render we checkout from using cart Page */
 const CheckoutMultiple = (props) => {
@@ -51,10 +53,10 @@ const CheckoutMultiple = (props) => {
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
   if (getCartLoading) {
-    return <div>Error while Fetching products</div>;
+    return <ShowError>Error while Fetching Cart Data</ShowError>;
   }
   if (getCartError) {
-    return <div>Loading Products...</div>;
+    return <ShowLoading />;
   }
 
   /**

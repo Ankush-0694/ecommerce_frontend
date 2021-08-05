@@ -10,6 +10,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import ShowError from "../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 
 /* This is common for single and multiple checkout , 
 And contains the address Form and address list */
@@ -28,10 +30,10 @@ const AddressContainer = (props) => {
   } = useQuery(GET_ALL_ADDRESS);
 
   if (getAddressError) {
-    return <div>Error while Fetching addresses</div>;
+    return <ShowError>Error while Fetching addresses</ShowError>;
   }
   if (getAddressLoading) {
-    return <div>Loading Adresses...</div>;
+    return <ShowLoading>Loading Adresses...</ShowLoading>;
   }
 
   /* This data will be render in UI */

@@ -30,6 +30,8 @@ import {
   PublicVendorRoute,
   PublicAdminRoute,
 } from "./Routing/PublicRoutes";
+import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
+import ShowError from "./components/layout/ErrorComponent/ShowError";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -42,14 +44,14 @@ const App = () => {
     loading: getMeLoading,
     data: getMeData,
   } = useQuery(GET_ME, {
-    skip: !localStorage.getItem("token"), //we need to skip this query if there is no token
+    skip: !isAuthenticated, //we need to skip this query if there is no token
   });
 
   if (getMeLoading) {
-    return <div>Loading User...</div>;
+    return <ShowLoading />;
   }
   if (getMeError) {
-    return <div>Errror</div>;
+    return <ShowError>Error while Fetching User Data</ShowError>;
   }
 
   return (

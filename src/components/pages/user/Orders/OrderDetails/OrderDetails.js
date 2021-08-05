@@ -7,6 +7,8 @@ import { OrderDetailsStyles } from "./CSS/OrderDetailsStyles";
 import { MyPaper } from "../../../../Design/MyPaper";
 import ProductList from "./Component/ProductList/ProductList";
 import OrderedProductList from "../AllOrders/Component/OrderedProductList/OrderedProductList";
+import ShowError from "../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 
 const OrderDetails = (props) => {
   const classes = OrderDetailsStyles();
@@ -32,11 +34,11 @@ const OrderDetails = (props) => {
   });
 
   if (getSingleOrderError) {
-    return <div>Error Occured While getting Order Detail</div>;
+    return <ShowError>Error Occured While getting Order Detail</ShowError>;
   }
 
   if (getSingleOrderLoading) {
-    return <div>Loading Order....</div>;
+    return <ShowLoading />;
   }
 
   /* Have only single order but may have multiple products */
