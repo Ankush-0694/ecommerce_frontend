@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
+import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
 
 /**
  * Need to pass user details here to check the role
@@ -65,7 +66,7 @@ const ProtectedVendorRoute = ({
         } else {
           return (
             <>
-              <UserNavbar {...routeProps} />
+              <VendorNavbar {...routeProps} />
               <Component {...routeProps} />
             </>
           );
@@ -78,6 +79,7 @@ const ProtectedVendorRoute = ({
 const ProtectedAdminRoute = ({
   component: Component,
   isAuthenticated,
+  setIsAuthenticated,
   user,
   ...restProps
 }) => {

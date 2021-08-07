@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
+import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
 
 /** PublicCustomerRoute */
 const PublicCustomerRoute = ({
@@ -32,34 +33,12 @@ const PublicCustomerRoute = ({
   );
 };
 
-/** PublicAdminRoute */
-const PublicAdminRoute = ({
-  exact,
-  path,
-  component: Component,
-  ...restProps
-}) => {
-  return (
-    <Route
-      exact={exact}
-      path={path}
-      {...restProps}
-      render={(routeProps) => {
-        return (
-          <>
-            <AdminNavbar {...routeProps} />
-            <Component {...routeProps} />
-          </>
-        );
-      }}
-    />
-  );
-};
-
 /** PublicVendorRoute */
 const PublicVendorRoute = ({
   exact,
   path,
+  isAuthenticated,
+  setIsAuthenticated,
   component: Component,
   ...restProps
 }) => {
@@ -72,8 +51,41 @@ const PublicVendorRoute = ({
         return (
           <>
             {/** add Vendor Navbar here */}
-            <UserNavbar {...routeProps} />
-            <Component {...routeProps} />
+            <VendorNavbar {...routeProps} />
+            <Component
+              {...routeProps}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          </>
+        );
+      }}
+    />
+  );
+};
+
+/** PublicAdminRoute */
+const PublicAdminRoute = ({
+  exact,
+  path,
+  isAuthenticated,
+  setIsAuthenticated,
+  component: Component,
+  ...restProps
+}) => {
+  return (
+    <Route
+      exact={exact}
+      path={path}
+      {...restProps}
+      render={(routeProps) => {
+        return (
+          <>
+            <AdminNavbar {...routeProps} />
+
+            <Component
+              {...routeProps}
+              setIsAuthenticated={setIsAuthenticated}
+            />
           </>
         );
       }}
