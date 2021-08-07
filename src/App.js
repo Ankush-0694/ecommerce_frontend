@@ -32,6 +32,7 @@ import {
 } from "./Routing/PublicRoutes";
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import ShowError from "./components/layout/ErrorComponent/ShowError";
+import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -45,14 +46,15 @@ const App = () => {
     data: getMeData,
   } = useQuery(GET_ME, {
     skip: !isAuthenticated, //we need to skip this query if there is no token
+    onError: () => {},
   });
 
   if (getMeLoading) {
     return <ShowLoading />;
   }
-  if (getMeError) {
-    return <ShowError>Error while Fetching User Data</ShowError>;
-  }
+  // if (getMeError) {
+  //   return <ShowError>Error while Fetching User Data</ShowError>;
+  // }
 
   return (
     <BrowserRouter>
@@ -172,6 +174,7 @@ const App = () => {
 
           {/* InValid Route */}
           <Route exact path="/unAuth" component={Unauthorized} />
+          <Route exact path="/NetworkError" component={NetworkError} />
           <Route render={() => <h1>Invalid URL</h1>} />
         </Switch>
       </div>
