@@ -7,39 +7,36 @@ const CartStyles = makeStyles({
   cartContainer: {
     display: "flex",
     padding: "20px",
+    justifyContent: "space-between",
   },
   productHeading: {
     textAlign: "center",
     margin: "0px",
     padding: "5px",
-    backgroundColor: "#DCDCDC",
     borderBottom: "1px solid black",
-    // marginBottom: "20px",
   },
   item1: {
     width: "60%",
-    border: "1px solid black",
 
     height: "84vh",
     overflow: "auto",
   },
   item2: {
     width: "30%",
-    position: "fixed",
     minWidth: "200px",
     right: "20px",
-    border: "1px solid black",
+    marginTop: "10px",
     textAlign: "center",
   },
   MediaImg: {
     width: "100%",
     minWidth: "130px",
   },
-  placeOrder: {
+  checkout: {
     border: "1px solid black",
     textAlign: "center",
   },
-  placeOrderbtn: {
+  checkoutbtn: {
     padding: "10px 0px",
     borderRadius: "0px",
   },
