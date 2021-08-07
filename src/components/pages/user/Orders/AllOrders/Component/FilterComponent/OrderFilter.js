@@ -24,10 +24,8 @@ const OrderFilter = () => {
    * Same as orderStatusFilter docs
    */
   const orderTimeFilter = [
-    { name: "onWay", label: "On the Way" },
-    { name: "delivered", label: "Delivered" },
-    { name: "cancelled", label: "Cancelled" },
-    { name: "returned", label: "Returned" },
+    { name: "last30Days", label: "Last 30 Days" },
+    { name: "older", label: "Older" },
   ];
 
   return (

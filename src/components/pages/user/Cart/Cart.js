@@ -7,6 +7,7 @@ import { CartStyles } from "./CSS/CartStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
+import MyDivider from "../../../Design/MyDivider";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();
@@ -63,7 +64,7 @@ const Cart = ({ history }) => {
     <div>
       <div>
         <h3 style={{ textAlign: "center", marginTop: "10px" }}>MY CART</h3>
-        <hr></hr>
+        <MyDivider />
       </div>
       <div className={classes.cartContainer}>
         <div className={classes.item1}>
@@ -77,12 +78,12 @@ const Cart = ({ history }) => {
 
         <div className={classes.item2}>
           <CartPriceDetails itemCount={itemCount} totalPrice={totalPrice} />
-          <div className={classes.placeOrder}>
+          <div className={classes.checkout}>
             <MyButtonComponent
               color="primary"
               variant="contained"
               fullWidth
-              className={classes.placeOrderbtn}
+              className={classes.checkoutbtn}
               onClick={onCheckout}>
               Checkout
             </MyButtonComponent>
