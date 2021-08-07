@@ -15,18 +15,44 @@ import {
   GET_ALL_PRODUCTS,
 } from "../../../../../../queries/Product/productQueries";
 import { AddProductStyles } from "../../CSS/AddProductStyles";
+import { categoryList, subCategoryList } from "./Category_SubCategory";
 
 const AddProduct = ({ current, setCurrent }) => {
+  const classes = AddProductStyles();
+
   const [productFormData, setProductFormData] = useState({
     productName: "",
     productDescription: "",
     productPrice: "",
-    productCategory: "",
+    productSubCategory: "",
   });
-  const { productName, productDescription, productPrice } = productFormData;
+  const { productName, productDescription, productPrice } = productFormData; // Destructing State
 
-  const classes = AddProductStyles();
+  /** Adding separate Category state to choose subCategory Based on Category
+   * when we add Product ,  productCategory : categoryName
+   */
+  const [productCategory, setProductCategory] = useState({
+    categoryName: "",
+    categoryId: "",
+  });
+  const { categoryName, categoryId } = productCategory; // Destructing State
 
+  /** Filtering subCategories based on the categoryID Choosen */
+  const subCategoryListItems = subCategoryList.filter((filteredItem) => {
+    return filteredItem.categoryId == categoryId;
+  });
+
+  const [addProduct] = useMutation(ADD_PRODUCT, {
+    onError: () => {},
+  });
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    onError: () => {},
+  });
+
+  /**
+   * Setting intial Form State depend on the current
+   * we change current on update and set current to that product and then set productFormData to current
+   */
   useEffect(() => {
     if (current !== null) {
       setProductFormData(current);
@@ -35,21 +61,10 @@ const AddProduct = ({ current, setCurrent }) => {
         productName: "",
         productDescription: "",
         productPrice: "",
-        productCategory: "",
+        productSubCategory: "",
       });
     }
   }, [current]);
-
-  const [addProduct, { data: addProductData }] = useMutation(ADD_PRODUCT, {
-    onError: () => {},
-  });
-
-  const [updateProduct, { data: updateProductData }] = useMutation(
-    UPDATE_PRODUCT,
-    {
-      onError: () => {},
-    }
-  );
 
   const onChange = (e) => {
     setProductFormData({
@@ -58,6 +73,25 @@ const AddProduct = ({ current, setCurrent }) => {
     });
   };
 
+  /** Changing productCategory State when we select a Category */
+  const onCategoryChange = (e) => {
+    /** Value passed from select input */
+    let categoryValue = e.target.value;
+
+    /** Fetching id and Name seprately from selected value */
+    let categoryIdSelected = categoryValue.split("-")[0];
+    let categoryNameSelected = categoryValue.split("-")[1];
+
+    setProductCategory({
+      categoryName: categoryNameSelected,
+      categoryId: categoryIdSelected,
+    });
+  };
+
+  /**
+   * we call mutation depend on the current
+   * if current not equal to null then it is in update so we call updateProduct
+   */
   const onSubmit = (e) => {
     if (!current) {
       addProduct({
@@ -80,7 +114,6 @@ const AddProduct = ({ current, setCurrent }) => {
         },
       });
     } else {
-      // console.log(productFormData);
       updateProduct({
         variables: {
           productID: productFormData.id,
@@ -91,13 +124,15 @@ const AddProduct = ({ current, setCurrent }) => {
       });
     }
 
+    /**
+     * Clear State and input Value
+     */
     setProductFormData({
       productName: "",
       productDescription: "",
       productPrice: "",
-      productCategory: "",
+      productSubCategory: "",
     });
-
     setCurrent(null);
 
     e.preventDefault();
@@ -140,35 +175,67 @@ const AddProduct = ({ current, setCurrent }) => {
         </div>
 
         {/* Category Select Input */}
+
         <div>
-          <label for="category-select" className={classes.categoryLabel}>
+          <label htmlFor="category-select" className={classes.categoryLabel}>
             Choose a Category
           </label>
           <select
-            onChange={onChange}
+            onChange={onCategoryChange}
             id="category-select"
-            name="productCategory"
+            name="categoryName"
             className={classes.CategorySelect}>
             <option value="">None</option>
 
-            {/* Array of all the Category */}
-            {[
-              "Electronics",
-              "Clothes",
-              "Grocery",
-              "Furniture",
-              "Appliances",
-              "Beauty",
-              "Other",
-            ].map((mappedItem, index) => {
+            {/* Array of all the Category import from other category files */}
+
+            {/* Passing value with combination of id and name to select Category and id seprately */}
+
+            {categoryList.map((mappedItem) => {
               return (
-                <option key={index} value={mappedItem}>
-                  {mappedItem}
+                <option
+                  key={mappedItem.id}
+                  value={`${mappedItem.id}-${mappedItem.name}`}>
+                  {mappedItem.name}
                 </option>
               );
             })}
           </select>
         </div>
+
+        {/* Sub - Category Select Input */}
+
+        <div>
+          <label htmlFor="category-select" className={classes.categoryLabel}>
+            Choose a Sub Category
+          </label>
+          <select
+            onChange={onChange}
+            id="subCategory-select"
+            name="productSubCategory"
+            className={classes.CategorySelect}>
+            {/*  */}
+            {/* Choosing default Category based on Category choosen or not  */}
+
+            {categoryName === "" ? (
+              <option value="">Choose a category First</option>
+            ) : (
+              <option value="">None</option>
+            )}
+
+            {/* Array of all the Sub Category import from other SubCategory files */}
+
+            {subCategoryListItems.map((mappedItem) => {
+              return (
+                <option key={mappedItem.id} value={mappedItem.name}>
+                  {mappedItem.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        {/** Buttons to add or update and Clear */}
 
         <div style={{ textAlign: "center" }}>
           <MyButtonComponent type="submit" variant="contained" color="primary">
