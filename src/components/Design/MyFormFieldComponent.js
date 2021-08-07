@@ -3,6 +3,9 @@ import {
   FormControlLabel,
   Checkbox,
   Typography,
+  MenuItem,
+  InputLabel,
+  Select,
 } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -111,5 +114,27 @@ const MyCheckbox = ({ name, label, className }) => {
     />
   );
 };
+
+// const MySelect = ({ onChange, value, InputLabelText }) => {
+//   return (
+//     <>
+//       <InputLabel id="demo-simple-select-outlined-label">
+//         {InputLabelText}
+//       </InputLabel>
+//       <Select
+//         labelId="demo-simple-select-outlined-label"
+//         id="demo-simple-select-outlined"
+//         value={value}
+//         onChange={onChange}>
+//         <MenuItem value="">
+//           <em>None</em>
+//         </MenuItem>
+//         <MenuItem value={10}>Ten</MenuItem>
+//         <MenuItem value={20}>Twenty</MenuItem>
+//         <MenuItem value={30}>Thirty</MenuItem>
+//       </Select>
+//     </>
+//   );
+// };
 
 export { MyTextInput, MyCheckbox, MyMultilineInput };
