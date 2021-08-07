@@ -14,14 +14,18 @@ import {
   getProductsQuery,
   GET_ALL_PRODUCTS,
 } from "../../../../../../queries/Product/productQueries";
+import { AddProductStyles } from "../../CSS/AddProductStyles";
 
 const AddProduct = ({ current, setCurrent }) => {
   const [productFormData, setProductFormData] = useState({
     productName: "",
     productDescription: "",
     productPrice: "",
+    productCategory: "",
   });
   const { productName, productDescription, productPrice } = productFormData;
+
+  const classes = AddProductStyles();
 
   useEffect(() => {
     if (current !== null) {
@@ -31,6 +35,7 @@ const AddProduct = ({ current, setCurrent }) => {
         productName: "",
         productDescription: "",
         productPrice: "",
+        productCategory: "",
       });
     }
   }, [current]);
@@ -90,6 +95,7 @@ const AddProduct = ({ current, setCurrent }) => {
       productName: "",
       productDescription: "",
       productPrice: "",
+      productCategory: "",
     });
 
     setCurrent(null);
@@ -132,6 +138,38 @@ const AddProduct = ({ current, setCurrent }) => {
             type="text"
           />
         </div>
+
+        {/* Category Select Input */}
+        <div>
+          <label for="category-select" className={classes.categoryLabel}>
+            Choose a Category
+          </label>
+          <select
+            onChange={onChange}
+            id="category-select"
+            name="productCategory"
+            className={classes.CategorySelect}>
+            <option value="">None</option>
+
+            {/* Array of all the Category */}
+            {[
+              "Electronics",
+              "Clothes",
+              "Grocery",
+              "Furniture",
+              "Appliances",
+              "Beauty",
+              "Other",
+            ].map((mappedItem, index) => {
+              return (
+                <option key={index} value={mappedItem}>
+                  {mappedItem}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
         <div style={{ textAlign: "center" }}>
           <MyButtonComponent type="submit" variant="contained" color="primary">
             {!current ? "Add Product" : "Edit Product"}
