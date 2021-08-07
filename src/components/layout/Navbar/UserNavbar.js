@@ -199,6 +199,17 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               )}
             </MyButtonComponent>
 
+            {/* Profile Tab */}
+
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/account");
+              }}
+              color="inherit">
+              My Account
+            </MyButtonComponent>
+
             {/** Showing signup button only if user is not logged in */}
 
             {!isAuthenticated && (

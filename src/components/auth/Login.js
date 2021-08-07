@@ -25,6 +25,7 @@ const Login = (props) => {
     useMutation(USER_LOGIN, {
       onError: (error) => {
         //handling the rejected promise when calling mutation
+        // console.log(error);
       },
       onCompleted: (data) => {
         const token = data.userLogin.token;

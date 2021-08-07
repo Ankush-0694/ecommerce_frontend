@@ -40,6 +40,13 @@ const CartStyles = makeStyles({
     padding: "10px 0px",
     borderRadius: "0px",
   },
+
+  EmptyCart: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export { CartStyles };

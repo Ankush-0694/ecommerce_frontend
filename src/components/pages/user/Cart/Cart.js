@@ -66,30 +66,43 @@ const Cart = ({ history }) => {
         <h3 style={{ textAlign: "center", marginTop: "10px" }}>MY CART</h3>
         <MyDivider />
       </div>
-      <div className={classes.cartContainer}>
-        <div className={classes.item1}>
-          <h3 className={classes.productHeading}>Products</h3>
-          {cartData.map((cartItemData) => {
-            return (
-              <CartItem key={cartItemData.id} cartItemData={cartItemData} />
-            );
-          })}
-        </div>
 
-        <div className={classes.item2}>
-          <CartPriceDetails itemCount={itemCount} totalPrice={totalPrice} />
-          <div className={classes.checkout}>
-            <MyButtonComponent
-              color="primary"
-              variant="contained"
-              fullWidth
-              className={classes.checkoutbtn}
-              onClick={onCheckout}>
-              Checkout
-            </MyButtonComponent>
+      {cartData.length > 0 ? (
+        <div className={classes.cartContainer}>
+          <div className={classes.item1}>
+            <h3 className={classes.productHeading}>Products</h3>
+
+            {cartData.map((cartItemData) => {
+              return (
+                <CartItem key={cartItemData.id} cartItemData={cartItemData} />
+              );
+            })}
+          </div>
+
+          <div className={classes.item2}>
+            <CartPriceDetails itemCount={itemCount} totalPrice={totalPrice} />
+            <div className={classes.checkout}>
+              <MyButtonComponent
+                color="primary"
+                variant="contained"
+                fullWidth
+                className={classes.checkoutbtn}
+                onClick={onCheckout}>
+                Checkout
+              </MyButtonComponent>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <div className={classes.EmptyCart}>
+            {/* Showing Cart Empty if there is no item in the cart */}
+            <div>Icon</div>
+
+            <p style={{ fontSize: "50px" }}>Your Cart is Empty</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
