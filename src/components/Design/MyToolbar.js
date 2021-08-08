@@ -6,9 +6,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-const MyToolbar = () => {
+const MyToolbar = ({ style }) => {
   const classes = useStyles();
-  return <div className={classes.toolbar}></div>;
+  return <div style={style} className={classes.toolbar}></div>;
 };
 
 export default MyToolbar;
