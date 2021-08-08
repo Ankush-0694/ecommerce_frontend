@@ -36,11 +36,11 @@ const SingleProduct = (props) => {
   const [currentReview, setCurrentReview] = useState(null);
 
   /** Make it true after Add to cart completion , and so success alert based on this state
-   * We May need to setAdded false in the myalert Component just like we did for address(setSubmitEvent)
+   * We May need to setCartAdded false in the myalert Component just like we did for address(setSubmitEvent)
    * Because We may need to add items on shop page one after one
    * Add to Cart button will be disabled when it is true
    */
-  const [added, setAdded] = useState(false);
+  const [cartAdded, setCartAdded] = useState(false);
 
   const {
     error: getProductError,
@@ -57,7 +57,7 @@ const SingleProduct = (props) => {
     refetchQueries: [{ query: GET_CART }],
     onError: () => {},
     onCompleted: () => {
-      setAdded(true);
+      setCartAdded(true);
       // props.history.push("/cart");
     },
   });
@@ -107,11 +107,11 @@ const SingleProduct = (props) => {
 
   return (
     <div style={{ marginTop: "10px", padding: "20px" }}>
-      {/** If product successfully added to cart  */}
+      {/** If product successfully cartAdded to cart  */}
 
-      {added && (
-        <MyAlert type="success" setAdded={setAdded}>
-          Added To cart{" "}
+      {cartAdded && (
+        <MyAlert type="success" setCartAdded={setCartAdded}>
+          cartAdded To cart{" "}
           <button
             onClick={() => {
               history.push("/cart");
@@ -121,7 +121,7 @@ const SingleProduct = (props) => {
         </MyAlert>
       )}
 
-      {/** If product already added to cart then error alert */}
+      {/** If product already cartAdded to cart then error alert */}
 
       {addToCartError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
@@ -151,7 +151,7 @@ const SingleProduct = (props) => {
               variant="outlined"
               size="medium"
               color="secondary"
-              disabled={(added || addToCartError) && true} // we disabled this to prevent user click addToCart continuously
+              disabled={(cartAdded || addToCartError) && true} // we disabled this to prevent user click addToCart continuously
               onClick={onClickAddCart}>
               ADD TO CART
             </MyButtonComponent>

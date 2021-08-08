@@ -22,7 +22,7 @@ const MyAlert = ({ children, type, ...otherProps }) => {
   /** This prop passed from checkout page to make false the submit event
    * By which we can generate alert again and again if there is no address selected
    */
-  const { setSubmitEvent, setAdded } = otherProps;
+  const { setSubmitEvent, setCartAdded } = otherProps;
 
   const handleClose = (event, reason) => {
     /**don't close when user click other than close alert button
@@ -44,7 +44,7 @@ const MyAlert = ({ children, type, ...otherProps }) => {
      * Setting added to true after adding the cart on cart page
      * And Here we set the false again after alert closed
      */
-    if (setAdded) setAdded(false);
+    if (setCartAdded) setCartAdded(false);
 
     /** We need to clear the global error from reactive variable
      * after alert get closed
