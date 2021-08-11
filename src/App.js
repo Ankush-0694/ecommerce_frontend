@@ -34,6 +34,7 @@ import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import ShowError from "./components/layout/ErrorComponent/ShowError";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";
+import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -95,6 +96,14 @@ const App = () => {
             exact
             path="/Products/:id"
             component={SingleProduct}
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+
+          <PublicCustomerRoute
+            exact
+            path="/ShopBy"
+            component={ShopBy}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
           />
