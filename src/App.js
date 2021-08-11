@@ -33,6 +33,7 @@ import {
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import ShowError from "./components/layout/ErrorComponent/ShowError";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
+import MyProfile from "./components/pages/user/Profile/MyProfile";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -74,13 +75,28 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             component={Login}
           />
-          <PublicCustomerRoute exact path="/Signup" component={Signup} />
+
+          <PublicCustomerRoute
+            exact
+            path="/Signup"
+            component={Signup}
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+
           <PublicCustomerRoute
             exact
             path="/"
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             component={Home}
+          />
+          <PublicCustomerRoute
+            exact
+            path="/Products/:id"
+            component={SingleProduct}
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
           />
 
           <ProtectedCustomerRoute
@@ -106,13 +122,7 @@ const App = () => {
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
           />
-          <ProtectedCustomerRoute
-            exact
-            path="/Products/:id"
-            component={SingleProduct}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-          />
+
           <ProtectedCustomerRoute
             exact
             path="/checkout"
@@ -124,6 +134,13 @@ const App = () => {
             exact
             path="/checkout/:id"
             component={CheckoutSingle}
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+          <ProtectedCustomerRoute
+            exact
+            path="/account"
+            component={MyProfile}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
           />

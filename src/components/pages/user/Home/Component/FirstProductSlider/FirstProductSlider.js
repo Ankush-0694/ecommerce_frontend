@@ -23,13 +23,11 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
   },
   cardDescription: {
     display: "flex",
     justifyContent: "center",
     alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
   },
 });
 
@@ -62,9 +60,8 @@ const FirstProductSlider = () => {
                 style={{ textDecoration: "none" }}>
                 <MyCardMedia
                   height="200"
-                  // style={{ width: "100%", height: "100%" }}
                   title="IMAGE"
-                  image="https://source.unsplash.com/collection/190727/1600x900"
+                  image="https://source.unsplash.com/weekly?nature"
                 />
                 <MyCardContent>
                   <div className={classes.cardDescription}>
@@ -85,7 +82,7 @@ const FirstProductSlider = () => {
                   </div>
                 </MyCardContent>
               </Link>
-              <div style={{ textAlign: "center" }}>
+              {/* <div style={{ textAlign: "center" }}>
                 <hr style={{ padding: 0, margin: 0 }}></hr>
                 <MyCardActions style={{ justifyContent: "center" }}>
                   <MyButtonComponent
@@ -103,7 +100,7 @@ const FirstProductSlider = () => {
                     BUY NOW
                   </MyButtonComponent>
                 </MyCardActions>
-              </div>
+              </div> */}
             </MyPaper>
           </div>
         );
