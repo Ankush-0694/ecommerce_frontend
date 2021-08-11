@@ -1,7 +1,7 @@
 const categoryList = [
   {
     id: 1,
-    name: "Electonics",
+    name: "Electronics",
   },
   {
     id: 2,
