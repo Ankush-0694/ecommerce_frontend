@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
 
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
-// import PrivateRoute from "./components/routing/PrivateRoute";
 import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
@@ -31,7 +30,6 @@ import {
   PublicAdminRoute,
 } from "./Routing/PublicRoutes";
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
-import ShowError from "./components/layout/ErrorComponent/ShowError";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";

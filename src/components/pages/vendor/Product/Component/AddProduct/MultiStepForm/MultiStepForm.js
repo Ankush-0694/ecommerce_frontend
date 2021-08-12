@@ -1,0 +1,285 @@
+import React, { useEffect, useState } from "react";
+import WizardHeader from "../../../../../../Design/MyWizardHeader";
+import SwipeableViews from "react-swipeable-views";
+import { MultiStepFromStyles } from "../../../CSS/MultiStepFormStyles";
+import {
+  ADD_PRODUCT,
+  UPDATE_PRODUCT,
+} from "../../../../../../../queries/Product/productMutations";
+import { useMutation } from "@apollo/client";
+import ProductDetails from "../TabsContent/ProductDetails";
+import ProductAttributes from "../TabsContent/ProductAttributes";
+import ProductPhotoUpload from "../TabsContent/ProductPhotoUpload";
+import { GET_ALL_PRODUCTS } from "../../../../../../../queries/Product/productQueries";
+import { MyPaper } from "../../../../../../Design/MyPaper";
+import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
+import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
+
+const MultiStepForm = ({ current, setCurrent }) => {
+  const classes = MultiStepFromStyles();
+
+  /** This can be used for checking the form submitted or not
+   * Can show a button Reset Form which will clear all the values and get us to first Step
+   */
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  /** to keep track of on which step we need to be at
+   *  it will use it wizard header and React swipable views
+   * */
+  const [activeStep, setActiveStep] = useState(0);
+
+  /** ProductFormData to maintin controlled component */
+  const [productFormData, setProductFormData] = useState({
+    productName: "",
+    productDescription: "",
+    productPrice: "",
+    productSubCategory: "",
+  });
+
+  /** Adding separate Category state to choose subCategory Based on Category
+   * when we add Product ,  productCategory : categoryName
+   */
+  const [productCategory, setProductCategory] = useState({
+    categoryName: "",
+    categoryId: "",
+  });
+
+  /** Destructing States */
+  const { productName, productDescription, productPrice, productSubCategory } =
+    productFormData; // Destructing State
+  const { categoryName, categoryId } = productCategory; // Destructing State
+
+  const [addProduct] = useMutation(ADD_PRODUCT, {
+    onError: () => {},
+  });
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    onError: () => {},
+  });
+
+  /** Changing the step by Clicking the header
+   * So it passed to WIzard header and REACT_SWIPABLE views
+   */
+  const handleStepChange = (index) => (e) => {
+    setActiveStep(index);
+  };
+
+  /** when  click on buttonn NEXT */
+  const handleStepNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
+  /** when  click on buttonn BACK */
+  const handleStepPrev = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  /**
+   * Setting intial Form State depend on the current
+   * we change current on update and set current to that product and then set productFormData to current
+   */
+  useEffect(() => {
+    if (current !== null) {
+      setProductFormData(current);
+    } else {
+      setProductFormData({
+        productName: "",
+        productDescription: "",
+        productPrice: "",
+        productSubCategory: "",
+      });
+    }
+  }, [current]);
+
+  /** Changing product Form Details State */
+  const onChange = (e) => {
+    setProductFormData({
+      ...productFormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  /** Changing productCategory State when we select a Category */
+  const onCategoryChange = (e) => {
+    /** Value passed from select input */
+    let categoryValue = e.target.value;
+
+    /** Fetching id and Name seprately from selected value */
+    let categoryIdSelected = categoryValue.split("-")[0];
+    let categoryNameSelected = categoryValue.split("-")[1];
+
+    setProductCategory({
+      categoryName: categoryNameSelected,
+      categoryId: categoryIdSelected,
+    });
+  };
+
+  /**
+   * we call mutation depend on the current
+   * if current not equal to null then it is in update so we call updateProduct
+   *
+   * Form Will Submit only at Last Step
+   */
+  const onFormSubmit = (e) => {
+    if (!current) {
+      addProduct({
+        variables: {
+          productName,
+          productDescription,
+          productPrice: Number(productPrice),
+        },
+        // addProduct is the data which comes in response to mutation, with same name as the mutation
+        update: (cache, { data: { addProduct } }) => {
+          const data = cache.readQuery({ query: GET_ALL_PRODUCTS });
+          // need to newData var because we need to add a
+          // new instance of all data , we can not use data var direclty
+          let dataToUpdate = data.getAllProducts;
+          dataToUpdate = [...dataToUpdate, addProduct];
+          cache.writeQuery({
+            query: GET_ALL_PRODUCTS,
+            data: { ...data, getAllProducts: { dataToUpdate } },
+          });
+        },
+      });
+    } else {
+      updateProduct({
+        variables: {
+          productID: productFormData.id, // this property will be set using current
+          productName,
+          productDescription,
+          productPrice: Number(productPrice),
+        },
+      });
+    }
+
+    /**
+     * Clear State and input Value- WHich will clear the form
+     */
+    setProductFormData({
+      productName: "",
+      productDescription: "",
+      productPrice: "",
+      productSubCategory: "",
+    });
+
+    /** Need to disable the Updating State - Because this method is called for both add and update Product */
+    setCurrent(null);
+
+    e.preventDefault();
+  };
+
+  /** Header Tabs Name -  Passed to WIZARD HEADER */
+  const tabs = ["Product Details", "Attributes", "Photo Upload"];
+
+  return (
+    <div>
+      <MyPaper elevation={1} className={classes.root}>
+        {/* Heading */}
+
+        <MyTypography
+          variant="h4"
+          gutterBottom
+          color="primary"
+          style={{ padding: "0 8px", textAlign: "center" }}>
+          Add Your Product
+        </MyTypography>
+
+        {/* Header With TABS */}
+        <WizardHeader
+          tabs={tabs}
+          activeStep={activeStep}
+          handleChange={handleStepChange}
+          formSubmitted={formSubmitted}
+        />
+
+        {/* Form NEEDED to SUBMIT */}
+
+        <form onSubmit={onFormSubmit}>
+          <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
+            <ProductDetails
+              onChange={onChange}
+              productFormData={productFormData}
+            />
+            <ProductAttributes
+              productCategory={productCategory}
+              onCategoryChange={onCategoryChange}
+              onChange={onChange}
+            />
+            <ProductPhotoUpload />
+          </SwipeableViews>
+
+          {/* Buttons - BACK NEXT , RESET  AND SUBMIT */}
+
+          <MyGridContainer
+            justify="space-between"
+            style={{ padding: "16px 16px" }}>
+            {/* Back Button - Disable for first step  */}
+            <MyGridItem>
+              <MyButtonComponent
+                disabled={activeStep === 0 || formSubmitted}
+                onClick={handleStepPrev}
+                variant="contained"
+                color="default"
+                className={`${classes.navigation} ${classes.prevBtn}`}>
+                Back
+              </MyButtonComponent>
+            </MyGridItem>
+
+            {/**  RESET Button - Show only on Update State OR on Last step  
+              OnClick -
+               IF current then reset the current , 
+               if last step reset - go to first Page
+               If both then both thing will happen
+           */}
+            {(current || activeStep === tabs.length - 1) && (
+              <MyGridItem>
+                <MyButtonComponent
+                  color="secondary"
+                  className={classes.navigation}
+                  variant="contained"
+                  onClick={() => {
+                    current && setCurrent(null);
+                    activeStep === tabs.length - 1 && setActiveStep(0);
+                  }}
+                  disabled={formSubmitted}>
+                  Reset
+                </MyButtonComponent>
+              </MyGridItem>
+            )}
+
+            {/* NEXT  Button - Disable for Last Step  */}
+            {activeStep < tabs.length - 1 && (
+              <MyGridItem>
+                <MyButtonComponent
+                  color="primary"
+                  className={classes.navigation}
+                  variant="contained"
+                  onClick={handleStepNext}
+                  disabled={formSubmitted}>
+                  Next
+                </MyButtonComponent>
+              </MyGridItem>
+            )}
+
+            {/* SUBMIT  Button - Show only For Last Step  */}
+
+            {activeStep === tabs.length - 1 && (
+              <MyGridItem>
+                <MyButtonComponent
+                  type="submit"
+                  color="primary"
+                  className={classes.navigation}
+                  variant="contained"
+                  disabled={formSubmitted}>
+                  {!current ? "Add" : "Update"}
+                </MyButtonComponent>
+              </MyGridItem>
+            )}
+          </MyGridContainer>
+        </form>
+      </MyPaper>
+    </div>
+  );
+};
+
+export default MultiStepForm;
