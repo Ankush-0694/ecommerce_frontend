@@ -5,8 +5,8 @@ import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
-import AddProduct from "./Component/AddProduct/AddProduct";
 import VendorAllProducts from "./Component/AllProducts/AllProducts";
+import MultiStepForm from "./Component/AddProduct/MultiStepForm/MultiStepForm";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
 
@@ -61,7 +61,8 @@ const VendorProduct = () => {
         <MyFullScreenBox display="flex" width="50%" height="90vh">
           <div style={{ margin: "auto", width: "70%" }}>
             <div>
-              <AddProduct current={current} setCurrent={setCurrent} />
+              {/* <AddProduct current={current} setCurrent={setCurrent} /> */}
+              <MultiStepForm current={current} setCurrent={setCurrent} />
             </div>
           </div>
         </MyFullScreenBox>
