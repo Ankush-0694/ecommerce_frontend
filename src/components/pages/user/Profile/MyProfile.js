@@ -5,12 +5,10 @@ import {
 } from "../../../Design/MySideDrawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Route } from "react-router-dom";
-import Customers from "../../admin/Dashboard/Component/UserListComponents/Customers/Customers";
 import { makeStyles } from "@material-ui/core";
-import PersonalInformation from "./Component/PersonalInformation";
+import ProfileInformation from "./Component/ProfileInformation/ProfileInformation";
 import AddressContainer from "../Checkout/AddressContainer";
-import ProductReviewList from "../Products/SingleProduct/Component/ProductReviewList/ProductReviewList";
-import RatingAndReview from "./Component/RatingAndReview";
+import RatingAndReview from "./Component/RatingAndReview/RatingAndReview";
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +20,7 @@ const MyProfile = () => {
   const classes = useStyles();
   const listData = [
     {
-      Name: "Personal Information",
+      Name: "Profile Information",
       url: "/account",
       icon: "account_circle_Icon",
     },
@@ -52,7 +50,7 @@ const MyProfile = () => {
         {/* This is working because we remove exact from app.js in this route
             And we are using exact here
          */}
-        <Route exact path="/account" component={PersonalInformation} />
+        <Route exact path="/account" component={ProfileInformation} />
 
         {/* Coming From /user/checkout/addressContainer */}
         <Route exact path="/account/address" component={AddressContainer} />
