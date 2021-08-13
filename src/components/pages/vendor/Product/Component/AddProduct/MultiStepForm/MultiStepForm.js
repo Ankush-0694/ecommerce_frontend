@@ -181,7 +181,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
           gutterBottom
           color="primary"
           style={{ padding: "0 8px", textAlign: "center" }}>
-          Add Your Product
+          {!current ? "Add Your Product" : "Update Your Product"}
         </MyTypography>
 
         {/* Header With TABS */}

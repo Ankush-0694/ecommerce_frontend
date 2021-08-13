@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { AddProductStyles } from "../../../CSS/AddProductStyles";
-import { categoryList, subCategoryList } from "../Category_SubCategory";
+import { categoryList, subCategoryList } from "../Category_SubCategoryData";
 
 const useStyles = makeStyles({
   // Category and subcategory styles are same

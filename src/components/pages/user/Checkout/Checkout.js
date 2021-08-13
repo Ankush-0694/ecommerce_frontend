@@ -14,6 +14,9 @@ import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { GET_ALL_ADDRESS } from "../../../../queries/address/addressQueries";
 import { GET_CART } from "../../../../queries/Cart/cartQueries";
 
+/** Used before but not using it
+ *Can be used to take help
+ */
 const Checkout = (props) => {
   const classes = CheckoutStyles();
 

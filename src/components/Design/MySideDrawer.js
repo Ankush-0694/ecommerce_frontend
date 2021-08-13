@@ -1,5 +1,14 @@
-import { makeStyles, useTheme } from "@material-ui/core";
+import { Divider, makeStyles, useTheme } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
+import { Fragment } from "react";
+import { withRouter } from "react-router";
+import { MyIcon } from "./MyIcons";
+import {
+  MyListContainer,
+  MyListItem,
+  MyListItemIcon,
+  MyListItemText,
+} from "./MyList";
 
 const drawerWidth = 250;
 const useStyles = makeStyles((theme) => ({
@@ -9,10 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    marginLeft: "10px",
   },
 }));
 
-const MySideDrawer = ({ children }) => {
+/** container for side Drawer */
+const MySideDrawerContainer = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -29,4 +40,48 @@ const MySideDrawer = ({ children }) => {
   );
 };
 
-export { MySideDrawer };
+/** toolbar to make content below app Bar */
+const SideDrawerStyles = makeStyles((theme) => ({
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+}));
+
+/** List Item  for side Drawer */
+const MySideDrawerList = withRouter(({ history, listData }) => {
+  const classes = SideDrawerStyles();
+
+  return (
+    <div>
+      {/* This toolbar is neccessary to make the drawer list below navbar */}
+      <div
+        className={classes.toolbar}
+        style={{ backgroundColor: "#3F51BB" }}></div>
+
+      <div>
+        {listData.map((item, index) => {
+          return (
+            <Fragment key={index}>
+              <Divider />
+              <MyListContainer>
+                <MyListItem
+                  button
+                  onClick={() => {
+                    history.push(item.url);
+                  }}>
+                  {item.icon && (
+                    <MyListItemIcon>
+                      <MyIcon>{item.icon}</MyIcon>
+                    </MyListItemIcon>
+                  )}
+                  <MyListItemText primary={item.Name} />
+                </MyListItem>
+              </MyListContainer>
+            </Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+});
+
+export { MySideDrawerContainer, MySideDrawerList };

@@ -41,9 +41,17 @@ const AddressContainer = (props) => {
 
   /** This function is used to change the value of address state id  in this component
    * Which comes from parent checkout component
+   *
+   * Selected address only if props are passed from parent component
+   *
+   * Because we are using it in My Profile Also
    */
   const handleAddressRadio = (event) => {
-    setSelectedAddress(event.target.value);
+    /** Must compare with undefined because it checks wheither props passed or not
+     *
+     * Don't check with null
+     */
+    selectedAddress !== undefined && setSelectedAddress(event.target.value);
   };
 
   return (
@@ -73,6 +81,7 @@ const AddressContainer = (props) => {
                         data={data}
                         current={current}
                         setCurrent={setCurrent}
+                        selectedAddress={selectedAddress} //this is passed to remove radio button when using it MyProfile Page
                       />
                     );
                   })}

@@ -8,6 +8,7 @@ import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import MyDivider from "../../../Design/MyDivider";
+import { MyPaper } from "../../../Design/MyPaper";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();
@@ -62,47 +63,56 @@ const Cart = ({ history }) => {
 
   return (
     <div>
+      {/* Heading */}
       <div>
         <h3 style={{ textAlign: "center", marginTop: "10px" }}>MY CART</h3>
         <MyDivider />
       </div>
 
-      {cartData.length > 0 ? (
-        <div className={classes.cartContainer}>
-          <div className={classes.item1}>
-            <h3 className={classes.productHeading}>Products</h3>
+      {/* Cart Data Map */}
+      <div>
+        {cartData.length > 0 ? (
+          <div className={classes.cartContainer}>
+            {/* Cart Product List - Left Side */}
+            <MyPaper className={classes.item1}>
+              <MyPaper elevation={3} className="heading">
+                <h3 className={classes.productHeading}>Products</h3>
+              </MyPaper>
 
-            {cartData.map((cartItemData) => {
-              return (
-                <CartItem key={cartItemData.id} cartItemData={cartItemData} />
-              );
-            })}
-          </div>
+              {cartData.map((cartItemData) => {
+                return (
+                  <CartItem key={cartItemData.id} cartItemData={cartItemData} />
+                );
+              })}
+            </MyPaper>
 
-          <div className={classes.item2}>
-            <CartPriceDetails itemCount={itemCount} totalPrice={totalPrice} />
-            <div className={classes.checkout}>
-              <MyButtonComponent
-                color="primary"
-                variant="contained"
-                fullWidth
-                className={classes.checkoutbtn}
-                onClick={onCheckout}>
-                Checkout
-              </MyButtonComponent>
+            {/* Cart Price Details - Right Side */}
+
+            <div className={classes.item2}>
+              <CartPriceDetails itemCount={itemCount} totalPrice={totalPrice} />
+              <div className={classes.checkout}>
+                <MyButtonComponent
+                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  className={classes.checkoutbtn}
+                  onClick={onCheckout}>
+                  Checkout
+                </MyButtonComponent>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          <div className={classes.EmptyCart}>
-            {/* Showing Cart Empty if there is no item in the cart */}
-            <div>Icon</div>
+        ) : (
+          <div>
+            <div className={classes.EmptyCart}>
+              {/* Showing Cart Empty if there is no item in the cart */}
+              <div>Icon</div>
 
-            <p style={{ fontSize: "50px" }}>Your Cart is Empty</p>
+              <p style={{ fontSize: "50px" }}>Your Cart is Empty</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

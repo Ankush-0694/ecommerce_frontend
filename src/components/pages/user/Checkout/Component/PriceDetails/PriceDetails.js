@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { makeStyles } from "../../../../../Design/MyUseStyles";
 import { Paper } from "@material-ui/core";
@@ -57,8 +57,14 @@ const PriceDetails = ({ productData, quantity, setTotalPriceOfOrder }) => {
     });
   }
 
-  /** Passed from checkout page as a props , to store price during adding order */
-  setTotalPriceOfOrder(totalPrice);
+  /** Passed from checkout page as a props , to store price during adding order
+   *
+   * Using useEffect to prevent Error
+   */
+
+  useEffect(() => {
+    setTotalPriceOfOrder(totalPrice);
+  }, [totalPrice]);
 
   let deliveryCharge = 0;
   if (totalPrice < 500) deliveryCharge = 40;

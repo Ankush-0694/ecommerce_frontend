@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/styles";
 import {
   categoryList,
   subCategoryList,
-} from "../../../../vendor/Product/Component/AddProduct/Category_SubCategory";
+} from "../../../../vendor/Product/Component/AddProduct/Category_SubCategoryData";
 import { getImageByCategoryOrSubCategory } from "./ImageURLs";
 
 const useStyles = makeStyles({

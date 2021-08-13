@@ -85,7 +85,7 @@ const CartItem = ({ cartItemData }) => {
   };
 
   return (
-    <MyPaper elevation={3} className={classes.cartItem}>
+    <MyPaper elevation={7} className={classes.cartItem}>
       <div>
         <div className={classes.MediaImgDiv}>
           <MyCardMedia

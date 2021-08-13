@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyTypography } from "../../../../../Design/MyTypography";
-import { makeStyles } from "../../../../../Design/MyUseStyles";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 import { ProductDetailsStyles } from "../../CSS/ProductDetailsStyles";
 import { UPDATE_CART_QUANTITY } from "../../../../../../queries/Cart/cartMutations";
@@ -47,14 +46,6 @@ const MultipleProductDetails = ({ productData }) => {
       setQuantityById(cartID, quantityCount);
     }
   }, [quantityCount]);
-
-  /** If we want to remove data from checkout  */
-
-  // const onRemove = () => {
-  //   let data = cartItemsVar();
-  //   data = data.filter((item) => item.id !== cartID);
-  //   cartItemsVar(data);
-  // };
 
   return (
     <div className={classes.productDiv}>

@@ -4,7 +4,7 @@ import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutations";
 import { useMutation } from "@apollo/client";
 
-const ProductReviewList = ({ reviewData, currentReview, setCurrentReview }) => {
+const ProductReviewList = ({ reviewData, setCurrentReview }) => {
   const { id, productID, rating, review } = reviewData;
 
   const [deleteReview, { data: deleteReviewData }] = useMutation(DELETE_REVIEW);
@@ -12,10 +12,12 @@ const ProductReviewList = ({ reviewData, currentReview, setCurrentReview }) => {
   const onDeleteReview = () => {
     deleteReview({
       variables: {
-        id,
+        id, // review id
       },
     });
-    // refetch or writeQuery
+
+    // refetch or writeQuery Here to Update the Ui after Delete
+
     setCurrentReview(null);
   };
 

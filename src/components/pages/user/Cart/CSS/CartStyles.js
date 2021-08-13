@@ -11,13 +11,11 @@ const CartStyles = makeStyles({
   },
   productHeading: {
     textAlign: "center",
-    margin: "0px",
-    padding: "5px",
-    borderBottom: "1px solid black",
+
+    padding: "10px",
   },
   item1: {
     width: "60%",
-
     height: "84vh",
     overflow: "auto",
   },
