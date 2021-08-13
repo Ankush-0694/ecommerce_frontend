@@ -29,6 +29,9 @@ const MyFiberManualRecordIcon = () => {
   return <FiberManualRecordIcon />;
 };
 
+/** passed material ui icon name
+ * Must be separeated by underscore and all letter small except i of icon
+ */
 const MyIcon = ({ children }) => {
   return <Icon>{children}</Icon>;
 };

@@ -17,7 +17,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
 
   const { review } = reviewFormData;
 
-  // Check Every time, the current value then based on it we set the form value
+  // Check Every time, the currentReview value change then based on it we set the form value
   useEffect(() => {
     if (currentReview !== null) {
       setReviewFormData(currentReview);
@@ -54,7 +54,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
     } else {
       updateReview({
         variables: {
-          ...currentReview,
+          ...currentReview, // need to add this because it has id product id and other stuff
           review: review, // this comes from reviewFromdata
           rating: ratingValue, // needed to added separately due to another rating state
         },

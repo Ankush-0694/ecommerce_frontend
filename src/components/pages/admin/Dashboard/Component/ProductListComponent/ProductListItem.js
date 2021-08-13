@@ -1,9 +1,9 @@
 import React from "react";
-import { MyCardMedia } from "../../../../../../Design/MyCardComponents";
-import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
-import { MyPaper } from "../../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { AllProductStyles } from "../../../../../vendor/Product/CSS/AllProductStyles";
+import { MyCardMedia } from "../../../../../Design/MyCardComponents";
+import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
+import { MyPaper } from "../../../../../Design/MyPaper";
+import { MyTypography } from "../../../../../Design/MyTypography";
+import { AllProductStyles } from "../../../../vendor/Product/CSS/AllProductStyles";
 
 const ProductListItem = ({ data }) => {
   /* We are fetching this styling from vendor because we are using same type of component */

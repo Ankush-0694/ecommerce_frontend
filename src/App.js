@@ -145,7 +145,6 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
           />
           <ProtectedCustomerRoute
-            exact
             path="/account"
             component={MyProfile}
             isAuthenticated={isAuthenticated}

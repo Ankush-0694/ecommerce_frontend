@@ -17,6 +17,7 @@ import MyAlert from "../../../../Design/MyAlert";
 import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
+import { MyPaper } from "../../../../Design/MyPaper";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -107,8 +108,7 @@ const SingleProduct = (props) => {
 
   return (
     <div style={{ marginTop: "10px", padding: "20px" }}>
-      {/** If product successfully cartAdded to cart  */}
-
+      {/** If product successfully cartAdded to cart - Show This Alert  */}
       {cartAdded && (
         <MyAlert type="success" setCartAdded={setCartAdded}>
           cartAdded To cart{" "}
@@ -122,7 +122,6 @@ const SingleProduct = (props) => {
       )}
 
       {/** If product already cartAdded to cart then error alert */}
-
       {addToCartError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
       <MyGridContainer justify="center" spacing={4}>
@@ -190,16 +189,18 @@ const SingleProduct = (props) => {
 
         <MyGridContainer justify="center">
           <MyGridItem xs={8}>
-            {productData.reviews.map((review, index) => {
-              return (
-                <ProductReviewList
-                  currentReview={currentReview}
-                  setCurrentReview={setCurrentReview}
-                  key={index}
-                  reviewData={review}
-                />
-              );
-            })}
+            <MyPaper style={{ padding: "20px" }}>
+              {productData.reviews.map((review, index) => {
+                return (
+                  <ProductReviewList
+                    currentReview={currentReview}
+                    setCurrentReview={setCurrentReview}
+                    key={index}
+                    reviewData={review}
+                  />
+                );
+              })}
+            </MyPaper>
           </MyGridItem>
         </MyGridContainer>
       </div>

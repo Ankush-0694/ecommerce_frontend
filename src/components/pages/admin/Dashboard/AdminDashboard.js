@@ -1,43 +1,58 @@
 import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Route } from "react-router-dom";
-import SideDrawerList from "./Component/SideDrawerList/SideDrawerList";
 import { AdminDashboardStyles } from "./CSS/AdminDashboardStyles";
-import ProductList from "./Component/DrawerContent/ProductListComponent/ProductList";
-import { MySideDrawer } from "../../../Design/MySideDrawer";
-import Customers from "./Component/DrawerContent/UserListComponents/Customers/Customers";
-import Vendors from "./Component/DrawerContent/UserListComponents/Vendors/Vendors";
+import {
+  MySideDrawerContainer,
+  MySideDrawerList,
+} from "../../../Design/MySideDrawer";
+import Customers from "./Component/UserListComponents/Customers/Customers";
+import Vendors from "./Component/UserListComponents/Vendors/Vendors";
+import ProductList from "./Component/ProductListComponent/ProductList";
 
 // this dashboard could be created using verical tab component in material ui
 const AdminDashboard = () => {
   const classes = AdminDashboardStyles();
+
+  /**
+   * This data Array Needed to pass to drawer list to show Side Bar
+   */
+  const listData = [
+    {
+      Name: "Customers",
+      url: "/admin/dashboard/customers",
+      icon: "directions_walk_Icon",
+    },
+    {
+      Name: "Vendors",
+      url: "/admin/dashboard/vendors",
+      icon: "emoji_people_Icon",
+    },
+
+    {
+      Name: "Products",
+      url: "/admin/dashboard/products",
+      icon: "card_giftcard_Icon",
+    },
+  ];
 
   return (
     <div className={classes.root}>
       <CssBaseline />
 
       {/* Side Drawer implmented in separate design component */}
-      <MySideDrawer>
+      <MySideDrawerContainer>
         {/** List content heading to add in the side drawer */}
-        <SideDrawerList />
-      </MySideDrawer>
+        <MySideDrawerList listData={listData} />
+      </MySideDrawerContainer>
 
       {/* The main content at the Admin pages */}
-      <div style={{ flexGrow: 2 }}>
-        {/* Used IIFE's to use IF else syntax in the jsx */}
-        {(() => {
-          {
-            /* To show home dashboard at "/dashboard" and "/dashboard/"
-             */
-          }
-          if (
-            window.location.href.split("/").pop() === "dashboard" ||
-            window.location.href.split("/").pop() === ""
-          ) {
-            return <div>Make a welcome thing or something for admin page</div>;
-          }
-        })()}
+      <div style={{ flexGrow: 2, marginLeft: "20px" }}>
+        {/* This is working we remove exact from app.js in this route
+            And we are using exact here
+         */}
 
+        {/* <Route exact path="/admin/dashboard" component={Customers} /> */}
         <Route exact path="/admin/dashboard/customers" component={Customers} />
         <Route exact path="/admin/dashboard/vendors" component={Vendors} />
         <Route exact path="/admin/dashboard/products" component={ProductList} />

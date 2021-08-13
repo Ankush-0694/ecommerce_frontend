@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_PRODUCTS } from "../../../../../../../queries/Product/productQueries";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
+import { MyTypography } from "../../../../../Design/MyTypography";
 import ProductListItem from "./ProductListItem";
-import ShowError from "../../../../../../layout/ErrorComponent/ShowError";
-import ShowLoading from "../../../../../../layout/LoadingComponent/ShowLoading";
+import ShowError from "../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 
 const ProductList = () => {
   const {
