@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import { MyTextInput } from "../../../../../../Design/MyFormFieldComponent";
 import { AddProductStyles } from "../../../CSS/AddProductStyles";
 import { categoryList, subCategoryList } from "../Category_SubCategoryData";
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 const ProductAttributes = (props) => {
   const classes = useStyles();
 
-  const { productCategory, onCategoryChange, onChange } = props;
+  const { productCategory, productBrand, onCategoryChange, onChange } = props;
 
   const { categoryId, categoryName } = productCategory;
 
@@ -86,6 +87,18 @@ const ProductAttributes = (props) => {
             );
           })}
         </select>
+      </div>
+
+      {/* Brand */}
+
+      <div className="field">
+        <MyTextInput
+          type="text"
+          name="productBrand"
+          onChange={onChange}
+          label="Please Enter Valid Brand Name"
+          value={productBrand}
+        />
       </div>
     </div>
   );

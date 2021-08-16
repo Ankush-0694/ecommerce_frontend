@@ -61,7 +61,7 @@ const FirstProductSlider = () => {
                 <MyCardMedia
                   height="200"
                   title="IMAGE"
-                  image="https://source.unsplash.com/weekly?nature"
+                  image={`https://source.unsplash.com/collection/${mappedProduct.productPrice}/800x450`}
                 />
                 <MyCardContent>
                   <div className={classes.cardDescription}>
@@ -77,12 +77,24 @@ const FirstProductSlider = () => {
                       component="p"
                       variant="body2"
                       color="textPrimary">
-                      Price - {mappedProduct.productPrice}$
+                      Price - ₹{mappedProduct.productPrice}
                     </MyTypography>
                   </div>
                 </MyCardContent>
               </Link>
-              {/* <div style={{ textAlign: "center" }}>
+            </MyPaper>
+          </div>
+        );
+      })}
+    </MyMultiCarousel>
+  );
+};
+
+export default FirstProductSlider;
+
+{
+  /* These are addCart and BUY NOW button */
+  /* <div style={{ textAlign: "center" }}>
                 <hr style={{ padding: 0, margin: 0 }}></hr>
                 <MyCardActions style={{ justifyContent: "center" }}>
                   <MyButtonComponent
@@ -100,13 +112,5 @@ const FirstProductSlider = () => {
                     BUY NOW
                   </MyButtonComponent>
                 </MyCardActions>
-              </div> */}
-            </MyPaper>
-          </div>
-        );
-      })}
-    </MyMultiCarousel>
-  );
-};
-
-export default FirstProductSlider;
+              </div> */
+}

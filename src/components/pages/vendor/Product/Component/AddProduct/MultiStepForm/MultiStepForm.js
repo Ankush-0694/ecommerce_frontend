@@ -16,6 +16,8 @@ import { MyTypography } from "../../../../../../Design/MyTypography";
 import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 
+import { emptyProductState, useAddProductHook } from "./UseAddProductHook";
+
 const MultiStepForm = ({ current, setCurrent }) => {
   const classes = MultiStepFromStyles();
 
@@ -29,13 +31,11 @@ const MultiStepForm = ({ current, setCurrent }) => {
    * */
   const [activeStep, setActiveStep] = useState(0);
 
-  /** ProductFormData to maintin controlled component */
-  const [productFormData, setProductFormData] = useState({
-    productName: "",
-    productDescription: "",
-    productPrice: "",
-    productSubCategory: "",
-  });
+  /** ProductFormData to maintin controlled component
+   *
+   *  emptyProductState will be used to clear the state and form
+   */
+  const { productFormData, setProductFormData } = useAddProductHook();
 
   /** Adding separate Category state to choose subCategory Based on Category
    * when we add Product ,  productCategory : categoryName
@@ -46,8 +46,14 @@ const MultiStepForm = ({ current, setCurrent }) => {
   });
 
   /** Destructing States */
-  const { productName, productDescription, productPrice, productSubCategory } =
-    productFormData; // Destructing State
+  const {
+    productName,
+    productDescription,
+    productPrice,
+    productSubCategory,
+    productBrand,
+  } = productFormData; // Destructing State
+
   const { categoryName, categoryId } = productCategory; // Destructing State
 
   const [addProduct] = useMutation(ADD_PRODUCT, {
@@ -80,14 +86,11 @@ const MultiStepForm = ({ current, setCurrent }) => {
    */
   useEffect(() => {
     if (current !== null) {
-      setProductFormData(current);
-    } else {
       setProductFormData({
-        productName: "",
-        productDescription: "",
-        productPrice: "",
-        productSubCategory: "",
+        ...current,
       });
+    } else {
+      setProductFormData(emptyProductState);
     }
   }, [current]);
 
@@ -124,9 +127,9 @@ const MultiStepForm = ({ current, setCurrent }) => {
     if (!current) {
       addProduct({
         variables: {
-          productName,
-          productDescription,
-          productPrice: Number(productPrice),
+          ...productFormData,
+          productPrice: Number(productPrice), // need to change into number
+          productCategory: categoryName,
         },
         // addProduct is the data which comes in response to mutation, with same name as the mutation
         update: (cache, { data: { addProduct } }) => {
@@ -144,10 +147,10 @@ const MultiStepForm = ({ current, setCurrent }) => {
     } else {
       updateProduct({
         variables: {
+          ...productFormData,
           productID: productFormData.id, // this property will be set using current
-          productName,
-          productDescription,
           productPrice: Number(productPrice),
+          productCategory: categoryName,
         },
       });
     }
@@ -156,14 +159,14 @@ const MultiStepForm = ({ current, setCurrent }) => {
      * Clear State and input Value- WHich will clear the form
      */
     setProductFormData({
-      productName: "",
-      productDescription: "",
-      productPrice: "",
-      productSubCategory: "",
+      emptyProductState,
     });
 
     /** Need to disable the Updating State - Because this method is called for both add and update Product */
     setCurrent(null);
+
+    /*  */
+    setActiveStep(0);
 
     e.preventDefault();
   };
@@ -192,7 +195,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
           formSubmitted={formSubmitted}
         />
 
-        {/* Form NEEDED to SUBMIT */}
+        {/* Form to fill and SUBMIT */}
 
         <form onSubmit={onFormSubmit}>
           <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
@@ -203,9 +206,10 @@ const MultiStepForm = ({ current, setCurrent }) => {
             <ProductAttributes
               productCategory={productCategory}
               onCategoryChange={onCategoryChange}
+              productBrand={productBrand}
               onChange={onChange}
             />
-            <ProductPhotoUpload />
+            {/* <ProductPhotoUpload /> */}
           </SwipeableViews>
 
           {/* Buttons - BACK NEXT , RESET  AND SUBMIT */}
@@ -225,27 +229,29 @@ const MultiStepForm = ({ current, setCurrent }) => {
               </MyButtonComponent>
             </MyGridItem>
 
-            {/**  RESET Button - Show only on Update State OR on Last step  
+            {/**  RESET Button - Clear the states and the form
               OnClick -
-               IF current then reset the current , 
-               if last step reset - go to first Page
-               If both then both thing will happen
+               reset the current and the Form Data
            */}
-            {(current || activeStep === tabs.length - 1) && (
+
+            {
               <MyGridItem>
                 <MyButtonComponent
                   color="secondary"
                   className={classes.navigation}
                   variant="contained"
                   onClick={() => {
-                    current && setCurrent(null);
+                    /** Clear form on reset */
+                    setProductFormData(emptyProductState);
+                    setCurrent(null);
+
                     activeStep === tabs.length - 1 && setActiveStep(0);
                   }}
                   disabled={formSubmitted}>
                   Reset
                 </MyButtonComponent>
               </MyGridItem>
-            )}
+            }
 
             {/* NEXT  Button - Disable for Last Step  */}
             {activeStep < tabs.length - 1 && (

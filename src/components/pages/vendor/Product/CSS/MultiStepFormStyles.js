@@ -4,6 +4,7 @@ const MultiStepFromStyles = makeStyles((theme) => ({
   root: {
     border: `8px solid ${theme.palette.common.white}`,
     margin: 16,
+    minWidth: "400px",
     padding: "36px 0 0",
     background: `rgba(255,255,255,0.9)`,
     boxShadow: [
@@ -12,7 +13,7 @@ const MultiStepFromStyles = makeStyles((theme) => ({
     ],
   },
   navigation: {
-    width: 110,
+    width: 100,
     fontSize: 12,
     [theme.breakpoints.down("xs")]: {
       fontSize: 10,

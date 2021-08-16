@@ -5,15 +5,24 @@ const ADD_PRODUCT = gql`
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
+    $productCategory: String!
+    $productSubCategory: String!
+    $productBrand: String
   ) {
     addProduct(
       productName: $productName
       productDescription: $productDescription
       productPrice: $productPrice
+      productCategory: $productCategory
+      productSubCategory: $productSubCategory
+      productBrand: $productBrand
     ) {
       productName
       productDescription
       productPrice
+      productCategory
+      productSubCategory
+      productBrand
     }
   }
 `;
@@ -24,17 +33,26 @@ const UPDATE_PRODUCT = gql`
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
+    $productCategory: String!
+    $productSubCategory: String!
+    $productBrand: String
   ) {
     updateProduct(
       productID: $productID
       productName: $productName
       productDescription: $productDescription
       productPrice: $productPrice
+      productCategory: $productCategory
+      productSubCategory: $productSubCategory
+      productBrand: $productBrand
     ) {
       id
       productName
       productDescription
       productPrice
+      productCategory
+      productSubCategory
+      productBrand
     }
   }
 `;
@@ -46,6 +64,9 @@ const DELETE_PRODUCT = gql`
       productName
       productDescription
       productPrice
+      productCategory
+      productSubCategory
+      productBrand
     }
   }
 `;

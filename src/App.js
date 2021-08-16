@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
-
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import Cart from "./components/pages/user/Cart/Cart";
 import Signup from "./components/auth/Signup";
@@ -29,6 +28,7 @@ import {
   PublicVendorRoute,
   PublicAdminRoute,
 } from "./Routing/PublicRoutes";
+
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";

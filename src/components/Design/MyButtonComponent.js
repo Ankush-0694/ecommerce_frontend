@@ -12,6 +12,7 @@ const useStyles = makeStyles({
 
 const MyButtonComponent = ({
   onClick,
+  onMouseDown,
   userStyle,
   children,
   type,
@@ -30,6 +31,7 @@ const MyButtonComponent = ({
       disableRipple
       variant={variant}
       onClick={onClick}
+      onMouseDown={onMouseDown}
       style={userStyle}
       type={type}
       color={color}
