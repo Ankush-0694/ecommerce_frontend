@@ -1,23 +1,48 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import { userNavbarStyles } from "../Css/UserNavbarStyles";
 import SearchIcon from "@material-ui/icons/Search";
 import UserNavbarSearchResult from "./UserNavbarSearchResult";
+import { GET_PRODUCT_BY_SEARCH_TEXT } from "../../../../queries/Product/productQueries";
+import { useLazyQuery } from "@apollo/client";
+import { withRouter } from "react-router-dom";
 
-const UserNavbarSearch = () => {
+const UserNavbarSearch = ({ history }) => {
   const classes = userNavbarStyles();
+
+  /** this is to store the searched text */
   const [searchText, setSearchText] = useState("");
+
+  /** this is to check , wheither Query is completed or not
+   * Because we can not render Result until query got completed
+   */
+  const [show, setShow] = useState(false);
 
   /** use Lazy Query to search on Change
    * Pass a variable searchText and query on backend
    */
+  const [
+    getProductsBySearchText,
+    { error: searchError, loading: searchLoading, data: productData },
+  ] = useLazyQuery(GET_PRODUCT_BY_SEARCH_TEXT, {
+    onCompleted: (data) => {
+      setShow(true);
+    },
+  });
 
   /**
-   * If we hit enter then we can pass search text as a query in route and show the result in new Page like /search/?searchText={searchText}
+   * If we hit enter then we can pass search text as a query in
+   *  route and show the result in new Page like /ShopBy/?searchText={searchText}
    */
-
   const onChange = (e) => {
-    setSearchText(e.target.value);
+    setShow(false); // Now changin the text so Hide the Result or there will be many issues
+
+    getProductsBySearchText({
+      variables: {
+        searchText: e.target.value,
+      },
+    });
+    setSearchText(e.target.value); // storing  to  pass on ShopBy Page as a query Parameter
   };
 
   return (
@@ -26,18 +51,38 @@ const UserNavbarSearch = () => {
         onChange={onChange}
         className={classes.searchInput}
         placeholder="Search Product..."
+        onBlur={(e) => {
+          setShow(false);
+        }}
+        onFocus={() => {
+          setShow(true);
+        }}
       />
 
       <MyButtonComponent
         color="primary"
         variant="contained"
-        className={classes.searchIcon}>
+        className={classes.searchIcon}
+        onMouseDown={() => {
+          if (searchText.trim() === "") return;
+          history.push(`/ShopBy?q=${searchText}`);
+        }}>
         <SearchIcon />
       </MyButtonComponent>
 
-      {searchText !== "" && <UserNavbarSearchResult />}
+      {/* Show Result only input has something and Query is completed  ,
+          Trim will remove the whitespace from string
+       */}
+      {searchText.trim() !== "" && show && (
+        <UserNavbarSearchResult
+          productData={productData}
+          searchError={searchError}
+          searchLoading={searchLoading}
+          searchText={searchText}
+        />
+      )}
     </>
   );
 };
 
-export default UserNavbarSearch;
+export default withRouter(UserNavbarSearch);

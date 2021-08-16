@@ -11,7 +11,14 @@ import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 
 const AllProducts = ({ data, setCurrent }) => {
   const classes = AllProductStyles();
-  const { id, productName, productPrice, productDescription } = data;
+  const {
+    id,
+    productName,
+    productPrice,
+    productDescription,
+    productBrand,
+    productCategory,
+  } = data;
   const [deleteProduct, { data: deletedProductData }] = useMutation(
     DELETE_PRODUCT,
     {
@@ -55,11 +62,11 @@ const AllProducts = ({ data, setCurrent }) => {
               <MyGridItem xs={5}>
                 <div className={classes.imgDiv}>
                   <MyCardMedia
-                    height="100"
+                    height="120"
                     className={classes.MediaImg}
-                    style={{ minWidth: "80px" }}
+                    style={{ minWidth: "100px" }}
                     title="IMAGE"
-                    image="https://source.unsplash.com/collection/190727/800x450"
+                    image={`https://source.unsplash.com/collection/${productPrice}/800x450`}
                   />
                 </div>
               </MyGridItem>
@@ -72,7 +79,10 @@ const AllProducts = ({ data, setCurrent }) => {
                     {productName}
                   </MyTypography>
                   <MyTypography variant="body1" component="p">
-                    {productDescription}
+                    Desc - {productDescription}
+                  </MyTypography>
+                  <MyTypography variant="body1" component="p">
+                    Brand - {productBrand} , Category - {productCategory}
                   </MyTypography>
                   <MyTypography variant="h6" component="h6">
                     Price - ₹{productPrice}

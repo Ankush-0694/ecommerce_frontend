@@ -18,6 +18,7 @@ import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 import { MyPaper } from "../../../../Design/MyPaper";
+import MyDivider from "../../../../Design/MyDivider";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -72,7 +73,15 @@ const SingleProduct = (props) => {
 
   // data To Render
   const productData = getProductData.getProductById;
-  const { id, productName, productDescription, productPrice } = productData;
+  const {
+    id,
+    productName,
+    productDescription,
+    productPrice,
+    productCategory,
+    productSubCategory,
+    productBrand,
+  } = productData;
 
   /** adding item to the cart in backend
    * Used onCompleted for mutation
@@ -111,13 +120,17 @@ const SingleProduct = (props) => {
       {/** If product successfully cartAdded to cart - Show This Alert  */}
       {cartAdded && (
         <MyAlert type="success" setCartAdded={setCartAdded}>
-          cartAdded To cart{" "}
-          <button
+          Added To Cart{"  "} {"  "}
+          <MyButtonComponent
+            variant="outlined"
+            size="small"
+            color="primary"
+            userStyle={{ padding: "3px 5px", marginLeft: "5px" }}
             onClick={() => {
               history.push("/cart");
             }}>
             Go To cart
-          </button>
+          </MyButtonComponent>
         </MyAlert>
       )}
 
@@ -139,6 +152,12 @@ const SingleProduct = (props) => {
             </MyTypography>
             <MyTypography variant="body1" component="p">
               Description : {productDescription}
+            </MyTypography>
+            <MyTypography variant="body1" component="p">
+              Brand : {productBrand}
+            </MyTypography>
+            <MyTypography variant="body1" component="p">
+              Category : {productCategory} , SubCategory - {productSubCategory}
             </MyTypography>
             <MyTypography variant="h6" component="h6">
               Price : {productPrice}
@@ -185,22 +204,32 @@ const SingleProduct = (props) => {
           <h1 style={{ margin: "20px auto" }}>Rating and Reviews</h1>
         </MyFullScreenBox>
 
+        <MyDivider />
+
         {/* review List  Component */}
 
         <MyGridContainer justify="center">
           <MyGridItem xs={8}>
-            <MyPaper style={{ padding: "20px" }}>
-              {productData.reviews.map((review, index) => {
-                return (
-                  <ProductReviewList
-                    currentReview={currentReview}
-                    setCurrentReview={setCurrentReview}
-                    key={index}
-                    reviewData={review}
-                  />
-                );
-              })}
-            </MyPaper>
+            {productData.reviews.length > 0 ? (
+              <MyPaper style={{ padding: "20px", marginTop: "5px" }}>
+                {productData.reviews.map((review, index) => {
+                  return (
+                    <ProductReviewList
+                      currentReview={currentReview}
+                      setCurrentReview={setCurrentReview}
+                      key={index}
+                      reviewData={review}
+                    />
+                  );
+                })}
+              </MyPaper>
+            ) : (
+              <MyFullScreenBox display="flex" width="100%">
+                <h4 style={{ margin: "20px auto" }}>
+                  No Reviews Added on this Product
+                </h4>
+              </MyFullScreenBox>
+            )}
           </MyGridItem>
         </MyGridContainer>
       </div>

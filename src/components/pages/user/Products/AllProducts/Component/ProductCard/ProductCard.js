@@ -76,24 +76,6 @@ const ProductCard = ({ details, link, history }) => {
             </div>
           </MyCardContent>
         </Link>
-
-        <MyCardActions>
-          {/* <MyButtonComponent
-            fullWidth={true}
-            variant="outlined"
-            size="small"
-            color="primary"
-            onClick={onClickAddCart}>
-            ADD TO CART
-          </MyButtonComponent>
-          <MyButtonComponent
-            fullWidth={true}
-            variant="outlined"
-            size="small"
-            color="primary">
-            BUY NOW
-          </MyButtonComponent> */}
-        </MyCardActions>
       </MyCardContainer>
     </MyGridItem>
   );

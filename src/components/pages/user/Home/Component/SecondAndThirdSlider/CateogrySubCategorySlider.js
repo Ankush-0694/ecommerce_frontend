@@ -37,7 +37,6 @@ const SecondProductSlider = ({ dataProp }) => {
    *
    * ?category=""   or   ?subcategory=""
    */
-  let queryParameterName = dataProp;
 
   {
     /* Category and SubCategory Array is Imported From Vendor Folder */
@@ -58,7 +57,7 @@ const SecondProductSlider = ({ dataProp }) => {
               {/* Generating Link depend on the queryParamter Name and Categor or SubCategory Name  */}
 
               <Link
-                to={`/ShopBy/?${queryParameterName}=${mappedData.name}`}
+                to={`/ShopBy/?q=${mappedData.name}`}
                 style={{ textDecoration: "none" }}>
                 <MyCardMedia
                   height="150"
