@@ -37,12 +37,18 @@ const UserNavbarSearch = ({ history }) => {
   const onChange = (e) => {
     setShow(false); // Now changin the text so Hide the Result or there will be many issues
 
+    setSearchText(e.target.value); // storing  to  pass on ShopBy Page as a query Parameter
+
+    /* If no text then no network call */
+    if (e.target.value.trim() === "") {
+      return;
+    }
+
     getProductsBySearchText({
       variables: {
-        searchText: e.target.value,
+        searchText: e.target.value, // prevent network request to whitespaces(because cache will store the result for "")
       },
     });
-    setSearchText(e.target.value); // storing  to  pass on ShopBy Page as a query Parameter
   };
 
   return (
@@ -64,7 +70,7 @@ const UserNavbarSearch = ({ history }) => {
         variant="contained"
         className={classes.searchIcon}
         onMouseDown={() => {
-          if (searchText.trim() === "") return;
+          if (searchText.trim() === "") return; //don't search if there are only whitespaces
           history.push(`/ShopBy?q=${searchText}`);
         }}>
         <SearchIcon />
@@ -72,6 +78,7 @@ const UserNavbarSearch = ({ history }) => {
 
       {/* Show Result only input has something and Query is completed  ,
           Trim will remove the whitespace from string
+          Not showing result for whitespaces in search string
        */}
       {searchText.trim() !== "" && show && (
         <UserNavbarSearchResult

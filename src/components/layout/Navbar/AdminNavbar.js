@@ -16,7 +16,6 @@ const AdminNavbar = ({ history }) => {
         onClick={() => {
           history.push("/admin/dashboard");
         }}
-        variant="filled"
         userStyle={{ color: "white", textTransform: "capitalize" }}>
         <MyTypography variant="h6" noWrap>
           Admin Dashboard

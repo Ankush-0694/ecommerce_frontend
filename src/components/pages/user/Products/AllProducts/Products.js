@@ -5,7 +5,7 @@ import { MyGridContainer } from "../../../../Design/MyGrid";
 const Products = ({ productData }) => {
   return (
     <div style={{ margin: "20px" }}>
-      <MyGridContainer container justify="center" spacing={4}>
+      <MyGridContainer container spacing={4}>
         {productData.map((product) => {
           return (
             <ProductCard

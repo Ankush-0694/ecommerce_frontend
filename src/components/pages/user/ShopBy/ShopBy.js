@@ -5,6 +5,9 @@ import { useQuery } from "@apollo/client";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import Products from "../Products/AllProducts/Products";
+import MyDivider from "../../../Design/MyDivider";
+import { MyPaper } from "../../../Design/MyPaper";
+import ProductFilter from "./Component/ProductFilter";
 
 const ShopBy = (props) => {
   const queryParameter = queryString.parse(props.location.search);
@@ -39,7 +42,32 @@ const ShopBy = (props) => {
   return (
     <div>
       {/* This component comes from product/AllProducts which further use productCard to show the content */}
-      <Products productData={dataToRender} />
+      <div style={{ textAlign: "center", padding: "10px 0px" }}>
+        <h2>Showing Results For - "{searchText}"</h2>
+        <MyDivider />
+      </div>
+
+      <div
+        className="products"
+        style={{ display: "flex", justifyContent: "space-between" }}>
+        {/* Filter Component */}
+
+        <div className="filter" style={{ width: "20%", marginLeft: "20px" }}>
+          <ProductFilter />
+        </div>
+
+        {/* Filter List  */}
+
+        <div className="productData" style={{ width: "70%" }}>
+          <div style={{ marginLeft: "20px" }}>
+            <h2>Products</h2>
+            <MyDivider />
+          </div>
+          <div>
+            <Products productData={dataToRender} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
