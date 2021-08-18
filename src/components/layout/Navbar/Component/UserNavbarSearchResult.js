@@ -12,12 +12,13 @@ const useStyles = makeStyles({
     position: "absolute",
     top: "42px",
     width: "calc(100% - 72px)",
-    padding: "5px 7px",
+    // padding: "5px 0px",
     marginLeft: "2px",
   },
-  resultsLinks: {
+  hoverEffect: {
     "&:hover": {
-      textDecoration: "none",
+      backgroundColor: "#e6f2ff",
+      cursor: "pointer",
     },
   },
 });
@@ -44,7 +45,9 @@ const UserNavbarSearchResult = ({
   /** If no match Found */
   if (dataToRender.length === 0) {
     return (
-      <MyPaper className={classes.resultPaper}>No Match Found ...</MyPaper>
+      <MyPaper className={classes.resultPaper}>
+        <div style={{ padding: "8px 7px" }}>No Match Found ...</div>
+      </MyPaper>
     );
   }
 
@@ -56,26 +59,27 @@ const UserNavbarSearchResult = ({
             const { id, productName, productPrice } = mappedProduct;
 
             return (
-              <div style={{ padding: "5px 0px" }} key={id}>
+              <Fragment key={id}>
                 <div
-                  className={classes.resultsLinks}
-                  style={{ color: "black" }}
-                  onMouseDown={() => {
-                    // this event is used to counter the onBlur event happen on search input
-                    history.push(`/ShopBy?q=${searchText}`);
-                  }}>
-                  <div>
-                    {productName} , Price - ₹{productPrice}
+                  className={classes.hoverEffect}
+                  style={{ padding: "8px 7px" }}>
+                  <div
+                    onMouseDown={() => {
+                      // this event is used to counter the onBlur event happen on search input
+                      history.push(`/ShopBy?q=${searchText}`);
+                    }}>
+                    <div>
+                      {productName} , Price - ₹{productPrice}
+                    </div>
                   </div>
                 </div>
-
                 {
                   /** showing divider except for last Element  */
                   dataToRender[dataToRender.length - 1] !== mappedProduct && (
-                    <MyDivider style={{ margin: "5px 0px" }} />
+                    <MyDivider />
                   )
                 }
-              </div>
+              </Fragment>
             );
           })}
         </div>

@@ -100,6 +100,11 @@ const AllProducts = ({ data, setCurrent }) => {
                 <MyButtonComponent
                   onClick={() => {
                     setCurrent(data);
+                    window.scroll({
+                      top: 0,
+                      left: 0,
+                      behavior: "smooth",
+                    });
                   }}
                   variant="contained"
                   color="primary"

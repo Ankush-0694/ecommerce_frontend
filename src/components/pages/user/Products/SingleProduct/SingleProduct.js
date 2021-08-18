@@ -142,7 +142,7 @@ const SingleProduct = (props) => {
           <MyCardMedia
             height="300"
             title="IMAGE"
-            image="https://source.unsplash.com/collection/190727/800x450"
+            image={`https://source.unsplash.com/collection/${productPrice}{/800x450`}
           />
         </MyGridItem>
         <MyGridItem xs={8} sm={4}>

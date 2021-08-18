@@ -1,13 +1,10 @@
 import React from "react";
 import MyDivider from "../../../../../../Design/MyDivider";
-import { MyCheckbox } from "../../../../../../Design/MyFormFieldComponent";
 import { MyPaper } from "../../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../../Design/MyTypography";
-import { OrderFilterStyles } from "../../CSS/OrderFilterStyles";
+import FilterLayout from "./FilterLayout";
 
 const OrderFilter = () => {
-  const classes = OrderFilterStyles();
-
   /** This will map to the checkbox then we don't need to
    * Write checkbox comp. again and again for every field
    * @param name - Name of the input Field
@@ -29,7 +26,7 @@ const OrderFilter = () => {
   ];
 
   return (
-    <MyPaper className={classes.filterPaper}>
+    <MyPaper style={{ padding: "10px 20px" }}>
       <div style={{ marginBottom: "8px" }}>
         <MyTypography variant="h6">Filters</MyTypography>
       </div>
@@ -37,42 +34,22 @@ const OrderFilter = () => {
 
       {/**  Filter based on Order Status  */}
 
-      <div className={classes.onStatusCheckbox}>
-        <h6>OrderStatus</h6>
-        <div className="inputFields">
-          {orderStatusFilter.map(({ name, label }, index) => {
-            return (
-              <div key={index}>
-                <MyCheckbox
-                  className={classes.checkbox}
-                  label={label}
-                  name={name}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {/* Pass and heading and filter array to FilterLayout Component */}
+
+      <FilterLayout
+        FilterHeading="Order Status"
+        FilterByArray={orderStatusFilter}
+      />
       <MyDivider></MyDivider>
 
       {/**  Filter based on Order Time */}
 
-      <div className={classes.onStatusCheckbox}>
-        <h6>Order Time</h6>
-        <div className="inputFields">
-          {orderTimeFilter.map(({ name, label }, index) => {
-            return (
-              <div key={index}>
-                <MyCheckbox
-                  className={classes.checkbox}
-                  label={label}
-                  name={name}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {/* Pass and heading and filter array to FilterLayout Component */}
+
+      <FilterLayout
+        FilterHeading="Order Time"
+        FilterByArray={orderTimeFilter}
+      />
     </MyPaper>
   );
 };

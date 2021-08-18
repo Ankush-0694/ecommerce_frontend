@@ -39,7 +39,7 @@ const MyProfile = () => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       {/* Side Drawer implmented in separate design component */}
       <MySideDrawerContainer>
         {/** List content heading to add in the side drawer */}

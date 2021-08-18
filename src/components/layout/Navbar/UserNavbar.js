@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MyNavbar } from "../../Design/MyNavbar";
 import { MyTypography } from "../../Design/MyTypography";
 import { MyButtonComponent } from "../../Design/MyButtonComponent";
