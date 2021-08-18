@@ -17,7 +17,7 @@ const AllProducts = ({ data, setCurrent }) => {
     productPrice,
     productDescription,
     productBrand,
-    productCategory,
+    // productCategory,
   } = data;
   const [deleteProduct, { data: deletedProductData }] = useMutation(
     DELETE_PRODUCT,
@@ -82,7 +82,7 @@ const AllProducts = ({ data, setCurrent }) => {
                     Desc - {productDescription}
                   </MyTypography>
                   <MyTypography variant="body1" component="p">
-                    Brand - {productBrand} , Category - {productCategory}
+                    Brand - {productBrand} ,{/* Category - {productCategory} */}
                   </MyTypography>
                   <MyTypography variant="h6" component="h6">
                     Price - ₹{productPrice}

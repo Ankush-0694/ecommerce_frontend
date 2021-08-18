@@ -37,24 +37,15 @@ const MultiStepForm = ({ current, setCurrent }) => {
    */
   const { productFormData, setProductFormData } = useAddProductHook();
 
-  /** Adding separate Category state to choose subCategory Based on Category
-   * when we add Product ,  productCategory : categoryName
-   */
-  const [productCategory, setProductCategory] = useState({
-    categoryName: "",
-    categoryId: "",
-  });
-
   /** Destructing States */
   const {
     productName,
     productDescription,
     productPrice,
+    productCategory,
     productSubCategory,
     productBrand,
   } = productFormData; // Destructing State
-
-  const { categoryName, categoryId } = productCategory; // Destructing State
 
   const [addProduct] = useMutation(ADD_PRODUCT, {
     onError: () => {},
@@ -102,18 +93,21 @@ const MultiStepForm = ({ current, setCurrent }) => {
     });
   };
 
-  /** Changing productCategory State when we select a Category */
+  // /** Changing productCategory State when we select a Category */
   const onCategoryChange = (e) => {
     /** Value passed from select input */
     let categoryValue = e.target.value;
 
     /** Fetching id and Name seprately from selected value */
-    let categoryIdSelected = categoryValue.split("-")[0];
+    let categoryIdSelected = Number(categoryValue.split("-")[0]);
     let categoryNameSelected = categoryValue.split("-")[1];
 
-    setProductCategory({
-      categoryName: categoryNameSelected,
-      categoryId: categoryIdSelected,
+    setProductFormData({
+      ...productFormData,
+      productCategory: {
+        categoryId: categoryIdSelected,
+        categoryName: categoryNameSelected,
+      },
     });
   };
 
@@ -129,7 +123,6 @@ const MultiStepForm = ({ current, setCurrent }) => {
         variables: {
           ...productFormData,
           productPrice: Number(productPrice), // need to change into number
-          productCategory: categoryName,
         },
         // addProduct is the data which comes in response to mutation, with same name as the mutation
         update: (cache, { data: { addProduct } }) => {
@@ -150,7 +143,6 @@ const MultiStepForm = ({ current, setCurrent }) => {
           ...productFormData,
           productID: productFormData.id, // this property will be set using current
           productPrice: Number(productPrice),
-          productCategory: categoryName,
         },
       });
     }
@@ -158,9 +150,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
     /**
      * Clear State and input Value- WHich will clear the form
      */
-    setProductFormData({
-      emptyProductState,
-    });
+    setProductFormData(emptyProductState);
 
     /** Need to disable the Updating State - Because this method is called for both add and update Product */
     setCurrent(null);
@@ -205,9 +195,11 @@ const MultiStepForm = ({ current, setCurrent }) => {
             />
             <ProductAttributes
               productCategory={productCategory}
-              onCategoryChange={onCategoryChange}
+              productSubCategory={productSubCategory}
               productBrand={productBrand}
+              current={current}
               onChange={onChange}
+              onCategoryChange={onCategoryChange}
             />
             {/* <ProductPhotoUpload /> */}
           </SwipeableViews>
