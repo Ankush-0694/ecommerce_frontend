@@ -20,12 +20,19 @@ const useStyles = makeStyles({
 const ProductAttributes = (props) => {
   const classes = useStyles();
 
-  const { productCategory, productBrand, onCategoryChange, onChange } = props;
+  const {
+    productCategory,
+    productSubCategory,
+    productBrand,
+    onChange,
+    onCategoryChange,
+    current,
+  } = props;
 
   const { categoryId, categoryName } = productCategory;
 
   const subCategoryListItems = subCategoryList.filter((filteredItem) => {
-    return filteredItem.categoryId == categoryId;
+    return filteredItem.categoryId === categoryId;
   });
 
   return (
@@ -37,19 +44,26 @@ const ProductAttributes = (props) => {
         <select
           onChange={onCategoryChange}
           id="category-select"
-          name="categoryName"
+          name="productCategory"
+          defaultValue={categoryName}
           className={classes.CategorySelect}>
-          <option value="">None</option>
+          {/* if Product don't need to updated */}
+
+          {!current && (
+            <option disabled value="">
+              None
+            </option>
+          )}
 
           {/* Array of all the Category import from other category files */}
-
           {/* Passing value with combination of id and name to select Category and id seprately */}
 
           {categoryList.map((mappedItem) => {
             return (
               <option
                 key={mappedItem.id}
-                value={`${mappedItem.id}-${mappedItem.name}`}>
+                value={`${mappedItem.id}-${mappedItem.name}`} // passing category  id and name combined and spliting in  onCategoryChange
+              >
                 {mappedItem.name}
               </option>
             );
@@ -68,13 +82,12 @@ const ProductAttributes = (props) => {
           id="subCategory-select"
           name="productSubCategory"
           className={classes.CategorySelect}>
-          {/*  */}
-          {/* Choosing default Category based on Category choosen or not  */}
+          {/* if Product don't need to updated */}
 
-          {categoryName === "" ? (
-            <option value="">Choose a category First</option>
-          ) : (
-            <option value="">None</option>
+          {!current && (
+            <option disabled value="">
+              None
+            </option>
           )}
 
           {/* Array of all the Sub Category import from other SubCategory files */}

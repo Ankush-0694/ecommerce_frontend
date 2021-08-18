@@ -5,7 +5,7 @@ const ADD_PRODUCT = gql`
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
-    $productCategory: String!
+    $productCategory: ProductCategoryInput!
     $productSubCategory: String!
     $productBrand: String
   ) {
@@ -20,7 +20,10 @@ const ADD_PRODUCT = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }
@@ -33,7 +36,7 @@ const UPDATE_PRODUCT = gql`
     $productName: String!
     $productDescription: String!
     $productPrice: Int!
-    $productCategory: String!
+    $productCategory: ProductCategoryInput!
     $productSubCategory: String!
     $productBrand: String
   ) {
@@ -50,7 +53,10 @@ const UPDATE_PRODUCT = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }
@@ -64,7 +70,10 @@ const DELETE_PRODUCT = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }

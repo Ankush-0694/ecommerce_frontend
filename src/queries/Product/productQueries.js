@@ -7,7 +7,10 @@ const GET_ALL_PRODUCTS = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }
@@ -21,7 +24,10 @@ const GET_SINGLE_PRODUCT = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
       reviews {
@@ -41,7 +47,10 @@ const GET_PRODUCT_BY_SEARCH_TEXT = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }
@@ -55,7 +64,10 @@ const GET_MULTIPLE_PRODUCTS = gql`
       productName
       productDescription
       productPrice
-      productCategory
+      productCategory {
+        categoryId
+        categoryName
+      }
       productSubCategory
       productBrand
     }
