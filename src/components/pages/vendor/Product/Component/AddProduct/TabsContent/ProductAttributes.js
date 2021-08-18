@@ -45,15 +45,11 @@ const ProductAttributes = (props) => {
           onChange={onCategoryChange}
           id="category-select"
           name="productCategory"
-          defaultValue={categoryName}
+          value={`${categoryId}-${categoryName}`} // this is the line which make select controlled componenet (need to match the option value)
           className={classes.CategorySelect}>
           {/* if Product don't need to updated */}
 
-          {!current && (
-            <option disabled value="">
-              None
-            </option>
-          )}
+          <option value="">None</option>
 
           {/* Array of all the Category import from other category files */}
           {/* Passing value with combination of id and name to select Category and id seprately */}
@@ -81,13 +77,14 @@ const ProductAttributes = (props) => {
           onChange={onChange}
           id="subCategory-select"
           name="productSubCategory"
+          value={productSubCategory} // this is the line which make select controlled componenet (need to match with option value)
           className={classes.CategorySelect}>
           {/* if Product don't need to updated */}
 
-          {!current && (
-            <option disabled value="">
-              None
-            </option>
+          {categoryName === "" ? (
+            <option value="">Choose Category First..</option>
+          ) : (
+            <option value="">None</option>
           )}
 
           {/* Array of all the Sub Category import from other SubCategory files */}

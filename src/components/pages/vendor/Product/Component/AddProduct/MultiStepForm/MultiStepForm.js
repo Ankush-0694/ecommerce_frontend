@@ -237,7 +237,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
                     setProductFormData(emptyProductState);
                     setCurrent(null);
 
-                    activeStep === tabs.length - 1 && setActiveStep(0);
+                    setActiveStep(0);
                   }}
                   disabled={formSubmitted}>
                   Reset
