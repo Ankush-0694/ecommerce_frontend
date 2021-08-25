@@ -96,7 +96,7 @@ const ProtectedAdminRoute = ({
               }}
             />
           );
-        } else if (user.getMe.role !== "admin") {
+        } else if (user && user.getMe.role !== "admin") {
           /** Routed to unauth page if user role is not admin */
           return <Redirect to="/unAuth" />;
         } else {

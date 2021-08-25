@@ -15,8 +15,13 @@ const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
 
   /** mapped Single cart Data  */
-  const { id, productName, productPrice, productDescription, quantity } =
-    cartItemData;
+  const { id, quantity } = cartItemData;
+
+  /** cartItemData has product Data in the productData Object
+   * Because we used ref using product in the MongoDB
+   */
+  const { productName, productPrice, productDescription } =
+    cartItemData.productData;
 
   /** State to update individual quantity of the every cart item
    * When it changes , useEffect will run and call the setQuantity function to

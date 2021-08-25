@@ -83,7 +83,7 @@ const CheckoutSingle = (props) => {
    * This data will be mapped to rendered the order summary data
    * @type {Array} - Contains Array of objects
    */
-  let productData = getSingleProductData.getProductById;
+  let productData = getSingleProductData.getProductByProductId;
 
   /** Called when we click place order button */
   const OnPlaceOrder = (e) => {
@@ -95,16 +95,16 @@ const CheckoutSingle = (props) => {
       return;
     }
 
-    addOrder({
-      variables: {
-        productDetailsWithQuantity: [
-          { productDetails: productid, quantity: quantity },
-        ],
-        totalQuantity: Number(quantity),
-        addressID: selectedAddress,
-        totalPrice: totalPriceOfOrder,
-      },
-    });
+    // addOrder({
+    //   variables: {
+    //     productDetailsWithQuantity: [
+    //       { productDetails: productid, quantity: quantity },
+    //     ],
+    //     totalQuantity: Number(quantity),
+    //     addressID: selectedAddress,
+    //     totalPrice: totalPriceOfOrder,
+    //   },
+    // });
   };
 
   return (

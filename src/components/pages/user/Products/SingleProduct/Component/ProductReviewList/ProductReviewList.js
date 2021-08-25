@@ -49,7 +49,6 @@ const ProductReviewList = ({ reviewData, setCurrentReview }) => {
           Delete
         </MyButtonComponent>
       </div>
-      <hr></hr>
     </div>
   );
 };

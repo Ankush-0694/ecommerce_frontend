@@ -4,6 +4,7 @@ const GET_ALL_PRODUCTS = gql`
   {
     getAllProducts {
       id
+      vendorId
       productName
       productDescription
       productPrice
@@ -17,10 +18,35 @@ const GET_ALL_PRODUCTS = gql`
   }
 `;
 
+const GET_PRODUCT_BY_VENDORID = gql`
+  query getProductsByVendorId {
+    getProductsByVendorId {
+      id
+      vendorId
+      productName
+      productDescription
+      productPrice
+      productCategory {
+        categoryId
+        categoryName
+      }
+      productSubCategory
+      productBrand
+      reviews {
+        id
+        productID
+        review
+        rating
+      }
+    }
+  }
+`;
+
 const GET_SINGLE_PRODUCT = gql`
   query ($id: ID!) {
-    getProductById(id: $id) {
+    getProductByProductId(id: $id) {
       id
+      vendorId
       productName
       productDescription
       productPrice
@@ -44,23 +70,7 @@ const GET_PRODUCT_BY_SEARCH_TEXT = gql`
   query ($searchText: String!) {
     getProductsBySearchText(searchText: $searchText) {
       id
-      productName
-      productDescription
-      productPrice
-      productCategory {
-        categoryId
-        categoryName
-      }
-      productSubCategory
-      productBrand
-    }
-  }
-`;
-
-const GET_MULTIPLE_PRODUCTS = gql`
-  query ($productIDArray: [ID]) {
-    getMultipleProducts(productIDArray: $productIDArray) {
-      id
+      vendorId
       productName
       productDescription
       productPrice
@@ -76,7 +86,7 @@ const GET_MULTIPLE_PRODUCTS = gql`
 
 export {
   GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_VENDORID,
   GET_SINGLE_PRODUCT,
   GET_PRODUCT_BY_SEARCH_TEXT,
-  GET_MULTIPLE_PRODUCTS,
 };

@@ -10,7 +10,7 @@ import { useMutation } from "@apollo/client";
 import ProductDetails from "../TabsContent/ProductDetails";
 import ProductAttributes from "../TabsContent/ProductAttributes";
 import ProductPhotoUpload from "../TabsContent/ProductPhotoUpload";
-import { GET_ALL_PRODUCTS } from "../../../../../../../queries/Product/productQueries";
+import { GET_PRODUCT_BY_VENDORID } from "../../../../../../../queries/Product/productQueries";
 import { MyPaper } from "../../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
@@ -46,6 +46,8 @@ const MultiStepForm = ({ current, setCurrent }) => {
     productSubCategory,
     productBrand,
   } = productFormData; // Destructing State
+
+  const { categoryId, categoryName } = productCategory;
 
   const [addProduct] = useMutation(ADD_PRODUCT, {
     onError: () => {},
@@ -118,6 +120,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
    * Form Will Submit only at Last Step
    */
   const onFormSubmit = (e) => {
+    e.preventDefault();
     if (!current) {
       addProduct({
         variables: {
@@ -126,14 +129,14 @@ const MultiStepForm = ({ current, setCurrent }) => {
         },
         // addProduct is the data which comes in response to mutation, with same name as the mutation
         update: (cache, { data: { addProduct } }) => {
-          const data = cache.readQuery({ query: GET_ALL_PRODUCTS });
+          const data = cache.readQuery({ query: GET_PRODUCT_BY_VENDORID });
           // need to newData var because we need to add a
           // new instance of all data , we can not use data var direclty
-          let dataToUpdate = data.getAllProducts;
+          let dataToUpdate = data.getProductsByVendorId;
           dataToUpdate = [...dataToUpdate, addProduct];
           cache.writeQuery({
-            query: GET_ALL_PRODUCTS,
-            data: { ...data, getAllProducts: { dataToUpdate } },
+            query: GET_PRODUCT_BY_VENDORID,
+            data: { ...data, getProductsByVendorId: { dataToUpdate } },
           });
         },
       });
@@ -143,6 +146,10 @@ const MultiStepForm = ({ current, setCurrent }) => {
           ...productFormData,
           productID: productFormData.id, // this property will be set using current
           productPrice: Number(productPrice),
+          productCategory: {
+            categoryId,
+            categoryName,
+          },
         },
       });
     }

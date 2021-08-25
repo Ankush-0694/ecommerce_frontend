@@ -42,8 +42,10 @@ const Cart = ({ history }) => {
    */
   let totalPrice = 0;
   const cartItems = cartData;
-  cartItems.forEach((item) => {
-    totalPrice += item.productPrice * item.quantity;
+
+  // calcualting the total Price to show cart price Details
+  cartItems.forEach((mappedItem) => {
+    totalPrice += mappedItem.productData.productPrice * mappedItem.quantity;
   });
 
   /** redirect to checkout after mapping the product ID array

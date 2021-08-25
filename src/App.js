@@ -33,6 +33,7 @@ import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
+import ShowError from "./components/layout/ErrorComponent/ShowError";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -52,9 +53,6 @@ const App = () => {
   if (getMeLoading) {
     return <ShowLoading />;
   }
-  // if (getMeError) {
-  //   return <ShowError>Error while Fetching User Data</ShowError>;
-  // }
 
   return (
     <BrowserRouter>

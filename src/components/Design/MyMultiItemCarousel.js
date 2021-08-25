@@ -12,6 +12,7 @@ const responsive = {
   largeDesktop: {
     breakpoint: { max: 3000, min: 1400 },
     items: 4,
+    partialVisibilityGutter: 60,
   },
   desktop: {
     breakpoint: { max: 1400, min: 1024 },
@@ -44,7 +45,8 @@ const MyMultiCarousel = ({ children }) => {
       dotListClass="dots"
       partialVisible
       // infinite
-      itemClass="image-item"
+      // itemClass="image-item"
+      itemClass="slider-image-item"
       keyBoardControl
       minimumTouchDrag={200}
       keyBoardControl
