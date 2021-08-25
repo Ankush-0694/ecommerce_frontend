@@ -6,7 +6,7 @@ import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { useMutation } from "@apollo/client";
 import { DELETE_PRODUCT } from "../../../../../../queries/Product/productMutations";
-import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
+import { GET_PRODUCT_BY_VENDORID } from "../../../../../../queries/Product/productQueries";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
 
 const AllProducts = ({ data, setCurrent }) => {
@@ -17,7 +17,7 @@ const AllProducts = ({ data, setCurrent }) => {
     productPrice,
     productDescription,
     productBrand,
-    // productCategory,
+    productCategory,
   } = data;
   const [deleteProduct, { data: deletedProductData }] = useMutation(
     DELETE_PRODUCT,
@@ -32,18 +32,18 @@ const AllProducts = ({ data, setCurrent }) => {
         productID: id,
       },
       update: (cache, { data: { deleteProduct } }) => {
-        const data = cache.readQuery({ query: GET_ALL_PRODUCTS });
+        const data = cache.readQuery({ query: GET_PRODUCT_BY_VENDORID });
         // need to newData var because we need to add a
         // new instance of all data , we can not use data var direclty
-        let dataToUpdate = data.getAllProducts;
+        let dataToUpdate = data.getProductsByVendorId;
 
         dataToUpdate.filter((singleProductData) => {
           return singleProductData.id !== deleteProduct.id;
         });
 
         cache.writeQuery({
-          query: GET_ALL_PRODUCTS,
-          data: { ...data, getAllProducts: { dataToUpdate } },
+          query: GET_PRODUCT_BY_VENDORID,
+          data: { ...data, getProductsByVendorId: { dataToUpdate } },
         });
       },
     });
@@ -82,8 +82,12 @@ const AllProducts = ({ data, setCurrent }) => {
                     Desc - {productDescription}
                   </MyTypography>
                   <MyTypography variant="body1" component="p">
-                    Brand - {productBrand} ,{/* Category - {productCategory} */}
+                    Brand - {productBrand}
                   </MyTypography>
+                  <MyTypography variant="body1" component="p">
+                    Category - {productCategory.categoryName}
+                  </MyTypography>
+
                   <MyTypography variant="h6" component="h6">
                     Price - ₹{productPrice}
                   </MyTypography>

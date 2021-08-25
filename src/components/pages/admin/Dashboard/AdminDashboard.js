@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   const listData = [
     {
       Name: "Customers",
-      url: "/admin/dashboard/customers",
+      url: "/admin/dashboard",
       icon: "directions_walk_Icon",
     },
     {
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
          */}
 
         {/* <Route exact path="/admin/dashboard" component={Customers} /> */}
-        <Route exact path="/admin/dashboard/customers" component={Customers} />
+        <Route exact path="/admin/dashboard" component={Customers} />
         <Route exact path="/admin/dashboard/vendors" component={Vendors} />
         <Route exact path="/admin/dashboard/products" component={ProductList} />
       </div>

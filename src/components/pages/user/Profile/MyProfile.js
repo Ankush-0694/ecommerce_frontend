@@ -31,7 +31,7 @@ const MyProfile = () => {
     },
 
     {
-      Name: "My Review and Ratings",
+      Name: "My Reviews and Ratings",
       url: "/account/review",
       icon: "star_icon",
     },

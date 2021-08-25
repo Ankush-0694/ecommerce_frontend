@@ -5,7 +5,7 @@ const MultiStepFromStyles = makeStyles((theme) => ({
     border: `8px solid ${theme.palette.common.white}`,
     margin: 16,
     minWidth: "400px",
-    padding: "36px 0 0",
+    padding: "36px 20px 0 20px",
     background: `rgba(255,255,255,0.9)`,
     boxShadow: [
       `0px 16px 26px -10px ${theme.palette.primary.main}99`,

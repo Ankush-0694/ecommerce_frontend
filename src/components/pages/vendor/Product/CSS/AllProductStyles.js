@@ -6,7 +6,7 @@ const AllProductStyles = makeStyles({
     margin: "10px 0",
   },
   imgDiv: {
-    width: "120px",
+    width: "110px",
     margin: "auto",
   },
 

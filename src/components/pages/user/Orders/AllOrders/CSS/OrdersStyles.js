@@ -9,6 +9,7 @@ const OrderStyles = makeStyles({
   },
   orderHeading: {
     margin: "10px",
+    marginBottom: "15px",
   },
   FilterAndOrderListContainer: {
     display: "flex",
@@ -34,6 +35,7 @@ const OrderStyles = makeStyles({
   inputSearchField: {
     width: "100%",
     height: "40px",
+    paddingLeft: "10px",
   },
   orderLinks: {
     textDecoration: "none",

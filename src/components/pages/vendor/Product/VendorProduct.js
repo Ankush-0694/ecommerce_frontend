@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { GET_ALL_PRODUCTS } from "../../../../queries/Product/productQueries";
+import { GET_PRODUCT_BY_VENDORID } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
@@ -19,7 +19,7 @@ const VendorProduct = () => {
     error: getProductError,
     loading: getProductLoading,
     data: getProductData,
-  } = useQuery(GET_ALL_PRODUCTS);
+  } = useQuery(GET_PRODUCT_BY_VENDORID);
 
   if (getProductError) {
     return <ShowError>Error while Fetching Products</ShowError>;
@@ -28,7 +28,7 @@ const VendorProduct = () => {
     return <ShowLoading />;
   }
 
-  const productData = getProductData.getAllProducts;
+  const productData = getProductData.getProductsByVendorId;
 
   return (
     <div>
@@ -59,9 +59,8 @@ const VendorProduct = () => {
         </div>
 
         <MyFullScreenBox display="flex" width="50%" height="90vh">
-          <div style={{ margin: "auto", width: "70%" }}>
+          <div style={{ margin: "48px auto", width: "70%" }}>
             <div>
-              {/* <AddProduct current={current} setCurrent={setCurrent} /> */}
               <MultiStepForm current={current} setCurrent={setCurrent} />
             </div>
           </div>

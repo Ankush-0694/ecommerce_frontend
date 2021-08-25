@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { makeVar, useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
 import ProductReviewList from "./Component/ProductReviewList/ProductReviewList";
@@ -19,6 +18,7 @@ import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 import { MyPaper } from "../../../../Design/MyPaper";
 import MyDivider from "../../../../Design/MyDivider";
+import { Fragment } from "react";
 
 const useStyles = makeStyles({
   productDiv: {
@@ -60,7 +60,6 @@ const SingleProduct = (props) => {
     onError: () => {},
     onCompleted: () => {
       setCartAdded(true);
-      // props.history.push("/cart");
     },
   });
 
@@ -72,7 +71,14 @@ const SingleProduct = (props) => {
   }
 
   // data To Render
-  const productData = getProductData.getProductById;
+  const productData = getProductData.getProductByProductId;
+
+  /** If no product Match then we should not destructure it
+   * if user change the productId from url (if objectid is valid then this will show)
+   */
+  if (productData === null) {
+    return <h1>No Product Found</h1>;
+  }
   const {
     id,
     productName,
@@ -83,6 +89,11 @@ const SingleProduct = (props) => {
     productBrand,
   } = productData;
 
+  /** destructuring review data
+   * This will be an array
+   */
+  const { reviews } = productData;
+
   /** adding item to the cart in backend
    * Used onCompleted for mutation
    */
@@ -90,9 +101,6 @@ const SingleProduct = (props) => {
     addToCart({
       variables: {
         productID: id,
-        productName,
-        productDescription,
-        productPrice,
       },
     });
   };
@@ -157,7 +165,8 @@ const SingleProduct = (props) => {
               Brand : {productBrand}
             </MyTypography>
             <MyTypography variant="body1" component="p">
-              Category : {productCategory} , SubCategory - {productSubCategory}
+              Category : {productCategory.categoryName} , SubCategory -{" "}
+              {productSubCategory}
             </MyTypography>
             <MyTypography variant="h6" component="h6">
               Price : {productPrice}
@@ -201,7 +210,7 @@ const SingleProduct = (props) => {
       </MyGridContainer>
       <div>
         <MyFullScreenBox display="flex" width="100%">
-          <h1 style={{ margin: "20px auto" }}>Rating and Reviews</h1>
+          <h1 style={{ margin: "20px auto" }}>Ratings and Reviews</h1>
         </MyFullScreenBox>
 
         <MyDivider />
@@ -212,14 +221,18 @@ const SingleProduct = (props) => {
           <MyGridItem xs={8}>
             {productData.reviews.length > 0 ? (
               <MyPaper style={{ padding: "20px", marginTop: "5px" }}>
-                {productData.reviews.map((review, index) => {
+                {productData.reviews.map((review) => {
                   return (
-                    <ProductReviewList
-                      currentReview={currentReview}
-                      setCurrentReview={setCurrentReview}
-                      key={index}
-                      reviewData={review}
-                    />
+                    <Fragment key={review.id}>
+                      <ProductReviewList
+                        currentReview={currentReview}
+                        setCurrentReview={setCurrentReview}
+                        reviewData={review}
+                      />
+
+                      {productData.reviews[productData.reviews.length - 1] !==
+                        review && <hr></hr>}
+                    </Fragment>
                   );
                 })}
               </MyPaper>

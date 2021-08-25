@@ -68,7 +68,7 @@ const RatingAndReview = () => {
         <MyPaper>
           {/* Rating and Reviews Heading */}
           <MyFullScreenBox display="flex" width="100%">
-            <h1 style={{ margin: "20px auto" }}>Rating and Reviews</h1>
+            <h1 style={{ margin: "20px auto" }}>Ratings and Reviews</h1>
           </MyFullScreenBox>
 
           <MyDivider />
