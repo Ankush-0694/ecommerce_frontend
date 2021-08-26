@@ -9,7 +9,10 @@ import {
   UPDATE_CART_QUANTITY,
 } from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
-import { GET_CART } from "../../../../../../queries/Cart/cartQueries";
+import {
+  GET_CART,
+  GET_CART_BY_CUSTOMERID,
+} from "../../../../../../queries/Cart/cartQueries";
 
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
@@ -72,18 +75,18 @@ const CartItem = ({ cartItemData }) => {
         cartID: id,
       },
       update: (cache, { data: { deleteCart } }) => {
-        let data = cache.readQuery({ query: GET_CART });
+        let data = cache.readQuery({ query: GET_CART_BY_CUSTOMERID });
 
         // need to newData var because we need to add a
         // new instance of all data , we can not use data var direclty
-        let dataToUpdate = data.getCart;
+        let dataToUpdate = data.getCartByCustomerId;
         dataToUpdate = dataToUpdate.filter((singleCartItem) => {
           return singleCartItem.id !== deleteCart.id;
         });
 
         cache.writeQuery({
-          query: GET_CART,
-          data: { ...data, getCart: dataToUpdate },
+          query: GET_CART_BY_CUSTOMERID,
+          data: { ...data, getCartByCustomerId: dataToUpdate },
         });
       },
     });

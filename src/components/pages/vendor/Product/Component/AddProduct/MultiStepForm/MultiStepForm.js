@@ -45,6 +45,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
     productCategory,
     productSubCategory,
     productBrand,
+    productImageUrl,
   } = productFormData; // Destructing State
 
   const { categoryId, categoryName } = productCategory;
@@ -208,7 +209,10 @@ const MultiStepForm = ({ current, setCurrent }) => {
               onChange={onChange}
               onCategoryChange={onCategoryChange}
             />
-            {/* <ProductPhotoUpload /> */}
+            <ProductPhotoUpload
+              onChange={onChange}
+              productImageUrl={productImageUrl}
+            />
           </SwipeableViews>
 
           {/* Buttons - BACK NEXT , RESET  AND SUBMIT */}

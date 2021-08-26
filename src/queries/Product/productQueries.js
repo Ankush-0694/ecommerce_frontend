@@ -14,6 +14,7 @@ const GET_ALL_PRODUCTS = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
     }
   }
 `;
@@ -32,6 +33,7 @@ const GET_PRODUCT_BY_VENDORID = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
       reviews {
         id
         productID
@@ -56,6 +58,7 @@ const GET_SINGLE_PRODUCT = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
       reviews {
         id
         productID
@@ -80,6 +83,7 @@ const GET_PRODUCT_BY_SEARCH_TEXT = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
     }
   }
 `;

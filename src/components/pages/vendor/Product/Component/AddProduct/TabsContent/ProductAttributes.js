@@ -36,7 +36,7 @@ const ProductAttributes = (props) => {
   });
 
   return (
-    <div>
+    <div style={{ padding: "10px" }}>
       <div>
         <label htmlFor="category-select" className={classes.categoryLabel}>
           Choose a Category

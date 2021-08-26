@@ -11,7 +11,10 @@ import { MyCardMedia } from "../../../../Design/MyCardComponents";
 import { MyFullScreenBox } from "../../../../Design/MyFullScreenBox";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
-import { GET_CART } from "../../../../../queries/Cart/cartQueries";
+import {
+  GET_CART,
+  GET_CART_BY_CUSTOMERID,
+} from "../../../../../queries/Cart/cartQueries";
 import MyAlert from "../../../../Design/MyAlert";
 import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
@@ -56,7 +59,7 @@ const SingleProduct = (props) => {
     addToCart,
     { error: addToCartError, loading: addToCartLoading, data: cartData },
   ] = useMutation(ADD_TO_CART, {
-    refetchQueries: [{ query: GET_CART }],
+    refetchQueries: [{ query: GET_CART_BY_CUSTOMERID }],
     onError: () => {},
     onCompleted: () => {
       setCartAdded(true);

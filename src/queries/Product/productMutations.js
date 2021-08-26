@@ -8,6 +8,7 @@ const ADD_PRODUCT = gql`
     $productCategory: ProductCategoryInput!
     $productSubCategory: String!
     $productBrand: String
+    $productImageUrl: String!
   ) {
     addProduct(
       productName: $productName
@@ -16,6 +17,7 @@ const ADD_PRODUCT = gql`
       productCategory: $productCategory
       productSubCategory: $productSubCategory
       productBrand: $productBrand
+      productImageUrl: $productImageUrl
     ) {
       productName
       productDescription
@@ -26,6 +28,7 @@ const ADD_PRODUCT = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
     }
   }
 `;
@@ -39,6 +42,7 @@ const UPDATE_PRODUCT = gql`
     $productCategory: ProductCategoryInput!
     $productSubCategory: String!
     $productBrand: String
+    $productImageUrl: String!
   ) {
     updateProduct(
       productID: $productID
@@ -48,6 +52,7 @@ const UPDATE_PRODUCT = gql`
       productCategory: $productCategory
       productSubCategory: $productSubCategory
       productBrand: $productBrand
+      productImageUrl: $productImageUrl
     ) {
       id
       productName
@@ -59,6 +64,7 @@ const UPDATE_PRODUCT = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
     }
   }
 `;
@@ -76,18 +82,9 @@ const DELETE_PRODUCT = gql`
       }
       productSubCategory
       productBrand
+      productImageUrl
     }
   }
 `;
 
-const UPLOAD_FILE = gql`
-  mutation ($file: Upload!) {
-    uploadFile(file: $file) {
-      filename
-      mimetype
-      encoding
-    }
-  }
-`;
-
-export { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, UPLOAD_FILE };
+export { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT };

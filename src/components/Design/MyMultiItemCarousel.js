@@ -16,13 +16,13 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 1400, min: 1024 },
-    items: 3,
-    partialVisibilityGutter: 60,
+    items: 4,
+    partialVisibilityGutter: 0,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    partialVisibilityGutter: 50,
+    partialVisibilityGutter: 40,
   },
   mobile: {
     breakpoint: { max: 700, min: 0 },

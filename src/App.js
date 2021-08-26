@@ -12,7 +12,6 @@ import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
 import MyToolbar from "./components/Design/MyToolbar";
-import FileUpload from "./components/pages/vendor/FileUpload/FileUpload";
 import { GET_ME } from "./queries/user/userQueries";
 import { useQuery } from "@apollo/client";
 import Unauthorized from "./components/layout/ErrorComponent/Unauthorized";
@@ -53,6 +52,7 @@ const App = () => {
   if (getMeLoading) {
     return <ShowLoading />;
   }
+  console.log(getMeData);
 
   return (
     <BrowserRouter>
@@ -109,6 +109,7 @@ const App = () => {
             path="/cart"
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
             component={Cart}
           />
 
@@ -117,7 +118,9 @@ const App = () => {
             path="/orders"
             component={Orders}
             isAuthenticated={isAuthenticated}
+            user={getMeData}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
 
           <ProtectedCustomerRoute
@@ -126,6 +129,7 @@ const App = () => {
             component={OrderDetails}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
 
           <ProtectedCustomerRoute
@@ -134,6 +138,7 @@ const App = () => {
             component={CheckoutMultiple}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
           <ProtectedCustomerRoute
             exact
@@ -147,6 +152,7 @@ const App = () => {
             component={MyProfile}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
 
           {/* Vendor Routes */}
@@ -165,14 +171,7 @@ const App = () => {
             component={VendorProduct}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
-          />
-
-          <ProtectedVendorRoute
-            exact
-            path="/vendor/file"
-            component={FileUpload}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
 
           {/* Admin Routes */}
