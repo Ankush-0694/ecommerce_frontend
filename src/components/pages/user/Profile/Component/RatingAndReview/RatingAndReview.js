@@ -1,4 +1,6 @@
+import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { GET_REVIEWS_BY_CUSTOMERID } from "../../../../../../queries/Review/ReviewQueries";
 import MyDivider from "../../../../../Design/MyDivider";
 import { MyFullScreenBox } from "../../../../../Design/MyFullScreenBox";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
@@ -16,24 +18,13 @@ const RatingAndReview = () => {
   /** For adding and updating the data using same form */
   const [currentReview, setCurrentReview] = useState(null);
 
-  /** ReviewByUsedID - Separate Query  */
-  const reviewData = [
-    {
-      id: 1,
-      rating: 2,
-      review: "good",
-    },
-    {
-      id: 2,
-      rating: 4,
-      review: "Nice",
-    },
-    {
-      id: 3,
-      rating: 5,
-      review: "Awesome",
-    },
-  ];
+  const { error, loading, data } = useQuery(GET_REVIEWS_BY_CUSTOMERID);
+
+  if (error || loading) {
+    return <div>Hello</div>;
+  }
+
+  const reviewData = data.getReviewsByCustomerId;
 
   return (
     <div>
@@ -73,7 +64,7 @@ const RatingAndReview = () => {
 
           <MyDivider />
 
-          <MyGridContainer justify="center">
+          <MyGridContainer justify="center" style={{ paddingBottom: "16px" }}>
             <MyGridItem xs={8}>
               {reviewData.map((review, index) => {
                 {

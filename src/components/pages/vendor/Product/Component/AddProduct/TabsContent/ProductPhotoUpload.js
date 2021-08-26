@@ -1,35 +1,26 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { UPLOAD_FILE } from "../../../../../../../queries/Product/productMutations";
+import { MyMultilineInput } from "../../../../../../Design/MyFormFieldComponent";
 
-const ProductPhotoUpload = () => {
-  const [uploadFile, { error, loading, data }] = useMutation(UPLOAD_FILE);
-
-  const [File, setFile] = useState(null);
-
-  const onChange = ({
-    target: {
-      validity,
-      files: [file],
-    },
-  }) => {
-    setFile(file);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    uploadFile({
-      variables: {
-        file: File,
-      },
-    });
-  };
-
+const ProductPhotoUpload = ({ onChange, productImageUrl }) => {
   return (
-    <>
-      <input type="file" required onChange={onChange} />
-      <button type="submit">submit</button>
-    </>
+    <div>
+      <h3>Add Image Link</h3>
+
+      {/* We can use textAreaAutoSize of material ui */}
+      <MyMultilineInput
+        onChange={onChange}
+        name="productImageUrl"
+        value={productImageUrl}
+        rows={3}
+        variant="outlined"
+      />
+
+      <p>
+        <a href="https://source.unsplash.com/" rel="noreferrer" target="_blank">
+          Unsplash Link
+        </a>
+      </p>
+    </div>
   );
 };
 

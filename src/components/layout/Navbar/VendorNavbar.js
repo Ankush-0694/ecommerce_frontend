@@ -15,7 +15,7 @@ const VendorNavbar = ({ history }) => {
         }}
         userStyle={{ color: "white", textTransform: "capitalize" }}>
         <MyTypography variant="h6" noWrap>
-          Vendor_Dashboard
+          Home
         </MyTypography>
       </MyButtonComponent>
     </MyNavbar>

@@ -5,7 +5,7 @@ import { MyButtonComponent } from "../../Design/MyButtonComponent";
 import { Link, withRouter } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useQuery } from "@apollo/client";
-import { GET_CART } from "../../../queries/Cart/cartQueries";
+import { GET_CART_BY_CUSTOMERID } from "../../../queries/Cart/cartQueries";
 import { StyledBadge, userNavbarStyles } from "./Css/UserNavbarStyles";
 import UserNavbarSearch from "./Component/UserNavbarSearch";
 
@@ -16,8 +16,10 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const {
     error: getCartError,
     loading: getCartLoading,
-    data,
-  } = useQuery(GET_CART);
+    data: getCartData,
+  } = useQuery(GET_CART_BY_CUSTOMERID, {
+    skip: !isAuthenticated,
+  });
 
   //Error and loading handlend at the cart tab
 
@@ -56,24 +58,30 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             My Orders
           </MyButtonComponent>
 
-          {/** added badge to the Cart Button to show cart Count */}
+          {/** added badge to the Cart Button to show cart Count  
+            Showing this button only if cart data is available, means query is called
+          */}
 
-          <MyButtonComponent
-            className={classes.NavbarLink}
-            onClick={() => {
-              history.push("/cart");
-            }}
-            color="inherit">
-            {/* If error just show the text */}
-            {getCartError && <>Cart</>}
+          {getCartData && (
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/cart");
+              }}
+              color="inherit">
+              {/* If error just show the text */}
+              {getCartError && <>Cart</>}
 
-            {/* Showing cart count only when query success */}
-            {!getCartLoading && !getCartError && (
-              <StyledBadge badgeContent={data.getCart.length} color="secondary">
-                <ShoppingCartIcon />
-              </StyledBadge>
-            )}
-          </MyButtonComponent>
+              {/* Showing cart count only when query success */}
+              {!getCartLoading && !getCartError && (
+                <StyledBadge
+                  badgeContent={getCartData.getCartByCustomerId.length}
+                  color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              )}
+            </MyButtonComponent>
+          )}
 
           {/* Profile Tab */}
 

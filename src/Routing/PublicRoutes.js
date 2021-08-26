@@ -4,7 +4,15 @@ import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../components/layout/Navbar/UserNavbar";
 import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
 
-/** PublicCustomerRoute */
+/**
+ * Need to have access of isAuthenticated in public route to check which tabs we need to show
+ *
+ * Need to have setAuthenticated on Public route to set isAuth to false when customer logout
+ *
+ * Same Logic applied to the vendor and admin route
+ */
+
+/** Public Customer Route */
 const PublicCustomerRoute = ({
   component: Component,
   isAuthenticated,
@@ -33,7 +41,7 @@ const PublicCustomerRoute = ({
   );
 };
 
-/** PublicVendorRoute */
+/** Public Vendor Route */
 const PublicVendorRoute = ({
   exact,
   path,
@@ -63,7 +71,7 @@ const PublicVendorRoute = ({
   );
 };
 
-/** PublicAdminRoute */
+/** Public Admin Route */
 const PublicAdminRoute = ({
   exact,
   path,

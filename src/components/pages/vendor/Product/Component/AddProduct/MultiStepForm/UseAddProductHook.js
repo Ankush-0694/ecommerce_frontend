@@ -10,6 +10,7 @@ const emptyProductState = {
   },
   productSubCategory: "",
   productBrand: "",
+  productImageUrl: "", // can provide default url but it will show on ui //https://source.unsplash.com/user/jackie/likes/1600x900
 };
 
 const useAddProductHook = () => {
@@ -23,6 +24,7 @@ const useAddProductHook = () => {
     },
     productSubCategory: "",
     productBrand: "",
+    productImageUrl: "",
   });
 
   return { productFormData, setProductFormData };

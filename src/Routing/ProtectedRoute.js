@@ -7,18 +7,23 @@ import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
 /**
  * Need to pass user details here to check the role
  * if role does not our given role then redirect to unAuthorized Page
+ *
+ * if no logged in then redirect to appropiate route
  */
 
+/** Customer Protected Route Logic */
 const ProtectedCustomerRoute = ({
   component: Component,
   isAuthenticated,
   setIsAuthenticated,
+  user,
   ...restProps
 }) => {
   return (
     <Route
       {...restProps}
       render={(routeProps) => {
+        //if not logged in
         if (!isAuthenticated) {
           return (
             <Redirect
@@ -28,7 +33,13 @@ const ProtectedCustomerRoute = ({
               }}
             />
           );
-        } else {
+        }
+        //if Role does not match to require role then redirect to unAuth page
+        else if (user && user.getMe.role !== "customer") {
+          return <Redirect to="/unAuth" />;
+        }
+        // else show the component we want to access
+        else {
           return (
             <>
               <UserNavbar
@@ -45,9 +56,11 @@ const ProtectedCustomerRoute = ({
   );
 };
 
+/** Vendor Protected Route Logic */
 const ProtectedVendorRoute = ({
   component: Component,
   isAuthenticated,
+  user,
   ...restProps
 }) => {
   return (
@@ -63,6 +76,8 @@ const ProtectedVendorRoute = ({
               }}
             />
           );
+        } else if (user && user.getMe.role !== "vendor") {
+          return <Redirect to="/unAuth" />;
         } else {
           return (
             <>
@@ -76,6 +91,7 @@ const ProtectedVendorRoute = ({
   );
 };
 
+/** Admin Protected Route Logic */
 const ProtectedAdminRoute = ({
   component: Component,
   isAuthenticated,

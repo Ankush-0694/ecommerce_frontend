@@ -16,9 +16,9 @@ const GET_CART = gql`
   }
 `;
 
-const GET_CART_BY_PRODUCT_ID = gql`
-  query ($productID: ID) {
-    getCartItemByProductId(productID: $productID) {
+const GET_CART_BY_CUSTOMERID = gql`
+  query {
+    getCartByCustomerId {
       id
       customerId
       productData {
@@ -32,4 +32,20 @@ const GET_CART_BY_PRODUCT_ID = gql`
   }
 `;
 
-export { GET_CART, GET_CART_BY_PRODUCT_ID };
+const GET_CART_BY_PRODUCT_ID = gql`
+  query ($productID: ID) {
+    getCartByProductId(productID: $productID) {
+      id
+      customerId
+      productData {
+        id
+        productName
+        productDescription
+        productPrice
+      }
+      quantity
+    }
+  }
+`;
+
+export { GET_CART, GET_CART_BY_PRODUCT_ID, GET_CART_BY_CUSTOMERID };

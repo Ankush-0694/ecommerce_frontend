@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_CART } from "../../../../queries/Cart/cartQueries";
+import { useQuery } from "@apollo/client";
+import { GET_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
@@ -18,7 +18,7 @@ const Cart = ({ history }) => {
     error: getCartError,
     loading: getCartLoading,
     data: getCartData,
-  } = useQuery(GET_CART, {
+  } = useQuery(GET_CART_BY_CUSTOMERID, {
     onError: () => {},
   });
 
@@ -31,7 +31,7 @@ const Cart = ({ history }) => {
   }
 
   // storing cartData array // this data will be render
-  const cartData = getCartData.getCart;
+  const cartData = getCartData.getCartByCustomerId;
 
   //No of product
   let itemCount = 0;
