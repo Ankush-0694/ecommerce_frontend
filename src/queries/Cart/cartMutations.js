@@ -22,6 +22,13 @@ const UPDATE_CART_QUANTITY = gql`
   mutation ($cartID: ID, $quantity: Int) {
     updateCartQuantity(cartID: $cartID, quantity: $quantity) {
       id
+      customerId
+      productData {
+        id
+        productName
+        productDescription
+        productPrice
+      }
       quantity
     }
   }

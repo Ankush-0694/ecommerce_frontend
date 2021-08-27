@@ -14,6 +14,7 @@ import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
 import MyAlert from "../../../Design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
+import { GET_ALL_ORDERS } from "../../../../queries/Order/orderQueries";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
@@ -66,6 +67,10 @@ const CheckoutSingle = (props) => {
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER, {
     onError: () => {},
+    onCompleted: () => {
+      return alert("order successfully placed"); // can use a state and show proper alert
+    },
+    refetchQueries: [{ query: GET_ALL_ORDERS }], // updating order afeter we placed order
   });
 
   /* We call this mutation on Mount to add the checkouted product to the cart */
@@ -95,16 +100,16 @@ const CheckoutSingle = (props) => {
       return;
     }
 
-    // addOrder({
-    //   variables: {
-    //     productDetailsWithQuantity: [
-    //       { productDetails: productid, quantity: quantity },
-    //     ],
-    //     totalQuantity: Number(quantity),
-    //     addressID: selectedAddress,
-    //     totalPrice: totalPriceOfOrder,
-    //   },
-    // });
+    addOrder({
+      variables: {
+        productDetailsWithQuantity: [
+          { productDetails: productid, quantity: quantity },
+        ],
+        totalQuantity: Number(quantity),
+        addressID: selectedAddress,
+        totalPrice: totalPriceOfOrder,
+      },
+    });
   };
 
   return (

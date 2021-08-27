@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
@@ -8,7 +8,10 @@ import PriceDetails from "./Component/PriceDetails/PriceDetails";
 import { MyTypography } from "../../../Design/MyTypography";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
-import { GET_CART } from "../../../../queries/Cart/cartQueries";
+import {
+  GET_CART,
+  GET_CART_BY_CUSTOMERID,
+} from "../../../../queries/Cart/cartQueries";
 import AddressContainer from "./AddressContainer";
 import MyAlert from "../../../Design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
@@ -46,9 +49,13 @@ const CheckoutMultiple = (props) => {
     loading: getCartLoading,
     error: getCartError,
     data: getCartData,
-  } = useQuery(GET_CART, {
+  } = useQuery(GET_CART_BY_CUSTOMERID, {
     fetchPolicy: "cache-first",
   }); /* cache-first is prevent network call if data is available in cache  */
+
+  useEffect(() => {
+    alert("TODO - Cart data has been changed , Don't order Now");
+  }, []);
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
@@ -64,7 +71,7 @@ const CheckoutMultiple = (props) => {
    * @type {Array} - Contains Array of objects
    */
 
-  let productData = getCartData.getCart;
+  let productData = getCartData.getCartByCustomerId;
 
   /**  This is called when we click on place order
    *  We also compute the total quantity and map individual quantity with product id
@@ -97,14 +104,16 @@ const CheckoutMultiple = (props) => {
       });
     });
 
-    addOrder({
-      variables: {
-        productDetailsWithQuantity: ProductDetailsWithQuantity,
-        totalQuantity: Number(totalQuantity),
-        addressID: selectedAddress,
-        totalPrice: totalPriceOfOrder,
-      },
-    });
+    //
+
+    // addOrder({
+    //   variables: {
+    //     productDetailsWithQuantity: ProductDetailsWithQuantity,
+    //     totalQuantity: Number(totalQuantity),
+    //     addressID: selectedAddress,
+    //     totalPrice: totalPriceOfOrder,
+    //   },
+    // });
   };
 
   return (

@@ -3,11 +3,19 @@ import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutations";
 import { useMutation } from "@apollo/client";
+import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";
 
 const ProductReviewList = ({ reviewData, setCurrentReview }) => {
   const { id, productID, rating, review } = reviewData;
 
-  const [deleteReview, { data: deleteReviewData }] = useMutation(DELETE_REVIEW);
+  const [deleteReview, { data: deleteReviewData }] = useMutation(
+    DELETE_REVIEW,
+    {
+      refetchQueries: [
+        { query: GET_SINGLE_PRODUCT, variables: { id: productID } }, // reftech full page , not good approach
+      ],
+    }
+  );
 
   const onDeleteReview = () => {
     deleteReview({

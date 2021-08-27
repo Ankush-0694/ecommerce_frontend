@@ -60,6 +60,7 @@ const ProtectedCustomerRoute = ({
 const ProtectedVendorRoute = ({
   component: Component,
   isAuthenticated,
+  setIsAuthenticated,
   user,
   ...restProps
 }) => {
@@ -81,7 +82,11 @@ const ProtectedVendorRoute = ({
         } else {
           return (
             <>
-              <VendorNavbar {...routeProps} />
+              <VendorNavbar
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                {...routeProps}
+              />
               <Component {...routeProps} />
             </>
           );
@@ -118,7 +123,11 @@ const ProtectedAdminRoute = ({
         } else {
           return (
             <>
-              <AdminNavbar {...routeProps} />
+              <AdminNavbar
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                {...routeProps}
+              />
               <Component {...routeProps} />
             </>
           );

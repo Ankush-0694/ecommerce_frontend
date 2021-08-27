@@ -18,6 +18,7 @@ const AllProducts = ({ data, setCurrent }) => {
     productDescription,
     productBrand,
     productCategory,
+    productImageUrl,
   } = data;
   const [deleteProduct, { data: deletedProductData }] = useMutation(
     DELETE_PRODUCT,
@@ -66,7 +67,7 @@ const AllProducts = ({ data, setCurrent }) => {
                     className={classes.MediaImg}
                     style={{ minWidth: "100px" }}
                     title="IMAGE"
-                    image={`https://source.unsplash.com/collection/${productPrice}/800x450`}
+                    image={productImageUrl}
                   />
                 </div>
               </MyGridItem>
