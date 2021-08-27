@@ -17,6 +17,7 @@ const PublicCustomerRoute = ({
   component: Component,
   isAuthenticated,
   setIsAuthenticated,
+
   ...restProps
 }) => {
   return (
@@ -31,7 +32,7 @@ const PublicCustomerRoute = ({
               {...routeProps}
             />
             <Component
-              setIsAuthenticated={setIsAuthenticated}
+              setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
               {...routeProps}
             />
           </>
@@ -58,11 +59,14 @@ const PublicVendorRoute = ({
       render={(routeProps) => {
         return (
           <>
-            {/** add Vendor Navbar here */}
-            <VendorNavbar {...routeProps} />
+            <VendorNavbar
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+              {...routeProps}
+            />
             <Component
               {...routeProps}
-              setIsAuthenticated={setIsAuthenticated}
+              setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
             />
           </>
         );
@@ -88,7 +92,11 @@ const PublicAdminRoute = ({
       render={(routeProps) => {
         return (
           <>
-            <AdminNavbar {...routeProps} />
+            <AdminNavbar
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+              {...routeProps}
+            />
 
             <Component
               {...routeProps}

@@ -14,13 +14,7 @@ const HomeSliderContent = (props) => {
       }}
       elevation={10}>
       <div className={classes.slider_details}>
-        <div>
-          <h2>{props.item.name}</h2>
-          <p>{props.item.description}</p>
-          <MyButtonComponent className={classes.CheckButton}>
-            Check it out!
-          </MyButtonComponent>
-        </div>
+        <h1 style={{ color: "white", fontSize: "4rem" }}>Coming Soon</h1>
       </div>
     </MyPaper>
   );

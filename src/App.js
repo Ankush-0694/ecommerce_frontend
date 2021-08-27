@@ -46,7 +46,7 @@ const App = () => {
     data: getMeData,
   } = useQuery(GET_ME, {
     skip: !isAuthenticated, //we need to skip this query if there is no token
-    onError: () => {},
+    onError: () => {}, // error handled here instead of show error on Ui
   });
 
   if (getMeLoading) {
@@ -64,6 +64,8 @@ const App = () => {
       <div style={{ minWidth: "940px" }}>
         <Switch>
           {/* Customer Routes */}
+
+          {/*  Need to pass these state to use in navbar , login and logout */}
 
           <PublicCustomerRoute
             exact
@@ -146,6 +148,7 @@ const App = () => {
             component={CheckoutSingle}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
           <ProtectedCustomerRoute
             path="/account"

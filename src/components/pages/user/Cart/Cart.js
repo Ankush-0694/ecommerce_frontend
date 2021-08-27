@@ -55,7 +55,7 @@ const Cart = ({ history }) => {
     e.preventDefault();
     let productIDArray = [];
     cartData.map((cartDataItem) => {
-      productIDArray.push(cartDataItem.productID);
+      productIDArray.push(cartDataItem.productData.productID);
     });
     history.push({
       pathname: `/checkout`,

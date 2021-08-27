@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import { MyNavbar } from "../../Design/MyNavbar";
 import { MyTypography } from "../../Design/MyTypography";
 import { MyButtonComponent } from "../../Design/MyButtonComponent";
-import { Link, withRouter } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useQuery } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../queries/Cart/cartQueries";
 import { StyledBadge, userNavbarStyles } from "./Css/UserNavbarStyles";
 import UserNavbarSearch from "./Component/UserNavbarSearch";
+import ShowLoading from "../LoadingComponent/ShowLoading";
+import { GET_ME } from "../../../queries/user/userQueries";
+import MyAlert from "../../Design/MyAlert";
 
 const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = userNavbarStyles();
@@ -19,9 +22,52 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
     data: getCartData,
   } = useQuery(GET_CART_BY_CUSTOMERID, {
     skip: !isAuthenticated,
+    //Error and loading handlend at the cart nav button
   });
 
-  //Error and loading handlend at the cart tab
+  /**
+   *  Need to use this because we may need to show the tabs (logout) only to the customer
+   * Not to vendor and not to admin
+   *
+   * It will get this from apollo cache
+   */
+  const {
+    error: getMeError,
+    loading: getMeLoading,
+    data: getMeData,
+  } = useQuery(GET_ME, {
+    skip: !isAuthenticated, //we need to skip this query if there is no token
+    onError: () => {}, // if this query we can still see the navbar on the ui due to this
+  });
+
+  if (getMeLoading) {
+    return <ShowLoading />;
+  }
+
+  /**
+   * Restricting vendor and Admin to access the customer side public Route
+   *
+   * Pass a Msg that you need to logout first
+   *
+   * first condition there is a token and there is someone who logged in
+   *
+   * in inner condition we are checking who it is.
+   */
+  if (getMeData) {
+    if (getMeData.getMe.role === "vendor") {
+      history.push({
+        pathname: "/vendor/products", // redirecting to main page of vendor
+        state: { message: "You Need to Logout First" },
+      });
+    }
+
+    if (getMeData.getMe.role === "admin") {
+      history.push({
+        pathname: "/admin/dashboard", // redirecting to main page of admin
+        state: { message: "You Need to Logout First" },
+      });
+    }
+  }
 
   return (
     <MyNavbar className={classes.navbar}>
@@ -48,7 +94,6 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
       <div className={classes.NavbarTabsContainer}>
         <div>
           {/* Order Tab */}
-
           <MyButtonComponent
             className={classes.NavbarLink}
             onClick={() => {
@@ -62,26 +107,26 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             Showing this button only if cart data is available, means query is called
           */}
 
-          {getCartData && (
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                history.push("/cart");
-              }}
-              color="inherit">
-              {/* If error just show the text */}
-              {getCartError && <>Cart</>}
+          <MyButtonComponent
+            className={classes.NavbarLink}
+            onClick={() => {
+              history.push("/cart");
+            }}
+            color="inherit">
+            {/* If error just show the text */}
+            {getCartError && <>Cart</>}
 
-              {/* Showing cart count only when query success */}
-              {!getCartLoading && !getCartError && (
-                <StyledBadge
-                  badgeContent={getCartData.getCartByCustomerId.length}
-                  color="secondary">
-                  <ShoppingCartIcon />
-                </StyledBadge>
-              )}
-            </MyButtonComponent>
-          )}
+            {/* Showing cart count only when query success */}
+            {!getCartLoading && !getCartError && (
+              <StyledBadge
+                badgeContent={
+                  getCartData && getCartData.getCartByCustomerId.length
+                } /// showing this badge if only query is called
+                color="secondary">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            )}
+          </MyButtonComponent>
 
           {/* Profile Tab */}
 
@@ -93,9 +138,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             color="inherit">
             My Account
           </MyButtonComponent>
-
           {/** Showing signup button only if user is not logged in */}
-
           {!isAuthenticated && (
             <MyButtonComponent
               className={classes.NavbarLink}
@@ -124,7 +167,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               onClick={() => {
                 // console.log("logout by deleting token from LS");
 
-                /** Logout - Removing token , authentication False, Redirected to User Page */
+                /** Logout - Removing token , authentication False, Redirected to User login Page */
 
                 localStorage.removeItem("token");
                 setIsAuthenticated(false);

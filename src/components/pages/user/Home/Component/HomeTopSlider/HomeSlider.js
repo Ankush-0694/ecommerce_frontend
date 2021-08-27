@@ -45,7 +45,7 @@ const HomeSlider = () => {
         timeout={300}
         navButtonsAlwaysVisible={true}>
         {items.map((item, index) => {
-          return <HomeSliderContent item={item} key={item.id} />;
+          return <HomeSliderContent item={item} key={index} />;
         })}
       </MyCarousel>
     </div>

@@ -90,6 +90,7 @@ const SingleProduct = (props) => {
     productCategory,
     productSubCategory,
     productBrand,
+    productImageUrl,
   } = productData;
 
   /** destructuring review data
@@ -149,12 +150,10 @@ const SingleProduct = (props) => {
       {addToCartError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
       <MyGridContainer justify="center" spacing={4}>
+        {/* Product Details  */}
+
         <MyGridItem xs={8} sm={4}>
-          <MyCardMedia
-            height="300"
-            title="IMAGE"
-            image={`https://source.unsplash.com/collection/${productPrice}{/800x450`}
-          />
+          <MyCardMedia height="300" title="IMAGE" image={productImageUrl} />
         </MyGridItem>
         <MyGridItem xs={8} sm={4}>
           <div className={classes.productDiv} style={{ maxWidth: " 500px" }}>
@@ -176,7 +175,9 @@ const SingleProduct = (props) => {
             </MyTypography>
           </div>
 
+          {/* Buttons AddCart And Buy Now */}
           <div>
+            {/* AddToCart Button */}
             <MyButtonComponent
               variant="outlined"
               size="medium"

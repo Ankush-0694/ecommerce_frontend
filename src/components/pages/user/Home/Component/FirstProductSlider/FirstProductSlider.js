@@ -61,7 +61,7 @@ const FirstProductSlider = () => {
                 <MyCardMedia
                   height="200"
                   title="IMAGE"
-                  image={`https://source.unsplash.com/collection/${mappedProduct.productPrice}/800x450`}
+                  image={mappedProduct.productImageUrl}
                 />
                 <MyCardContent>
                   <div className={classes.cardDescription}>
