@@ -22,10 +22,15 @@ const useStyles = makeStyles((theme) => ({
 /** This component is common to the single and  multiple checkout
  *  We Separate the logic based on the quantity props.
  
- * If Quantity is false , then we need to calculate
+ * If Quantity is false (it means we are using for multiple) , then we need to calculate
  *  price for multiple product else for single product
  */
-const PriceDetails = ({ productData, quantity, setTotalPriceOfOrder }) => {
+const PriceDetails = ({
+  productDataProp, // this is coming from checkout multiple ((null for checkout Multiple))
+  cartDataProp, //this is coming from checkout multiple (null for checkout single)
+  quantityProp,
+  setTotalPriceOfOrder,
+}) => {
   const classes = useStyles();
 
   /* Total amount for order */
@@ -38,22 +43,27 @@ const PriceDetails = ({ productData, quantity, setTotalPriceOfOrder }) => {
   let totalQuantity = 0;
 
   /* This means that quantity has been passed from the single Product Checkout */
-  if (quantity !== false) {
+  if (quantityProp !== false) {
     totalItems = 1;
-    totalQuantity = quantity;
-    totalPrice = productData.productPrice * quantity;
-  } else {
+    totalQuantity = quantityProp;
+    totalPrice = productDataProp.productPrice * quantityProp;
+  }
+
+  //this means we are calculating for checkout Multiple (checkout multiple sending cartData as a prop with name of productData)
+  else {
     /* No of product items */
-    totalItems = productData.length;
+    totalItems = cartDataProp.length;
 
     /* Need to map and sum the quantity , Hence we got the total Quantity 
       And do the same for calculating the product price
     */
-    productData.map((mappedProductData) => {
-      const { productPrice, quantity } = mappedProductData;
+    cartDataProp.map((mappedCartData) => {
+      const { quantity, productData } = mappedCartData;
+
+      const { productPrice } = productData;
 
       totalQuantity += quantity;
-      totalPrice = totalPrice + productPrice * quantity;
+      totalPrice += productPrice * quantity;
     });
   }
 

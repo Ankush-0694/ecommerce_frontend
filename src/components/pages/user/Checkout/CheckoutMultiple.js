@@ -53,10 +53,6 @@ const CheckoutMultiple = (props) => {
     fetchPolicy: "cache-first",
   }); /* cache-first is prevent network call if data is available in cache  */
 
-  useEffect(() => {
-    alert("TODO - Cart data has been changed , Don't order Now");
-  }, []);
-
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
 
   if (getCartLoading) {
@@ -71,7 +67,7 @@ const CheckoutMultiple = (props) => {
    * @type {Array} - Contains Array of objects
    */
 
-  let productData = getCartData.getCartByCustomerId;
+  let cartData = getCartData.getCartByCustomerId;
 
   /**  This is called when we click on place order
    *  We also compute the total quantity and map individual quantity with product id
@@ -95,12 +91,17 @@ const CheckoutMultiple = (props) => {
      */
     let totalQuantity = 0;
 
-    /* mapping the product data to get total quantity and set productDetailsWithQuantity */
-    productData.map((mappedData) => {
-      totalQuantity += mappedData.quantity;
+    /* mapping the cart data to get total quantity and set productDetailsWithQuantity */
+    cartData.map((mappedData) => {
+      /** productData is coming after populate as an object in cart schema */
+      const { quantity, productData } = mappedData;
+
+      totalQuantity += quantity; // Calculating total quantity of the order(every item may have different quantity)
+
+      /** this object will pass to order to store productData with individual quantity */
       ProductDetailsWithQuantity.push({
-        productDetails: mappedData.productID,
-        quantity: mappedData.quantity,
+        productDetails: productData.id,
+        quantity: quantity,
       });
     });
 
@@ -128,6 +129,8 @@ const CheckoutMultiple = (props) => {
         Order Summary
       </MyTypography>
       <MyGridContainer justify="center" spacing={4}>
+        {/* Product Details on order Summary */}
+
         <MyGridItem xs={8} sm={6} className="product-details">
           <div
             style={{
@@ -135,23 +138,28 @@ const CheckoutMultiple = (props) => {
               overflow: "auto",
               paddingRight: "20px",
             }}>
-            {productData.map((mappedProductData) => {
+            {/* Mapping cart to show product details on order summary  */}
+
+            {cartData.map((mappedCartData) => {
               return (
                 <MultipleProductDetails
-                  key={mappedProductData.id}
-                  productData={mappedProductData}
+                  key={mappedCartData.id} // this is cart id
+                  cartDataProp={mappedCartData}
                 />
               );
             })}
           </div>
         </MyGridItem>
+
+        {/* Price Details on order Summary */}
+
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
             {/* We are sending total Quantity false because product data is from cart
             and we can calculate the quantity in the price details itself for multiple products */}
             <PriceDetails
-              productData={productData}
-              quantity={false}
+              cartDataProp={cartData} // this same prop is passed from checkoutSingle so we name it the same
+              quantityProp={false}
               setTotalPriceOfOrder={setTotalPriceOfOrder}
             />
           </div>
@@ -168,6 +176,8 @@ const CheckoutMultiple = (props) => {
       </MyGridContainer>
       <div style={{ textAlign: "center", margin: "10px" }}></div>
       <hr></hr>
+
+      {/* Address List and Form */}
 
       <div>
         <AddressContainer

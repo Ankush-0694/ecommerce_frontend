@@ -83,7 +83,9 @@ const Login = (props) => {
         variables: {
           email,
           password,
-          // role: identity,
+
+          // need to check condition if url is "http:something/login"  only
+          role: identity == "login" ? "customer" : identity, // need to pass identity for customer
         },
       });
 
@@ -108,6 +110,11 @@ const Login = (props) => {
        */}
       {props.location.state && props.location.state.errorMsg && (
         <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
+      )}
+
+      {/* if signup got successfull then we need to come to this page with a alert msg */}
+      {props.location.state && props.location.state.signUpSuccess && (
+        <MyAlert type="success">{props.location.state.signUpSuccess}</MyAlert>
       )}
 
       {/* Clearing the state passed from redirection to prevent it from showing error on reload */}

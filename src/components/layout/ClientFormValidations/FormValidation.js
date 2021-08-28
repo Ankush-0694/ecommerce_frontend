@@ -6,6 +6,7 @@ const validateSignupForm = (userDetails, setUserDetails) => {
 
   let isError = false;
 
+  // we spread it in userDetails after setting the error (this prevent us to do setUserDetails for every error)
   const errors = {
     firstNameError: "",
     lastNameError: "",
