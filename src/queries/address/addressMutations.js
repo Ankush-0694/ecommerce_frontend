@@ -21,6 +21,8 @@ const ADD_ADDRESS = gql`
       area: $area
       landmark: $landmark
     ) {
+      id
+      customerId
       fullName
       phoneNumber
       pincode
@@ -57,6 +59,7 @@ const UPDATE_ADDRESS = gql`
       landmark: $landmark
     ) {
       id
+      customerId
       fullName
       phoneNumber
       pincode
@@ -73,6 +76,7 @@ const DELETE_ADDRESS = gql`
   mutation ($id: ID!) {
     deleteAddress(addressID: $id) {
       id
+      customerId
       fullName
       phoneNumber
       pincode

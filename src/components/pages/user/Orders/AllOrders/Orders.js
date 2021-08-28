@@ -4,7 +4,7 @@ import { MyTypography } from "../../../../Design/MyTypography";
 import OrderedProductList from "./Component/OrderedProductList/OrderedProductList";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_ORDERS } from "../../../../../queries/Order/orderQueries";
+import { GET__ORDERS_BY_CUSTOMERID } from "../../../../../queries/Order/orderQueries";
 import { OrderStyles } from "./CSS/OrdersStyles";
 import OrderFilter from "./Component/FilterComponent/OrderFilter";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
@@ -17,7 +17,7 @@ const Orders = () => {
     error: getOrdersError,
     loading: getOrdersLoading,
     data: getOrdersData,
-  } = useQuery(GET_ALL_ORDERS);
+  } = useQuery(GET__ORDERS_BY_CUSTOMERID);
 
   if (getOrdersError) {
     return <ShowError>Error Occured While getting Orders</ShowError>;
@@ -31,7 +31,7 @@ const Orders = () => {
    * @type {array} - Every Order further have productDetailsWithQuantity Array
    */
 
-  const orderData = getOrdersData.getAllOrders;
+  const orderData = getOrdersData.getOrdersByCustomerId;
 
   return (
     <div className={classes.pageContainer}>

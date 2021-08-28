@@ -5,7 +5,7 @@ import { MyTypography } from "../../../Design/MyTypography";
 import AddressForm from "./Component/AddressForm/AddressForm";
 import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
-import { GET_ALL_ADDRESS } from "../../../../queries/address/addressQueries";
+import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../queries/address/addressQueries";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -27,7 +27,7 @@ const AddressContainer = (props) => {
     error: getAddressError,
     loading: getAddressLoading,
     data: addressData,
-  } = useQuery(GET_ALL_ADDRESS);
+  } = useQuery(GET_ADDRESSES_BY_CUSTOMERID);
 
   if (getAddressError) {
     return <ShowError>Error while Fetching addresses</ShowError>;
@@ -37,7 +37,7 @@ const AddressContainer = (props) => {
   }
 
   /* This data will be render in UI */
-  const addressDataToRender = addressData.getAllAddress;
+  const addressDataToRender = addressData.getAddressesByCustomerId;
 
   /** This function is used to change the value of address state id  in this component
    * Which comes from parent checkout component
@@ -68,25 +68,29 @@ const AddressContainer = (props) => {
             </div>
 
             <div className="addressList" style={{ marginLeft: "10px" }}>
-              <FormControl component="fieldset" style={{ width: "100%" }}>
-                <RadioGroup
-                  aria-label="address"
-                  name="address1"
-                  value={selectedAddress}
-                  onChange={handleAddressRadio}>
-                  {addressDataToRender.map((data) => {
-                    return (
-                      <AddressList
-                        key={data.id}
-                        data={data}
-                        current={current}
-                        setCurrent={setCurrent}
-                        selectedAddress={selectedAddress} //this is passed to remove radio button when using it MyProfile Page
-                      />
-                    );
-                  })}
-                </RadioGroup>
-              </FormControl>
+              {addressDataToRender.length > 0 ? (
+                <FormControl component="fieldset" style={{ width: "100%" }}>
+                  <RadioGroup
+                    aria-label="address"
+                    name="address1"
+                    value={selectedAddress}
+                    onChange={handleAddressRadio}>
+                    {addressDataToRender.map((data) => {
+                      return (
+                        <AddressList
+                          key={data.id}
+                          data={data}
+                          current={current}
+                          setCurrent={setCurrent}
+                          selectedAddress={selectedAddress} //this is passed to remove radio button when using it MyProfile Page
+                        />
+                      );
+                    })}
+                  </RadioGroup>
+                </FormControl>
+              ) : (
+                <h3 style={{ padding: "10px" }}>No Address Found..</h3>
+              )}
             </div>
           </div>
           <hr></hr>
