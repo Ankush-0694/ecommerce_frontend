@@ -29,8 +29,8 @@ const CREATE_USER = gql`
 
 /** Single Mutation  for all user types  */
 const USER_LOGIN = gql`
-  mutation ($email: String!, $password: String!) {
-    userLogin(email: $email, password: $password) {
+  mutation ($email: String!, $password: String!, $role: String!) {
+    userLogin(email: $email, password: $password, role: $role) {
       token
     }
   }

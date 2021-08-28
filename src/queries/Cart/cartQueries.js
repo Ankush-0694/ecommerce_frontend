@@ -10,6 +10,7 @@ const GET_CART = gql`
         productName
         productDescription
         productPrice
+        productImageUrl
       }
       quantity
     }
@@ -26,6 +27,7 @@ const GET_CART_BY_CUSTOMERID = gql`
         productName
         productDescription
         productPrice
+        productImageUrl
       }
       quantity
     }
@@ -42,6 +44,7 @@ const GET_CART_BY_PRODUCT_ID = gql`
         productName
         productDescription
         productPrice
+        productImageUrl
       }
       quantity
     }

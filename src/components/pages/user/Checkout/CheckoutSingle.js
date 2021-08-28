@@ -136,8 +136,8 @@ const CheckoutSingle = (props) => {
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
             <PriceDetails
-              productData={productData}
-              quantity={quantity}
+              productDataProp={productData}
+              quantityProp={quantity}
               setTotalPriceOfOrder={setTotalPriceOfOrder}
             />
           </div>

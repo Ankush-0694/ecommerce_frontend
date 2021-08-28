@@ -8,22 +8,30 @@ import { UPDATE_CART_QUANTITY } from "../../../../../../queries/Cart/cartMutatio
 import { useMutation } from "@apollo/client";
 import { MyPaper } from "../../../../../Design/MyPaper";
 
-const MultipleProductDetails = ({ productData }) => {
+const MultipleProductDetails = ({ cartDataProp }) => {
   const classes = ProductDetailsStyles();
 
-  /* This is single cart data  */
-  const { quantity, id: cartID, productID } = productData;
+  /**  This is single cart data  */
+  const { quantity, id: cartID, productData } = cartDataProp;
 
-  /* State to show quantity on UI and when it changes , we can call updateQuantity on update */
+  /** Destructuring futher productData to show the data on ui */
+  const {
+    id: productId,
+    productName,
+    productPrice,
+    productImageUrl,
+  } = productData;
+
+  /**  State to show quantity on UI and when it changes , we can call updateQuantity on update */
   const [quantityCount, setQuantityCount] = useState(quantity);
 
   // mutation to chaning the quantity of cart item
-  const [
-    updateCartQuantity,
-    { error: updateError, loading: updateLoading, data: updateCartData },
-  ] = useMutation(UPDATE_CART_QUANTITY, {
-    onError: () => {},
-  });
+  const [updateCartQuantity, { data: updateCartData }] = useMutation(
+    UPDATE_CART_QUANTITY,
+    {
+      onError: () => {},
+    }
+  );
 
   /**
    * This function is called from useEffect when we change the quantity of the item
@@ -42,6 +50,7 @@ const MultipleProductDetails = ({ productData }) => {
   /** Whenever quantity changes , we call the setQuantity function  */
   useEffect(() => {
     //eslint
+    //setting quantity only if it is valid
     if (quantityCount > 0 && quantityCount != "") {
       setQuantityById(cartID, quantityCount);
     }
@@ -52,28 +61,29 @@ const MultipleProductDetails = ({ productData }) => {
       <MyPaper style={{ padding: "10px" }} elevation={5}>
         <MyGridContainer justify="center">
           <MyGridItem xs={12} sm={6} md={3}>
-            <MyCardMedia
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-              title="IMAGE"
-              image="https://source.unsplash.com/collection/190727/800x450"
-            />
+            <div style={{ height: "150px" }}>
+              <MyCardMedia
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                title="IMAGE"
+                image={productImageUrl}
+              />
+            </div>
           </MyGridItem>
           <MyGridItem xs={10} sm={6} md={9}>
             <div style={{ textAlign: "center" }}>
               <MyTypography variant="h6" component="h2">
-                {productData.productName}
+                {productName}
               </MyTypography>
-              {/* <MyTypography variant="body2" component="p">
-              Description : {productData.productDescription}
-            </MyTypography> */}
+
               <MyTypography variant="body1" component="p">
-                Single Item Price : {productData.productPrice}
+                Single Item Price : {productPrice}
               </MyTypography>
+
               <MyTypography variant="body1" component="p">
-                Total Price : {productData.productPrice * quantityCount}
+                Total Price : {productPrice * quantityCount}
               </MyTypography>
             </div>
             <div

@@ -38,12 +38,9 @@ const Signup = (props) => {
         //handling the rejected promise when calling mutation
       },
       onCompleted: (data) => {
-        /** decide where to push the user ,
-         * Login or profile page to enter first name and last Name then on Home pages
-         */
         props.history.push({
-          // pathname:"/login",
-          // state : {}
+          pathname: "/login",
+          state: { signUpSuccess: "SignUp Successfull.Please Login..." },
         });
       },
     }
@@ -67,7 +64,7 @@ const Signup = (props) => {
     /**  this is validate the fields and set the error state and return a boolean
      * If any error found it will send the true
      * @param userDetails To validate all fields in the state
-     * @param setUserDetails after validate the state we set the state
+     * @param setUserDetails after validate the state we set the error state
      *@returns Boolean
      */
     const validationError = validateSignupForm(userDetails, setUserDetails);
@@ -81,10 +78,11 @@ const Signup = (props) => {
           lastName,
           email,
           password,
-          role: "customer", // Signup Form only for user
+          role: "customer", // Signup Form only for customer
         },
       });
 
+      // clear from after createUser calling
       setUserDetails({
         firstName: "",
         firstNameError: "",
@@ -104,6 +102,7 @@ const Signup = (props) => {
        * Only if there are any error
        */}
       {createUserError && <MyAlert type="error">{errorVar()}</MyAlert>}
+
       <MyFullScreenBox display="flex" width="100%" height="100vh">
         <form
           onSubmit={onSubmit}
