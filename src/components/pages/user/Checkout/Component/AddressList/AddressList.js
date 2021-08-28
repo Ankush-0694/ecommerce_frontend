@@ -1,19 +1,12 @@
 import React from "react";
-import { MyGridItem } from "../../../../../Design/MyGrid";
-import { MyHomeIcon } from "../../../../../Design/MyIcons";
 import { MyTypography } from "../../../../../Design/MyTypography";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import { AddressListStyles } from "../../CSS/AddressListStyles";
 import { useMutation } from "@apollo/client";
 import { DELETE_ADDRESS } from "../../../../../../queries/address/addressMutations";
-import { GET_ALL_ADDRESS } from "../../../../../../queries/address/addressQueries";
-import { IdleTransactionSpanRecorder } from "@sentry/tracing/dist/idletransaction";
-import { Fragment } from "react";
+import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../../../queries/address/addressQueries";
 
 const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
   const classes = AddressListStyles();
@@ -42,18 +35,18 @@ const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
         id,
       },
       update: (cache, { data: deletedAddressData }) => {
-        const data = cache.readQuery({ query: GET_ALL_ADDRESS });
+        const data = cache.readQuery({ query: GET_ADDRESSES_BY_CUSTOMERID });
         // need to newData var because we need to add a
         // new instance of all data , we can not use data var direclty
-        let dataToUpdate = data.getAllAddress;
+        let dataToUpdate = data.getAddressesByCustomerId;
         // filtering the data to delete given returned data
         dataToUpdate = dataToUpdate.filter((addressItem) => {
           return addressItem.id !== deletedAddressData.id;
         });
 
         cache.writeQuery({
-          query: GET_ALL_ADDRESS,
-          data: { ...data, getAllAddress: { dataToUpdate } },
+          query: GET_ADDRESSES_BY_CUSTOMERID,
+          data: { ...data, getAddressesByCustomerId: { dataToUpdate } },
         });
       },
     });

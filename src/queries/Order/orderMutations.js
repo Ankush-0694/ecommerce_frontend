@@ -13,6 +13,7 @@ const ADD_ORDER = gql`
       addressID: $addressID
       totalPrice: $totalPrice
     ) {
+      customerId
       totalQuantity
       totalPrice
       productDetailsWithQuantity {

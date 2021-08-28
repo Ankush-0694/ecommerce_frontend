@@ -42,7 +42,7 @@ const OrderDetails = (props) => {
   }
 
   /* Have only single order but may have multiple products */
-  const orderData = getSingleOrderData.getOrderById;
+  const orderData = getSingleOrderData.getOrderByOrderId;
 
   /** If no order Match then we should not destructure it
    * if user change the order ID from url (if objectid is valid then this will show)

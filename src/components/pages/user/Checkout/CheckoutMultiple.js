@@ -53,7 +53,9 @@ const CheckoutMultiple = (props) => {
     fetchPolicy: "cache-first",
   }); /* cache-first is prevent network call if data is available in cache  */
 
-  const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER);
+  const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER, {
+    onError: () => {},
+  });
 
   if (getCartLoading) {
     return <ShowError>Error while Fetching Cart Data</ShowError>;
@@ -105,16 +107,15 @@ const CheckoutMultiple = (props) => {
       });
     });
 
-    //
-
-    // addOrder({
-    //   variables: {
-    //     productDetailsWithQuantity: ProductDetailsWithQuantity,
-    //     totalQuantity: Number(totalQuantity),
-    //     addressID: selectedAddress,
-    //     totalPrice: totalPriceOfOrder,
-    //   },
-    // });
+    //Finally placing the order after hard work
+    addOrder({
+      variables: {
+        productDetailsWithQuantity: ProductDetailsWithQuantity,
+        totalQuantity: Number(totalQuantity),
+        addressID: selectedAddress,
+        totalPrice: totalPriceOfOrder,
+      },
+    });
   };
 
   return (

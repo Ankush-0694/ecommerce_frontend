@@ -11,7 +11,7 @@ import {
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 import { emptyAddressState, useAddAddressHook } from "./useAddressHook";
-import { GET_ALL_ADDRESS } from "../../../../../../queries/address/addressQueries";
+import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../../../queries/address/addressQueries";
 
 const AddressForm = ({ current, setCurrent }) => {
   const classes = AddressFormStyles();
@@ -70,14 +70,14 @@ const AddressForm = ({ current, setCurrent }) => {
         variables: addressFormData,
 
         update: (cache, { data: addAddressData }) => {
-          const data = cache.readQuery({ query: GET_ALL_ADDRESS }); // read only data
+          const data = cache.readQuery({ query: GET_ADDRESSES_BY_CUSTOMERID }); // read only data
           // need to newData var because we need to add a
           // new instance of all data , we can not use data var direclty
-          let dataToUpdate = data.getAllAddress;
+          let dataToUpdate = data.getAddressesByCustomerId;
           dataToUpdate = [...dataToUpdate, addAddressData];
           cache.writeQuery({
-            query: GET_ALL_ADDRESS,
-            data: { ...data, getAllAddress: { dataToUpdate } },
+            query: GET_ADDRESSES_BY_CUSTOMERID,
+            data: { ...data, getAddressesByCustomerId: { dataToUpdate } },
           });
         },
       });
