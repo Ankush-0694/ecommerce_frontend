@@ -10,10 +10,12 @@ import { StyledBadge, userNavbarStyles } from "./Css/UserNavbarStyles";
 import UserNavbarSearch from "./Component/UserNavbarSearch";
 import ShowLoading from "../LoadingComponent/ShowLoading";
 import { GET_ME } from "../../../queries/user/userQueries";
-import MyAlert from "../../Design/MyAlert";
+import { useApolloClient } from "@apollo/client";
 
 const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = userNavbarStyles();
+
+  const client = useApolloClient(); // getting client to clear cache on logout
 
   /** Getting cart to show number of items in the cart on the navbar */
   const {
@@ -171,6 +173,9 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
 
                 localStorage.removeItem("token");
                 setIsAuthenticated(false);
+
+                client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
+
                 history.push("/login");
               }}
               color="inherit">

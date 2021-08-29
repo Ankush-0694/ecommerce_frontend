@@ -18,6 +18,7 @@ const ProductList = ({ productData, orderedDate }) => {
     productName,
     productDescription,
     productPrice,
+    productImageUrl,
   } = productDetails;
 
   orderedDate = new Date(Number(orderedDate)).toDateString();
@@ -33,10 +34,7 @@ const ProductList = ({ productData, orderedDate }) => {
               {/* Image Item */}
               <MyGridItem xs={5}>
                 <div className={classes.ImageDiv}>
-                  <img
-                    className={classes.imgStyle}
-                    src="https://source.unsplash.com/collection/190727/900x600"
-                  />
+                  <img className={classes.imgStyle} src={productImageUrl} />
                 </div>
               </MyGridItem>
 

@@ -8,14 +8,12 @@ const HomeSliderContent = (props) => {
 
   return (
     <MyPaper
-      className={classes.Project}
-      style={{
-        backgroundColor: props.item.color,
-      }}
-      elevation={10}>
-      <div className={classes.slider_details}>
-        <h1 style={{ color: "white", fontSize: "4rem" }}>Coming Soon</h1>
-      </div>
+      className={classes.carouselItemPaper}
+      style={{ width: "100%", height: "30vw" }}>
+      <img
+        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+        src={props.item.link}
+      />
     </MyPaper>
   );
 };

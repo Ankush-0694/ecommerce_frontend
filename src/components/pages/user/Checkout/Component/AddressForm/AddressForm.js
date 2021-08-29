@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ADD_ADDRESS,
   UPDATE_ADDRESS,
@@ -12,9 +12,14 @@ import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 import { emptyAddressState, useAddAddressHook } from "./useAddressHook";
 import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../../../queries/address/addressQueries";
+import MyAlert from "../../../../../Design/MyAlert";
 
 const AddressForm = ({ current, setCurrent }) => {
   const classes = AddressFormStyles();
+
+  /* For Alert on Add and Update of Form */
+  const [addressFormSubmitMessage, setAddressFormSubmitMessage] = useState("");
+
   const { addressFormData, setAddressFormData } = useAddAddressHook();
   const {
     fullName,
@@ -27,14 +32,20 @@ const AddressForm = ({ current, setCurrent }) => {
     landmark,
   } = addressFormData;
 
-  const [addAddress, { data: addAddressData }] = useMutation(ADD_ADDRESS, {
+  const [addAddress, { data: addedAddressData }] = useMutation(ADD_ADDRESS, {
     onError: () => {},
+    onCompleted: () => {
+      setAddressFormSubmitMessage("Address Added Successfully !");
+    },
   });
 
-  const [updateAddress, { data: updateAddressData }] = useMutation(
+  const [updateAddress, { data: updatedAddressData }] = useMutation(
     UPDATE_ADDRESS,
     {
       onError: () => {},
+      onCompleted: () => {
+        setAddressFormSubmitMessage("Address Updated Successfully !");
+      },
     }
   );
 
@@ -92,6 +103,16 @@ const AddressForm = ({ current, setCurrent }) => {
 
   return (
     <div className="addressFormDiv">
+      {/* Success Alert Message if address is added or updated  */}
+
+      {addressFormSubmitMessage && (
+        <MyAlert
+          type="success"
+          setAddressFormSubmitMessage={setAddressFormSubmitMessage}>
+          {addressFormSubmitMessage}
+        </MyAlert>
+      )}
+
       <form id="add-address" onSubmit={onSubmit}>
         <div className={classes.addressInputContainer}>
           <div className="field">
@@ -184,7 +205,8 @@ const AddressForm = ({ current, setCurrent }) => {
             }}
             color="secondary"
             variant="contained">
-            Clear
+            {/**  if update State then show cancel */}
+            {!current ? "Clear" : "Cancel Update"}
           </MyButtonComponent>
         </div>
       </form>

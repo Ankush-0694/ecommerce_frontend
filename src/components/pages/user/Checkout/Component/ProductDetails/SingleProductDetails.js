@@ -16,7 +16,8 @@ const SingleProductDetails = ({
 }) => {
   const classes = ProductDetailsStyles();
 
-  const { productDescription, productName, productPrice } = productData;
+  const { productDescription, productName, productPrice, productImageUrl } =
+    productData;
 
   return (
     <div className={classes.productDiv}>
@@ -27,9 +28,10 @@ const SingleProductDetails = ({
               style={{
                 width: "100%",
                 height: "100%",
+                maxHeight: "150px",
               }}
               title="IMAGE"
-              image="https://source.unsplash.com/collection/190727/800x450"
+              image={productImageUrl}
             />
           </MyGridItem>
           <MyGridItem xs={10} sm={6} md={9}>

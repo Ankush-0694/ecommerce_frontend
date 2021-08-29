@@ -57,7 +57,7 @@ const wizardHeaderStyles = makeStyles((theme) => ({
   },
 }));
 
-const WizardHeader = ({ activeStep, handleChange, formSubmitted, tabs }) => {
+const WizardHeader = ({ activeStep, handleChange, tabs }) => {
   const tabWidth = 100 / tabs.length;
   const indicatorLeft = activeStep * tabWidth;
   const indicatorStyle = {
@@ -70,10 +70,7 @@ const WizardHeader = ({ activeStep, handleChange, formSubmitted, tabs }) => {
     <Grid container className={classes.root}>
       {tabs.map((tab, index) => (
         <Grid item key={index} style={{ width: `${tabWidth}%` }}>
-          <ButtonBase
-            className={classes.tab}
-            onClick={handleChange(index)}
-            disabled={formSubmitted}>
+          <ButtonBase className={classes.tab} onClick={handleChange(index)}>
             {tab}
           </ButtonBase>
         </Grid>

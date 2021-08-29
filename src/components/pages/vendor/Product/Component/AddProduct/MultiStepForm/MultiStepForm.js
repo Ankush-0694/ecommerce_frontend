@@ -17,6 +17,7 @@ import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
 
 import { emptyProductState, useAddProductHook } from "./UseAddProductHook";
+import MyAlert from "../../../../../../Design/MyAlert";
 
 const MultiStepForm = ({ current, setCurrent }) => {
   const classes = MultiStepFromStyles();
@@ -24,7 +25,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
   /** This can be used for checking the form submitted or not
    * Can show a button Reset Form which will clear all the values and get us to first Step
    */
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmittedMessage, setFormSubmittedMessage] = useState("");
 
   /** to keep track of on which step we need to be at
    *  it will use it wizard header and React swipable views
@@ -52,9 +53,16 @@ const MultiStepForm = ({ current, setCurrent }) => {
 
   const [addProduct] = useMutation(ADD_PRODUCT, {
     onError: () => {},
+    onCompleted: () => {
+      setFormSubmittedMessage("Product Added Successfully");
+    },
   });
+
   const [updateProduct] = useMutation(UPDATE_PRODUCT, {
     onError: () => {},
+    onCompleted: () => {
+      setFormSubmittedMessage("Product Updated Successfully");
+    },
   });
 
   /** Changing the step by Clicking the header
@@ -174,6 +182,14 @@ const MultiStepForm = ({ current, setCurrent }) => {
 
   return (
     <div>
+      {formSubmittedMessage && (
+        <MyAlert
+          setFormSubmittedMessage={setFormSubmittedMessage}
+          type="success">
+          {formSubmittedMessage}
+        </MyAlert>
+      )}
+
       <MyPaper elevation={1} className={classes.root}>
         {/* Heading */}
 
@@ -190,7 +206,6 @@ const MultiStepForm = ({ current, setCurrent }) => {
           tabs={tabs}
           activeStep={activeStep}
           handleChange={handleStepChange}
-          formSubmitted={formSubmitted}
         />
 
         {/* Form to fill and SUBMIT */}
@@ -223,7 +238,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
             {/* Back Button - Disable for first step  */}
             <MyGridItem>
               <MyButtonComponent
-                disabled={activeStep === 0 || formSubmitted}
+                disabled={activeStep === 0}
                 onClick={handleStepPrev}
                 variant="contained"
                 color="default"
@@ -249,9 +264,8 @@ const MultiStepForm = ({ current, setCurrent }) => {
                     setCurrent(null);
 
                     setActiveStep(0);
-                  }}
-                  disabled={formSubmitted}>
-                  Reset
+                  }}>
+                  {!current ? "Reset" : "Cancel"}
                 </MyButtonComponent>
               </MyGridItem>
             }
@@ -263,8 +277,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
                   color="primary"
                   className={classes.navigation}
                   variant="contained"
-                  onClick={handleStepNext}
-                  disabled={formSubmitted}>
+                  onClick={handleStepNext}>
                   Next
                 </MyButtonComponent>
               </MyGridItem>
@@ -278,8 +291,7 @@ const MultiStepForm = ({ current, setCurrent }) => {
                   type="submit"
                   color="primary"
                   className={classes.navigation}
-                  variant="contained"
-                  disabled={formSubmitted}>
+                  variant="contained">
                   {!current ? "Add" : "Update"}
                 </MyButtonComponent>
               </MyGridItem>

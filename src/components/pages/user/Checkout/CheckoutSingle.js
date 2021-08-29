@@ -14,7 +14,7 @@ import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
 import MyAlert from "../../../Design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
-import { GET_ALL_ORDERS } from "../../../../queries/Order/orderQueries";
+import { GET__ORDERS_BY_CUSTOMERID } from "../../../../queries/Order/orderQueries";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
@@ -41,7 +41,7 @@ const CheckoutSingle = (props) => {
    *  generate if he didn't choose the address
    * We again make this state to false , when alert get closed
    */
-  const [submitEvent, setSubmitEvent] = useState(false);
+  const [orderSubmitEvent, setOrderSubmitEvent] = useState(false); // we can use "" also instead of false and set a message
 
   /**  total Price Variable, It will pass to price details as a prop  */
   const [totalPriceOfOrder, setTotalPriceOfOrder] = useState(0);
@@ -68,9 +68,9 @@ const CheckoutSingle = (props) => {
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER, {
     onError: () => {},
     onCompleted: () => {
-      return alert("order successfully placed"); // can use a state and show proper alert
+      setOrderSubmitEvent("Order Placed Successfully !");
     },
-    refetchQueries: [{ query: GET_ALL_ORDERS }], // updating order afeter we placed order
+    refetchQueries: [{ query: GET__ORDERS_BY_CUSTOMERID }], // updating order afeter we placed order
   });
 
   /* We call this mutation on Mount to add the checkouted product to the cart */
@@ -92,7 +92,13 @@ const CheckoutSingle = (props) => {
 
   /** Called when we click place order button */
   const OnPlaceOrder = (e) => {
-    setSubmitEvent(true); // to use it in an alert
+    /** it means we clicked the order button -
+     *  this will be used to check address is selected or not
+     *
+     * this state will also used to fill the message of order place success in the onComplete callback function of mutation
+     *
+     *  */
+    setOrderSubmitEvent(true);
 
     /* If user does not select the address and try to place order */
 
@@ -115,11 +121,20 @@ const CheckoutSingle = (props) => {
   return (
     <div style={{ padding: "20px" }}>
       {/** Needee to pass the setSubmitEvent to make it again false  */}
-      {submitEvent && selectedAddress === null && (
-        <MyAlert type="error" setSubmitEvent={setSubmitEvent}>
+      {orderSubmitEvent && selectedAddress === null && (
+        <MyAlert type="error" setOrderSubmitEvent={setOrderSubmitEvent}>
           Select the Address First
         </MyAlert>
       )}
+
+      {/* For showing sucess alert message when wep placed the order   */}
+
+      {orderSubmitEvent && selectedAddress && (
+        <MyAlert type="success" setOrderSubmitEvent={setOrderSubmitEvent}>
+          {orderSubmitEvent}
+        </MyAlert>
+      )}
+
       <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
         Order Summary
       </MyTypography>

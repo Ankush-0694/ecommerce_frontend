@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       {/* Top Carousel  */}
-      <div style={{ backgroundColor: "black" }}>
+      <div>
         <HomeSlider />
       </div>
 
