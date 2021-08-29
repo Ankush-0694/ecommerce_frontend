@@ -3,32 +3,28 @@ import { HomeSliderStyles } from "../../CSS/HomeSliderStyles";
 import { MyCarousel } from "../../../../../Design/MyCarousel";
 
 import HomeSliderContent from "./HomeSliderContent";
+import MyDivider from "../../../../../Design/MyDivider";
 
 const items = [
   {
     id: 1,
-    name: "Lear Music Reader",
-    description: "A PDF Reader specially designed for musicians.",
-    color: "#64ACC8",
+    link: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
   },
   {
     id: 2,
-    name: "Hash Code 2019",
-    description:
-      "My Solution on the 2019 Hash Code by Google Slideshow My Solution on the 2019 Hash Code by Google Slideshow problem.My Solution on the 2019 Hash Code by Google Slideshow problem.My Solution on the 2019 Hash Code by Google Slideshow problem.My Solution on the 2019 Hash Code by Google Slideshow problem.My Solution on the 2019 Hash Code by Google Slideshow problem.My Solution on the 2019 Hash Code by Google Slideshow problem.",
-    color: "#7D85B1",
+    link: "https://images.unsplash.com/photo-1523380677598-64d85d015339?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
   },
   {
     id: 3,
-    name: "Terrio",
-    description: "A exciting mobile game game made in the Unity Engine.",
-    color: "#CE7E78",
+    link: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
   },
   {
     id: 4,
-    name: "React Carousel",
-    description: "A Generic carousel UI component for React using material ui.",
-    color: "#C9A27E",
+    link: "https://images.unsplash.com/photo-1604467794349-0b74285de7e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+  },
+  {
+    id: 5,
+    link: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
   },
 ];
 
@@ -36,7 +32,7 @@ const HomeSlider = () => {
   const classes = HomeSliderStyles();
 
   return (
-    <div style={{ color: "#494949", margin: "auto", width: "95%" }}>
+    <div style={{ margin: "auto", width: "90%" }}>
       <MyCarousel
         className={classes.SecondExample}
         autoPlay={false}
@@ -48,6 +44,7 @@ const HomeSlider = () => {
           return <HomeSliderContent item={item} key={index} />;
         })}
       </MyCarousel>
+      <MyDivider />
     </div>
   );
 };

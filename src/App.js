@@ -142,6 +142,7 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
           />
+
           <ProtectedCustomerRoute
             exact
             path="/checkout/:id"

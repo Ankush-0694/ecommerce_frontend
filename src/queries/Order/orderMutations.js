@@ -22,6 +22,7 @@ const ADD_ORDER = gql`
           productName
           productPrice
           productDescription
+          productImageUrl
         }
         quantity
       }

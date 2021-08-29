@@ -13,7 +13,6 @@ import {
   categoryList,
   subCategoryList,
 } from "../../../../vendor/Product/Component/AddProduct/Category_SubCategoryData";
-import { getImageByCategoryOrSubCategory } from "./ImageURLs";
 
 const useStyles = makeStyles({
   itemContainerDiv: {
@@ -32,11 +31,6 @@ const SecondProductSlider = ({ dataProp }) => {
 
   /**  which data to show will depend on the dataProp Passed */
   let dataToRender;
-
-  /** Giving Parameter depend on the propPassed
-   *
-   * ?category=""   or   ?subcategory=""
-   */
 
   {
     /* Category and SubCategory Array is Imported From Vendor Folder */
@@ -62,10 +56,7 @@ const SecondProductSlider = ({ dataProp }) => {
                 <MyCardMedia
                   height="150"
                   title="IMAGE"
-                  image={
-                    getImageByCategoryOrSubCategory(mappedData.name) ||
-                    "https://source.unsplash.com/weekly?water"
-                  }
+                  image={mappedData.imgUrl}
                 />
 
                 <MyCardContent>

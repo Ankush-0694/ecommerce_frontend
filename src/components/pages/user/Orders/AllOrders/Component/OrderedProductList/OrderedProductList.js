@@ -30,6 +30,7 @@ const OrderedProductList = ({ productData, orderID }) => {
           productName,
           productDescription,
           productPrice,
+          productImageUrl,
         } = productDetails;
 
         const queryParameter = `orderId=${orderID}&productId=${productId}`;
@@ -52,7 +53,7 @@ const OrderedProductList = ({ productData, orderID }) => {
                       <div className={classes.ImageDiv}>
                         <img
                           className={classes.imgStyle}
-                          src="https://source.unsplash.com/collection/190727/900x600"
+                          src={productImageUrl}
                         />
                       </div>
                     </MyGridItem>

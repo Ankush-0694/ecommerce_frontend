@@ -14,6 +14,7 @@ const GET_ALL_ORDERS = gql`
           productName
           productPrice
           productDescription
+          productImageUrl
         }
         orderStatus
         deliveredDate
@@ -50,6 +51,7 @@ const GET_SINGLE_ORDER_BY_ID = gql`
           productName
           productPrice
           productDescription
+          productImageUrl
         }
         orderStatus
         deliveredDate
@@ -86,6 +88,7 @@ const GET__ORDERS_BY_CUSTOMERID = gql`
           productName
           productPrice
           productDescription
+          productImageUrl
         }
         orderStatus
         deliveredDate

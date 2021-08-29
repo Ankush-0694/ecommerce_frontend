@@ -23,7 +23,7 @@ const CartItem = ({ cartItemData }) => {
   /** cartItemData has product Data in the productData Object
    * Because we used ref using product in the MongoDB
    */
-  const { productName, productPrice, productDescription } =
+  const { productName, productPrice, productDescription, productImageUrl } =
     cartItemData.productData;
 
   /** State to update individual quantity of the every cart item
@@ -101,7 +101,7 @@ const CartItem = ({ cartItemData }) => {
             className={classes.MediaImg}
             style={{ borderRadius: "10px", minWidth: "100px", width: "100px" }}
             title="IMAGE"
-            image="https://source.unsplash.com/collection/190727/800x450"
+            image={productImageUrl}
           />
         </div>
       </div>

@@ -16,6 +16,7 @@ import AddressContainer from "./AddressContainer";
 import MyAlert from "../../../Design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
+import { GET__ORDERS_BY_CUSTOMERID } from "../../../../queries/Order/orderQueries";
 
 /* It render we checkout from using cart Page */
 const CheckoutMultiple = (props) => {
@@ -34,8 +35,10 @@ const CheckoutMultiple = (props) => {
    * so when user clicked on submit button it became true and alert
    *  generate if he didn't choose the address
    * We again make this state to false , when alert get closed
+   *
+   * We also use it in onComplete callback in mutations
    */
-  const [submitEvent, setSubmitEvent] = useState(false);
+  const [orderSubmitEvent, setOrderSubmitEvent] = useState(false);
 
   /**
    * This Array will contains all the ids of products which are in the cart
@@ -55,6 +58,10 @@ const CheckoutMultiple = (props) => {
 
   const [addOrder, { data: addOrderData }] = useMutation(ADD_ORDER, {
     onError: () => {},
+    onCompleted: () => {
+      setOrderSubmitEvent("Order Placed Successfully !");
+    },
+    refetchQueries: [{ query: GET__ORDERS_BY_CUSTOMERID }], // updating order afeter we placed order
   });
 
   if (getCartLoading) {
@@ -77,7 +84,8 @@ const CheckoutMultiple = (props) => {
   const OnPlaceOrder = (e) => {
     /* If user does not select the address and try to place order */
 
-    setSubmitEvent(true); // to use it in an alert
+    setOrderSubmitEvent(true); // to use it in an alert
+
     if (selectedAddress === null) {
       return;
     }
@@ -120,12 +128,21 @@ const CheckoutMultiple = (props) => {
 
   return (
     <div style={{ padding: "20px" }}>
-      {/** Needee to pass the setSubmitEvent to make it again false  */}
-      {submitEvent && selectedAddress === null && (
-        <MyAlert type="error" setSubmitEvent={setSubmitEvent}>
+      {/** Needee to pass the setOrderSubmitEvent to make it again false  */}
+      {orderSubmitEvent && selectedAddress === null && (
+        <MyAlert type="error" setOrderSubmitEvent={setOrderSubmitEvent}>
           Select the Address First
         </MyAlert>
       )}
+
+      {/* For showing sucess alert message when wep placed the order   */}
+
+      {orderSubmitEvent && selectedAddress && (
+        <MyAlert type="success" setOrderSubmitEvent={setOrderSubmitEvent}>
+          {orderSubmitEvent}
+        </MyAlert>
+      )}
+
       <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
         Order Summary
       </MyTypography>
