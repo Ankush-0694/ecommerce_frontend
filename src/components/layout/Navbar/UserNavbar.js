@@ -72,7 +72,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   }
 
   return (
-    <MyNavbar className={classes.navbar}>
+    <MyNavbar className={classes.navbarRoot}>
       {/* Heading of the Navbar */}
 
       <div className={classes.title}>

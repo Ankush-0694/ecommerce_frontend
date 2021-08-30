@@ -2,21 +2,12 @@ import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import { Badge } from "@material-ui/core";
 
 const userNavbarStyles = makeStyles((theme) => ({
+  /* Doubt - May be use in vendor navbar */
   NavbarLink: {
     minWidth: "940px",
   },
   title: {
     flexGrow: 1,
-  },
-
-  /* Menu Bar when screen is small */
-  MenuLinkStyle: {
-    "&:hover": {
-      textDecoration: "none",
-    },
-    textDecoration: "none",
-    color: "Black",
-    padding: "6px 16px",
   },
 
   /* Nav Bar when screen is Large */
@@ -68,3 +59,12 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 export { userNavbarStyles, StyledBadge };
+
+// MenuLinkStyle: {
+//   "&:hover": {
+//     textDecoration: "none",
+//   },
+//   textDecoration: "none",
+//   color: "Black",
+//   padding: "6px 16px",
+// },

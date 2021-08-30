@@ -102,17 +102,23 @@ const Login = (props) => {
     <div>
       {/** Using reactive variable which is set at global level and show it using Myalert
        * Only if there are any error
+       * We don't need to pass prop to myAlert to clear state because it is coming from cache
+       * it will be handle automatically
        */}
       {userLoginError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
       {/** if we access a protected route without login then we pass a error msg in state while redirecting
        *  And Show that message as an alert
+       *
        */}
       {props.location.state && props.location.state.errorMsg && (
         <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
       )}
 
-      {/* if signup got successfull then we need to come to this page with a alert msg */}
+      {/* if signup got successfull then we need to come to this page with a alert msg
+
+       * state is cleared after using window.history
+       */}
       {props.location.state && props.location.state.signUpSuccess && (
         <MyAlert type="success">{props.location.state.signUpSuccess}</MyAlert>
       )}

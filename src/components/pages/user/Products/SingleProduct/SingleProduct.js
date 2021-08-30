@@ -129,32 +129,33 @@ const SingleProduct = (props) => {
 
   return (
     <div style={{ marginTop: "10px", padding: "20px" }}>
-      {/** If product successfully cartAdded to cart - Show This Alert  */}
+      {/** If product successfully Added to cart - Show this success Alert
+        * Need to clear this state to in every MyAlert for showing alert again if again added to cart
+
+        * Note - Here there will no effect but we must clear the state if alert is depend on that
+        */}
       {cartAdded && (
-        <MyAlert type="success" setCartAdded={setCartAdded}>
-          Added To Cart{"  "} {"  "}
-          <MyButtonComponent
-            variant="outlined"
-            size="small"
-            color="primary"
-            userStyle={{ padding: "3px 5px", marginLeft: "5px" }}
-            onClick={() => {
-              history.push("/cart");
-            }}>
-            Go To cart
-          </MyButtonComponent>
+        <MyAlert type="success" stateToClear={setCartAdded}>
+          {productName} is added to your Cart successfully
         </MyAlert>
       )}
 
-      {/** If product already cartAdded to cart then error alert */}
+      {/** If product already cartAdded to cart then error alert
+       *
+       * No need to pass prop to alert component because apollo state are managed automatically
+       *
+       */}
       {addToCartError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
       <MyGridContainer justify="center" spacing={4}>
         {/* Product Details  */}
 
+        {/* Image Item */}
         <MyGridItem xs={8} sm={4}>
           <MyCardMedia height="300" title="IMAGE" image={productImageUrl} />
         </MyGridItem>
+
+        {/* product information */}
         <MyGridItem xs={8} sm={4}>
           <div className={classes.productDiv} style={{ maxWidth: " 500px" }}>
             <MyTypography variant="h5" component="h2">
@@ -189,7 +190,6 @@ const SingleProduct = (props) => {
             <span style={{ margin: "0 10px" }}></span>
 
             {/* Buy Now Link and button */}
-
             <MyButtonComponent
               variant="contained"
               size="medium"
@@ -255,3 +255,17 @@ const SingleProduct = (props) => {
 };
 
 export default SingleProduct;
+
+// if need to use go to cart on adding cart in myAlert
+{
+  /* <MyButtonComponent
+            variant="outlined"
+            size="small"
+            color="primary"
+            userStyle={{ padding: "3px 5px", marginLeft: "5px" }}
+            onClick={() => {
+              history.push("/cart");
+            }}>
+            Go To cart
+          </MyButtonComponent> */
+}

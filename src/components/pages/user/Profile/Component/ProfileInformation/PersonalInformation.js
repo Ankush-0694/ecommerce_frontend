@@ -11,11 +11,31 @@ const PersonalInformation = () => {
    *  */
   const [editState, setEditState] = useState(false);
 
+  const [personalInfoForm, setPersonalInfoForm] = useState({
+    firstName: "",
+    lastName: "",
+  });
+
+  const { firstName, lastName } = personalInfoForm;
+
+  const onChange = (e) => {
+    setPersonalInfoForm({
+      ...personalInfoForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("form Submitted");
+  };
+
   return (
     <div className={classes.personalInfo}>
       {/* Personal Information  Heading */}
       <div className={classes.personalInfoHeading}>
-        <h3 style={{ fontWeight: 550 }}>
+        <h2 style={{ fontWeight: 550 }}>
           Personal Information
           {/* Button in Heading - Value depend on Edit State  */}
           <span style={{ marginLeft: "20px" }}>
@@ -29,7 +49,7 @@ const PersonalInformation = () => {
               {!editState ? "Edit" : "Cancel"}
             </MyButtonComponent>
           </span>
-        </h3>
+        </h2>
       </div>
 
       {/* Personal Information  Content */}
@@ -38,16 +58,33 @@ const PersonalInformation = () => {
         {/* Showing Content depend on  EditState value is true or false */}
         {!editState ? (
           <div className={classes.NameContainer}>
-            <div className={classes.NameDiv}>First Name - Ankush </div>
-            <div className={classes.NameDiv}>Last Name - Kumar </div>
+            <div className={classes.NameDiv}>
+              <span style={{ fontWeight: "550" }}> First Name -</span> Ankush
+            </div>
+            <div className={classes.NameDiv}>
+              <span style={{ fontWeight: "550" }}> Last Name -</span> Kumar{" "}
+            </div>
           </div>
         ) : (
           <div>
             {/* Edit Personal Information  Form */}
-            <form>
-              <MyTextInput type="text" label="First Name" name="firstName" />
 
-              <MyTextInput type="text" label="Last Name" name="lastName" />
+            <form onSubmit={onSubmit}>
+              <MyTextInput
+                onChange={onChange}
+                type="text"
+                label="First Name"
+                name="firstName"
+                value={firstName}
+              />
+
+              <MyTextInput
+                onChange={onChange}
+                type="text"
+                label="Last Name"
+                name="lastName"
+                value={lastName}
+              />
 
               <MyButtonComponent variant="outlined" color="primary">
                 Save

@@ -3,7 +3,6 @@ import {
   MySideDrawerContainer,
   MySideDrawerList,
 } from "../../../Design/MySideDrawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import ProfileInformation from "./Component/ProfileInformation/ProfileInformation";
@@ -13,6 +12,7 @@ import RatingAndReview from "./Component/RatingAndReview/RatingAndReview";
 const useStyles = makeStyles({
   root: {
     display: "flex",
+    marginRight: "20px",
   },
 });
 

@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 import { DELETE_ADDRESS } from "../../../../../../queries/address/addressMutations";
 import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../../../queries/address/addressQueries";
 
-const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
+const AddressList = ({ addressData, current, setCurrent, selectedAddress }) => {
   const classes = AddressListStyles();
   const {
     id,
@@ -20,7 +20,7 @@ const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
     HouseNo,
     area,
     landmark,
-  } = data;
+  } = addressData;
 
   const [deleteAddress, { data: deletedAddressData }] = useMutation(
     DELETE_ADDRESS,
@@ -82,7 +82,7 @@ const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
           <div>
             <MyButtonComponent
               onClick={() => {
-                setCurrent(data);
+                setCurrent(addressData);
                 window.scroll({
                   top: document.body.offsetHeight,
                   left: 0,
@@ -101,7 +101,6 @@ const AddressList = ({ data, current, setCurrent, selectedAddress }) => {
             </MyButtonComponent>
           </div>
         </div>
-        <hr></hr>
       </>
     );
   };

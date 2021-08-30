@@ -108,7 +108,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
               setCurrentReview(null);
               setRatingValue(0);
             }}>
-            Clear
+            {!currentReview ? "Clear" : "Cancel Update"}
           </MyButtonComponent>
         </div>
       </div>

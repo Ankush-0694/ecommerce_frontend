@@ -25,7 +25,8 @@ const MultiStepForm = ({ current, setCurrent }) => {
   /** This can be used for checking the form submitted or not
    * Can show a button Reset Form which will clear all the values and get us to first Step
    */
-  const [formSubmittedMessage, setFormSubmittedMessage] = useState("");
+  const [productFormSubmittedMessage, setProductFormSubmittedMessage] =
+    useState("");
 
   /** to keep track of on which step we need to be at
    *  it will use it wizard header and React swipable views
@@ -54,14 +55,14 @@ const MultiStepForm = ({ current, setCurrent }) => {
   const [addProduct] = useMutation(ADD_PRODUCT, {
     onError: () => {},
     onCompleted: () => {
-      setFormSubmittedMessage("Product Added Successfully");
+      setProductFormSubmittedMessage("Product Added Successfully");
     },
   });
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT, {
     onError: () => {},
     onCompleted: () => {
-      setFormSubmittedMessage("Product Updated Successfully");
+      setProductFormSubmittedMessage("Product Updated Successfully");
     },
   });
 
@@ -182,11 +183,9 @@ const MultiStepForm = ({ current, setCurrent }) => {
 
   return (
     <div>
-      {formSubmittedMessage && (
-        <MyAlert
-          setFormSubmittedMessage={setFormSubmittedMessage}
-          type="success">
-          {formSubmittedMessage}
+      {productFormSubmittedMessage && (
+        <MyAlert type="success" stateToClear={setProductFormSubmittedMessage}>
+          {productFormSubmittedMessage}
         </MyAlert>
       )}
 
