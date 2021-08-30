@@ -129,8 +129,10 @@ const CheckoutMultiple = (props) => {
   return (
     <div style={{ padding: "20px" }}>
       {/** Needee to pass the setOrderSubmitEvent to make it again false  */}
+
+      {/* if address is not Selected and we enter the button  */}
       {orderSubmitEvent && selectedAddress === null && (
-        <MyAlert type="error" setOrderSubmitEvent={setOrderSubmitEvent}>
+        <MyAlert type="error" stateToClear={setOrderSubmitEvent}>
           Select the Address First
         </MyAlert>
       )}
@@ -138,7 +140,7 @@ const CheckoutMultiple = (props) => {
       {/* For showing sucess alert message when wep placed the order   */}
 
       {orderSubmitEvent && selectedAddress && (
-        <MyAlert type="success" setOrderSubmitEvent={setOrderSubmitEvent}>
+        <MyAlert type="success" stateToClear={setOrderSubmitEvent}>
           {orderSubmitEvent}
         </MyAlert>
       )}

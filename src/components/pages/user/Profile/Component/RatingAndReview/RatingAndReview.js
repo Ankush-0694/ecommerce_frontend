@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { Fragment } from "react";
 import { GET_REVIEWS_BY_CUSTOMERID } from "../../../../../../queries/Review/ReviewQueries";
 import MyDivider from "../../../../../Design/MyDivider";
 import { MyFullScreenBox } from "../../../../../Design/MyFullScreenBox";
@@ -55,9 +56,11 @@ const RatingAndReview = () => {
       </div>
 
       {/* Rating and Reviews List */}
+
       <div style={{ marginTop: "10px" }}>
         <MyPaper>
           {/* Rating and Reviews Heading */}
+
           <MyFullScreenBox display="flex" width="100%">
             <h1 style={{ margin: "20px auto" }}>Ratings and Reviews</h1>
           </MyFullScreenBox>
@@ -67,16 +70,22 @@ const RatingAndReview = () => {
           <MyGridContainer justify="center" style={{ paddingBottom: "16px" }}>
             <MyGridItem xs={8}>
               {reviewData.map((review, index) => {
-                {
-                  /* Mappping of data - ReviewByUsedID */
-                }
+                /** Mappping of data - ReviewByUserID */
+
                 return (
-                  <ProductReviewList
-                    currentReview={currentReview}
-                    setCurrentReview={setCurrentReview}
-                    key={index}
-                    reviewData={review}
-                  />
+                  <Fragment key={review.id}>
+                    <ProductReviewList
+                      currentReview={currentReview}
+                      setCurrentReview={setCurrentReview}
+                      reviewData={review}
+                    />
+
+                    {/* Not showing below last review */}
+
+                    {review !== reviewData[reviewData.length - 1] && (
+                      <MyDivider style={{ margin: "20px 0px" }} />
+                    )}
+                  </Fragment>
                 );
               })}
             </MyGridItem>

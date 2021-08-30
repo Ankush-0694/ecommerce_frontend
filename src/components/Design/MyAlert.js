@@ -20,22 +20,11 @@ const MyAlert = ({ children, type, ...otherProps }) => {
   const alertref = useRef(null);
 
   /** This prop passed from various page to make false the submit event
-   * By which we can generate alert again and again if there is no address selected
+   * By which we can generate alert again and again
    *
    * So We need to clear these state so that we can again show the alert
-   *
-   * @param {setOrderSubmitEvent} thisIsForAddressAndOrderPlaceAlert  if user does not select or place order.
-   * @param {setCartAdded} thisIsForCartAdded On single Product Details
-   * @param {setFormSubmittedMessage} productaddAndupdate Vendor Page - Add and Update Product related
-   *
-   *
    */
-  const {
-    setOrderSubmitEvent,
-    setCartAdded,
-    setFormSubmittedMessage,
-    setAddressFormSubmitMessage,
-  } = otherProps;
+  const { stateToClear } = otherProps;
 
   const handleClose = (event, reason) => {
     /**don't close when user click other than close alert button
@@ -47,31 +36,11 @@ const MyAlert = ({ children, type, ...otherProps }) => {
     }
 
     /** need to clear this after alert is closed */
-    if (setOrderSubmitEvent) setOrderSubmitEvent(false);
-
-    /**
-     * Setting added to true after adding the cart on cart page
-     * And Here we set the false again after alert closed
-     */
-    if (setCartAdded) setCartAdded(false);
-
-    /**
-     * setting formSUbmitted to false to generate alert again when we add
-     * a product again without reload
-     *
-     * Vendor Page - Add and Update Product related
-     */
-    if (setFormSubmittedMessage) setFormSubmittedMessage(false);
-
-    /**
-     *
-     * We are clearing the state if we close the alert
-     *
-     */
-    if (setAddressFormSubmitMessage) setAddressFormSubmitMessage("");
+    if (stateToClear) stateToClear(false);
 
     /** We need to clear the global error from reactive variable
      * after alert get closed
+     * we it is the same var we are using everywhere
      */
     errorVar([]);
 

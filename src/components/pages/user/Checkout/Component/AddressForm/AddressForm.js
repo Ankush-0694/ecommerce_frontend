@@ -103,12 +103,12 @@ const AddressForm = ({ current, setCurrent }) => {
 
   return (
     <div className="addressFormDiv">
-      {/* Success Alert Message if address is added or updated  */}
+      {/* Success Alert Message if address is added or updated
+       * Clearing the state after alert get closed to showing alert again
+       */}
 
       {addressFormSubmitMessage && (
-        <MyAlert
-          type="success"
-          setAddressFormSubmitMessage={setAddressFormSubmitMessage}>
+        <MyAlert type="success" stateToClear={setAddressFormSubmitMessage}>
           {addressFormSubmitMessage}
         </MyAlert>
       )}

@@ -12,6 +12,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
+import { Fragment } from "react";
+import MyDivider from "../../../Design/MyDivider";
 
 /* This is common for single and multiple checkout , 
 And contains the address Form and address list */
@@ -75,15 +77,18 @@ const AddressContainer = (props) => {
                     name="address1"
                     value={selectedAddress}
                     onChange={handleAddressRadio}>
-                    {addressDataToRender.map((data) => {
+                    {addressDataToRender.map((mappedData) => {
                       return (
-                        <AddressList
-                          key={data.id}
-                          data={data}
-                          current={current}
-                          setCurrent={setCurrent}
-                          selectedAddress={selectedAddress} //this is passed to remove radio button when using it MyProfile Page
-                        />
+                        <Fragment key={mappedData.id}>
+                          <AddressList
+                            addressData={mappedData}
+                            current={current}
+                            setCurrent={setCurrent}
+                            selectedAddress={selectedAddress} //this is passed to remove radio button when using it MyProfile Page
+                          />
+
+                          <MyDivider />
+                        </Fragment>
                       );
                     })}
                   </RadioGroup>

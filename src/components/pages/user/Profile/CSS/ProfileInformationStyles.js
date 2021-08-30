@@ -12,14 +12,15 @@ const ProfileInformationStyles = makeStyles({
   },
   NameContainer: {
     display: "flex",
+    flexDirection: "column",
     width: "80%",
   },
   NameDiv: {
     fontSize: "15px",
     marginLeft: "15px",
-    border: "1px solid black",
+    // border: "1px solid black",
     padding: "15px",
-    flexGrow: 1,
+    // flexGrow: 1,
   },
 });
 

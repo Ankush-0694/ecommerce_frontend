@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MyDivider from "../../../../../Design/MyDivider";
 import { MyPaper } from "../../../../../Design/MyPaper";
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 import EmailInformation from "./EmailInformation";
@@ -12,6 +13,8 @@ const ProfileInformation = () => {
       <MyPaper>
         {/* Personal Information */}
         <PersonalInformation />
+
+        <MyDivider />
 
         {/* Email Information */}
         <EmailInformation />

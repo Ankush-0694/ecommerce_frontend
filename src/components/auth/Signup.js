@@ -100,6 +100,8 @@ const Signup = (props) => {
     <div>
       {/** Using reactive variable which is set at global level and show it using Myalert
        * Only if there are any error
+       * We don't need to pass prop to myAlert to clear state because it is coming from cache
+       * it will be handle automatically
        */}
       {createUserError && <MyAlert type="error">{errorVar()}</MyAlert>}
 
