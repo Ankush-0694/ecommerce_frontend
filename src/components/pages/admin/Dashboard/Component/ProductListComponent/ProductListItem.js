@@ -8,7 +8,8 @@ import { AllProductStyles } from "../../../../vendor/Product/CSS/AllProductStyle
 const ProductListItem = ({ data }) => {
   /* We are fetching this styling from vendor because we are using same type of component */
   const classes = AllProductStyles();
-  const { id, productName, productPrice, productDescription } = data;
+  const { id, productName, productPrice, productDescription, productImageUrl } =
+    data;
   return (
     <div className="productListItemContainer">
       <MyPaper className={classes.ListItemPaper}>
@@ -25,7 +26,7 @@ const ProductListItem = ({ data }) => {
                     className={classes.MediaImg}
                     style={{ minWidth: "80px" }}
                     title="IMAGE"
-                    image="https://source.unsplash.com/collection/190727/800x450"
+                    image={productImageUrl}
                   />
                 </div>
               </MyGridItem>

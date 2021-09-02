@@ -7,9 +7,12 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../../../queries/user/userQueries";
 import ShowLoading from "../LoadingComponent/ShowLoading";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
+import { useApolloClient } from "@apollo/client";
 
 const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = VendorNavbarStyles();
+
+  const client = useApolloClient(); // getting client to clear cache on logout
 
   /** Need to use this because we may need to show the tabs (logout) only to the vendor
    * Not to customer and not to admin
@@ -91,6 +94,9 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
 
               localStorage.removeItem("token");
               setIsAuthenticated(false);
+
+              client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
+
               history.push("/vendor/login");
             }}
             color="inherit">
