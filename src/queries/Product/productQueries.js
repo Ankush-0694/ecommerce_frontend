@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_ALL_PRODUCTS = gql`
-  {
-    getAllProducts {
+  query getAllProducts($limit: Int!, $cursor: ID) {
+    getAllProducts(limit: $limit, cursor: $cursor) {
       id
       vendorId
       productName
@@ -88,9 +88,29 @@ const GET_PRODUCT_BY_SEARCH_TEXT = gql`
   }
 `;
 
+const GET_PRODUCT_USING_PAGINATION = gql`
+  query ($limit: Int!, $nextCursor: ID) {
+    getSomeProducts(limit: $limit, nextCursor: $nextCursor) {
+      id
+      vendorId
+      productName
+      productDescription
+      productPrice
+      productCategory {
+        categoryId
+        categoryName
+      }
+      productSubCategory
+      productBrand
+      productImageUrl
+    }
+  }
+`;
+
 export {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_VENDORID,
   GET_SINGLE_PRODUCT,
   GET_PRODUCT_BY_SEARCH_TEXT,
+  GET_PRODUCT_USING_PAGINATION,
 };

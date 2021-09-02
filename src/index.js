@@ -20,8 +20,11 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 // });
 
 import { authLink, errorLink, httplink } from "./ApolloLinks/ApolloLinks";
+import { typePolicies } from "./TypePolicies/typePolicies";
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  typePolicies: { ...typePolicies },
+});
 
 const client = new ApolloClient({
   link: errorLink.concat(authLink.concat(httplink)),
