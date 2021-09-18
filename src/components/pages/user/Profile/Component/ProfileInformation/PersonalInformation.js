@@ -34,12 +34,13 @@ const PersonalInformation = () => {
   return (
     <div className={classes.personalInfo}>
       {/* Personal Information  Heading */}
-      <div className={classes.personalInfoHeading}>
-        <h2 style={{ fontWeight: 550 }}>
+      <div>
+        <h2 className={classes.personalInfoHeading}>
           Personal Information
           {/* Button in Heading - Value depend on Edit State  */}
           <span style={{ marginLeft: "20px" }}>
             <MyButtonComponent
+              className={classes.editCancelBtn}
               variant="outlined"
               color="primary"
               size="small"
@@ -66,7 +67,7 @@ const PersonalInformation = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className={classes.ProfileFormDiv}>
             {/* Edit Personal Information  Form */}
 
             <form onSubmit={onSubmit}>

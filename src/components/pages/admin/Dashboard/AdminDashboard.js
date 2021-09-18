@@ -47,7 +47,7 @@ const AdminDashboard = () => {
       </MySideDrawerContainer>
 
       {/* The main content at the Admin pages */}
-      <div style={{ flexGrow: 2, padding: "0px 20px" }}>
+      <div style={{ flexGrow: 2 }}>
         {/* This is working we remove exact from app.js in this route
             And we are using exact here
          */}

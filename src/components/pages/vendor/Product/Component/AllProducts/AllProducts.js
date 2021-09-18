@@ -1,15 +1,21 @@
 import React from "react";
 import { AllProductStyles } from "../../CSS/AllProductStyles";
-import { MyTypography } from "../../../../../Design/MyTypography";
-import { MyPaper } from "../../../../../Design/MyPaper";
+
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
 import { MyCardMedia } from "../../../../../Design/MyCardComponents";
 import { useMutation } from "@apollo/client";
 import { DELETE_PRODUCT } from "../../../../../../queries/Product/productMutations";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../../../queries/Product/productQueries";
 import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
+import { MyDeleteIcon, MyEditButton } from "../../../../../Design/MyIcons";
 
-const AllProducts = ({ data, setCurrent }) => {
+/**
+ *
+ * @param {} role role is passed because it is used in vendor and admin page both and on
+ *  admin page we dont need to update button
+ * @returns
+ */
+const AllProducts = ({ data, setCurrent, role }) => {
   const classes = AllProductStyles();
   const {
     id,
@@ -53,10 +59,10 @@ const AllProducts = ({ data, setCurrent }) => {
 
   return (
     <div className="productListItemContainer">
-      <MyPaper className={classes.ListItemPaper}>
+      <div className={classes.ListItemPaper}>
         <MyGridContainer>
           {/* Image and ProductDetails grid item */}
-          <MyGridItem xs={8}>
+          <MyGridItem xs={9}>
             <MyGridContainer>
               {/* Image  Grid item */}
 
@@ -65,7 +71,6 @@ const AllProducts = ({ data, setCurrent }) => {
                   <MyCardMedia
                     height="120"
                     className={classes.MediaImg}
-                    style={{ minWidth: "100px" }}
                     title="IMAGE"
                     image={productImageUrl}
                   />
@@ -75,23 +80,19 @@ const AllProducts = ({ data, setCurrent }) => {
               {/* Product  Grid  item */}
 
               <MyGridItem xs={7}>
-                <div>
-                  <MyTypography variant="h6" component="h6">
-                    {productName}
-                  </MyTypography>
-                  <MyTypography variant="body1" component="p">
+                <div className={classes.detailsDiv}>
+                  <div className={classes.darkFont}>{productName}</div>
+                  <div className={classes.lightFont}>
                     Desc - {productDescription}
-                  </MyTypography>
-                  <MyTypography variant="body1" component="p">
+                  </div>
+                  <div className={classes.lightFont}>
                     Brand - {productBrand}
-                  </MyTypography>
-                  <MyTypography variant="body1" component="p">
+                  </div>
+                  <div className={classes.lightFont}>
                     Category - {productCategory.categoryName}
-                  </MyTypography>
+                  </div>
 
-                  <MyTypography variant="h6" component="h6">
-                    Price - ₹{productPrice}
-                  </MyTypography>
+                  <div className={classes.darkFont}>₹ {productPrice}</div>
                 </div>
               </MyGridItem>
             </MyGridContainer>
@@ -99,38 +100,40 @@ const AllProducts = ({ data, setCurrent }) => {
 
           {/* Update and delete button Grid Item */}
 
-          <MyGridItem xs={4}>
+          <MyGridItem xs={3}>
             <div className={classes.buttonContainerParent}>
               <div className={classes.buttonContainerChild}>
-                <MyButtonComponent
-                  onClick={() => {
-                    setCurrent(data);
-                    window.scroll({
-                      top: 0,
-                      left: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  className={classes.update_btn}>
-                  Update
-                </MyButtonComponent>
+                {!role === "admin" && (
+                  <MyButtonComponent
+                    onClick={() => {
+                      setCurrent(data);
+                      window.scroll({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    className={classes.update_btn}>
+                    <MyEditButton />
+                  </MyButtonComponent>
+                )}
 
                 <MyButtonComponent
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
                   size="small"
                   onClick={onDeleteProduct}
                   className={classes.delete_btn}>
-                  Delete
+                  <MyDeleteIcon />
                 </MyButtonComponent>
               </div>
             </div>
           </MyGridItem>
         </MyGridContainer>
-      </MyPaper>
+      </div>
     </div>
   );
 };

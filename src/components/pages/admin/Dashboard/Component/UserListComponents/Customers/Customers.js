@@ -69,35 +69,41 @@ const Customers = () => {
           Customers
         </MyTypography>
       </div>
-      <MyPaper className={classes.root}>
-        <MyTableContainer className={classes.container}>
-          <MyTable stickyHeader aria-label="sticky table">
-            <MyTableHead>
-              <MyTableRow>
-                {columns.map((column) => (
-                  <MyTableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth, fontWeight: "bolder" }}>
-                    {column.label}
-                  </MyTableCell>
-                ))}
-              </MyTableRow>
-            </MyTableHead>
-            <MyTableBody>
-              {dataToRender.map((customer, index) => {
-                return (
-                  <UserList
-                    key={customer.id}
-                    customerData={customer}
-                    serialNo={index}
-                  />
-                );
-              })}
-            </MyTableBody>
-          </MyTable>
-        </MyTableContainer>
-      </MyPaper>
+
+      <div style={{ padding: "0px 16px" }}>
+        <MyPaper className={classes.root}>
+          <MyTableContainer className={classes.container}>
+            <MyTable stickyHeader aria-label="sticky table">
+              <MyTableHead>
+                <MyTableRow>
+                  {columns.map((column) => (
+                    <MyTableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{
+                        minWidth: column.minWidth,
+                        fontWeight: "bolder",
+                      }}>
+                      {column.label}
+                    </MyTableCell>
+                  ))}
+                </MyTableRow>
+              </MyTableHead>
+              <MyTableBody>
+                {dataToRender.map((customer, index) => {
+                  return (
+                    <UserList
+                      key={customer.id}
+                      customerData={customer}
+                      serialNo={index}
+                    />
+                  );
+                })}
+              </MyTableBody>
+            </MyTable>
+          </MyTableContainer>
+        </MyPaper>
+      </div>
     </div>
   );
 };

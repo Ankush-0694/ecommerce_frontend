@@ -2,20 +2,40 @@ import { makeStyles } from "../../../../Design/MyUseStyles";
 const AllProductStyles = makeStyles({
   ListItemPaper: {
     padding: "20px",
+    paddingLeft: "0px",
     width: "100%",
-    margin: "10px 0",
+    // margin: "10px 0",
   },
   imgDiv: {
-    width: "110px",
+    minWidth: "100px",
+    width: "75%",
     margin: "auto",
+    maxWidth: "150px",
+  },
+  detailsDiv: {
+    marginRight: "16px",
+  },
+
+  lightFont: {
+    fontWeight: "300",
+  },
+  darkFont: {
+    fontWeight: "550",
+    fontSize: "1.2rem",
   },
 
   update_btn: {
-    margin: "10px",
+    marginRight: "8px",
+    marginBottom: "8px",
   },
   delete_btn: {
-    margin: "10px",
+    marginBottom: "8px",
+
+    "&:focus": {
+      outline: "none",
+    },
   },
+
   buttonContainerParent: {
     height: "100%",
   },

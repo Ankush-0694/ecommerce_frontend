@@ -6,6 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import { Delete } from "@material-ui/icons";
+import EditIcon from "@material-ui/icons/Edit";
 
 const MyMenuIcon = () => {
   return <MenuIcon />;
@@ -34,6 +35,10 @@ const MyDeleteIcon = () => {
   return <Delete />;
 };
 
+const MyEditButton = () => {
+  return <EditIcon />;
+};
+
 /** passed material ui icon name
  * Must be separeated by underscore and all letter small except i of icon
  */
@@ -49,5 +54,6 @@ export {
   MyAddIcon,
   MyFiberManualRecordIcon,
   MyDeleteIcon,
+  MyEditButton,
   MyIcon,
 };

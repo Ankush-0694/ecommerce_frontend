@@ -61,7 +61,7 @@ const App = () => {
       <MyToolbar />
 
       {/* This styling for stop responsiveness */}
-      <div style={{ minWidth: "940px" }}>
+      <div>
         <Switch>
           {/* Customer Routes */}
 

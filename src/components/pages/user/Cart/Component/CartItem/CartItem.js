@@ -123,7 +123,7 @@ const CartItem = ({ cartItemData }) => {
           {/* Price */}
 
           <MyTypography variant="h6" component="h6">
-            ₹{productPrice}
+            ₹ {productPrice}
           </MyTypography>
           <div>
             <MyButtonComponent

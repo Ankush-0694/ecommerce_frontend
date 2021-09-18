@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../queries/Product/productQueries";
 import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
@@ -9,6 +9,8 @@ import VendorAllProducts from "./Component/AllProducts/AllProducts";
 import MultiStepForm from "./Component/AddProduct/MultiStepForm/MultiStepForm";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
+import { MyPaper } from "../../../Design/MyPaper";
+import MyDivider from "../../../Design/MyDivider";
 
 const VendorProduct = () => {
   const classes = VendorProductStyles();
@@ -33,29 +35,33 @@ const VendorProduct = () => {
   return (
     <div>
       <div className={classes.flexcontainer}>
-        <div style={{ flexGrow: 1 }}>
-          <div>
+        <div style={{ marginTop: "20px", marginLeft: "24px" }}>
+          <MyPaper elevation={0}>
             <MyTypography
               variant="h4"
               component="h5"
-              style={{ textAlign: "center", padding: "10px" }}>
-              Products
+              className={classes.productHeading}>
+              Products ( {productData.length} items )
             </MyTypography>
+            <MyDivider />
             <div className={classes.productListContainer}>
               {productData
                 .slice(0)
                 .reverse()
                 .map((data) => {
                   return (
-                    <VendorAllProducts
-                      key={data.id}
-                      data={data}
-                      setCurrent={setCurrent}
-                    />
+                    <Fragment key={data.id}>
+                      <VendorAllProducts
+                        role="vendor"
+                        data={data}
+                        setCurrent={setCurrent}
+                      />
+                      <MyDivider />
+                    </Fragment>
                   );
                 })}
             </div>
-          </div>
+          </MyPaper>
         </div>
 
         <MyFullScreenBox display="flex" width="50%" height="90vh">

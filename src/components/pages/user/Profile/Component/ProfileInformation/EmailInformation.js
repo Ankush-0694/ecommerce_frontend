@@ -18,8 +18,8 @@ const EmailInformation = () => {
   return (
     <div className={classes.personalInfo}>
       {/* Personal Information  Heading */}
-      <div className={classes.personalInfoHeading}>
-        <h2 style={{ fontWeight: 550 }}>
+      <div>
+        <h2 className={classes.personalInfoHeading}>
           Email Address <Email />
         </h2>
       </div>
@@ -30,7 +30,7 @@ const EmailInformation = () => {
         {/* Showing Content depend on  EditState value is true or false */}
 
         <div className={classes.NameContainer}>
-          <div className={classes.NameDiv}>ankush1234@gmail.com</div>
+          <div className={classes.emailDiv}>ankush1234@gmail.com</div>
         </div>
       </div>
     </div>

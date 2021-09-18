@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
 import { MyTypography } from "../../../../../Design/MyTypography";
@@ -6,6 +6,8 @@ import ProductListItem from "./ProductListItem";
 import ShowError from "../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import AllProducts from "../../../../vendor/Product/Component/AllProducts/AllProducts";
+import MyDivider from "../../../../../Design/MyDivider";
 
 const ProductList = () => {
   const [isMount, setIsMount] = useState(false); // for prevent fetch more call on Mount
@@ -63,24 +65,34 @@ const ProductList = () => {
 
   return (
     <div>
-      <div style={{ maxHeight: "90vh", overflow: "scroll" }}>
+      <div>
         {/* Heading of Products */}
         <MyTypography
           variant="h4"
           component="h5"
-          style={{ textAlign: "center", padding: "10px" }}>
+          style={{ textAlign: "center", padding: "13px" }}>
           Products
         </MyTypography>
 
+        <MyDivider />
+
         {/* Product List */}
-        <div>
+        <div style={{ maxHeight: "75vh", overflow: "scroll" }}>
           {productData.map((data) => {
-            return <ProductListItem key={data.id} data={data} />;
+            {
+              /* return <ProductListItem key={data.id} data={data} />; */
+            }
+            return (
+              <Fragment key={data.id}>
+                <AllProducts data={data} role="admin" />
+                <MyDivider />
+              </Fragment>
+            );
           })}
         </div>
 
         {/* Fetch More  */}
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", margin: "16px 0px" }}>
           <MyButtonComponent
             color="primary"
             variant="contained"

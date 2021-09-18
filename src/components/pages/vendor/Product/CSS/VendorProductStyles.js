@@ -4,11 +4,16 @@ const VendorProductStyles = makeStyles({
   AddProductGrid: {},
   flexcontainer: {
     display: "flex",
+    justifyContent: "space-around",
+  },
+  productHeading: {
+    padding: "16px 0px",
+    marginLeft: "18px",
+    fontWeight: "300",
   },
   productListContainer: {
-    padding: "20px",
     paddingTop: "0px",
-    height: "85vh",
+    height: "80vh",
     overflow: "auto",
   },
 });
