@@ -13,6 +13,8 @@ import {
   GET_CART,
   GET_CART_BY_CUSTOMERID,
 } from "../../../../../../queries/Cart/cartQueries";
+import MyDivider from "../../../../../Design/MyDivider";
+import { MyDeleteIcon } from "../../../../../Design/MyIcons";
 
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
@@ -93,40 +95,43 @@ const CartItem = ({ cartItemData }) => {
   };
 
   return (
-    <MyPaper elevation={7} className={classes.cartItem}>
+    <MyPaper elevation={0} className={classes.cartItem}>
       <div>
         <div className={classes.MediaImgDiv}>
           <MyCardMedia
-            height="100"
+            height="150"
             className={classes.MediaImg}
-            style={{ borderRadius: "10px", minWidth: "100px", width: "100px" }}
+            //don't remove this styles
+            style={{ borderRadius: "10px", minWidth: "100px", width: "150px" }}
             title="IMAGE"
             image={productImageUrl}
           />
         </div>
       </div>
-      <div
-        className={classes.cartDetails}
-        style={{ margin: "10px", width: "70%" }}>
-        <div>
-          <MyTypography variant="h6" component="h6">
-            {" "}
+      <div className={classes.cartDetails}>
+        <div className={classes.cartDetailsInner}>
+          {/* product Name */}
+
+          <div style={{ fontWeight: "550", fontSize: "1.2rem" }}>
             {productName}
-          </MyTypography>
-          <MyTypography variant="body1" component="p">
-            {productDescription}
-          </MyTypography>
+          </div>
+
+          {/* Description */}
+
+          <div style={{ fontWeight: "300" }}>{productDescription}</div>
+
+          {/* Price */}
+
           <MyTypography variant="h6" component="h6">
-            Price - ₹{productPrice}
+            ₹{productPrice}
           </MyTypography>
           <div>
             <MyButtonComponent
-              variant="contained"
-              color="secondary"
-              size="small"
+              variant="outlined"
+              // color="secondary"
               className={classes.remove_btn}
               onClick={onRemoveCart}>
-              Remove
+              <MyDeleteIcon />
             </MyButtonComponent>
           </div>
         </div>

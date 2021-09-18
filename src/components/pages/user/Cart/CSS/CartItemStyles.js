@@ -9,11 +9,17 @@ const CartItemStyles = makeStyles({
   MediaImgDiv: {
     padding: "10px",
   },
+
   cartDetails: {
     margin: "10px",
     width: "70%",
     display: "flex",
     justifyContent: "space-between",
+  },
+  cartDetailsInner: {
+    "& > * ": {
+      marginBottom: "5px",
+    },
   },
   quantityButtonDiv: {
     height: "100%",
@@ -21,10 +27,16 @@ const CartItemStyles = makeStyles({
     alignItems: "center",
   },
   quantityInput: {
-    width: "50px",
+    width: "30px",
     height: "30px",
     margin: "0px 5px 0px 5px",
     textAlign: "center",
+    borderRadius: "50%",
+    border: "1px solid black",
+
+    "&:focus": {
+      outline: "none",
+    },
   },
   quantityButton: {
     maxWidth: "30px",
@@ -42,6 +54,8 @@ const CartItemStyles = makeStyles({
     },
   },
   remove_btn: {
+    padding: "4px 0px",
+    color: "red",
     "&:focus": {
       border: "none",
       outline: "none",

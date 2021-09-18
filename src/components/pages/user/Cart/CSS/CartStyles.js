@@ -4,15 +4,23 @@ const CartStyles = makeStyles({
   once: {
     width: "100px",
   },
+  cartHeading: {
+    textAlign: "center",
+    marginTop: "10px",
+    padding: "1rem 0px",
+    fontSize: "3rem",
+    fontWeight: "300",
+  },
   cartContainer: {
     display: "flex",
     padding: "20px",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   productHeading: {
-    textAlign: "center",
-
-    padding: "10px",
+    marginLeft: "32px",
+    padding: "12px 0px",
+    fontSize: "2rem",
+    fontWeight: "300",
   },
   item1: {
     width: "60%",
@@ -23,7 +31,7 @@ const CartStyles = makeStyles({
     width: "30%",
     minWidth: "200px",
     right: "20px",
-    marginTop: "10px",
+
     textAlign: "center",
   },
   MediaImg: {
