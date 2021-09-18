@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
@@ -9,6 +9,7 @@ import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import MyDivider from "../../../Design/MyDivider";
 import { MyPaper } from "../../../Design/MyPaper";
+import emptyCartSvg from "../../../layout/IMAGES/emptyCart3.png";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();
@@ -67,7 +68,7 @@ const Cart = ({ history }) => {
     <div>
       {/* Heading */}
       <div>
-        <h3 style={{ textAlign: "center", marginTop: "10px" }}>MY CART</h3>
+        <h3 className={classes.cartHeading}>MY CART</h3>
         <MyDivider />
       </div>
 
@@ -77,13 +78,17 @@ const Cart = ({ history }) => {
           <div className={classes.cartContainer}>
             {/* Cart Product List - Left Side */}
             <MyPaper className={classes.item1}>
-              <MyPaper elevation={3} className="heading">
-                <h3 className={classes.productHeading}>Products</h3>
-              </MyPaper>
+              <div className={classes.productHeading}>
+                Products ( {itemCount} items )
+              </div>
+              <MyDivider />
 
               {cartData.map((cartItemData) => {
                 return (
-                  <CartItem key={cartItemData.id} cartItemData={cartItemData} />
+                  <Fragment key={cartItemData.id}>
+                    <CartItem cartItemData={cartItemData} />
+                    <MyDivider />
+                  </Fragment>
                 );
               })}
             </MyPaper>
@@ -108,9 +113,16 @@ const Cart = ({ history }) => {
           <div>
             <div className={classes.EmptyCart}>
               {/* Showing Cart Empty if there is no item in the cart */}
-              <div>Icon</div>
-
-              <p style={{ fontSize: "50px" }}>Your Cart is Empty</p>
+              <div>
+                <p
+                  style={{
+                    fontSize: "40px",
+                    textAlign: "center",
+                    padding: "20px",
+                  }}>
+                  Your Cart is Empty
+                </p>
+              </div>
             </div>
           </div>
         )}

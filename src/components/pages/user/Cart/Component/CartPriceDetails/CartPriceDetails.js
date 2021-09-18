@@ -14,8 +14,9 @@ import MyDivider from "../../../../../Design/MyDivider";
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
-    color: "grey",
-    padding: "10px 0px",
+    fontSize: "2rem",
+    padding: "12px 0px",
+    fontWeight: "300",
   },
 }));
 

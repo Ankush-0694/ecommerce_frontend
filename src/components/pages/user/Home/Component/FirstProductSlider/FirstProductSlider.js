@@ -37,7 +37,12 @@ const FirstProductSlider = () => {
     error: getProductsError,
     loading: getProductsLoading,
     data: getProductsData,
-  } = useQuery(GET_ALL_PRODUCTS);
+  } = useQuery(GET_ALL_PRODUCTS, {
+    variables: {
+      limit: 10,
+      cursor: null,
+    },
+  });
 
   if (getProductsError) {
     return <ShowError>Error while Fetching Products</ShowError>;

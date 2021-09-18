@@ -5,6 +5,7 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import { Delete } from "@material-ui/icons";
 
 const MyMenuIcon = () => {
   return <MenuIcon />;
@@ -29,6 +30,10 @@ const MyFiberManualRecordIcon = () => {
   return <FiberManualRecordIcon />;
 };
 
+const MyDeleteIcon = () => {
+  return <Delete />;
+};
+
 /** passed material ui icon name
  * Must be separeated by underscore and all letter small except i of icon
  */
@@ -43,5 +48,6 @@ export {
   MyEmojiPeopleIcon,
   MyAddIcon,
   MyFiberManualRecordIcon,
+  MyDeleteIcon,
   MyIcon,
 };
