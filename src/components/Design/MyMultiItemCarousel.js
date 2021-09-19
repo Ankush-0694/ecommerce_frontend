@@ -1,12 +1,12 @@
-import { makeStyles } from "@material-ui/styles";
+// import { makeStyles } from "@material-ui/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const useStyles = makeStyles({
-  itemContainerDiv: {
-    padding: "10px",
-  },
-});
+// const useStyles = makeStyles({
+//   itemContainerDiv: {
+//     padding: "10px",
+//   },
+// });
 
 const responsive = {
   largeDesktop: {
@@ -32,7 +32,7 @@ const responsive = {
 };
 
 const MyMultiCarousel = ({ children }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <Carousel
@@ -49,7 +49,6 @@ const MyMultiCarousel = ({ children }) => {
       itemClass="slider-image-item"
       keyBoardControl
       minimumTouchDrag={200}
-      keyBoardControl
       showDots={true}
       slidesToSlide={1}
       swipeable

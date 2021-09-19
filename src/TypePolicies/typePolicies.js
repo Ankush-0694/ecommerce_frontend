@@ -1,4 +1,4 @@
-import { offsetLimitPagination } from "@apollo/client/utilities";
+// import { offsetLimitPagination } from "@apollo/client/utilities";
 
 // type policy - for offset based pagination
 // export const typePolicies = {

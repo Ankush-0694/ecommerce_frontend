@@ -84,6 +84,11 @@ const GET_PRODUCT_BY_SEARCH_TEXT = gql`
       productSubCategory
       productBrand
       productImageUrl
+      reviews {
+        productID
+        review
+        rating
+      }
     }
   }
 `;

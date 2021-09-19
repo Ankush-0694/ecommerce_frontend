@@ -23,6 +23,12 @@ const AllProductStyles = makeStyles({
     fontWeight: "550",
     fontSize: "1.2rem",
   },
+  productDescription: {
+    maxWidth: "300px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
 
   update_btn: {
     marginRight: "8px",

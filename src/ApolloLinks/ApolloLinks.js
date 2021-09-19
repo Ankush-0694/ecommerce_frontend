@@ -22,6 +22,7 @@ const errorLink = onError(({ graphQLErrors, networkError, response }) => {
         errorVar([response.errors[0].message]);
         console.log(errorVar());
       }
+      return message;
     });
   }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import queryString from "query-string";
 import { GET_PRODUCT_BY_SEARCH_TEXT } from "../../../../queries/Product/productQueries";
 import { useQuery } from "@apollo/client";
@@ -6,13 +6,17 @@ import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import Products from "../Products/AllProducts/Products";
 import MyDivider from "../../../Design/MyDivider";
-import { MyPaper } from "../../../Design/MyPaper";
+// import { MyPaper } from "../../../Design/MyPaper";
 import ProductFilter from "./Component/ProductFilter";
+import { ShopByStyles } from "./CSS/ShopByStyles";
 
 const ShopBy = (props) => {
+  const classes = ShopByStyles();
   const queryParameter = queryString.parse(props.location.search);
 
   const searchText = queryParameter.q;
+
+  const [selectedRating, setSelectedRating] = useState();
 
   const {
     error: searchError,
@@ -39,32 +43,37 @@ const ShopBy = (props) => {
     return <h1>No Product Found</h1>;
   }
 
+  const onFilterChange = (e) => {
+    let value = Number(e.target.value);
+    setSelectedRating(value);
+  };
+
   return (
     <div>
       {/* This component comes from product/AllProducts which further use productCard to show the content */}
-      <div style={{ textAlign: "center", padding: "10px 0px" }}>
-        <h2>Showing Results For - "{searchText}"</h2>
-        <MyDivider />
+
+      <div className={classes.shopByHeader}>
+        Showing Results For - "{searchText}" ( {dataToRender.length} Items
+        Found)
       </div>
 
-      <div
-        className="products"
-        style={{ display: "flex", justifyContent: "space-between" }}>
+      <MyDivider />
+
+      <div className="products" style={{ display: "flex" }}>
         {/* Filter Component */}
 
-        <div className="filter" style={{ width: "20%", marginLeft: "20px" }}>
-          <ProductFilter />
+        <div className="filter" style={{ margin: "16px 0 0 16px" }}>
+          <ProductFilter onFilterChange={onFilterChange} />
         </div>
 
         {/* Filter List  */}
 
-        <div className="productData" style={{ width: "70%" }}>
-          <div style={{ marginLeft: "20px" }}>
-            <h2>Products</h2>
-            <MyDivider />
-          </div>
+        <div className="productData" style={{ width: "80%" }}>
           <div>
-            <Products productData={dataToRender} />
+            <Products
+              selectedRating={selectedRating}
+              productData={dataToRender}
+            />
           </div>
         </div>
       </div>

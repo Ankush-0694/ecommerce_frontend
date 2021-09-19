@@ -3,14 +3,10 @@ import {
   FormControlLabel,
   Checkbox,
   Typography,
-  MenuItem,
-  InputLabel,
-  Select,
 } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { useRef } from "react";
 
 // we will override these styles using other classes instead of this in our component, (this is for example)
 
@@ -99,10 +95,10 @@ const MyMultilineInput = ({
   );
 };
 
-const MyCheckbox = ({ name, label, className }) => {
+const MyCheckbox = ({ name, label, className, onChange, value }) => {
   return (
     <FormControlLabel
-      control={<Checkbox name={name} />}
+      control={<Checkbox name={name} onChange={onChange} value={value} />}
       label={
         <Typography
           className={className}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MyButtonComponent } from "../Design/MyButtonComponent";
-import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
+import { MyTextInput } from "../Design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../Design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
 import { validateLoginForm } from "../layout/ClientFormValidations/FormValidation";
@@ -167,9 +167,7 @@ const Login = (props) => {
           {/* <div>
             <MyCheckbox name="remember Me" label="Remember Me" />
           </div> */}
-          <div>
-            <a href="#">Forgot Password</a>
-          </div>
+          <div>{/* <a href="#">Forgot Password</a> */}</div>
           <br></br>
           <div className="container-log-btn" style={{ textAlign: "center" }}>
             <MyButtonComponent

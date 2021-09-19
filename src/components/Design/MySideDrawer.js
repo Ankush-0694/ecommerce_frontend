@@ -1,4 +1,4 @@
-import { Divider, makeStyles, useTheme } from "@material-ui/core";
+import { Divider, makeStyles } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import { Fragment } from "react";
 import { withRouter } from "react-router";

@@ -1,17 +1,19 @@
 import { makeStyles } from "../../../../../Design/MyUseStyles";
 
 const ProductCardStyles = makeStyles({
-  cardPricing: {
+  productDetails: {
     display: "flex",
     justifyContent: "center",
     alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
   },
-  cardDescription: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    // marginBottom: theme.spacing(2),
+  rating: {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    padding: "4px",
+    backgroundColor: "white",
+    color: "black",
+    borderRadius: "15%",
   },
 });
 
