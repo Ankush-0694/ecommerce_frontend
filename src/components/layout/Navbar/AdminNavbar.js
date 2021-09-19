@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "../../Design/MyUseStyles";
+// import { makeStyles } from "../../Design/MyUseStyles";
 import { MyButtonComponent } from "../../Design/MyButtonComponent";
 import { withRouter } from "react-router";
 import { MyNavbar } from "../../Design/MyNavbar";
@@ -8,7 +8,7 @@ import { useQuery } from "@apollo/client";
 import ShowLoading from "../LoadingComponent/ShowLoading";
 import { GET_ME } from "../../../queries/user/userQueries";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
-const drawerWidth = 250;
+// const drawerWidth = 250;
 
 const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = VendorNavbarStyles(); //same styling as vendor

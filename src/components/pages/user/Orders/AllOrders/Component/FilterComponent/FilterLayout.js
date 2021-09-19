@@ -14,19 +14,26 @@ const useStyles = makeStyles({
 });
 
 /** Used on Shop By Page And Order Filter Pages */
-const FilterLayout = ({ FilterHeading, FilterByArray }) => {
+const CheckoutFilterLayout = ({
+  FilterHeading,
+  FilterByArray,
+  checkboxName,
+  onFilterChange,
+}) => {
   const classes = useStyles();
   return (
     <div className={classes.onStatusCheckbox}>
       <h6>{FilterHeading}</h6>
       <div className="inputFields">
-        {FilterByArray.map(({ name, label }, index) => {
+        {FilterByArray.map(({ label, value }, index) => {
           return (
             <div key={index}>
               <MyCheckbox
                 className={classes.checkbox}
                 label={label}
-                name={name}
+                name={checkboxName}
+                value={value}
+                onChange={onFilterChange}
               />
             </div>
           );
@@ -36,4 +43,4 @@ const FilterLayout = ({ FilterHeading, FilterByArray }) => {
   );
 };
 
-export default FilterLayout;
+export default CheckoutFilterLayout;

@@ -2,13 +2,16 @@ import React from "react";
 import ProductCard from "./Component/ProductCard/ProductCard";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 
-const Products = ({ productData }) => {
+const Products = ({ productData, selectedRating }) => {
+  //calculation of average rating
+
   return (
     <div style={{ margin: "20px" }}>
       <MyGridContainer container spacing={4}>
         {productData.map((product) => {
           return (
             <ProductCard
+              selectedRating={selectedRating}
               key={product.id}
               details={product}
               link={`/products/:${product.id}`}

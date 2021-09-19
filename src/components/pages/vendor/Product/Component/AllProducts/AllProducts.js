@@ -82,9 +82,12 @@ const AllProducts = ({ data, setCurrent, role }) => {
               <MyGridItem xs={7}>
                 <div className={classes.detailsDiv}>
                   <div className={classes.darkFont}>{productName}</div>
-                  <div className={classes.lightFont}>
+
+                  <div
+                    className={`${classes.productDescription} ${classes.lightFont}`}>
                     Desc - {productDescription}
                   </div>
+
                   <div className={classes.lightFont}>
                     Brand - {productBrand}
                   </div>
@@ -103,7 +106,7 @@ const AllProducts = ({ data, setCurrent, role }) => {
           <MyGridItem xs={3}>
             <div className={classes.buttonContainerParent}>
               <div className={classes.buttonContainerChild}>
-                {!role === "admin" && (
+                {role === "vendor" && (
                   <MyButtonComponent
                     onClick={() => {
                       setCurrent(data);

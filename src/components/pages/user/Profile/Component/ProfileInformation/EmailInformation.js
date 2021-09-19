@@ -1,7 +1,6 @@
 import { Email } from "@material-ui/icons";
 import React, { useState } from "react";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
-import { MyTextInput } from "../../../../../Design/MyFormFieldComponent";
+
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 
 const EmailInformation = () => {

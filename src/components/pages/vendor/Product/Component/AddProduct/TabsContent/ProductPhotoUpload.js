@@ -16,7 +16,7 @@ const ProductPhotoUpload = ({ onChange, productImageUrl }) => {
       />
 
       <p>
-        <a href="https://source.unsplash.com/" rel="noreferrer" target="_blank">
+        <a href="https://unsplash.com/" rel="noreferrer" target="_blank">
           Unsplash Link
         </a>
       </p>

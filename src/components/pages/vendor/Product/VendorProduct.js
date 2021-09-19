@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import React, { Fragment, useState } from "react";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../queries/Product/productQueries";
-import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
+// import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
 import { MyTypography } from "../../../Design/MyTypography";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
@@ -35,7 +35,7 @@ const VendorProduct = () => {
   return (
     <div>
       <div className={classes.flexcontainer}>
-        <div style={{ marginTop: "20px", marginLeft: "24px" }}>
+        <div style={{ margin: "20px 0px 0px 24px" }}>
           <MyPaper elevation={0}>
             <MyTypography
               variant="h4"
@@ -64,13 +64,13 @@ const VendorProduct = () => {
           </MyPaper>
         </div>
 
-        <MyFullScreenBox display="flex" width="50%" height="90vh">
-          <div style={{ margin: "48px auto", width: "70%" }}>
-            <div>
-              <MultiStepForm current={current} setCurrent={setCurrent} />
-            </div>
+        {/* <MyFullScreenBox display="flex" width="50%" height="90vh"> */}
+        <div style={{ width: "40%" }}>
+          <div>
+            <MultiStepForm current={current} setCurrent={setCurrent} />
           </div>
-        </MyFullScreenBox>
+        </div>
+        {/* </MyFullScreenBox> */}
       </div>
     </div>
   );

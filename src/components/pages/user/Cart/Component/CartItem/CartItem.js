@@ -9,11 +9,7 @@ import {
   UPDATE_CART_QUANTITY,
 } from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
-import {
-  GET_CART,
-  GET_CART_BY_CUSTOMERID,
-} from "../../../../../../queries/Cart/cartQueries";
-import MyDivider from "../../../../../Design/MyDivider";
+import { GET_CART_BY_CUSTOMERID } from "../../../../../../queries/Cart/cartQueries";
 import { MyDeleteIcon } from "../../../../../Design/MyIcons";
 
 const CartItem = ({ cartItemData }) => {
