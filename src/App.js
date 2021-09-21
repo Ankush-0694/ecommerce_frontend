@@ -89,6 +89,7 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             component={Home}
           />
+
           <PublicCustomerRoute
             exact
             path="/Products/:id"
@@ -134,8 +135,8 @@ const App = () => {
 
           <ProtectedCustomerRoute
             exact
-            path="/checkout"
-            component={CheckoutMultiple}
+            path="/checkout/:id"
+            component={CheckoutSingle}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
@@ -143,8 +144,8 @@ const App = () => {
 
           <ProtectedCustomerRoute
             exact
-            path="/checkout/:id"
-            component={CheckoutSingle}
+            path="/checkout"
+            component={CheckoutMultiple}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}

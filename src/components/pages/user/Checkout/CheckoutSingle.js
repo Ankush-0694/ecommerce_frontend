@@ -3,12 +3,11 @@ import { useQuery } from "@apollo/client";
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import PriceDetails from "./Component/PriceDetails/PriceDetails";
-import { MyTypography } from "../../../Design/MyTypography";
+import CheckoutPriceDetails from "./Component/CheckoutPriceDetails/CheckoutPriceDetails";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
 import AddressContainer from "./AddressContainer";
-import SingleProductDetails from "./Component/ProductDetails/SingleProductDetails";
+import SingleProductDetails from "./Component/CheckoutProductDetails/SingleProductDetails";
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
 import { ADD_TO_CART } from "../../../../queries/Cart/cartMutations";
 import MyAlert from "../../../Design/MyAlert";
@@ -119,7 +118,7 @@ const CheckoutSingle = (props) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       {/** Needed to pass the setOrderSubmitEvent to make it again false  */}
 
       {/* if address is not Selected and we enter the button  */}
@@ -137,12 +136,11 @@ const CheckoutSingle = (props) => {
         </MyAlert>
       )}
 
-      <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
-        Order Summary
-      </MyTypography>
-      <MyGridContainer justify="center" spacing={4}>
+      <div className={classes.orderSummaryHeading}>Order Summary</div>
+
+      <MyGridContainer justify="center">
         <MyGridItem xs={8} sm={6} className="product-details">
-          <div>
+          <div style={{ margin: "8px 12px 0px 0px" }}>
             <SingleProductDetails
               productData={productData}
               quantity={quantity}
@@ -150,9 +148,10 @@ const CheckoutSingle = (props) => {
             />
           </div>
         </MyGridItem>
+
         <MyGridItem xs={8} sm={4} className="price-details">
           <div className={classes.priceDetailsContainer}>
-            <PriceDetails
+            <CheckoutPriceDetails
               productDataProp={productData}
               quantityProp={quantity}
               setTotalPriceOfOrder={setTotalPriceOfOrder}

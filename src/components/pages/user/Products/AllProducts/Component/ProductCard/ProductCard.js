@@ -24,7 +24,12 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
   }
 
   return (
-    <MyGridItem xs={12} sm={6} md={4} lg={3}>
+    <MyGridItem
+      xs={12}
+      sm={6}
+      md={4}
+      lg={3}
+      userStyle={{ minWidth: "250px", maxWidth: "300px" }}>
       <MyCardContainer>
         <div style={{ position: "relative" }}>
           <Link to={link} style={{ textDecoration: "none" }}>

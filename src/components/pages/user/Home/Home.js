@@ -18,7 +18,7 @@ const Home = () => {
       {/* Show Products Itself */}
       <div className="FirstProductSection">
         <MyPaper className={classes.SliderPaper}>
-          <h2 className={classes.SliderHeading}>Products</h2>
+          <div className={classes.SliderHeading}>Products</div>
           <MyDivider />
           <section>
             <FirstProductSlider />
@@ -30,7 +30,7 @@ const Home = () => {
 
       <div className="SecondProductSection">
         <MyPaper className={classes.SliderPaper}>
-          <h2 className={classes.SliderHeading}>Shop By Category</h2>
+          <div className={classes.SliderHeading}>Shop By Category</div>
           <MyDivider />
           <section>
             <SecondProductSlider dataProp="category" />
@@ -42,7 +42,7 @@ const Home = () => {
 
       <div className="ThirdProductSection">
         <MyPaper className={classes.SliderPaper}>
-          <h2 className={classes.SliderHeading}>Shop By Sub Category</h2>
+          <div className={classes.SliderHeading}>Shop By Sub Category</div>
           <MyDivider />
           <section>
             <SecondProductSlider dataProp="subcategory" />

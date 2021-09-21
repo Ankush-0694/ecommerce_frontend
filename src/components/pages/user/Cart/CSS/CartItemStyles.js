@@ -7,7 +7,7 @@ const CartItemStyles = makeStyles({
   },
 
   MediaImgDiv: {
-    padding: "10px",
+    padding: "8px",
   },
 
   cartDetails: {

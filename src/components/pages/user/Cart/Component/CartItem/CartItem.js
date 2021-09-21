@@ -96,7 +96,6 @@ const CartItem = ({ cartItemData }) => {
         <div className={classes.MediaImgDiv}>
           <MyCardMedia
             height="150"
-            className={classes.MediaImg}
             //don't remove this styles
             style={{ borderRadius: "10px", minWidth: "100px", width: "150px" }}
             title="IMAGE"

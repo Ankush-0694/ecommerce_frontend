@@ -15,17 +15,17 @@ const responsive = {
     partialVisibilityGutter: 60,
   },
   desktop: {
-    breakpoint: { max: 1400, min: 1024 },
-    items: 4,
-    partialVisibilityGutter: 0,
+    breakpoint: { max: 1400, min: 960 },
+    items: 3,
+    partialVisibilityGutter: 40,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
+    breakpoint: { max: 960, min: 600 },
     items: 2,
     partialVisibilityGutter: 40,
   },
   mobile: {
-    breakpoint: { max: 700, min: 0 },
+    breakpoint: { max: 550, min: 0 },
     items: 1,
     partialVisibilityGutter: 30,
   },

@@ -57,7 +57,7 @@ const AddressContainer = (props) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       {/* Delivery Address List  */}
 
       <MyGridContainer justify="center">
@@ -98,7 +98,7 @@ const AddressContainer = (props) => {
               )}
             </div>
           </div>
-          <hr></hr>
+          <br />
         </MyGridItem>
 
         {/* Address Form  */}

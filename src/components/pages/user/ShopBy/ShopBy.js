@@ -62,7 +62,7 @@ const ShopBy = (props) => {
       <div className="products" style={{ display: "flex" }}>
         {/* Filter Component */}
 
-        <div className="filter" style={{ margin: "16px 0 0 16px" }}>
+        <div className="filter" style={{ margin: "16px 24px 0 16px" }}>
           <ProductFilter onFilterChange={onFilterChange} />
         </div>
 

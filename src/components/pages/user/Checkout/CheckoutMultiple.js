@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import { ADD_ORDER } from "../../../../queries/Order/orderMutations";
 import { useMutation } from "@apollo/client";
 import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import MultipleProductDetails from "./Component/ProductDetails/MultipleProductDetails";
-import PriceDetails from "./Component/PriceDetails/PriceDetails";
-import { MyTypography } from "../../../Design/MyTypography";
+import MultipleProductDetails from "./Component/CheckoutProductDetails/MultipleProductDetails";
+import CheckoutPriceDetails from "./Component/CheckoutPriceDetails/CheckoutPriceDetails";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
 import { MyButtonComponent } from "../../../Design/MyButtonComponent";
-import {
-  GET_CART,
-  GET_CART_BY_CUSTOMERID,
-} from "../../../../queries/Cart/cartQueries";
+import { GET_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartQueries";
 import AddressContainer from "./AddressContainer";
 import MyAlert from "../../../Design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
@@ -45,7 +41,7 @@ const CheckoutMultiple = (props) => {
    * Can be useful if things go south
    * @type {string[]} ID's
    */
-  const productIDArray = props.history.location.state || [];
+  // const productIDArray = props.history.location.state || [];
 
   // getting all cart item because we place order from the  cart
   const {
@@ -127,7 +123,7 @@ const CheckoutMultiple = (props) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       {/** Needee to pass the setOrderSubmitEvent to make it again false  */}
 
       {/* if address is not Selected and we enter the button  */}
@@ -145,10 +141,9 @@ const CheckoutMultiple = (props) => {
         </MyAlert>
       )}
 
-      <MyTypography variant="h4" component="h2" style={{ textAlign: "center" }}>
-        Order Summary
-      </MyTypography>
-      <MyGridContainer justify="center" spacing={4}>
+      <div className={classes.orderSummaryHeading}>Order Summary</div>
+
+      <MyGridContainer justify="center">
         {/* Product Details on order Summary */}
 
         <MyGridItem xs={8} sm={6} className="product-details">
@@ -177,7 +172,7 @@ const CheckoutMultiple = (props) => {
           <div className={classes.priceDetailsContainer}>
             {/* We are sending total Quantity false because product data is from cart
             and we can calculate the quantity in the price details itself for multiple products */}
-            <PriceDetails
+            <CheckoutPriceDetails
               cartDataProp={cartData} // this same prop is passed from checkoutSingle so we name it the same
               quantityProp={false}
               setTotalPriceOfOrder={setTotalPriceOfOrder}

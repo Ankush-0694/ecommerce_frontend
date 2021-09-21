@@ -6,6 +6,14 @@ const CheckoutStyles = makeStyles((theme) => ({
     border: "1px solid black",
     marginTop: "10px",
   },
+
+  orderSummaryHeading: {
+    maxWidth: "82vw",
+    margin: "0px auto",
+    padding: "8px 0px",
+    fontSize: "2rem",
+    fontWeight: "300",
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
