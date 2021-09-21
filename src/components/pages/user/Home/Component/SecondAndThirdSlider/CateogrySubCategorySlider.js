@@ -17,6 +17,7 @@ import {
 const useStyles = makeStyles({
   itemContainerDiv: {
     padding: "10px",
+    // maxWidth: "350px",
   },
 
   cardDescription: {

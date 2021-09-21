@@ -6,8 +6,10 @@ const HomeStyles = makeStyles({
     margin: "10px auto",
   },
   SliderHeading: {
-    padding: "7px 10px",
-    marginLeft: "5px",
+    padding: "16px 0px",
+    marginLeft: "16px",
+    fontSize: "1.8rem",
+    fontWeight: "600",
   },
 });
 

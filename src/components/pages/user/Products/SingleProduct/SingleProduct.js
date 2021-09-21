@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../queries/Product/productQueries";
 import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
@@ -6,15 +6,11 @@ import ProductReviewList from "./Component/ProductReviewList/ProductReviewList";
 import { MyGridContainer } from "../../../../Design/MyGrid";
 import { MyGridItem } from "../../../../Design/MyGrid";
 import { MyTypography } from "../../../../Design/MyTypography";
-import { makeStyles } from "../../../../Design/MyUseStyles";
 import { MyCardMedia } from "../../../../Design/MyCardComponents";
 import { MyFullScreenBox } from "../../../../Design/MyFullScreenBox";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
 import { ADD_TO_CART } from "../../../../../queries/Cart/cartMutations";
-import {
-  GET_CART,
-  GET_CART_BY_CUSTOMERID,
-} from "../../../../../queries/Cart/cartQueries";
+import { GET_CART_BY_CUSTOMERID } from "../../../../../queries/Cart/cartQueries";
 import MyAlert from "../../../../Design/MyAlert";
 import { errorVar } from "../../../../../ReactiveVariables/ReactiveVariables";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
@@ -22,18 +18,10 @@ import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 import { MyPaper } from "../../../../Design/MyPaper";
 import MyDivider from "../../../../Design/MyDivider";
 import { Fragment } from "react";
-
-const useStyles = makeStyles({
-  productDiv: {
-    //child selector
-    "& > *": {
-      margin: "10px 0",
-    },
-  },
-});
+import { SingleProductStyles } from "./CSS/SingleProductStyles";
 
 const SingleProduct = (props) => {
-  const classes = useStyles();
+  const classes = SingleProductStyles();
   const productid = props.match.params.id.split(":")[1];
   const { history } = props;
 
@@ -128,7 +116,7 @@ const SingleProduct = (props) => {
   };
 
   return (
-    <div style={{ marginTop: "10px", padding: "20px" }}>
+    <div style={{ marginTop: "20px" }}>
       {/** If product successfully Added to cart - Show this success Alert
         * Need to clear this state to in every MyAlert for showing alert again if again added to cart
 
@@ -157,22 +145,36 @@ const SingleProduct = (props) => {
 
         {/* product information */}
         <MyGridItem xs={8} sm={4}>
-          <div className={classes.productDiv} style={{ maxWidth: " 500px" }}>
+          <div className={classes.productDiv}>
             <MyTypography variant="h5" component="h2">
-              Product Name : {productName}
+              {productName}
             </MyTypography>
-            <MyTypography variant="body1" component="p">
+            <MyTypography
+              className={classes.lightFont}
+              variant="body1"
+              component="p">
               Description : {productDescription}
             </MyTypography>
-            <MyTypography variant="body1" component="p">
+            <MyTypography
+              className={classes.lightFont}
+              variant="body1"
+              component="p">
               Brand : {productBrand}
             </MyTypography>
-            <MyTypography variant="body1" component="p">
-              Category : {productCategory.categoryName} , SubCategory -{" "}
-              {productSubCategory}
+            <MyTypography
+              className={classes.lightFont}
+              variant="body1"
+              component="p">
+              Category : {productCategory.categoryName}
+            </MyTypography>
+            <MyTypography
+              className={classes.lightFont}
+              variant="body1"
+              component="p">
+              SubCategory - {productSubCategory}
             </MyTypography>
             <MyTypography variant="h6" component="h6">
-              Price : {productPrice}
+              ₹ {productPrice}
             </MyTypography>
           </div>
 
@@ -212,12 +214,14 @@ const SingleProduct = (props) => {
           />
         </MyGridItem>
       </MyGridContainer>
-      <div>
-        <MyFullScreenBox display="flex" width="100%">
-          <h1 style={{ margin: "20px auto" }}>Ratings and Reviews</h1>
-        </MyFullScreenBox>
 
-        <MyDivider />
+      <MyDivider />
+
+      {/* this style for making some space at the end of reviews  */}
+      <div style={{ paddingBottom: "24px" }}>
+        <div className={classes.RatingAndReviewHeading}>
+          Ratings and Reviews
+        </div>
 
         {/* review List  Component */}
 
