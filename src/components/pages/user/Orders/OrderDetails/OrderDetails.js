@@ -5,7 +5,7 @@ import { GET_SINGLE_ORDER_BY_ID } from "../../../../../queries/Order/orderQuerie
 import { MyTypography } from "../../../../Design/MyTypography";
 import { OrderDetailsStyles } from "./CSS/OrderDetailsStyles";
 import { MyPaper } from "../../../../Design/MyPaper";
-import ProductList from "./Component/ProductList/ProductList";
+import ProductList from "./Component/OrderDetailsProductList/ProductList";
 import OrderedProductList from "../AllOrders/Component/OrderedProductList/OrderedProductList";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";

@@ -4,7 +4,7 @@ import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyPaper } from "../../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../../Design/MyTypography";
 import { OrderedProductListStyles } from "../../CSS/OrderedProductListStyles";
-import OrderStatus from "../OrderStatus/OrderStatus";
+import OrderStatus from "./OrderStatus/OrderStatus";
 
 /** This Component will be mapped from order Data Array and
  *
@@ -13,8 +13,20 @@ import OrderStatus from "../OrderStatus/OrderStatus";
  * This component used in Order.js (to show all products in the orders)
  *  and OrderDetails.js(to show others products in order(other than on which we clicked)  )
  */
-const OrderedProductList = ({ productData, orderID }) => {
+const OrderedProductList = ({ productData, orderID, filters }) => {
   const classes = OrderedProductListStyles();
+
+  const { ByStatus } = filters;
+
+  /**
+   * Filtering data according to their order Status
+   * Don't want to use filter if selelected filter is empty
+   * */
+  if (ByStatus.length > 0) {
+    productData = productData.filter((singleProduct) =>
+      ByStatus.includes(singleProduct.orderStatus)
+    );
+  }
 
   return (
     <div>

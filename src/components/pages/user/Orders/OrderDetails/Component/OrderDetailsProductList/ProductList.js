@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
 import { MyPaper } from "../../../../../../Design/MyPaper";
 import { MyTypography } from "../../../../../../Design/MyTypography";
-import OrderStatus from "../../../AllOrders/Component/OrderStatus/OrderStatus";
+import OrderStatus from "../../../AllOrders/Component/OrderedProductList/OrderStatus/OrderStatus";
 import { ProductListStyles } from "../../CSS/ProductListStyles";
 
 /** This Component is used in OrderDetails component

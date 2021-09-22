@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 /** Used on Shop By Page And Order Filter Pages */
-const CheckoutFilterLayout = ({
+const CheckBoxFilterLayout = ({
   FilterHeading,
   FilterByArray,
   checkboxName,
@@ -43,4 +43,4 @@ const CheckoutFilterLayout = ({
   );
 };
 
-export default CheckoutFilterLayout;
+export default CheckBoxFilterLayout;
