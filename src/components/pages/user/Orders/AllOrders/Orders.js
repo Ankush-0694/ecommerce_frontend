@@ -1,5 +1,4 @@
-import React from "react";
-import { MyPaper } from "../../../../Design/MyPaper";
+import React, { useState } from "react";
 import { MyTypography } from "../../../../Design/MyTypography";
 import OrderedProductList from "./Component/OrderedProductList/OrderedProductList";
 import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
@@ -12,6 +11,21 @@ import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
 
 const Orders = () => {
   const classes = OrderStyles();
+
+  /**
+   * This state passed orderFilter to set them
+   *
+   * And passed to OrderProductList to use this filter and filter the list
+   */
+  const [filters, setFilters] = useState({
+    ByStatus: [],
+    ByTime: [],
+  });
+
+  /* this filter will use in this component because we can filter an order
+   we don't need to filter every product */
+
+  const { ByTime } = filters;
 
   const {
     error: getOrdersError,
@@ -31,7 +45,23 @@ const Orders = () => {
    * @type {array} - Every Order further have productDetailsWithQuantity Array
    */
 
-  const orderData = getOrdersData.getOrdersByCustomerId;
+  let orderData = getOrdersData.getOrdersByCustomerId;
+
+  let today = new Date();
+  let priorDate = new Date().setDate(today.getDate() - 30);
+
+  // console.log(priorDate);
+
+  // code for printing date from given seconds
+  // console.log(new Date(
+  //   Number(singleOrder.orderedDate)
+  // ).toDateString());
+
+  if (ByTime.length > 0) {
+    orderData = orderData.filter((singleOrder) => {
+      return singleOrder.orderedDate >= priorDate;
+    });
+  }
 
   return (
     <div className={classes.pageContainer}>
@@ -45,7 +75,7 @@ const Orders = () => {
         {/* Filter  component , LEFT PART */}
 
         <div className={classes.filterContainer}>
-          <OrderFilter />
+          <OrderFilter filters={filters} setFilters={setFilters} />
         </div>
 
         {/* Order Related , Right PART */}
@@ -78,6 +108,7 @@ const Orders = () => {
                   key={id}
                   orderID={id}
                   productData={productDetailsWithQuantity}
+                  filters={filters}
                 />
               );
             })}
