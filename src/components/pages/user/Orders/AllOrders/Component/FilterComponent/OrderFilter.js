@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import MyDivider from "../../../../../../Design/MyDivider";
-import { MyPaper } from "../../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
+import MyDivider from "../../../../../../design/MyDivider";
+import { MyPaper } from "../../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
 import CheckBoxFilterLayout from "./CheckboxFilterLayout";
 
 const OrderFilter = ({ filters, setFilters }) => {
@@ -80,8 +81,7 @@ const OrderFilter = ({ filters, setFilters }) => {
 
       {/**  Filter based on Order Status  */}
 
-      {/* Pass and heading and filter array to FilterLayout Component */}
-
+      {/* Pass  heading and filter array to FilterLayout Component */}
       <CheckBoxFilterLayout
         FilterHeading="Order Status"
         checkboxName="ByStatus"
@@ -93,7 +93,7 @@ const OrderFilter = ({ filters, setFilters }) => {
 
       {/**  Filter based on Order Time */}
 
-      {/* Pass and heading and filter array to FilterLayout Component */}
+      {/* Pass  heading and filter array to FilterLayout Component */}
 
       <CheckBoxFilterLayout
         FilterHeading="Order Time"
@@ -101,6 +101,28 @@ const OrderFilter = ({ filters, setFilters }) => {
         FilterByArray={orderTimeFilter}
         onFilterChange={onFilterChange}
       />
+
+      <MyDivider></MyDivider>
+
+      {/* Clear filter feature */}
+
+      {/* <div style={{ textAlign: "center", marginTop: "16px" }}>
+        <MyButtonComponent
+          onClick={() => {
+            setFilters({
+              ByStatus: [],
+              ByTime: [],
+            });
+
+            document.querySelectorAll("input[type=checkbox]").forEach((el) => {
+              return (el.checked = false);
+            });
+          }}
+          variant="contained"
+          color="secondary">
+          Clear Filters
+        </MyButtonComponent>
+      </div> */}
     </MyPaper>
   );
 };

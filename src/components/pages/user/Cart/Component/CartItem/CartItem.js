@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents";
-import { MyTypography } from "../../../../../Design/MyTypography";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
-import { MyPaper } from "../../../../../Design/MyPaper";
+import { MyCardMedia } from "../../../../../design/MyCardComponents";
+import { MyTypography } from "../../../../../design/MyTypography";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
+import { MyPaper } from "../../../../../design/MyPaper";
 import { CartItemStyles } from "../../CSS/CartItemStyles";
 import {
   DELETE_CART,
@@ -10,7 +10,7 @@ import {
 } from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../../../../queries/Cart/cartQueries";
-import { MyDeleteIcon } from "../../../../../Design/MyIcons";
+import { MyDeleteIcon } from "../../../../../design/MyIcons";
 
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();
@@ -147,7 +147,7 @@ const CartItem = ({ cartItemData }) => {
             className={classes.quantityInput}
             value={quantityCount}
             onChange={() => {
-              console.log("Will Handle it Later");
+              // console.log("Will Handle it Later");
             }}
             // for doing onChange we need to handle the situation when input is empty,
             // we need to make sure that req does not send to server if input is empty

@@ -3,15 +3,15 @@ import { makeStyles } from "@material-ui/styles";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 import {
   MyCardActions,
   MyCardContent,
   MyCardMedia,
-} from "../../../../../Design/MyCardComponents";
-import { MyMultiCarousel } from "../../../../../Design/MyMultiItemCarousel";
-import { MyPaper } from "../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../Design/MyTypography";
+} from "../../../../../design/MyCardComponents";
+import { MyMultiCarousel } from "../../../../../design/MyMultiItemCarousel";
+import { MyPaper } from "../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../design/MyTypography";
 import ShowError from "../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 

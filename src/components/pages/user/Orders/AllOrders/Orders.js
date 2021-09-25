@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { MyTypography } from "../../../../Design/MyTypography";
+import { MyTypography } from "../../../../design/MyTypography";
 import OrderedProductList from "./Component/OrderedProductList/OrderedProductList";
-import { MyButtonComponent } from "../../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../../design/MyButtonComponent";
 import { useQuery } from "@apollo/client";
 import { GET__ORDERS_BY_CUSTOMERID } from "../../../../../queries/Order/orderQueries";
 import { OrderStyles } from "./CSS/OrdersStyles";
@@ -21,6 +21,8 @@ const Orders = () => {
     ByStatus: [],
     ByTime: [],
   });
+
+  const [searchOrder, setSearchOrder] = useState("");
 
   /* this filter will use in this component because we can filter an order
    we don't need to filter every product */
@@ -47,9 +49,6 @@ const Orders = () => {
 
   let orderData = getOrdersData.getOrdersByCustomerId;
 
-  let today = new Date();
-  let priorDate = new Date().setDate(today.getDate() - 30);
-
   // console.log(priorDate);
 
   // code for printing date from given seconds
@@ -58,9 +57,34 @@ const Orders = () => {
   // ).toDateString());
 
   if (ByTime.length > 0) {
-    orderData = orderData.filter((singleOrder) => {
-      return singleOrder.orderedDate >= priorDate;
-    });
+    let today = new Date();
+    let priorDate;
+
+    // let priorDataArray;
+
+    // ByTime.map((timeFilter) => {
+    //   if (timeFilter === "last30Days") {
+    //     priorDataArray.push(new Date().setDate(today.getDate() - 10));
+    //   }
+    //   if (timeFilter === "older") {
+    //     priorDataArray.push(new Date().setDate(today.getDate() - 10));
+    //   }
+    // });
+
+    // filteredOrderData = orderData.filter((singleOrder) => {
+
+    //   priorDataArray.map((priorDate) => {
+    //     return singleOrder.orderedDate >= priorDate;
+    //   });
+
+    // });
+
+    if (ByTime.includes("last30Days")) {
+      priorDate = new Date().setDate(today.getDate() - 10);
+      orderData = orderData.filter((singleOrder) => {
+        return singleOrder.orderedDate >= priorDate;
+      });
+    }
   }
 
   return (

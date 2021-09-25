@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import Products from "../Products/AllProducts/Products";
-import MyDivider from "../../../Design/MyDivider";
+import MyDivider from "../../../design/MyDivider";
 // import { MyPaper } from "../../../Design/MyPaper";
 import ProductFilter from "./Component/ProductFilter";
 import { ShopByStyles } from "./CSS/ShopByStyles";

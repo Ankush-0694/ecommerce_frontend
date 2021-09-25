@@ -1,8 +1,8 @@
 import React from "react";
 import HomeSlider from "./Component/HomeTopSlider/HomeSlider";
 import FirstProductSlider from "./Component/FirstProductSlider/FirstProductSlider";
-import { MyPaper } from "../../../Design/MyPaper";
-import MyDivider from "../../../Design/MyDivider";
+import { MyPaper } from "../../../design/MyPaper";
+import MyDivider from "../../../design/MyDivider";
 import { HomeStyles } from "./CSS/HomeStyles";
 import SecondProductSlider from "./Component/SecondAndThirdSlider/CateogrySubCategorySlider";
 

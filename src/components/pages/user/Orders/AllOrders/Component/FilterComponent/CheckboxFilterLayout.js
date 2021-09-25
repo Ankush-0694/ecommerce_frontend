@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import { MyCheckbox } from "../../../../../../Design/MyFormFieldComponent";
+import { MyCheckbox } from "../../../../../../design/MyFormFieldComponent";
 
 const useStyles = makeStyles({
   onStatusCheckbox: {
@@ -25,7 +25,7 @@ const CheckBoxFilterLayout = ({
     <div className={classes.onStatusCheckbox}>
       <h6>{FilterHeading}</h6>
       <div className="inputFields">
-        {FilterByArray.map(({ label, value }, index) => {
+        {FilterByArray.map(({ label, value, checked }, index) => {
           return (
             <div key={index}>
               <MyCheckbox

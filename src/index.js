@@ -19,8 +19,12 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 //   tracesSampleRate: 1.0,
 // });
 
-import { authLink, errorLink, httplink } from "./ApolloLinks/ApolloLinks";
-import { typePolicies } from "./TypePolicies/typePolicies";
+import {
+  authLink,
+  errorLink,
+  httplink,
+} from "./helpers/ApolloLinks/ApolloLinks";
+import { typePolicies } from "./helpers/TypePolicies/typePolicies";
 
 const cache = new InMemoryCache({
   typePolicies: { ...typePolicies },

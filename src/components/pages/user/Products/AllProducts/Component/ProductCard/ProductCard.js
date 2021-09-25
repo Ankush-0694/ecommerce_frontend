@@ -1,11 +1,11 @@
 import { Star } from "@material-ui/icons";
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { MyCardContainer } from "../../../../../../Design/MyCardComponents";
-import { MyCardContent } from "../../../../../../Design/MyCardComponents";
-import { MyCardMedia } from "../../../../../../Design/MyCardComponents";
-import { MyGridItem } from "../../../../../../Design/MyGrid";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyCardContainer } from "../../../../../../design/MyCardComponents";
+import { MyCardContent } from "../../../../../../design/MyCardComponents";
+import { MyCardMedia } from "../../../../../../design/MyCardComponents";
+import { MyGridItem } from "../../../../../../design/MyGrid";
+import { MyTypography } from "../../../../../../design/MyTypography";
 import { ProductCardStyles } from "../../CSS/ProductCardStyles";
 
 const ProductCard = ({ details, link, history, selectedRating }) => {
@@ -43,7 +43,7 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
               </div>
               <div className={classes.productDetails}>
                 <MyTypography component="p" variant="body2" color="textPrimary">
-                  {productPrice}
+                  ₹ {productPrice}
                 </MyTypography>
               </div>
 

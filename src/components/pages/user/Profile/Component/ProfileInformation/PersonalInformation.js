@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
-import { MyTextInput } from "../../../../../Design/MyFormFieldComponent";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
+import { MyTextInput } from "../../../../../design/MyFormFieldComponent";
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 
 const PersonalInformation = () => {

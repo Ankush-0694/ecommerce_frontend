@@ -1,8 +1,8 @@
 import React from "react";
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { MyCardMedia } from "../../../../../../Design/MyCardComponents";
-import { MyPaper } from "../../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
+import { MyCardMedia } from "../../../../../../design/MyCardComponents";
+import { MyPaper } from "../../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
 import { ProductLayoutStyles } from "../../../CSS/ProductLayoutStyles";
 
 /**

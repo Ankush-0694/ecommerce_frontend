@@ -1,8 +1,8 @@
 import React from "react";
-import { MyButtonComponent } from "../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../design/MyButtonComponent";
 import { withRouter } from "react-router";
-import { MyNavbar } from "../../Design/MyNavbar";
-import { MyTypography } from "../../Design/MyTypography";
+import { MyNavbar } from "../../design/MyNavbar";
+import { MyTypography } from "../../design/MyTypography";
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../../../queries/user/userQueries";
 import ShowLoading from "../LoadingComponent/ShowLoading";

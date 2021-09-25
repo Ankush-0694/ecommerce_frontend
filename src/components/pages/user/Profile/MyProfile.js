@@ -2,7 +2,7 @@ import React from "react";
 import {
   MySideDrawerContainer,
   MySideDrawerList,
-} from "../../../Design/MySideDrawer";
+} from "../../../design/MySideDrawer";
 import { Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import ProfileInformation from "./Component/ProfileInformation/ProfileInformation";

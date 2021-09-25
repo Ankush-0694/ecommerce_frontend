@@ -1,6 +1,6 @@
 import React from "react";
-import { MyTypography } from "../../../../../Design/MyTypography";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyTypography } from "../../../../../design/MyTypography";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { AddressListStyles } from "../../CSS/AddressListStyles";

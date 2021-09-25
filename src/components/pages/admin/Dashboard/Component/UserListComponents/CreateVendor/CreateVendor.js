@@ -4,17 +4,36 @@ import { useMutation } from "@apollo/client";
 import {
   MyTextInput,
   MyMultilineInput,
-} from "../../../../../../Design/MyFormFieldComponent";
+} from "../../../../../../design/MyFormFieldComponent";
 
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyFullScreenBox } from "../../../../../../Design/MyFullScreenBox";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
+import { MyTypography } from "../../../../../../design/MyTypography";
+import { MyFullScreenBox } from "../../../../../../design/MyFullScreenBox";
+import { CREATE_VENDOR } from "../../../../../../../queries/user/userMutations";
+import MyAlert from "../../../../../../design/MyAlert";
 
 const CreateVendor = () => {
   const [vendorDetails, setVendorDetails] = useState({
     email: "",
   });
   const { email } = vendorDetails;
+
+  const [createVendorAlert, setCreateVendorAlert] = useState("");
+
+  const [createVendor, { data }] = useMutation(CREATE_VENDOR, {
+    onError: (error) => {
+      setCreateVendorAlert({
+        type: "error",
+        msg: "Error Ocuured while creating vendor",
+      });
+    },
+    onCompleted: (data) => {
+      setCreateVendorAlert({
+        type: "success",
+        msg: "Vendor created successfully",
+      });
+    },
+  });
 
   const onChange = (e) => {
     setVendorDetails({
@@ -24,7 +43,12 @@ const CreateVendor = () => {
   };
 
   const onSubmit = (e) => {
-    // console.log(vendorDetails);
+    createVendor({
+      variables: {
+        email: email,
+        role: "vendor",
+      },
+    });
 
     setVendorDetails({
       email: "",
@@ -34,6 +58,9 @@ const CreateVendor = () => {
 
   return (
     <div>
+      {createVendorAlert && (
+        <MyAlert type={createVendorAlert.type}>{createVendorAlert.msg}</MyAlert>
+      )}
       <MyFullScreenBox display="flex" width="100%">
         <div style={{ margin: "auto", width: "50%" }}>
           <div>

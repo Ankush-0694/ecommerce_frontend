@@ -95,10 +95,17 @@ const MyMultilineInput = ({
   );
 };
 
-const MyCheckbox = ({ name, label, className, onChange, value }) => {
+const MyCheckbox = ({ name, label, className, onChange, value, checked }) => {
   return (
     <FormControlLabel
-      control={<Checkbox name={name} onChange={onChange} value={value} />}
+      control={
+        <Checkbox
+          name={name}
+          onChange={onChange}
+          value={value}
+          checked={checked}
+        />
+      }
       label={
         <Typography
           className={className}

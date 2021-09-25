@@ -1,8 +1,8 @@
 import React from "react";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents";
-import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
-import { MyPaper } from "../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../Design/MyTypography";
+import { MyCardMedia } from "../../../../../design/MyCardComponents";
+import { MyGridContainer, MyGridItem } from "../../../../../design/MyGrid";
+import { MyPaper } from "../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../design/MyTypography";
 import { AllProductStyles } from "../../../../vendor/Product/CSS/AllProductStyles";
 
 const ProductListItem = ({ data }) => {

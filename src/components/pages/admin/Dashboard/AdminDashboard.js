@@ -5,7 +5,7 @@ import { AdminDashboardStyles } from "./CSS/AdminDashboardStyles";
 import {
   MySideDrawerContainer,
   MySideDrawerList,
-} from "../../../Design/MySideDrawer";
+} from "../../../design/MySideDrawer";
 import Customers from "./Component/UserListComponents/Customers/Customers";
 import Vendors from "./Component/UserListComponents/Vendors/Vendors";
 import ProductList from "./Component/ProductListComponent/ProductList";

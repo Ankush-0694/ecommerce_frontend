@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { MyButtonComponent } from "../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../design/MyButtonComponent";
 import { userNavbarStyles } from "../Css/UserNavbarStyles";
 import SearchIcon from "@material-ui/icons/Search";
 import UserNavbarSearchResult from "./UserNavbarSearchResult";

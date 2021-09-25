@@ -2,7 +2,7 @@ import React from "react";
 import {
   MyMultilineInput,
   MyTextInput,
-} from "../../../../../../Design/MyFormFieldComponent";
+} from "../../../../../../design/MyFormFieldComponent";
 
 const ProductDetails = (props) => {
   const { productFormData, onChange } = props;

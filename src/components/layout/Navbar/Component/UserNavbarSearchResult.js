@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import MyDivider from "../../../Design/MyDivider";
-import { MyPaper } from "../../../Design/MyPaper";
+import MyDivider from "../../../design/MyDivider";
+import { MyPaper } from "../../../design/MyPaper";
 import ShowError from "../../ErrorComponent/ShowError";
 import ShowLoading from "../../LoadingComponent/ShowLoading";
 

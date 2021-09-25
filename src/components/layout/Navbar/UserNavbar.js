@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { MyNavbar } from "../../Design/MyNavbar";
-import { MyTypography } from "../../Design/MyTypography";
-import { MyButtonComponent } from "../../Design/MyButtonComponent";
+import { MyNavbar } from "../../design/MyNavbar";
+import { MyTypography } from "../../design/MyTypography";
+import { MyButtonComponent } from "../../design/MyButtonComponent";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useQuery } from "@apollo/client";

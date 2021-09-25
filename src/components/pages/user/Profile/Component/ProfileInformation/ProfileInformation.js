@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MyDivider from "../../../../../Design/MyDivider";
-import { MyPaper } from "../../../../../Design/MyPaper";
+import MyDivider from "../../../../../design/MyDivider";
+import { MyPaper } from "../../../../../design/MyPaper";
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 import EmailInformation from "./EmailInformation";
 import PersonalInformation from "./PersonalInformation";

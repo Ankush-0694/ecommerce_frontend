@@ -1,4 +1,4 @@
-import { makeStyles } from "../../../../Design/MyUseStyles";
+import { makeStyles } from "../../../../design/MyUseStyles";
 const CartItemStyles = makeStyles({
   cartItem: {
     margin: "10px",

@@ -1,6 +1,6 @@
 import React from "react";
-import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
+import { MyRatingComponent } from "../../../../../../design/MyRatingComponent";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
 import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutations";
 import { useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";

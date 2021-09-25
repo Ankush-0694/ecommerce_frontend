@@ -1,4 +1,4 @@
-import { makeStyles } from "../../../../Design/MyUseStyles";
+import { makeStyles } from "../../../../design/MyUseStyles";
 
 const AddProductStyles = makeStyles({
   // Category and subcategory styles are same

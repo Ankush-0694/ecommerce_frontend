@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { MyGridContainer, MyGridItem } from "../../../Design/MyGrid";
-import { MyTypography } from "../../../Design/MyTypography";
+import { MyGridContainer, MyGridItem } from "../../../design/MyGrid";
+import { MyTypography } from "../../../design/MyTypography";
 import AddressForm from "./Component/AddressForm/AddressForm";
 import AddressList from "./Component/AddressList/AddressList";
 import { CheckoutStyles } from "./CSS/CheckoutStyles";
@@ -13,7 +13,7 @@ import FormControl from "@material-ui/core/FormControl";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import { Fragment } from "react";
-import MyDivider from "../../../Design/MyDivider";
+import MyDivider from "../../../design/MyDivider";
 
 /* This is common for single and multiple checkout , 
 And contains the address Form and address list */
