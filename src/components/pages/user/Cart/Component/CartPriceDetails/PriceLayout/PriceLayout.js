@@ -1,14 +1,14 @@
 import { makeStyles, Paper } from "@material-ui/core";
 import React from "react";
-import MyDivider from "../../../../../../Design/MyDivider";
+import MyDivider from "../../../../../../design/MyDivider";
 import {
   MyTable,
   MyTableBody,
   MyTableCell,
   MyTableContainer,
   MyTableRow,
-} from "../../../../../../Design/MyTableComponents";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+} from "../../../../../../design/MyTableComponents";
+import { MyTypography } from "../../../../../../design/MyTypography";
 
 const useStyles = makeStyles((theme) => ({
   title: {

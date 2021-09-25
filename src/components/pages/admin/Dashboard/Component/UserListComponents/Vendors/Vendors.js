@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import UserList from "../UserTableBody/UserTableBody";
 import { makeStyles } from "@material-ui/core/styles";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyPaper } from "../../../../../../Design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
+import { MyPaper } from "../../../../../../design/MyPaper";
 import {
   MyTableContainer,
   MyTable,
@@ -11,7 +11,7 @@ import {
   MyTableBody,
   MyTableCell,
   MyTableRow,
-} from "../../../../../../Design/MyTableComponents";
+} from "../../../../../../design/MyTableComponents";
 import CreateVendor from "../CreateVendor/CreateVendor";
 import { Divider } from "@material-ui/core";
 import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../queries/user/userQueries";

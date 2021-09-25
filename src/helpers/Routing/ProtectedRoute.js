@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
-import UserNavbar from "../components/layout/Navbar/UserNavbar";
-import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
+import AdminNavbar from "../../components/layout/Navbar/AdminNavbar";
+import UserNavbar from "../../components/layout/Navbar/UserNavbar";
+import VendorNavbar from "../../components/layout/Navbar/VendorNavbar";
 
 /**
  * Need to pass user details here to check the role

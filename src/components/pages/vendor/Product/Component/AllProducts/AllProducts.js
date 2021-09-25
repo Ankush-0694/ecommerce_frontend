@@ -1,13 +1,13 @@
 import React from "react";
 import { AllProductStyles } from "../../CSS/AllProductStyles";
 
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
-import { MyCardMedia } from "../../../../../Design/MyCardComponents";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
+import { MyCardMedia } from "../../../../../design/MyCardComponents";
 import { useMutation } from "@apollo/client";
 import { DELETE_PRODUCT } from "../../../../../../queries/Product/productMutations";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../../../queries/Product/productQueries";
-import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
-import { MyDeleteIcon, MyEditButton } from "../../../../../Design/MyIcons";
+import { MyGridContainer, MyGridItem } from "../../../../../design/MyGrid";
+import { MyDeleteIcon, MyEditButton } from "../../../../../design/MyIcons";
 
 /**
  *

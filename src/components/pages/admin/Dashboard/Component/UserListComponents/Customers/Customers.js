@@ -1,8 +1,8 @@
 import React from "react";
 import UserList from "../UserTableBody/UserTableBody";
 import { makeStyles } from "@material-ui/core/styles";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyPaper } from "../../../../../../Design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
+import { MyPaper } from "../../../../../../design/MyPaper";
 import { useQuery } from "@apollo/client";
 import {
   MyTableContainer,
@@ -11,7 +11,7 @@ import {
   MyTableBody,
   MyTableCell,
   MyTableRow,
-} from "../../../../../../Design/MyTableComponents";
+} from "../../../../../../design/MyTableComponents";
 import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../queries/user/userQueries";
 import ShowError from "../../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../../layout/LoadingComponent/ShowLoading";

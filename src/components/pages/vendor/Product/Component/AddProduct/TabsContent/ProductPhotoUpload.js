@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MyMultilineInput } from "../../../../../../Design/MyFormFieldComponent";
+import { MyMultilineInput } from "../../../../../../design/MyFormFieldComponent";
 
 const ProductPhotoUpload = ({ onChange, productImageUrl }) => {
   return (

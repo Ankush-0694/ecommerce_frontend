@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
-import { MyTypography } from "../../../../../Design/MyTypography";
+import { MyTypography } from "../../../../../design/MyTypography";
 import ProductListItem from "./ProductListItem";
 import ShowError from "../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 import AllProducts from "../../../../vendor/Product/Component/AllProducts/AllProducts";
-import MyDivider from "../../../../../Design/MyDivider";
+import MyDivider from "../../../../../design/MyDivider";
 
 const ProductList = () => {
   const [isMount, setIsMount] = useState(false); // for prevent fetch more call on Mount

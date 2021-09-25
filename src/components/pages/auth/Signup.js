@@ -1,12 +1,12 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { CREATE_USER } from "../../queries/user/userMutations";
-import { errorVar } from "../../ReactiveVariables/ReactiveVariables";
-import { MyButtonComponent } from "../Design/MyButtonComponent";
-import { MyTextInput, MyCheckbox } from "../Design/MyFormFieldComponent";
-import { MyFullScreenBox } from "../Design/MyFullScreenBox";
-import MyAlert from "../Design/MyAlert";
-import { validateSignupForm } from "../layout/ClientFormValidations/FormValidation";
+import { CREATE_USER } from "../../../queries/user/userMutations";
+import { errorVar } from "../../../helpers/ReactiveVariables/ReactiveVariables";
+import { MyButtonComponent } from "../../design/MyButtonComponent";
+import { MyTextInput, MyCheckbox } from "../../design/MyFormFieldComponent";
+import { MyFullScreenBox } from "../../design/MyFullScreenBox";
+import MyAlert from "../../design/MyAlert";
+import { validateSignupForm } from "../../layout/ClientFormValidations/FormValidation";
 
 const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -40,7 +40,7 @@ const Signup = (props) => {
       onCompleted: (data) => {
         props.history.push({
           pathname: "/login",
-          state: { signUpSuccess: "SignUp Successfull.Please Login..." },
+          state: { successMsg: "SignUp Successful, Please Login..." },
         });
       },
     }

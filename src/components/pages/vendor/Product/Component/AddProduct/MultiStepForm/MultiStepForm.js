@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import WizardHeader from "../../../../../../Design/MyWizardHeader";
+import WizardHeader from "../../../../../../design/MyWizardHeader";
 import SwipeableViews from "react-swipeable-views";
 import { MultiStepFromStyles } from "../../../CSS/MultiStepFormStyles";
 import {
@@ -11,13 +11,13 @@ import ProductDetails from "../TabsContent/ProductDetails";
 import ProductAttributes from "../TabsContent/ProductAttributes";
 import ProductPhotoUpload from "../TabsContent/ProductPhotoUpload";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../../../../queries/Product/productQueries";
-import { MyPaper } from "../../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../../Design/MyTypography";
-import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
+import { MyPaper } from "../../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
+import { MyGridContainer, MyGridItem } from "../../../../../../design/MyGrid";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
 
 import { emptyProductState, useAddProductHook } from "./UseAddProductHook";
-import MyAlert from "../../../../../../Design/MyAlert";
+import MyAlert from "../../../../../../design/MyAlert";
 
 const MultiStepForm = ({ current, setCurrent }) => {
   const classes = MultiStepFromStyles();

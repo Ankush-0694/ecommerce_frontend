@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { MyMultilineInput } from "../../../../../../Design/MyFormFieldComponent";
-import { MyButtonComponent } from "../../../../../../Design/MyButtonComponent";
-import { MyRatingComponent } from "../../../../../../Design/MyRatingComponent";
+import { MyMultilineInput } from "../../../../../../design/MyFormFieldComponent";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
+import { MyRatingComponent } from "../../../../../../design/MyRatingComponent";
 import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";
 import {
   ADD_REVIEW,

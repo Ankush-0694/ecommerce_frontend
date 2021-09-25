@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { UPDATE_CART_QUANTITY } from "../../../../../../queries/Cart/cartMutations";
 import { useMutation } from "@apollo/client";
 import ProductLayout from "./ProductLayout/ProductLayout";
-import { makeStyles } from "../../../../../Design/MyUseStyles";
+import { makeStyles } from "../../../../../design/MyUseStyles";
 
 const useStyles = makeStyles({
   productDiv: {

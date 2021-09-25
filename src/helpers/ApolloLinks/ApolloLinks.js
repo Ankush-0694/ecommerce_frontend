@@ -13,21 +13,21 @@ const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) => {
-      console.log("dispatch");
+      // console.log("dispatch");
 
       /** There can multiple response error , we may need to map this
        * reactive variable
        */
       if (response) {
         errorVar([response.errors[0].message]);
-        console.log(errorVar());
+        // console.log(errorVar());
       }
       return message;
     });
   }
 
   if (networkError) {
-    console.log(`[Network error]: ${networkError}`);
+    // console.log(`[Network error]: ${networkError}`);
 
     /** removing token if token is not valid */
     if (networkError.message.includes("Unexpected token ")) {

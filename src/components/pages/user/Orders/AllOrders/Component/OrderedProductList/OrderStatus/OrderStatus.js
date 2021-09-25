@@ -1,7 +1,7 @@
 import React from "react";
 import { OrderedProductListStyles } from "../../../CSS/OrderedProductListStyles";
-import { MyFiberManualRecordIcon } from "../../../../../../../Design/MyIcons";
-import { MyTypography } from "../../../../../../../Design/MyTypography";
+import { MyFiberManualRecordIcon } from "../../../../../../../design/MyIcons";
+import { MyTypography } from "../../../../../../../design/MyTypography";
 
 /** This component will be used in OrderedProductList
  * to show the current status of the order with an color icon

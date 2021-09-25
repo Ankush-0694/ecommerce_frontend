@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MyGridContainer, MyGridItem } from "../../../../../../Design/MyGrid";
-import { MyPaper } from "../../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../../Design/MyTypography";
+import { MyGridContainer, MyGridItem } from "../../../../../../design/MyGrid";
+import { MyPaper } from "../../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../../design/MyTypography";
 import OrderStatus from "../../../AllOrders/Component/OrderedProductList/OrderStatus/OrderStatus";
 import { ProductListStyles } from "../../CSS/ProductListStyles";
 

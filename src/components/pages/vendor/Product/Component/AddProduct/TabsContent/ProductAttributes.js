@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
-import { MyTextInput } from "../../../../../../Design/MyFormFieldComponent";
+import { MyTextInput } from "../../../../../../design/MyFormFieldComponent";
 import { AddProductStyles } from "../../../CSS/AddProductStyles";
 import { categoryList, subCategoryList } from "../Category_SubCategoryData";
 

@@ -7,12 +7,12 @@ import {
 import {
   MyMultilineInput,
   MyTextInput,
-} from "../../../../../Design/MyFormFieldComponent";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+} from "../../../../../design/MyFormFieldComponent";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 import { AddressFormStyles } from "../../CSS/AddressFormStyles";
 import { emptyAddressState, useAddAddressHook } from "./useAddressHook";
 import { GET_ADDRESSES_BY_CUSTOMERID } from "../../../../../../queries/address/addressQueries";
-import MyAlert from "../../../../../Design/MyAlert";
+import MyAlert from "../../../../../design/MyAlert";
 
 const AddressForm = ({ current, setCurrent }) => {
   const classes = AddressFormStyles();

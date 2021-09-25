@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
-import MyDivider from "../../../../Design/MyDivider";
+import MyDivider from "../../../../design/MyDivider";
 
-import { MyPaper } from "../../../../Design/MyPaper";
+import { MyPaper } from "../../../../design/MyPaper";
 
 const useStyles = makeStyles({
   ratingFilterContainer: {

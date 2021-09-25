@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { MyButtonComponent } from "../Design/MyButtonComponent";
-import { MyTextInput } from "../Design/MyFormFieldComponent";
-import { MyFullScreenBox } from "../Design/MyFullScreenBox";
+import { MyButtonComponent } from "../../design/MyButtonComponent";
+import { MyTextInput } from "../../design/MyFormFieldComponent";
+import { MyFullScreenBox } from "../../design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
-import { validateLoginForm } from "../layout/ClientFormValidations/FormValidation";
-import { USER_LOGIN } from "../../queries/user/userMutations";
-import MyAlert from "../Design/MyAlert";
-import { errorVar } from "../../ReactiveVariables/ReactiveVariables";
+import { validateLoginForm } from "../../layout/ClientFormValidations/FormValidation";
+import { USER_LOGIN } from "../../../queries/user/userMutations";
+import MyAlert from "../../design/MyAlert";
+import { errorVar } from "../../../helpers/ReactiveVariables/ReactiveVariables";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -119,8 +119,8 @@ const Login = (props) => {
 
        * state is cleared after using window.history
        */}
-      {props.location.state && props.location.state.signUpSuccess && (
-        <MyAlert type="success">{props.location.state.signUpSuccess}</MyAlert>
+      {props.location.state && props.location.state.successMsg && (
+        <MyAlert type="success">{props.location.state.successMsg}</MyAlert>
       )}
 
       {/* Clearing the state passed from redirection to prevent it from showing error on reload */}

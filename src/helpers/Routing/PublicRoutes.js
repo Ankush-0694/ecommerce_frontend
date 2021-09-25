@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import AdminNavbar from "../components/layout/Navbar/AdminNavbar";
-import UserNavbar from "../components/layout/Navbar/UserNavbar";
-import VendorNavbar from "../components/layout/Navbar/VendorNavbar";
+import AdminNavbar from "../../components/layout/Navbar/AdminNavbar";
+import UserNavbar from "../../components/layout/Navbar/UserNavbar";
+import VendorNavbar from "../../components/layout/Navbar/VendorNavbar";
 
 /**
  * Need to have access of isAuthenticated in public route to check which tabs we need to show

@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { HomeSliderStyles } from "../../CSS/HomeSliderStyles";
-import { MyCarousel } from "../../../../../Design/MyCarousel";
+import { MyCarousel } from "../../../../../design/MyCarousel";
 
 import HomeSliderContent from "./HomeSliderContent";
-import MyDivider from "../../../../../Design/MyDivider";
+import MyDivider from "../../../../../design/MyDivider";
 
 const items = [
   {

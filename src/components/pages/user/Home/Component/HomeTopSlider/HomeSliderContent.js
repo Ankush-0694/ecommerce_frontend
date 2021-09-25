@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { HomeSliderContentStyles } from "../../CSS/HomeSliderContentStyles";
-import { MyPaper } from "../../../../../Design/MyPaper";
-import { MyButtonComponent } from "../../../../../Design/MyButtonComponent";
+import { MyPaper } from "../../../../../design/MyPaper";
+import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 
 const HomeSliderContent = (props) => {
   const classes = HomeSliderContentStyles();

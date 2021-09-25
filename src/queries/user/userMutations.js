@@ -36,4 +36,26 @@ const USER_LOGIN = gql`
   }
 `;
 
-export { CREATE_USER, USER_LOGIN };
+const CREATE_VENDOR = gql`
+  mutation createVendor($email: String!, $role: String!) {
+    createVendor(email: $email, role: $role) {
+      ok
+      vendor {
+        id
+        email
+        role
+      }
+    }
+  }
+`;
+
+const GENERATE_PASSWORD = gql`
+  mutation generatePassword($password: String!, $verifyToken: String!) {
+    generatePassword(password: $password, verifyToken: $verifyToken) {
+      successMsg
+      ok
+    }
+  }
+`;
+
+export { CREATE_USER, USER_LOGIN, CREATE_VENDOR, GENERATE_PASSWORD };

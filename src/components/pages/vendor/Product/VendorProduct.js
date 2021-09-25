@@ -2,15 +2,15 @@ import { useQuery } from "@apollo/client";
 import React, { Fragment, useState } from "react";
 import { GET_PRODUCT_BY_VENDORID } from "../../../../queries/Product/productQueries";
 // import { MyFullScreenBox } from "../../../Design/MyFullScreenBox";
-import { MyTypography } from "../../../Design/MyTypography";
+import { MyTypography } from "../../../design/MyTypography";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import VendorAllProducts from "./Component/AllProducts/AllProducts";
 import MultiStepForm from "./Component/AddProduct/MultiStepForm/MultiStepForm";
 
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
-import { MyPaper } from "../../../Design/MyPaper";
-import MyDivider from "../../../Design/MyDivider";
+import { MyPaper } from "../../../design/MyPaper";
+import MyDivider from "../../../design/MyDivider";
 
 const VendorProduct = () => {
   const classes = VendorProductStyles();

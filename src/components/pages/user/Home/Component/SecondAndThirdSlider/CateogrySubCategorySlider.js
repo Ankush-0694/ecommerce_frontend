@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import {
   MyCardContent,
   MyCardMedia,
-} from "../../../../../Design/MyCardComponents";
-import { MyMultiCarousel } from "../../../../../Design/MyMultiItemCarousel";
-import { MyPaper } from "../../../../../Design/MyPaper";
-import { MyTypography } from "../../../../../Design/MyTypography";
+} from "../../../../../design/MyCardComponents";
+import { MyMultiCarousel } from "../../../../../design/MyMultiItemCarousel";
+import { MyPaper } from "../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../design/MyTypography";
 import { makeStyles } from "@material-ui/styles";
 import {
   categoryList,

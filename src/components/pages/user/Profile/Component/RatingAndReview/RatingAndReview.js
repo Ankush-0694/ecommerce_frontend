@@ -2,10 +2,10 @@ import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Fragment } from "react";
 import { GET_REVIEWS_BY_CUSTOMERID } from "../../../../../../queries/Review/ReviewQueries";
-import MyDivider from "../../../../../Design/MyDivider";
-import { MyFullScreenBox } from "../../../../../Design/MyFullScreenBox";
-import { MyGridContainer, MyGridItem } from "../../../../../Design/MyGrid";
-import { MyPaper } from "../../../../../Design/MyPaper";
+import MyDivider from "../../../../../design/MyDivider";
+import { MyFullScreenBox } from "../../../../../design/MyFullScreenBox";
+import { MyGridContainer, MyGridItem } from "../../../../../design/MyGrid";
+import { MyPaper } from "../../../../../design/MyPaper";
 import ProductReviewForm from "../../../Products/SingleProduct/Component/ProductReviewForm/ProductReviewForm";
 import ProductReviewList from "../../../Products/SingleProduct/Component/ProductReviewList/ProductReviewList";
 

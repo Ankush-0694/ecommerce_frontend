@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import Cart from "./components/pages/user/Cart/Cart";
-import Signup from "./components/auth/Signup";
-import Login from "./components/auth/Login";
+import Signup from "./components/pages/auth/Signup";
+import Login from "./components/pages/auth/Login";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 import AdminDashboard from "./components/pages/admin/Dashboard/AdminDashboard";
 import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
-import MyToolbar from "./components/Design/MyToolbar";
+import MyToolbar from "./components/design/MyToolbar";
 import { GET_ME } from "./queries/user/userQueries";
 import { useQuery } from "@apollo/client";
 import Unauthorized from "./components/layout/ErrorComponent/Unauthorized";
@@ -20,18 +20,19 @@ import {
   ProtectedAdminRoute,
   ProtectedCustomerRoute,
   ProtectedVendorRoute,
-} from "./Routing/ProtectedRoute";
+} from "./helpers/Routing/ProtectedRoute";
 
 import {
   PublicCustomerRoute,
   PublicVendorRoute,
   PublicAdminRoute,
-} from "./Routing/PublicRoutes";
+} from "./helpers/Routing/PublicRoutes";
 
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
 import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
+import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -51,7 +52,7 @@ const App = () => {
   if (getMeLoading) {
     return <ShowLoading />;
   }
-  console.log(getMeData);
+  // console.log(getMeData);
 
   return (
     <BrowserRouter>
@@ -166,6 +167,14 @@ const App = () => {
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             component={Login}
+          />
+
+          <PublicVendorRoute
+            exact
+            path="/vendor/generatePassword/:token"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            component={GeneratePassword}
           />
 
           <ProtectedVendorRoute

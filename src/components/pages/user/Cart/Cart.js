@@ -4,11 +4,11 @@ import { GET_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
 import { CartStyles } from "./CSS/CartStyles";
-import { MyButtonComponent } from "../../../Design/MyButtonComponent";
+import { MyButtonComponent } from "../../../design/MyButtonComponent";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
-import MyDivider from "../../../Design/MyDivider";
-import { MyPaper } from "../../../Design/MyPaper";
+import MyDivider from "../../../design/MyDivider";
+import { MyPaper } from "../../../design/MyPaper";
 import emptyCartSvg from "../../../layout/IMAGES/emptyCart3.png";
 
 const Cart = ({ history }) => {

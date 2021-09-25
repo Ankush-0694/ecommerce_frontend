@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./Component/ProductCard/ProductCard";
-import { MyGridContainer } from "../../../../Design/MyGrid";
+import { MyGridContainer } from "../../../../design/MyGrid";
 
 const Products = ({ productData, selectedRating }) => {
   //calculation of average rating
