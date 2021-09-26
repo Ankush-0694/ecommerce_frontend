@@ -11,7 +11,7 @@ import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple"
 import CheckoutSingle from "./components/pages/user/Checkout/CheckoutSingle";
 import Orders from "./components/pages/user/Orders/AllOrders/Orders";
 import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetails";
-import MyToolbar from "./components/design/MyToolbar";
+// import MyToolbar from "./components/design/MyToolbar";
 import { GET_ME } from "./queries/user/userQueries";
 import { useQuery } from "@apollo/client";
 import Unauthorized from "./components/layout/ErrorComponent/Unauthorized";
@@ -59,7 +59,7 @@ const App = () => {
     <BrowserRouter>
       {/** Toolbar added to make content below app bar because
         app bar is fixed */}
-      <MyToolbar />
+      {/* <MyToolbar /> */}
 
       {/* This styling for stop responsiveness */}
       <div>
