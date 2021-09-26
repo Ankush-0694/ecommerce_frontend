@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MyProfile = () => {
+const MyProfile = ({ userData }) => {
   const classes = useStyles();
   const listData = [
     {
@@ -50,7 +50,13 @@ const MyProfile = () => {
         {/* This is working because we remove exact from app.js in this route
             And we are using exact here
          */}
-        <Route exact path="/account" component={ProfileInformation} />
+        <Route
+          exact
+          path="/account"
+          render={(props) => {
+            return <ProfileInformation userData={userData} {...props} />;
+          }}
+        />
 
         {/* Coming From /user/checkout/addressContainer */}
         <Route exact path="/account/address" component={AddressContainer} />

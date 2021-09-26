@@ -8,6 +8,7 @@ import { GET_ME } from "../../../queries/user/userQueries";
 import ShowLoading from "../LoadingComponent/ShowLoading";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
 import { useApolloClient } from "@apollo/client";
+import { MyIcon } from "../../design/MyIcons";
 
 const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = VendorNavbarStyles();
@@ -57,54 +58,89 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
     }
   }
 
-  return (
-    <MyNavbar>
-      <div className={classes.navbar}>
+  // Logout user
+  const onLogout = () => {
+    // console.log("logout by deleting token from LS");
+
+    /** Logout - Removing token , authentication False, Redirected to User login Page */
+
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+
+    client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
+
+    history.push("/vendor/login");
+  };
+
+  // tabs need to show when user is not logged in
+  const PublicTabs = () => {
+    return (
+      <>
         <MyButtonComponent
           className={classes.navBtn}
           onClick={() => {
-            history.push("/vendor/products");
+            history.push("/vendor/login");
           }}
           color="inherit">
-          <MyTypography variant="h6" noWrap>
-            Dashboard
+          <MyTypography variant="body1" noWrap>
+            Login
+          </MyTypography>
+        </MyButtonComponent>
+      </>
+    );
+  };
+
+  // vice versa of public tabs comment
+  const ProtectedTabs = () => {
+    return (
+      <>
+        <MyButtonComponent
+          className={classes.navBtn}
+          // onClick={onLogout}
+          color="inherit">
+          <MyTypography variant="body1" noWrap>
+            Orders
           </MyTypography>
         </MyButtonComponent>
 
-        {/*  */}
+        <MyButtonComponent
+          className={classes.navBtn}
+          onClick={() => {
+            history.push("/vendor/account");
+          }}
+          color="inherit">
+          <MyIcon>account_circle_Icon</MyIcon>
+        </MyButtonComponent>
 
-        {!isAuthenticated ? (
+        <MyButtonComponent
+          className={classes.navBtn}
+          onClick={onLogout}
+          color="inherit">
+          <MyTypography variant="body1" noWrap>
+            Logout
+          </MyTypography>
+        </MyButtonComponent>
+      </>
+    );
+  };
+
+  return (
+    <MyNavbar>
+      <div className={classes.navbar}>
+        <div>
           <MyButtonComponent
             className={classes.navBtn}
             onClick={() => {
-              history.push("/vendor/login");
+              history.push("/vendor/products");
             }}
             color="inherit">
-            <MyTypography variant="h6" noWrap>
-              Login
+            <MyTypography variant="body1" noWrap>
+              Dashboard
             </MyTypography>
           </MyButtonComponent>
-        ) : (
-          <MyButtonComponent
-            className={classes.navBtn}
-            onClick={() => {
-              // console.log("logout by deleting token from LS");
+        </div>
 
-              /** Logout - Removing token , authentication False, Redirected to User login Page */
-
-              localStorage.removeItem("token");
-              setIsAuthenticated(false);
-
-              client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
-
-              history.push("/vendor/login");
-            }}
-            color="inherit">
-            <MyTypography variant="h6" noWrap>
-              Logout
-            </MyTypography>
-          </MyButtonComponent>
-        )}
+        <div>{!isAuthenticated ? <PublicTabs /> : <ProtectedTabs />}</div>
       </div>
     </MyNavbar>
   );

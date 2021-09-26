@@ -24,7 +24,7 @@ const CreateVendor = () => {
     onError: (error) => {
       setCreateVendorAlert({
         type: "error",
-        msg: "Error Ocuured while creating vendor",
+        msg: error.message,
       });
     },
     onCompleted: (data) => {

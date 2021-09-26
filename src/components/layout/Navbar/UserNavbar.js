@@ -78,7 +78,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
       <div className={classes.title}>
         <MyTypography variant="h6">
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            Ecommerce
+            E-Commerceology
           </Link>
         </MyTypography>
       </div>

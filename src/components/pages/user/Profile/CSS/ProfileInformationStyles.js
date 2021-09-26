@@ -10,14 +10,16 @@ const ProfileInformationStyles = makeStyles({
     fontWeight: 550,
     padding: "20px",
     margin: "0px",
-    color: "white",
-    background:
-      "linear-gradient(to right, #3f51b5, #3f51b5, #a6b8d9, #cfd1e3, #eeeeee)",
+    color: "black",
+    // background:
+    //   "linear-gradient(to right, #3f51b5, #3f51b5, #a6b8d9, #cfd1e3, #eeeeee)",
   },
   editCancelBtn: {
     marginLeft: "20px",
-    color: "white",
-    border: "1px solid black",
+
+    "&:focus": {
+      outline: "none",
+    },
   },
   NameContainer: {
     display: "flex",

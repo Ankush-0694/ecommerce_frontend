@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import Cart from "./components/pages/user/Cart/Cart";
-import Signup from "./components/pages/auth/Signup";
-import Login from "./components/pages/auth/Login";
+import Signup from "./components/pages/auth/Signup/Signup";
+import Login from "./components/pages/auth/Login/Login";
 import VendorProduct from "./components/pages/vendor/Product/VendorProduct";
 import AdminDashboard from "./components/pages/admin/Dashboard/AdminDashboard";
 import CheckoutMultiple from "./components/pages/user/Checkout/CheckoutMultiple";
@@ -33,6 +33,7 @@ import NetworkError from "./components/layout/ErrorComponent/NetworkError";
 import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
+import VendorProfile from "./components/pages/vendor/VendorProfile/VendorProfile";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -181,6 +182,15 @@ const App = () => {
             exact
             path="/Vendor/products"
             component={VendorProduct}
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
+          />
+
+          <ProtectedVendorRoute
+            exact
+            path="/Vendor/account"
+            component={VendorProfile}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}

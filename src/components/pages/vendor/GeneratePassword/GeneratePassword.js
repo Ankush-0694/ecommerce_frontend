@@ -6,6 +6,7 @@ import MyAlert from "../../../design/MyAlert";
 import { MyButtonComponent } from "../../../design/MyButtonComponent";
 import { MyTextInput } from "../../../design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
+import { validateGeneratePassword } from "../../../layout/clientFormValidations/authFormValidation";
 
 const GeneratePassword = ({ history }) => {
   const { token } = useParams();
@@ -14,10 +15,13 @@ const GeneratePassword = ({ history }) => {
 
   const [passwordState, setPasswordState] = useState({
     password: "",
+    passwordError: "",
     confirmPassword: "",
+    confirmPasswordError: "",
   });
 
-  const { password, confirmPassword } = passwordState;
+  const { password, passwordError, confirmPassword, confirmPasswordError } =
+    passwordState;
 
   const [generatePasswordAlert, setGeneratePassword] = useState("");
 
@@ -46,21 +50,34 @@ const GeneratePassword = ({ history }) => {
     });
   };
 
-  const onFocus = () => {};
+  const onFocus = (e) => {
+    let targetError = e.target.name + "Error";
+    setPasswordState({ ...passwordState, [targetError]: "" });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    generatePassword({
-      variables: {
-        password,
-        verifyToken: token,
-      },
-    });
 
-    setPasswordState({
-      password: "",
-      confirmPassword: "",
-    });
+    const validationError = validateGeneratePassword(
+      passwordState,
+      setPasswordState
+    );
+
+    if (!validationError) {
+      generatePassword({
+        variables: {
+          password,
+          verifyToken: token,
+        },
+      });
+
+      setPasswordState({
+        password: "",
+        passwordError: "",
+        confirmPassword: "",
+        confirmPasswordError: "",
+      });
+    }
   };
 
   return (
@@ -98,8 +115,8 @@ const GeneratePassword = ({ history }) => {
               label="Password"
               value={password}
               onChange={onChange}
-              //   error={passwordError !== ""}
-              //   helperText={passwordError}
+              error={passwordError !== ""}
+              helperText={passwordError}
               onFocus={onFocus}
             />
           </div>
@@ -112,8 +129,8 @@ const GeneratePassword = ({ history }) => {
               label="Confrim Password"
               value={confirmPassword}
               onChange={onChange}
-              //   error={passwordError !== ""}
-              //   helperText={passwordError}
+              error={confirmPasswordError !== ""}
+              helperText={confirmPasswordError}
               onFocus={onFocus}
             />
           </div>

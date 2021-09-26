@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { MyTextInput } from "../../design/MyFormFieldComponent";
-import { MyFullScreenBox } from "../../design/MyFullScreenBox";
+import { MyButtonComponent } from "../../../design/MyButtonComponent";
+import { MyTextInput } from "../../../design/MyFormFieldComponent";
+import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
 import { useMutation } from "@apollo/client";
-import { validateLoginForm } from "../../layout/ClientFormValidations/FormValidation";
-import { USER_LOGIN } from "../../../queries/user/userMutations";
-import MyAlert from "../../design/MyAlert";
-import { errorVar } from "../../../helpers/ReactiveVariables/ReactiveVariables";
+import { validateLoginForm } from "../../../layout/clientFormValidations/authFormValidation";
+import { USER_LOGIN } from "../../../../queries/user/userMutations";
+import MyAlert from "../../../design/MyAlert";
+import { errorVar } from "../../../../helpers/ReactiveVariables/ReactiveVariables";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -18,7 +19,10 @@ const Login = (props) => {
   const { email, emailError, password, passwordError } = userDetails;
 
   /** Fetching user identity from url then doing user login according to that */
-  const identity = props.history.location.pathname.split("/")[1];
+
+  let identity = props.history.location.pathname.split("/")[1];
+
+  if (identity !== "admin" || identity !== "vendor") identity = "";
 
   /** Mutation for User Login */
   const [userLogin, { data: userLoginData, error: userLoginError }] =
@@ -85,7 +89,7 @@ const Login = (props) => {
           password,
 
           // need to check condition if url is "http:something/login"  only
-          role: identity == "login" ? "customer" : identity, // need to pass identity for customer
+          role: identity == "" ? "customer" : identity, // need to pass identity for customer
         },
       });
 
@@ -167,7 +171,9 @@ const Login = (props) => {
           {/* <div>
             <MyCheckbox name="remember Me" label="Remember Me" />
           </div> */}
-          <div>{/* <a href="#">Forgot Password</a> */}</div>
+          <div>
+            <Link to={`/forgotPassword/${identity}`}>Forgot Password</Link>
+          </div>
           <br></br>
           <div className="container-log-btn" style={{ textAlign: "center" }}>
             <MyButtonComponent
