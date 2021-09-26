@@ -9,6 +9,7 @@ export const VendorNavbarStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   navBtn: {
+    marginLeft: "8px",
     "&:focus": {
       border: "none",
       outline: "none",

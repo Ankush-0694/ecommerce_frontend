@@ -5,19 +5,19 @@ import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 import EmailInformation from "./EmailInformation";
 import PersonalInformation from "./PersonalInformation";
 
-const ProfileInformation = () => {
+const ProfileInformation = ({ userData }) => {
   const classes = ProfileInformationStyles();
 
   return (
     <div className={classes.Container}>
       <MyPaper>
         {/* Personal Information */}
-        <PersonalInformation />
+        <PersonalInformation userData={userData} />
 
         <MyDivider />
 
         {/* Email Information */}
-        <EmailInformation />
+        <EmailInformation userData={userData} />
       </MyPaper>
     </div>
   );

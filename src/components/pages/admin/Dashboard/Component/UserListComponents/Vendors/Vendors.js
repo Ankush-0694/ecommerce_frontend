@@ -47,9 +47,9 @@ const Vendors = () => {
   const dataToRender = AllUsersData.getAllUsersByRole;
 
   const columns = [
-    { id: "SNo.", label: "S.No.", minWidth: 170 },
-    { id: "firstname", label: "FirstName", minWidth: 170 },
-    { id: "lastname", label: "LastName", minWidth: 170 },
+    { id: "SNo.", label: "S.No.", minWidth: 50 },
+    { id: "firstname", label: "FirstName", minWidth: 100 },
+    { id: "lastname", label: "LastName", minWidth: 100 },
     {
       id: "email",
       label: "Email",
@@ -58,7 +58,7 @@ const Vendors = () => {
     {
       id: "role",
       label: "Role",
-      minWidth: 170,
+      minWidth: 50,
     },
   ];
 

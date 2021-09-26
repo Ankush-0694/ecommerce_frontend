@@ -65,7 +65,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             history.push("/admin/dashboard");
           }}
           color="inherit">
-          <MyTypography variant="h6" noWrap>
+          <MyTypography variant="body1" noWrap>
             Dashboard
           </MyTypography>
         </MyButtonComponent>
@@ -79,7 +79,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               history.push("/admin/login");
             }}
             color="inherit">
-            <MyTypography variant="h6" noWrap>
+            <MyTypography variant="body1" noWrap>
               Login
             </MyTypography>
           </MyButtonComponent>
@@ -96,7 +96,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               history.push("/admin/login");
             }}
             color="inherit">
-            <MyTypography variant="h6" noWrap>
+            <MyTypography variant="body1" noWrap>
               Logout
             </MyTypography>
           </MyButtonComponent>

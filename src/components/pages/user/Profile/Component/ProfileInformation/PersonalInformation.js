@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
+import MyDivider from "../../../../../design/MyDivider";
 import { MyTextInput } from "../../../../../design/MyFormFieldComponent";
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 
-const PersonalInformation = () => {
+const PersonalInformation = ({ userData }) => {
   const classes = ProfileInformationStyles();
 
   /** To Change content if we click on Edit Button -
@@ -12,8 +13,8 @@ const PersonalInformation = () => {
   const [editState, setEditState] = useState(false);
 
   const [personalInfoForm, setPersonalInfoForm] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: userData.firstName,
+    lastName: userData.lastName,
   });
 
   const { firstName, lastName } = personalInfoForm;
@@ -41,8 +42,8 @@ const PersonalInformation = () => {
           <span style={{ marginLeft: "20px" }}>
             <MyButtonComponent
               className={classes.editCancelBtn}
-              variant="outlined"
-              color="primary"
+              variant="contained"
+              color={editState ? "secondary" : "primary"}
               size="small"
               onClick={() => {
                 !editState ? setEditState(true) : setEditState(false);
@@ -60,10 +61,12 @@ const PersonalInformation = () => {
         {!editState ? (
           <div className={classes.NameContainer}>
             <div className={classes.NameDiv}>
-              <span style={{ fontWeight: "550" }}> First Name -</span> Ankush
+              <span style={{ fontWeight: "700" }}> First Name - </span>
+              {firstName.toUpperCase()}
             </div>
             <div className={classes.NameDiv}>
-              <span style={{ fontWeight: "550" }}> Last Name -</span> Kumar{" "}
+              <span style={{ fontWeight: "700" }}> Last Name - </span>
+              {lastName.toUpperCase()}
             </div>
           </div>
         ) : (

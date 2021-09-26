@@ -1,12 +1,12 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { CREATE_USER } from "../../../queries/user/userMutations";
-import { errorVar } from "../../../helpers/ReactiveVariables/ReactiveVariables";
-import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { MyTextInput, MyCheckbox } from "../../design/MyFormFieldComponent";
-import { MyFullScreenBox } from "../../design/MyFullScreenBox";
-import MyAlert from "../../design/MyAlert";
-import { validateSignupForm } from "../../layout/ClientFormValidations/FormValidation";
+import { CREATE_USER } from "../../../../queries/user/userMutations";
+import { errorVar } from "../../../../helpers/ReactiveVariables/ReactiveVariables";
+import { MyButtonComponent } from "../../../design/MyButtonComponent";
+import { MyTextInput, MyCheckbox } from "../../../design/MyFormFieldComponent";
+import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
+import MyAlert from "../../../design/MyAlert";
+import { validateSignupForm } from "../../../layout/clientFormValidations/authFormValidation";
 
 const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({

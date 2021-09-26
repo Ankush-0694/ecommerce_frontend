@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";
 
-const EmailInformation = () => {
+const EmailInformation = ({ userData }) => {
   /**
    * // Styling is same as Personal Information so don't confuse with classes
    */
@@ -19,7 +19,7 @@ const EmailInformation = () => {
       {/* Personal Information  Heading */}
       <div>
         <h2 className={classes.personalInfoHeading}>
-          Email Address <Email />
+          Email Address <Email style={{ marginTop: "-8px" }} />
         </h2>
       </div>
 
@@ -29,7 +29,7 @@ const EmailInformation = () => {
         {/* Showing Content depend on  EditState value is true or false */}
 
         <div className={classes.NameContainer}>
-          <div className={classes.emailDiv}>ankush1234@gmail.com</div>
+          <div className={classes.emailDiv}>{userData.email}</div>
         </div>
       </div>
     </div>
