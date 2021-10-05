@@ -106,7 +106,7 @@ const AddressContainer = (props) => {
         <MyGridItem xs={10}>
           <div style={{ border: "1px solid black" }}>
             <div className={classes.DeliveryAddressHeading}>
-              <MyTypography variant="h5" component="h3">
+              <MyTypography variant="h4" component="h3">
                 {!current ? "Add Delivery Address" : "Update Delivery Address"}
               </MyTypography>
             </div>

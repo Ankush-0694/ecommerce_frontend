@@ -13,6 +13,7 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
   const { id, productName, productPrice, productImageUrl, reviews } = details;
 
   let avgRating = 0;
+
   reviews.map((singleReview) => {
     avgRating += singleReview.rating;
     avgRating = avgRating / 2;
@@ -29,7 +30,7 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
       sm={6}
       md={4}
       lg={3}
-      userStyle={{ minWidth: "250px", maxWidth: "300px" }}>
+      style={{ minWidth: "250px", maxWidth: "300px" }}>
       <MyCardContainer>
         <div style={{ position: "relative" }}>
           <Link to={link} style={{ textDecoration: "none" }}>
@@ -55,7 +56,7 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
                     color: avgRating > 3 ? "green" : "red",
                   }}
                 />{" "}
-                {avgRating.toFixed(1)}
+                {avgRating === 0 ? "Not Rated" : avgRating.toFixed(1)}
               </div>
             </MyCardContent>
           </Link>

@@ -4,11 +4,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { errorVar } from "../../helpers/ReactiveVariables/ReactiveVariables";
 
 const Alert = React.forwardRef((props, ref) => {
-  return <MuiAlert ref={ref} elevation={6} variant="filled" {...props} />;
+  return <MuiAlert ref={ref} elevation={10} variant="filled" {...props} />;
 });
 
 function Transition(props) {
-  return <Slide {...props} direction="down" />;
+  return <Slide {...props} direction="left" />;
 }
 
 /** FOR OPEN AND CLOSE THE ALERT MESSAGE */
@@ -56,7 +56,7 @@ const MyAlert = ({ children, type, ...otherProps }) => {
     <>
       <Snackbar
         style={{ marginTop: "48px" }}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         TransitionComponent={Transition}
         open={open}
         autoHideDuration={3000}

@@ -7,8 +7,8 @@ const CartStyles = makeStyles({
   cartHeading: {
     textAlign: "center",
     marginTop: "10px",
-    padding: "1rem 0px",
-    fontSize: "3rem",
+    padding: "0.6rem 0px",
+    fontSize: "2rem",
     fontWeight: "300",
   },
   cartContainer: {
@@ -16,11 +16,19 @@ const CartStyles = makeStyles({
     padding: "20px",
     justifyContent: "space-around",
   },
+  productHeadingContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
   productHeading: {
     marginLeft: "32px",
     padding: "12px 0px",
     fontSize: "2rem",
     fontWeight: "300",
+  },
+  clearAllBtnDiv: {
+    alignSelf: "center",
+    marginRight: "24px",
   },
   item1: {
     width: "60%",

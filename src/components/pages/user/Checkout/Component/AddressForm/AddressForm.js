@@ -189,10 +189,7 @@ const AddressForm = ({ current, setCurrent }) => {
         </div>
         {/* button to add or update the delivery address */}
         <div className={classes.SaveAddressbtnDiv}>
-          <MyButtonComponent
-            type="submit"
-            color="secondary"
-            variant="contained">
+          <MyButtonComponent type="submit" color="primary" variant="contained">
             {!current ? "Save Delivery Address" : "Update Delivery Address"}
           </MyButtonComponent>
         </div>

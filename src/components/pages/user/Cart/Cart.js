@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartQueries";
 import CartItem from "./Component/CartItem/CartItem";
 import CartPriceDetails from "./Component/CartPriceDetails/CartPriceDetails";
@@ -10,6 +10,7 @@ import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
 import emptyCartSvg from "../../../layout/IMAGES/emptyCart3.png";
+import { DELETE_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartMutations";
 
 const Cart = ({ history }) => {
   const classes = CartStyles();
@@ -21,6 +22,10 @@ const Cart = ({ history }) => {
     data: getCartData,
   } = useQuery(GET_CART_BY_CUSTOMERID, {
     onError: () => {},
+  });
+
+  const [clearCartByCustomerId] = useMutation(DELETE_CART_BY_CUSTOMERID, {
+    refetchQueries: [{ query: GET_CART_BY_CUSTOMERID }],
   });
 
   if (getCartError) {
@@ -64,6 +69,12 @@ const Cart = ({ history }) => {
     });
   };
 
+  // Clear All by User id Mutation
+  const onClearCart = (e) => {
+    e.preventDefault();
+    clearCartByCustomerId();
+  };
+
   return (
     <div>
       {/* Heading */}
@@ -78,9 +89,21 @@ const Cart = ({ history }) => {
           <div className={classes.cartContainer}>
             {/* Cart Product List - Left Side */}
             <MyPaper className={classes.item1}>
-              <div className={classes.productHeading}>
-                Products ( {itemCount} items )
+              <div className={classes.productHeadingContainer}>
+                <div className={classes.productHeading}>
+                  Products ( {itemCount} items )
+                </div>
+                <div className={classes.clearAllBtnDiv}>
+                  <MyButtonComponent
+                    onClick={onClearCart}
+                    color="secondary"
+                    variant="contained"
+                    size="small">
+                    Clear All
+                  </MyButtonComponent>
+                </div>
               </div>
+
               <MyDivider />
 
               {cartData.map((cartItemData) => {

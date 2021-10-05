@@ -10,6 +10,7 @@ export const VendorNavbarStyles = makeStyles((theme) => ({
   },
   navBtn: {
     marginLeft: "8px",
+    color: "white",
     "&:focus": {
       border: "none",
       outline: "none",

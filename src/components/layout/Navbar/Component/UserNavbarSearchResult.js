@@ -10,10 +10,10 @@ import ShowLoading from "../../LoadingComponent/ShowLoading";
 const useStyles = makeStyles({
   resultPaper: {
     position: "absolute",
-    top: "42px",
-    width: "calc(100% - 72px)",
+    top: "36px",
+    width: "calc(100% - 69px)",
+    borderRadius: "0px",
     // padding: "5px 0px",
-    marginLeft: "2px",
   },
   hoverEffect: {
     "&:hover": {

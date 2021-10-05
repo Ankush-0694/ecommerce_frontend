@@ -72,116 +72,122 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   }
 
   return (
-    <MyNavbar className={classes.navbarRoot}>
+    <MyNavbar>
       {/* Heading of the Navbar */}
-
-      <div className={classes.title}>
-        <MyTypography variant="h6">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            E-Commerceology
-          </Link>
-        </MyTypography>
-      </div>
-
-      {/* Search Box of the Navbar */}
-
-      <div className={classes.searchOutDiv}>
-        <div className={classes.searchInnerDiv}>
-          <UserNavbarSearch />
+      <div className={classes.NavbarContainer}>
+        <div className={classes.Navbartitle}>
+          <MyTypography variant="h6">
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}>
+              ShopNox
+            </Link>
+          </MyTypography>
         </div>
-      </div>
 
-      {/* Navbar Tabs  */}
+        {/* Search Box of the Navbar */}
 
-      <div className={classes.NavbarTabsContainer}>
-        <div>
-          {/* Order Tab */}
-          <MyButtonComponent
-            className={classes.NavbarLink}
-            onClick={() => {
-              history.push("/orders");
-            }}
-            color="inherit">
-            My Orders
-          </MyButtonComponent>
+        <div className={classes.searchOutDiv}>
+          <div className={classes.searchInnerDiv}>
+            <UserNavbarSearch />
+          </div>
+        </div>
 
-          {/** added badge to the Cart Button to show cart Count  
+        {/* Navbar Tabs  */}
+
+        <div className={classes.NavbarTabsContainer}>
+          <div>
+            {/* Order Tab */}
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/orders");
+              }}
+              color="inherit">
+              My Orders
+            </MyButtonComponent>
+
+            {/** added badge to the Cart Button to show cart Count  
             Showing this button only if cart data is available, means query is called
           */}
 
-          <MyButtonComponent
-            className={classes.NavbarLink}
-            onClick={() => {
-              history.push("/cart");
-            }}
-            color="inherit">
-            {/* If error just show the text */}
-            {getCartError && <>Cart</>}
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/cart");
+              }}
+              color="inherit">
+              {/* If error just show the text */}
+              {getCartError && <>Cart</>}
 
-            {/* Showing cart count only when query success */}
-            {!getCartLoading && !getCartError && (
-              <StyledBadge
-                badgeContent={
-                  getCartData && getCartData.getCartByCustomerId.length
-                } /// showing this badge if only query is called
-                color="secondary">
-                <ShoppingCartIcon />
-              </StyledBadge>
+              {/* Showing cart count only when query success */}
+              {!getCartLoading && !getCartError && (
+                <StyledBadge
+                  badgeContent={
+                    getCartData && getCartData.getCartByCustomerId.length
+                  } /// showing this badge if only query is called
+                  color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              )}
+            </MyButtonComponent>
+
+            {/* Profile Tab */}
+
+            <MyButtonComponent
+              className={classes.NavbarLink}
+              onClick={() => {
+                history.push("/account");
+              }}
+              color="inherit">
+              My Account
+            </MyButtonComponent>
+            {/** Showing signup button only if user is not logged in */}
+            {!isAuthenticated && (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  history.push("/signup");
+                }}
+                color="inherit">
+                Signup
+              </MyButtonComponent>
             )}
-          </MyButtonComponent>
 
-          {/* Profile Tab */}
+            {/** Showing Login or Logout button based on isAuthenticated */}
 
-          <MyButtonComponent
-            className={classes.NavbarLink}
-            onClick={() => {
-              history.push("/account");
-            }}
-            color="inherit">
-            My Account
-          </MyButtonComponent>
-          {/** Showing signup button only if user is not logged in */}
-          {!isAuthenticated && (
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                history.push("/signup");
-              }}
-              color="inherit">
-              Signup
-            </MyButtonComponent>
-          )}
+            {!isAuthenticated ? (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  history.push("/login");
+                }}
+                color="inherit">
+                Login
+              </MyButtonComponent>
+            ) : (
+              <MyButtonComponent
+                className={classes.NavbarLink}
+                onClick={() => {
+                  // console.log("logout by deleting token from LS");
 
-          {/** Showing Login or Logout button based on isAuthenticated */}
+                  /** Logout - Removing token , authentication False, Redirected to User login Page */
 
-          {!isAuthenticated ? (
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                history.push("/login");
-              }}
-              color="inherit">
-              Login
-            </MyButtonComponent>
-          ) : (
-            <MyButtonComponent
-              className={classes.NavbarLink}
-              onClick={() => {
-                // console.log("logout by deleting token from LS");
+                  localStorage.removeItem("token");
+                  setIsAuthenticated(false);
 
-                /** Logout - Removing token , authentication False, Redirected to User login Page */
+                  client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
 
-                localStorage.removeItem("token");
-                setIsAuthenticated(false);
-
-                client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
-
-                history.push("/login");
-              }}
-              color="inherit">
-              Logout
-            </MyButtonComponent>
-          )}
+                  history.push("/login");
+                }}
+                color="inherit">
+                Logout
+              </MyButtonComponent>
+            )}
+          </div>
         </div>
       </div>
     </MyNavbar>

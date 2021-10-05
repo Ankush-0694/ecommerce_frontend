@@ -70,7 +70,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div style={{ margin: "10px" }}>
+      <div style={{ marginTop: "10px" }}>
         <MyMultilineInput
           id="outlined-multiline-static"
           label="Enter Your Review"
@@ -88,9 +88,9 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
             setValue={setRatingValue}
           />
         </div>
-        <div style={{ marginTop: "5px" }}>
+        <div style={{ margin: "24px 0px" }}>
           <MyButtonComponent
-            userStyle={{ marginRight: "10px" }}
+            style={{ marginRight: "10px" }}
             color="primary"
             variant="contained"
             size="small"

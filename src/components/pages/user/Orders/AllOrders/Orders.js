@@ -8,6 +8,7 @@ import { OrderStyles } from "./CSS/OrdersStyles";
 import OrderFilter from "./Component/FilterComponent/OrderFilter";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
+import { MyTextInput } from "../../../../design/MyFormFieldComponent";
 
 const Orders = () => {
   const classes = OrderStyles();
@@ -22,12 +23,10 @@ const Orders = () => {
     ByTime: [],
   });
 
-  const [searchOrder, setSearchOrder] = useState("");
+  const [searchOrderKeyword, setSearchOrderKeyword] = useState("");
 
   /* this filter will use in this component because we can filter an order
    we don't need to filter every product */
-
-  const { ByTime } = filters;
 
   const {
     error: getOrdersError,
@@ -56,7 +55,7 @@ const Orders = () => {
   //   Number(singleOrder.orderedDate)
   // ).toDateString());
 
-  if (ByTime.length > 0) {
+  if (filters.ByTime.length > 0) {
     let today = new Date();
     let priorDate;
 
@@ -79,13 +78,37 @@ const Orders = () => {
 
     // });
 
-    if (ByTime.includes("last30Days")) {
+    if (filters.ByTime.includes("last30Days")) {
       priorDate = new Date().setDate(today.getDate() - 10);
       orderData = orderData.filter((singleOrder) => {
         return singleOrder.orderedDate >= priorDate;
       });
     }
   }
+
+  // we will filter orders using searchOrder state value
+  const SearchOrderByKeyword = (e) => {
+    e.preventDefault();
+    const searchKeyword = searchOrderKeyword;
+
+    orderData = orderData.map((singleOrder) => {
+      const regex = new RegExp(`${searchKeyword}`, "gi");
+
+      // singleOrder.productDetailsWithQuantity =
+
+      // return {
+      //   ...singleOrder,
+      //   productDetailsWithQuantity:
+      //     singleOrder.productDetailsWithQuantity.filter((singleProduct) => {
+      //       const { productName, productDescription } =
+      //         singleProduct.productDetails;
+      //       // console.log(singleProduct.productDetails);
+      //       // return productName.match(regex) || productDescription.match(regex);
+      //       return true;
+      //     }),
+      // };
+    });
+  };
 
   return (
     <div className={classes.pageContainer}>
@@ -109,11 +132,19 @@ const Orders = () => {
           <div className={classes.SearchBoxContainer}>
             <div className={classes.inputDiv} style={{ marginRight: "5px" }}>
               <input
+                onChange={(e) => {
+                  setSearchOrderKeyword(e.target.value);
+                }}
+                name="searchOrder"
+                value={searchOrderKeyword}
                 placeholder="Search your order here"
                 className={classes.inputSearchField}
               />
             </div>
-            <MyButtonComponent variant="contained" color="primary">
+            <MyButtonComponent
+              variant="contained"
+              color="primary"
+              onClick={SearchOrderByKeyword}>
               Search Order
             </MyButtonComponent>
           </div>

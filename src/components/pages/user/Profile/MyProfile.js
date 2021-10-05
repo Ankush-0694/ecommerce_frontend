@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     display: "flex",
     marginRight: "20px",
   },
+
+  addressContainerDiv: {
+    marginTop: "24px",
+  },
 });
 
 const MyProfile = ({ userData }) => {
@@ -57,9 +61,18 @@ const MyProfile = ({ userData }) => {
             return <ProfileInformation userData={userData} {...props} />;
           }}
         />
-
         {/* Coming From /user/checkout/addressContainer */}
-        <Route exact path="/account/address" component={AddressContainer} />
+        <Route
+          exact
+          path="/account/address"
+          render={(props) => {
+            return (
+              <div className={classes.addressContainerDiv}>
+                <AddressContainer {...props} />
+              </div>
+            );
+          }}
+        />
         <Route exact path="/account/review" component={RatingAndReview} />
       </div>
     </div>
@@ -67,3 +80,5 @@ const MyProfile = ({ userData }) => {
 };
 
 export default MyProfile;
+// component={AddressContainer}
+//

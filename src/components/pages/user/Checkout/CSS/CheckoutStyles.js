@@ -24,7 +24,7 @@ const CheckoutStyles = makeStyles((theme) => ({
     paddingLeft: "10px",
   },
   DeliveryAddressHeading: {
-    backgroundColor: "#003c8f",
+    backgroundColor: "#023e8a",
     color: "white",
     padding: "10px",
   },

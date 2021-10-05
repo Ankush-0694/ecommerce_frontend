@@ -50,4 +50,15 @@ const DELETE_CART = gql`
   }
 `;
 
-export { ADD_TO_CART, UPDATE_CART_QUANTITY, DELETE_CART };
+const DELETE_CART_BY_CUSTOMERID = gql`
+  mutation deleteCartByCustomerId {
+    clearCartByCustomerId
+  }
+`;
+
+export {
+  ADD_TO_CART,
+  UPDATE_CART_QUANTITY,
+  DELETE_CART,
+  DELETE_CART_BY_CUSTOMERID,
+};

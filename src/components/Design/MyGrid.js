@@ -1,8 +1,8 @@
 import { Grid } from "@material-ui/core";
 
-const MyGridItem = ({ children, xs, sm, md, userStyle, className }) => {
+const MyGridItem = ({ children, xs, sm, md, style, className }) => {
   return (
-    <Grid item xs={xs} sm={sm} md={md} style={userStyle} className={className}>
+    <Grid item xs={xs} sm={sm} md={md} style={style} className={className}>
       {children}
     </Grid>
   );
