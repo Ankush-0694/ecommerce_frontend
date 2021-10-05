@@ -66,7 +66,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
           }}
           color="inherit">
           <MyTypography variant="body1" noWrap>
-            Dashboard
+            Admin
           </MyTypography>
         </MyButtonComponent>
 

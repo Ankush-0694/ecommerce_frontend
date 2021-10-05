@@ -3,10 +3,10 @@ import ProfileInformation from "../../user/Profile/Component/ProfileInformation/
 
 const VendorProfile = ({ userData }) => {
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div style={{ width: "90%", padding: "0px 24px", margin: "auto" }}>
       <div
         style={{
-          padding: "12px 0px 16px 24px",
+          padding: "12px 0px 16px 16px",
           fontSize: "24px",
         }}
         className="vendorAccountHeading">

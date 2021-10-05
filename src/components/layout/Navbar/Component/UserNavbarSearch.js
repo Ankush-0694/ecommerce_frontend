@@ -66,7 +66,7 @@ const UserNavbarSearch = ({ history }) => {
       />
 
       <MyButtonComponent
-        color="primary"
+        color="secondary"
         variant="contained"
         className={classes.searchIcon}
         onMouseDown={() => {

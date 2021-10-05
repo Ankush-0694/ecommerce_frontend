@@ -135,7 +135,7 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             }}
             color="inherit">
             <MyTypography variant="body1" noWrap>
-              Dashboard
+              ShopNox
             </MyTypography>
           </MyButtonComponent>
         </div>

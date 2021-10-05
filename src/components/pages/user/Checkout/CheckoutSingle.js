@@ -160,7 +160,7 @@ const CheckoutSingle = (props) => {
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent
               variant="contained"
-              color="default"
+              color="primary"
               onClick={OnPlaceOrder}>
               Place Your order
             </MyButtonComponent>

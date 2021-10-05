@@ -22,7 +22,7 @@ const Login = (props) => {
 
   let identity = props.history.location.pathname.split("/")[1];
 
-  if (identity !== "admin" || identity !== "vendor") identity = "";
+  if (identity === "login") identity = "customer";
 
   /** Mutation for User Login */
   const [userLogin, { data: userLoginData, error: userLoginError }] =
@@ -88,8 +88,7 @@ const Login = (props) => {
           email,
           password,
 
-          // need to check condition if url is "http:something/login"  only
-          role: identity == "" ? "customer" : identity, // need to pass identity for customer
+          role: identity,
         },
       });
 

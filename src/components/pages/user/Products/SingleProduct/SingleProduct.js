@@ -266,7 +266,7 @@ export default SingleProduct;
             variant="outlined"
             size="small"
             color="primary"
-            userStyle={{ padding: "3px 5px", marginLeft: "5px" }}
+            style={{ padding: "3px 5px", marginLeft: "5px" }}
             onClick={() => {
               history.push("/cart");
             }}>

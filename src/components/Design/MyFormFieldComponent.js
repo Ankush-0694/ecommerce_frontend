@@ -4,7 +4,7 @@ import {
   Checkbox,
   Typography,
 } from "@material-ui/core";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({
+const theme = createTheme({
   // overrides: {
   //   // Style sheet name ⚛️
   //   "": {

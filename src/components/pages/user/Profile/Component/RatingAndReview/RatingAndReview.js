@@ -6,6 +6,8 @@ import MyDivider from "../../../../../design/MyDivider";
 import { MyFullScreenBox } from "../../../../../design/MyFullScreenBox";
 import { MyGridContainer, MyGridItem } from "../../../../../design/MyGrid";
 import { MyPaper } from "../../../../../design/MyPaper";
+import ShowError from "../../../../../layout/ErrorComponent/ShowError";
+import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 import ProductReviewForm from "../../../Products/SingleProduct/Component/ProductReviewForm/ProductReviewForm";
 import ProductReviewList from "../../../Products/SingleProduct/Component/ProductReviewList/ProductReviewList";
 
@@ -21,8 +23,13 @@ const RatingAndReview = () => {
 
   const { error, loading, data } = useQuery(GET_REVIEWS_BY_CUSTOMERID);
 
-  if (error || loading) {
-    return <div>Hello</div>;
+  if (error) {
+    return (
+      <ShowError>Error occured while fetching Ratings and Reviews</ShowError>
+    );
+  }
+  if (loading) {
+    return <ShowLoading />;
   }
 
   const reviewData = data.getReviewsByCustomerId;

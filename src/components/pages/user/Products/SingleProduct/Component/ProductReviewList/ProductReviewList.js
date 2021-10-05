@@ -38,7 +38,7 @@ const ProductReviewList = ({ reviewData, setCurrentReview }) => {
           variant="contained"
           color="primary"
           size="small"
-          userStyle={{ marginRight: "10px" }}
+          style={{ marginRight: "10px" }}
           onClick={() => {
             setCurrentReview(reviewData);
             window.scroll({

@@ -3,7 +3,12 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    ...theme.mixins.toolbar,
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "100px",
+    },
+  },
 }));
 
 const MyToolbar = ({ style }) => {

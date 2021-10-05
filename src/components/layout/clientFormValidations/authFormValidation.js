@@ -75,13 +75,13 @@ const validateLoginForm = (userDetails, setUserDetails) => {
     passwordError: "",
   };
 
-  if (!email) {
-    isError = true;
-    errors.emailError = "Email is required";
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
-    isError = true;
-    errors.emailError = "Email invalid";
-  }
+  // if (!email) {
+  //   isError = true;
+  //   errors.emailError = "Email is required";
+  // } else if (!/\S+@\S+\.\S+/.test(email)) {
+  //   isError = true;
+  //   errors.emailError = "Email invalid";
+  // }
 
   setUserDetails({
     ...userDetails,

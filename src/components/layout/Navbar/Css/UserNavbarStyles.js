@@ -3,45 +3,73 @@ import { Badge } from "@material-ui/core";
 
 const userNavbarStyles = makeStyles((theme) => ({
   /* Doubt - May be use in vendor navbar */
-  NavbarLink: {
-    minWidth: "940px",
+  NavbarContainer: {
+    width: "90%",
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
   },
-  title: {
-    flexGrow: 1,
+  Navbartitle: {
+    alignSelf: "center",
+    "&:hover": {
+      color: "#f50057",
+    },
   },
 
   /* Nav Bar when screen is Large */
-  NavbarLink: {
-    "&:hover": {
-      background: "white",
-      color: "black",
-    },
-  },
   NavbarTabsContainer: {
-    flexGrow: 1,
-    justifySelf: "flex-end",
-    minWidth: "500px", // to prevent shrink of tabs
+    alignSelf: "center",
+  },
+
+  NavbarLink: {
+    color: "white",
+    padding: "6px 3px",
+    "&:hover": {
+      color: "#f50057",
+    },
+    "&:focus": {
+      outline: "none",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "8px",
+      minWidth: "48px",
+    },
+    [theme.breakpoints.down(350)]: {
+      padding: "0px",
+    },
   },
 
   /* Search Bar Styles */
   searchOutDiv: {
-    flexGrow: 2,
+    flexGrow: 1,
     marginRight: theme.spacing(2),
-    width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto",
     },
+    [theme.breakpoints.down("sm")]: {
+      order: 3,
+      margin: "4px 0px",
+    },
   },
   searchInnerDiv: {
+    maxWidth: "550px",
+    margin: "0 auto",
     display: "flex",
     position: "relative",
   },
   searchInput: {
     flexGrow: 1,
-    padding: "8px",
+    padding: "4px",
     borderRadius: "5px",
     marginRight: "5px",
+    borderRadius: "0px",
+    "&:focus": {
+      outline: "1px solid black",
+    },
   },
   searchIcon: {
     border: "1px solid black",
@@ -54,7 +82,7 @@ const StyledBadge = withStyles((theme) => ({
     right: -3,
     top: 13,
     border: `2px solid ${theme.palette.background.paper}`,
-    padding: "0 4px",
+    padding: "0",
   },
 }))(Badge);
 

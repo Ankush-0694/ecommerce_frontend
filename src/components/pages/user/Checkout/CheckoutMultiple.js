@@ -181,7 +181,7 @@ const CheckoutMultiple = (props) => {
           <div className={classes.PlaceOrderbtn}>
             <MyButtonComponent
               variant="contained"
-              color="default"
+              color="primary"
               // disabled={submitEvent && selectedAddress === null}
               onClick={OnPlaceOrder}>
               Place Your order
