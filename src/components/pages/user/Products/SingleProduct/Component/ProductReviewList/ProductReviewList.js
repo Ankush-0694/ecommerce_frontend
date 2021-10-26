@@ -5,8 +5,9 @@ import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutatio
 import { useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";
 
-const ProductReviewList = ({ reviewData, setCurrentReview }) => {
-  const { id, productID, rating, review } = reviewData;
+const ProductReviewList = ({ reviewData, setCurrentReview, userData }) => {
+  const { id, productID, rating, review, customerId } = reviewData;
+  // console.log(reviewData);
 
   const [deleteReview, { data: deleteReviewData }] = useMutation(
     DELETE_REVIEW,
@@ -33,30 +34,32 @@ const ProductReviewList = ({ reviewData, setCurrentReview }) => {
     <div>
       <div style={{ margin: "10px 0" }}>Review : {review}</div>
       <MyRatingComponent value={rating} readOnly={true} />
-      <div>
-        <MyButtonComponent
-          variant="contained"
-          color="primary"
-          size="small"
-          style={{ marginRight: "10px" }}
-          onClick={() => {
-            setCurrentReview(reviewData);
-            window.scroll({
-              top: 0,
-              left: 0,
-              behavior: "smooth",
-            });
-          }}>
-          Edit
-        </MyButtonComponent>
-        <MyButtonComponent
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={onDeleteReview}>
-          Delete
-        </MyButtonComponent>
-      </div>
+      {userData && userData.id === customerId && (
+        <div>
+          <MyButtonComponent
+            variant="contained"
+            color="primary"
+            size="small"
+            style={{ marginRight: "10px" }}
+            onClick={() => {
+              setCurrentReview(reviewData);
+              window.scroll({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              });
+            }}>
+            Edit
+          </MyButtonComponent>
+          <MyButtonComponent
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={onDeleteReview}>
+            Delete
+          </MyButtonComponent>
+        </div>
+      )}
     </div>
   );
 };

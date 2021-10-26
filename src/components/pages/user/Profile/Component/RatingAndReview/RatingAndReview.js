@@ -17,7 +17,7 @@ import ProductReviewList from "../../../Products/SingleProduct/Component/Product
  *
  * All necessary props are passing ( same as we are from single product )
  */
-const RatingAndReview = () => {
+const RatingAndReview = ({ userData }) => {
   /** For adding and updating the data using same form */
   const [currentReview, setCurrentReview] = useState(null);
 
@@ -82,6 +82,7 @@ const RatingAndReview = () => {
                 return (
                   <Fragment key={review.id}>
                     <ProductReviewList
+                      userData={userData}
                       currentReview={currentReview}
                       setCurrentReview={setCurrentReview}
                       reviewData={review}

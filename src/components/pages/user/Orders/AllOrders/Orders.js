@@ -129,7 +129,7 @@ const Orders = () => {
 
         <div className={classes.orderListContainer}>
           {/* Search  component */}
-          <div className={classes.SearchBoxContainer}>
+          {/* <div className={classes.SearchBoxContainer}>
             <div className={classes.inputDiv} style={{ marginRight: "5px" }}>
               <input
                 onChange={(e) => {
@@ -147,26 +147,32 @@ const Orders = () => {
               onClick={SearchOrderByKeyword}>
               Search Order
             </MyButtonComponent>
-          </div>
+          </div> */}
 
           {/* Order List Item component by mapping all orders */}
 
-          {orderData
-            .slice(0)
-            .reverse()
-            .map((mappedOrderData) => {
-              /** type@ {Array} */
-              const { id, productDetailsWithQuantity } = mappedOrderData;
+          {orderData.length > 0 ? (
+            orderData
+              .slice(0)
+              .reverse()
+              .map((mappedOrderData) => {
+                /** type@ {Array} */
+                const { id, productDetailsWithQuantity } = mappedOrderData;
 
-              return (
-                <OrderedProductList
-                  key={id}
-                  orderID={id}
-                  productData={productDetailsWithQuantity}
-                  filters={filters}
-                />
-              );
-            })}
+                return (
+                  <OrderedProductList
+                    key={id}
+                    orderID={id}
+                    productData={productDetailsWithQuantity}
+                    filters={filters}
+                  />
+                );
+              })
+          ) : (
+            <h1 style={{ textAlign: "center" }}>
+              You have not ordered any Product.
+            </h1>
+          )}
         </div>
       </div>
     </div>

@@ -73,7 +73,13 @@ const MyProfile = ({ userData }) => {
             );
           }}
         />
-        <Route exact path="/account/review" component={RatingAndReview} />
+        <Route
+          exact
+          path="/account/review"
+          render={(props) => {
+            return <RatingAndReview userData={userData} {...props} />;
+          }}
+        />
       </div>
     </div>
   );

@@ -109,7 +109,6 @@ const Login = (props) => {
        * it will be handle automatically
        */}
       {userLoginError && <MyAlert type="error">{errorVar()}</MyAlert>}
-
       {/** if we access a protected route without login then we pass a error msg in state while redirecting
        *  And Show that message as an alert
        *
@@ -117,7 +116,6 @@ const Login = (props) => {
       {props.location.state && props.location.state.errorMsg && (
         <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
       )}
-
       {/* if signup got successfull then we need to come to this page with a alert msg
 
        * state is cleared after using window.history
@@ -125,11 +123,9 @@ const Login = (props) => {
       {props.location.state && props.location.state.successMsg && (
         <MyAlert type="success">{props.location.state.successMsg}</MyAlert>
       )}
-
       {/* Clearing the state passed from redirection to prevent it from showing error on reload */}
       {window.history.replaceState({}, document.title)}
-
-      <MyFullScreenBox display="flex" width="100%" height="100vh">
+      <MyFullScreenBox display="flex" width="100%" height="90vh">
         <form
           onSubmit={onSubmit}
           style={{
@@ -184,6 +180,15 @@ const Login = (props) => {
           </div>
         </form>
       </MyFullScreenBox>
+      {/* //https://getwaves.io/ */}
+      {/* <div style={{ marginTop: "-300px" }}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path
+            fill="#023e8a"
+            fill-opacity="1"
+            d="M0,192L80,202.7C160,213,320,235,480,240C640,245,800,235,960,229.3C1120,224,1280,224,1360,224L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
+      </div> */}
     </div>
   );
 };

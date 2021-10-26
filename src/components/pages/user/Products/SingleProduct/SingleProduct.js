@@ -23,7 +23,8 @@ import { SingleProductStyles } from "./CSS/SingleProductStyles";
 const SingleProduct = (props) => {
   const classes = SingleProductStyles();
   const productid = props.match.params.id.split(":")[1];
-  const { history } = props;
+  const { history, isAuthenticated, userData } = props;
+  // console.log(props);
 
   /** For adding and updating the data using same form */
   const [currentReview, setCurrentReview] = useState(null);
@@ -203,17 +204,21 @@ const SingleProduct = (props) => {
         </MyGridItem>
       </MyGridContainer>
 
+      <div style={{ margin: "8px 0px" }}></div>
+
       {/* review Form Component */}
 
-      <MyGridContainer justify="center">
-        <MyGridItem xs={8}>
-          <ProductReviewForm
-            currentReview={currentReview}
-            setCurrentReview={setCurrentReview}
-            productid={productid}
-          />
-        </MyGridItem>
-      </MyGridContainer>
+      {isAuthenticated && (
+        <MyGridContainer justify="center">
+          <MyGridItem xs={8}>
+            <ProductReviewForm
+              currentReview={currentReview}
+              setCurrentReview={setCurrentReview}
+              productid={productid}
+            />
+          </MyGridItem>
+        </MyGridContainer>
+      )}
 
       <MyDivider />
 
@@ -233,6 +238,7 @@ const SingleProduct = (props) => {
                   return (
                     <Fragment key={review.id}>
                       <ProductReviewList
+                        userData={userData}
                         currentReview={currentReview}
                         setCurrentReview={setCurrentReview}
                         reviewData={review}

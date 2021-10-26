@@ -61,6 +61,7 @@ const GET_SINGLE_PRODUCT = gql`
       productImageUrl
       reviews {
         id
+        customerId
         productID
         review
         rating

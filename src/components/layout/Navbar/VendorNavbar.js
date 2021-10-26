@@ -94,14 +94,14 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const ProtectedTabs = () => {
     return (
       <>
-        <MyButtonComponent
+        {/* <MyButtonComponent
           className={classes.navBtn}
           // onClick={onLogout}
           color="inherit">
           <MyTypography variant="body1" noWrap>
             Orders
           </MyTypography>
-        </MyButtonComponent>
+        </MyButtonComponent> */}
 
         <MyButtonComponent
           className={classes.navBtn}

@@ -47,7 +47,7 @@ const ProtectedCustomerRoute = ({
                 setIsAuthenticated={setIsAuthenticated}
                 {...routeProps}
               />
-              <Component userData={user.getMe} {...routeProps} />
+              <Component userData={user && user.getMe} {...routeProps} />
             </>
           );
         }

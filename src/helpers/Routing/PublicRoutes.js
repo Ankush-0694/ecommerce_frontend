@@ -17,7 +17,7 @@ const PublicCustomerRoute = ({
   component: Component,
   isAuthenticated,
   setIsAuthenticated,
-
+  user,
   ...restProps
 }) => {
   return (
@@ -32,6 +32,8 @@ const PublicCustomerRoute = ({
               {...routeProps}
             />
             <Component
+              userData={user && user.getMe}
+              isAuthenticated={isAuthenticated}
               setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
               {...routeProps}
             />

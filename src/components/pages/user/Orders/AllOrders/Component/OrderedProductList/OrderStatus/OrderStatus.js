@@ -29,6 +29,10 @@ const OrderStatus = ({ orderStatus }) => {
     iconColor = "orange";
     statusMessage = "You returned this order";
   }
+  if (orderStatus === "On The Way") {
+    iconColor = "lightblue";
+    statusMessage = "Your order is on the way";
+  }
 
   const classes = OrderedProductListStyles;
 

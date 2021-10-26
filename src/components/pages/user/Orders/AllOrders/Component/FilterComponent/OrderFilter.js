@@ -14,10 +14,11 @@ const OrderFilter = ({ filters, setFilters }) => {
    * @param label - lable of the input Field
    */
   const orderStatusFilter = [
-    { value: "onWay", label: "On the Way" },
+    { value: "On The Way", label: "On The Way" },
     { value: "delivered", label: "Delivered" },
     { value: "cancelled", label: "Cancelled" },
     { value: "returned", label: "Returned" },
+    { value: "pending", label: "Pending" },
   ];
 
   /**

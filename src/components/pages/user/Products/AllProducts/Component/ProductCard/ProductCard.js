@@ -14,10 +14,14 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
 
   let avgRating = 0;
 
+  const totalReviews = reviews.length;
+
+  console.log(reviews);
+
   reviews.map((singleReview) => {
     avgRating += singleReview.rating;
-    avgRating = avgRating / 2;
   });
+  avgRating = avgRating / totalReviews;
 
   // IF  product's avg rating is less than the selected filter value then we don't need to show that on UI
   if (selectedRating > avgRating) {
@@ -56,7 +60,7 @@ const ProductCard = ({ details, link, history, selectedRating }) => {
                     color: avgRating > 3 ? "green" : "red",
                   }}
                 />{" "}
-                {avgRating === 0 ? "Not Rated" : avgRating.toFixed(1)}
+                {!avgRating ? "Not Rated" : avgRating.toFixed(1)}
               </div>
             </MyCardContent>
           </Link>

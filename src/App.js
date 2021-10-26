@@ -98,6 +98,7 @@ const App = () => {
             component={SingleProduct}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
           />
 
           <PublicCustomerRoute

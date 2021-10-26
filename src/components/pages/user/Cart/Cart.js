@@ -9,7 +9,6 @@ import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
-import emptyCartSvg from "../../../layout/IMAGES/emptyCart3.png";
 import { DELETE_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartMutations";
 
 const Cart = ({ history }) => {
