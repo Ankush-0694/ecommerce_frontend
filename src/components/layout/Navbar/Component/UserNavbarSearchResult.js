@@ -26,21 +26,17 @@ const useStyles = makeStyles({
 const UserNavbarSearchResult = ({
   productData,
   searchError,
-  searchLoading,
+  // searchLoading,
   history,
   searchText,
 }) => {
   const classes = useStyles();
 
   if (searchError) {
-    return <ShowError>Error</ShowError>;
+    return <div>Error</div>;
   }
 
-  if (searchLoading) {
-    return <ShowLoading />;
-  }
-
-  const dataToRender = productData.getProductsBySearchText;
+  const dataToRender = productData ? productData.getProductsBySearchText : [];
 
   /** If no match Found */
   if (dataToRender.length === 0) {

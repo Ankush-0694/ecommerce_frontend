@@ -35,8 +35,6 @@ const UserNavbarSearch = ({ history }) => {
    *  route and show the result in new Page like /ShopBy/?searchText={searchText}
    */
   const onChange = (e) => {
-    setShow(false); // Now changin the text so Hide the Result or there will be many issues
-
     setSearchText(e.target.value); // storing  to  pass on ShopBy Page as a query Parameter
 
     /* If no text then no network call */
@@ -54,11 +52,12 @@ const UserNavbarSearch = ({ history }) => {
   return (
     <>
       <input
+        type="search"
         onChange={onChange}
         className={classes.searchInput}
         placeholder="Search Product..."
         onBlur={(e) => {
-          setShow(false);
+          setShow(false); // when we get out of search box
         }}
         onFocus={() => {
           setShow(true);

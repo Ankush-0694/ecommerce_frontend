@@ -1,14 +1,14 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
 
-const ShowLoading = ({ children }) => {
+const ShowLoading = ({ Notfullscreen = false }) => {
   return (
     <div
       style={{
-        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        height: !Notfullscreen && "100vh",
       }}>
       <CircularProgress />
     </div>
