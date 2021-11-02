@@ -3,8 +3,8 @@ import { gql } from "@apollo/client";
 const ADD_ADDRESS = gql`
   mutation (
     $fullName: String!
-    $phoneNumber: Int!
-    $pincode: Int!
+    $phoneNumber: String!
+    $pincode: String!
     $state: String!
     $city: String!
     $HouseNo: String!
@@ -39,8 +39,8 @@ const UPDATE_ADDRESS = gql`
   mutation (
     $id: ID!
     $fullName: String!
-    $phoneNumber: Int!
-    $pincode: Int!
+    $phoneNumber: String!
+    $pincode: String!
     $state: String!
     $city: String!
     $HouseNo: String!

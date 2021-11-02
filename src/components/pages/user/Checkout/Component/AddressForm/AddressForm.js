@@ -32,22 +32,19 @@ const AddressForm = ({ current, setCurrent }) => {
     landmark,
   } = addressFormData;
 
-  const [addAddress, { data: addedAddressData }] = useMutation(ADD_ADDRESS, {
+  const [addAddress] = useMutation(ADD_ADDRESS, {
     onError: () => {},
     onCompleted: () => {
       setAddressFormSubmitMessage("Address Added Successfully !");
     },
   });
 
-  const [updateAddress, { data: updatedAddressData }] = useMutation(
-    UPDATE_ADDRESS,
-    {
-      onError: () => {},
-      onCompleted: () => {
-        setAddressFormSubmitMessage("Address Updated Successfully !");
-      },
-    }
-  );
+  const [updateAddress] = useMutation(UPDATE_ADDRESS, {
+    onError: (error) => {},
+    onCompleted: () => {
+      setAddressFormSubmitMessage("Address Updated Successfully !");
+    },
+  });
 
   // To check ,current is empty or not ,
   // if it is not then we set the form data to current
@@ -70,10 +67,6 @@ const AddressForm = ({ current, setCurrent }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    /////change of types of values in address object
-    addressFormData["pincode"] = Number(addressFormData["pincode"]);
-    addressFormData["phoneNumber"] = Number(addressFormData["phoneNumber"]);
 
     // add Or update based on the current value
     if (current === null) {
@@ -125,6 +118,7 @@ const AddressForm = ({ current, setCurrent }) => {
           </div>
           <div className="field">
             <MyTextInput
+              type="number"
               name="phoneNumber"
               label="Phone Number"
               value={phoneNumber}
@@ -135,6 +129,7 @@ const AddressForm = ({ current, setCurrent }) => {
         <div className={classes.addressInputContainer}>
           <div className="field">
             <MyTextInput
+              type="number"
               name="pincode"
               label="Pincode"
               value={pincode}
