@@ -34,6 +34,7 @@ import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
 import VendorProfile from "./components/pages/vendor/VendorProfile/VendorProfile";
+import ReviewFormPage from "./components/pages/user/Review/ReviewFormPage";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -116,6 +117,15 @@ const App = () => {
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
             component={Cart}
+          />
+
+          <ProtectedCustomerRoute
+            exact
+            path="/review/create/:id"
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+            user={getMeData}
+            component={ReviewFormPage}
           />
 
           <ProtectedCustomerRoute

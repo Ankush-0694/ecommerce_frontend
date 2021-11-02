@@ -208,7 +208,7 @@ const SingleProduct = (props) => {
 
       {/* review Form Component */}
 
-      {isAuthenticated && (
+      {/* {isAuthenticated && (
         <MyGridContainer justify="center">
           <MyGridItem xs={8}>
             <ProductReviewForm
@@ -218,7 +218,7 @@ const SingleProduct = (props) => {
             />
           </MyGridItem>
         </MyGridContainer>
-      )}
+      )} */}
 
       <MyDivider />
 

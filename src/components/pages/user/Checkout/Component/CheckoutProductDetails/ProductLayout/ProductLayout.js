@@ -10,7 +10,12 @@ import { ProductLayoutStyles } from "../../../CSS/ProductLayoutStyles";
  * This component is used in
  * singleProductDetails and MultipleProductDetails component for layout
  */
-const ProductLayout = ({ productData, quantity, setQuantity }) => {
+const ProductLayout = ({
+  productData,
+  quantity,
+  setQuantity,
+  showQuantitySection,
+}) => {
   const classes = ProductLayoutStyles();
   const { productDescription, productName, productPrice, productImageUrl } =
     productData;
@@ -43,42 +48,48 @@ const ProductLayout = ({ productData, quantity, setQuantity }) => {
           <div style={{ fontWeight: "300" }}>
             Single Item Price : {productPrice}
           </div>
-          <MyTypography variant="body1" component="p">
-            Total Price : {productPrice * quantity}
-          </MyTypography>
+          {showQuantitySection && (
+            <MyTypography variant="body1" component="p">
+              Total Price : {productPrice * quantity}
+            </MyTypography>
+          )}
         </div>
 
         {/* Button and quantity */}
 
-        <div className={classes.quantityDiv}>
-          <MyButtonComponent
-            variant="contained"
-            color="primary"
-            className={classes.quantityButton}
-            disabled={quantity <= 1 && true}
-            onClick={() => {
-              setQuantity(quantity - 1);
-            }}>
-            -
-          </MyButtonComponent>
-          <input
-            className={classes.quantityInput}
-            value={quantity}
-            onChange={(e) => {
-              // setTotalQuantity(e.target.value);
-            }}
-          />
+        {/* using showQuantitySection to hide quantity section when using it on other page where we do not need to
+          show quantity */}
+        {showQuantitySection && (
+          <div className={classes.quantityDiv}>
+            <MyButtonComponent
+              variant="contained"
+              color="primary"
+              className={classes.quantityButton}
+              disabled={quantity <= 1 && true}
+              onClick={() => {
+                setQuantity(quantity - 1);
+              }}>
+              -
+            </MyButtonComponent>
+            <input
+              className={classes.quantityInput}
+              value={quantity}
+              onChange={(e) => {
+                // setTotalQuantity(e.target.value);
+              }}
+            />
 
-          <MyButtonComponent
-            variant="contained"
-            className={classes.quantityButton}
-            onClick={() => {
-              setQuantity(quantity + 1);
-            }}
-            color="primary">
-            +
-          </MyButtonComponent>
-        </div>
+            <MyButtonComponent
+              variant="contained"
+              className={classes.quantityButton}
+              onClick={() => {
+                setQuantity(quantity + 1);
+              }}
+              color="primary">
+              +
+            </MyButtonComponent>
+          </div>
+        )}
       </div>
     </MyPaper>
   );

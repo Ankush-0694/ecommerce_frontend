@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
 import { MyGridContainer, MyGridItem } from "../../../../../../design/MyGrid";
+import { MyIcon } from "../../../../../../design/MyIcons";
 import { MyPaper } from "../../../../../../design/MyPaper";
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { OrderedProductListStyles } from "../../CSS/OrderedProductListStyles";
 import OrderStatus from "./OrderStatus/OrderStatus";
+import { withRouter } from "react-router";
 
 /** This Component will be mapped from order Data Array and
  *
@@ -13,7 +16,7 @@ import OrderStatus from "./OrderStatus/OrderStatus";
  * This component used in Order.js (to show all products in the orders)
  *  and OrderDetails.js(to show others products in order(other than on which we clicked)  )
  */
-const OrderedProductList = ({ productData, orderID, filters }) => {
+const OrderedProductList = ({ productData, orderID, filters, history }) => {
   const classes = OrderedProductListStyles();
 
   const { ByStatus } = filters;
@@ -109,6 +112,24 @@ const OrderedProductList = ({ productData, orderID, filters }) => {
                   {/*Status Name And The icon , */}
 
                   <OrderStatus orderStatus={orderStatus} />
+
+                  <MyButtonComponent
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    onClick={(e) => {
+                      history.push(`review/create/${productId}`);
+
+                      // well , it worked but don't know how
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    className={classes.rateAndReviewButton}>
+                    <MyIcon className={classes.staricon}>
+                      {"star_border_Icon"}
+                    </MyIcon>
+                    Rate And Review
+                  </MyButtonComponent>
                 </MyGridItem>
               </MyGridContainer>
             </Link>
@@ -119,6 +140,6 @@ const OrderedProductList = ({ productData, orderID, filters }) => {
   );
 };
 
-export default OrderedProductList;
+export default withRouter(OrderedProductList);
 
 // to change second into date Format

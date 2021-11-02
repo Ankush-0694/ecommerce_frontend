@@ -90,20 +90,20 @@ const OrderFilter = ({ filters, setFilters }) => {
         onFilterChange={onFilterChange}
       />
 
-      <MyDivider></MyDivider>
+      {/* <MyDivider></MyDivider> */}
 
       {/**  Filter based on Order Time */}
 
       {/* Pass  heading and filter array to FilterLayout Component */}
 
-      <CheckBoxFilterLayout
+      {/* <CheckBoxFilterLayout
         FilterHeading="Order Time"
         checkboxName="ByTime"
         FilterByArray={orderTimeFilter}
         onFilterChange={onFilterChange}
-      />
+      /> */}
 
-      <MyDivider></MyDivider>
+      {/* <MyDivider></MyDivider> */}
 
       {/* Clear filter feature */}
 

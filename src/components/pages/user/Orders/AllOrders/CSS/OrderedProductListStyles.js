@@ -40,6 +40,13 @@ const OrderedProductListStyles = makeStyles({
   statusicon: {
     marginRight: "8px",
   },
+  rateAndReviewButton: {
+    marginTop: "8px",
+  },
+  staricon: {
+    marginRight: "5px",
+    marginTop: "-2px",
+  },
 });
 
 export { OrderedProductListStyles };

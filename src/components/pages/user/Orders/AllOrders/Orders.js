@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { MyTypography } from "../../../../design/MyTypography";
 import OrderedProductList from "./Component/OrderedProductList/OrderedProductList";
-import { MyButtonComponent } from "../../../../design/MyButtonComponent";
 import { useQuery } from "@apollo/client";
 import { GET__ORDERS_BY_CUSTOMERID } from "../../../../../queries/Order/orderQueries";
 import { OrderStyles } from "./CSS/OrdersStyles";
 import OrderFilter from "./Component/FilterComponent/OrderFilter";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
-import { MyTextInput } from "../../../../design/MyFormFieldComponent";
 
 const Orders = () => {
   const classes = OrderStyles();

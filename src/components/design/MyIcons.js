@@ -42,8 +42,8 @@ const MyEditButton = () => {
 /** passed material ui icon name
  * Must be separeated by underscore and all letter small except i of icon
  */
-const MyIcon = ({ children }) => {
-  return <Icon>{children}</Icon>;
+const MyIcon = ({ children, ...otherprops }) => {
+  return <Icon {...otherprops}>{children}</Icon>;
 };
 
 export {

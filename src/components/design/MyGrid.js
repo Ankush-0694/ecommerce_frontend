@@ -13,7 +13,7 @@ const MyGridContainer = ({ children, style, justify, spacing, className }) => {
     <Grid
       container
       style={style}
-      justify={justify}
+      justifyContent={justify}
       spacing={spacing}
       className={className}>
       {children}
