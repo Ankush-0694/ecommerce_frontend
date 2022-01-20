@@ -7,7 +7,8 @@ import { createBrowserHistory } from "history";
 /** imported for pushing on error */
 const history = createBrowserHistory();
 
-const httplink = createUploadLink({ uri: "http://ec2-65-1-132-213.ap-south-1.compute.amazonaws.com/graphql" });
+// const httplink = createUploadLink({ uri: "http://ec2-65-1-132-213.ap-south-1.compute.amazonaws.com/graphql" });
+const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
 
 /* For handling Errors at Top level */
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
