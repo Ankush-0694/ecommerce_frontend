@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, ButtonBase, makeStyles } from "@material-ui/core";
+import { Grid, ButtonBase } from "@mui/material";
+import {makeStyles } from "../design/MyUseStyles";
 
 const wizardHeaderStyles = makeStyles((theme) => ({
   root: {

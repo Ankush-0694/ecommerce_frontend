@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 // for making the child to the center we need to
 // add style ={{margin : auto }}

@@ -42,7 +42,7 @@ const ProductList = ({ productData, orderedDate }) => {
               <MyGridItem xs={6}>
                 <Link
                   className={classes.productLink}
-                  to={`/products/:${productId}`}>
+                  to={`/products/${productId}`}>
                   <div>
                     <div className={classes.productName}>{productName}</div>
                     <MyTypography

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 // import * as Sentry from "@sentry/react";
@@ -35,11 +36,25 @@ const client = new ApolloClient({
   cache,
 });
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: 'rgb(2, 62, 138)'
+    },
+    secondary: {
+      main: '#f50057'
+    }, 
+    
+  }
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+          <App />
+      </ApolloProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

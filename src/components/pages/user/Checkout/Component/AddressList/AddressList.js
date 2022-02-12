@@ -1,8 +1,8 @@
 import React from "react";
 import { MyTypography } from "../../../../../design/MyTypography";
 import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
-import Radio from "@material-ui/core/Radio";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { AddressListStyles } from "../../CSS/AddressListStyles";
 import { useMutation } from "@apollo/client";
 import { DELETE_ADDRESS } from "../../../../../../queries/address/addressMutations";

@@ -123,7 +123,7 @@ const CartItem = ({ cartItemData }) => {
           <div>
             <MyButtonComponent
               variant="outlined"
-              // color="secondary"
+              color="secondary"
               className={classes.remove_btn}
               onClick={onRemoveCart}>
               <MyDeleteIcon />

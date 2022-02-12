@@ -1,5 +1,5 @@
-import { IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { IconButton } from "@mui/material";
+import {useTheme, makeStyles} from './MyUseStyles';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -8,7 +8,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyIconButton = ({ children, onClick }) => {
-  const classes = useStyles();
+  const theme = useTheme(); 
+  const classes = useStyles(theme);
+
 
   return (
     <IconButton

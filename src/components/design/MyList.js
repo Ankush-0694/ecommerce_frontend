@@ -4,8 +4,8 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-} from "@material-ui/core";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+} from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 const MyListContainer = ({ className, children }) => {
   return <List className={className}>{children}</List>;

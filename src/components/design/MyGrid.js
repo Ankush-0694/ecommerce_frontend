@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 const MyGridItem = ({ children, xs, sm, md, style, className }) => {
   return (

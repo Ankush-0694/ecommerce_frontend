@@ -1,17 +1,21 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
+import MyAlert from "../../../design/MyAlert";
 import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
 import { MyGridContainer, MyGridItem } from "../../../design/MyGrid";
+import MyModal from "../../../design/MyModal";
 import { MyPaper } from "../../../design/MyPaper";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import SingleProductDetails from "../Checkout/Component/CheckoutProductDetails/SingleProductDetails";
 import ProductReviewForm from "../Products/SingleProduct/Component/ProductReviewForm/ProductReviewForm";
 
-const ReviewFormPage = (props) => {
-  const productid = props.match.params.id;
+const ReviewFormComponent = (props) => {
+  const productid = props.match.params.productId;
   const [currentReview, setCurrentReview] = useState(null);
+
+  const [reviewFormSubmitted, setReviewFormSubmitted] = useState(false);
 
   const {
     error: getProductError,
@@ -29,10 +33,16 @@ const ReviewFormPage = (props) => {
   }
 
   const dataToRender = getProductData.getProductByProductId;
-  console.log(dataToRender);
+  
 
   return (
     <div style={{ width: "95%", margin: "auto", marginTop: "16px" }}>
+      <MyModal />
+      {reviewFormSubmitted && (
+          <MyAlert type="success">
+            Review submitted successfully
+          </MyAlert>
+      )}
       <div style={{ paddingBottom: "10px", marginBottom: "10px" }}>
         <SingleProductDetails
           productData={dataToRender}
@@ -55,6 +65,7 @@ const ReviewFormPage = (props) => {
               currentReview={currentReview}
               setCurrentReview={setCurrentReview}
               productid={productid}
+              setReviewFormSubmitted={setReviewFormSubmitted}
             />
           </MyGridItem>
         </MyGridContainer>
@@ -63,4 +74,4 @@ const ReviewFormPage = (props) => {
   );
 };
 
-export default ReviewFormPage;
+export default ReviewFormComponent;

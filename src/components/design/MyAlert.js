@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Slide, Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
+import { Slide, Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { errorVar } from "../../helpers/ReactiveVariables/ReactiveVariables";
 
 const Alert = React.forwardRef((props, ref) => {

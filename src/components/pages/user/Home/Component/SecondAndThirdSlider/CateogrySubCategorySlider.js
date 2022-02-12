@@ -8,7 +8,7 @@ import {
 import { MyMultiCarousel } from "../../../../../design/MyMultiItemCarousel";
 import { MyPaper } from "../../../../../design/MyPaper";
 import { MyTypography } from "../../../../../design/MyTypography";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from '@mui/styles';
 import {
   categoryList,
   subCategoryList,

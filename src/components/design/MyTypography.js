@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 const MyTypography = ({
   children,
@@ -8,6 +8,7 @@ const MyTypography = ({
   component,
   color,
   style,
+  ...otherProps
 }) => {
   return (
     <Typography
@@ -15,7 +16,9 @@ const MyTypography = ({
       color={color}
       component={component}
       style={style}
-      variant={variant}>
+      variant={variant}
+      {...otherProps}
+      >
       {children}
     </Typography>
   );

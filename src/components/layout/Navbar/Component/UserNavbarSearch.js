@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { MyButtonComponent } from "../../../design/MyButtonComponent";
 import { userNavbarStyles } from "../Css/UserNavbarStyles";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchIcon from "@mui/icons-material/Search";
 import UserNavbarSearchResult from "./UserNavbarSearchResult";
 import { GET_PRODUCT_BY_SEARCH_TEXT } from "../../../../queries/Product/productQueries";
 import { useLazyQuery } from "@apollo/client";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../../../helpers/customHooks/withRouter";
 
 const UserNavbarSearch = ({ history }) => {
   const classes = userNavbarStyles();

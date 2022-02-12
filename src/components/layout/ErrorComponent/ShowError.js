@@ -1,4 +1,4 @@
-import { ErrorRounded } from "@material-ui/icons";
+import { ErrorRounded } from "@mui/icons-material";
 import React from "react";
 
 const ShowError = ({ children }) => {

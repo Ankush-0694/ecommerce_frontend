@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import WizardHeader from "../../../../../../design/MyWizardHeader";
 import SwipeableViews from "react-swipeable-views";
-import { MultiStepFromStyles } from "../../../CSS/MultiStepFormStyles";
 import {
   ADD_PRODUCT,
   UPDATE_PRODUCT,
@@ -18,9 +17,12 @@ import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
 
 import { emptyProductState, useAddProductHook } from "./UseAddProductHook";
 import MyAlert from "../../../../../../design/MyAlert";
+import { MultiStepFromStyles } from "../../../CSS/MultiStepFormStyles";
+import {useTheme} from "../../../../../../design/MyUseStyles"
 
 const MultiStepForm = ({ current, setCurrent }) => {
-  const classes = MultiStepFromStyles();
+  const theme = useTheme();
+  const classes = MultiStepFromStyles(theme);
 
   /** This can be used for checking the form submitted or not
    * Can show a button Reset Form which will clear all the values and get us to first Step

@@ -1,6 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import ProductLayout from "./ProductLayout/ProductLayout";
+import { withRouter } from "../../../../../../helpers/customHooks/withRouter";
+
 
 /* Used to show order Summary on the Single checkout page */
 const SingleProductDetails = ({

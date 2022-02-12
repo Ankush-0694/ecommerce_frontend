@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { HomeSliderStyles } from "../../CSS/HomeSliderStyles";
-import { MyCarousel } from "../../../../../design/MyCarousel";
+// import { MyCarousel } from "../../../../../design/MyCarousel";
 
 import HomeSliderContent from "./HomeSliderContent";
 import MyDivider from "../../../../../design/MyDivider";
@@ -34,7 +34,7 @@ const HomeSlider = () => {
 
   return (
     <div style={{ margin: "auto", width: "90%" }}>
-      <MyCarousel
+      {/* <MyCarousel
         className={classes.SecondExample}
         autoPlay={false}
         animation="slide"
@@ -44,7 +44,7 @@ const HomeSlider = () => {
         {items.map((item, index) => {
           return <HomeSliderContent item={item} key={index} />;
         })}
-      </MyCarousel>
+      </MyCarousel> */}
       <MyDivider />
     </div>
   );

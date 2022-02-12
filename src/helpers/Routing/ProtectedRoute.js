@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import AdminNavbar from "../../components/layout/Navbar/AdminNavbar";
 import UserNavbar from "../../components/layout/Navbar/UserNavbar";
 import VendorNavbar from "../../components/layout/Navbar/VendorNavbar";
 
 /**
  * Need to pass user details here to check the role
- * if role does not our given role then redirect to unAuthorized Page
+ * if role does not our given role then Navigate to unAuthorized Page
  *
- * if no logged in then redirect to appropiate route
+ * if no logged in then Navigate to appropiate route
  */
 
 /** Customer Protected Route Logic */
@@ -26,17 +26,17 @@ const ProtectedCustomerRoute = ({
         //if not logged in
         if (!isAuthenticated) {
           return (
-            <Redirect
+            <Navigate
               to={{
                 pathname: "/login",
-                state: { errorMsg: "You are not Logged in" },
+                state: { errorMsg: "You must login to access this page" },
               }}
             />
           );
         }
-        //if Role does not match to require role then redirect to unAuth page
+        //if Role does not match to require role then Navigate to unAuth page
         else if (user && user.getMe.role !== "customer") {
-          return <Redirect to="/unAuth" />;
+          return <Navigate to="/unAuth" />;
         }
         // else show the component we want to access
         else {
@@ -70,15 +70,15 @@ const ProtectedVendorRoute = ({
       render={(routeProps) => {
         if (!isAuthenticated) {
           return (
-            <Redirect
+            <Navigate
               to={{
                 pathname: "/vendor/login",
-                state: { errorMsg: "You are not Logged in" },
+                state: { errorMsg: "You have to login first..." },
               }}
             />
           );
         } else if (user && user.getMe.role !== "vendor") {
-          return <Redirect to="/unAuth" />;
+          return <Navigate to="/unAuth" />;
         } else {
           return (
             <>
@@ -110,16 +110,16 @@ const ProtectedAdminRoute = ({
       render={(routeProps) => {
         if (!isAuthenticated) {
           return (
-            <Redirect
+            <Navigate
               to={{
                 pathname: "/admin/login",
-                state: { errorMsg: "You are not Logged in" },
+                state: { errorMsg: "You have to login first..." },
               }}
             />
           );
         } else if (user && user.getMe.role !== "admin") {
           /** Routed to unauth page if user role is not admin */
-          return <Redirect to="/unAuth" />;
+          return <Navigate to="/unAuth" />;
         } else {
           return (
             <>

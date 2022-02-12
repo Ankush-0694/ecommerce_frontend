@@ -1,7 +1,7 @@
 import React from "react";
 // import { makeStyles } from "../../Design/MyUseStyles";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { withRouter } from "react-router";
+import { withRouter } from "../../../helpers/customHooks/withRouter";
 import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { useQuery } from "@apollo/client";

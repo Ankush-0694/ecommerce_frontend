@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/pages/user/Home/Home";
 import SingleProduct from "./components/pages/user/Products/SingleProduct/SingleProduct";
 import Cart from "./components/pages/user/Cart/Cart";
@@ -34,7 +34,7 @@ import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
 import VendorProfile from "./components/pages/vendor/VendorProfile/VendorProfile";
-import ReviewFormPage from "./components/pages/user/Review/ReviewFormPage";
+import ReviewFormComponent from "./components/pages/user/Review/ReviewFormComponent";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -64,20 +64,23 @@ const App = () => {
 
       {/* This styling for stop responsiveness */}
       <div>
-        <Switch>
+        <Routes>
           {/* Customer Routes */}
 
           {/*  Need to pass these state to use in navbar , login and logout */}
-
-          <PublicCustomerRoute
-            exact
+          
+          <Route
             path="/login"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            component={Login}
+            element={
+            <PublicCustomerRoute
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+              Component={Login} 
+            />
+            }
           />
 
-          <PublicCustomerRoute
+          {/* <PublicCustomerRoute
             exact
             path="/Signup"
             component={Signup}
@@ -121,11 +124,11 @@ const App = () => {
 
           <ProtectedCustomerRoute
             exact
-            path="/review/create/:id"
+            path="/review/:productId"
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
-            component={ReviewFormPage}
+            component={ReviewFormComponent}
           />
 
           <ProtectedCustomerRoute
@@ -169,11 +172,11 @@ const App = () => {
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
-          />
+          /> */}
 
           {/* Vendor Routes */}
 
-          <PublicVendorRoute
+          {/* <PublicVendorRoute
             exact
             path="/vendor/login"
             isAuthenticated={isAuthenticated}
@@ -205,11 +208,11 @@ const App = () => {
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
             user={getMeData}
-          />
+          /> */}
 
           {/* Admin Routes */}
 
-          <PublicAdminRoute
+          {/* <PublicAdminRoute
             exact
             path="/admin/login"
             isAuthenticated={isAuthenticated}
@@ -223,13 +226,13 @@ const App = () => {
             user={getMeData}
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
-          />
+          /> */}
 
           {/* InValid Route */}
           <Route exact path="/unAuth" component={Unauthorized} />
           <Route exact path="/NetworkError" component={NetworkError} />
           <Route render={() => <h1>Invalid URL</h1>} />
-        </Switch>
+        </Routes>
       </div>
     </BrowserRouter>
   );

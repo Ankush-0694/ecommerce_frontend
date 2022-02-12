@@ -14,10 +14,10 @@ const CheckoutStyles = makeStyles((theme) => ({
     fontSize: "2rem",
     fontWeight: "300",
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
+  // heading: {
+  //   fontSize: theme.typography.pxToRem(15),
+  //   fontWeight: theme.typography.fontWeightRegular,
+  // },
   AddDeliveryAddressHeading: {
     backgroundColor: "#003c8f",
     color: "white",

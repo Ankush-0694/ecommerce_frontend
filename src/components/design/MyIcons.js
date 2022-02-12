@@ -1,12 +1,12 @@
-import MenuIcon from "@material-ui/icons/Menu";
-import HomeIcon from "@material-ui/icons/Home";
-import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
-import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import AddIcon from "@material-ui/icons/Add";
-import Icon from "@material-ui/core/Icon";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
-import { Delete } from "@material-ui/icons";
-import EditIcon from "@material-ui/icons/Edit";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import AddIcon from "@mui/icons-material/Add";
+import Icon from "@mui/material/Icon";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { Delete } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const MyMenuIcon = () => {
   return <MenuIcon />;

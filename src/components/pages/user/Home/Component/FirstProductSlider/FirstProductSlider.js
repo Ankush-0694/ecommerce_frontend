@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { makeStyles } from "@material-ui/styles";
+ import { makeStyles } from '@mui/styles';
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { GET_ALL_PRODUCTS } from "../../../../../../queries/Product/productQueries";
@@ -61,7 +61,7 @@ const FirstProductSlider = () => {
           <div className={classes.itemContainerDiv} key={mappedProduct.id}>
             <MyPaper elevation={20} style={{ marginBottom: "20px" }}>
               <Link
-                to={`/products/:${mappedProduct.id}`}
+                to={`/products/${mappedProduct.id}`}
                 style={{ textDecoration: "none" }}>
                 <MyCardMedia
                   height="200"

@@ -1,22 +1,4 @@
-import { Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-
-//changin color for color=primary props
-const theme = createTheme({
-  palette: {
-    primary: {
-      // light: will be calculated from palette.primary.main,
-      main: "rgb(2, 62, 138)",
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: "rgb(255,255,255)",
-    },
-  },
-});
-
-const useStyles = makeStyles({
-  buttonStyle: {},
-});
+import { Button } from "@mui/material";
 
 const MyButtonComponent = ({
   onClick,
@@ -33,10 +15,9 @@ const MyButtonComponent = ({
   disabled,
   className,
 }) => {
-  const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
+   
       <Button
         disableRipple
         variant={variant}
@@ -50,10 +31,10 @@ const MyButtonComponent = ({
         component={component}
         to={to}
         disabled={disabled}
-        className={`${className} ${classes.buttonStyle}`}>
+        className={className}>
         {children}
       </Button>
-    </ThemeProvider>
+    
   );
 };
 

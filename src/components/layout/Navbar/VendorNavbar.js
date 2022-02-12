@@ -1,6 +1,5 @@
 import React from "react";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { withRouter } from "react-router";
 import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { useQuery } from "@apollo/client";
@@ -9,6 +8,7 @@ import ShowLoading from "../LoadingComponent/ShowLoading";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
 import { useApolloClient } from "@apollo/client";
 import { MyIcon } from "../../design/MyIcons";
+import { withRouter } from "../../../helpers/customHooks/withRouter";
 
 const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
   const classes = VendorNavbarStyles();

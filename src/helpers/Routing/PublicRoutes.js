@@ -13,35 +13,25 @@ import VendorNavbar from "../../components/layout/Navbar/VendorNavbar";
  */
 
 /** Public Customer Route */
-const PublicCustomerRoute = ({
-  component: Component,
-  isAuthenticated,
-  setIsAuthenticated,
-  user,
-  ...restProps
-}) => {
-  return (
-    <Route
-      {...restProps}
-      render={(routeProps) => {
-        return (
-          <>
-            <UserNavbar
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-              {...routeProps}
-            />
-            <Component
-              userData={user && user.getMe}
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
-              {...routeProps}
-            />
-          </>
-        );
-      }}
-    />
-  );
+const PublicCustomerRoute = (props) => {
+  console.log({props})
+  const { isAuthenticated, setIsAuthenticated,  Component,  user } = props;
+
+  return ( 
+    <>
+      <UserNavbar
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+       
+      />
+      {/* {Component} */}
+      <Component
+        userData={user && user.getMe}
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
+      />
+    </>    
+  )
 };
 
 /** Public Vendor Route */

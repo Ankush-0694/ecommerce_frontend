@@ -1,4 +1,4 @@
-import { MenuItem } from "@material-ui/core";
+import { MenuItem } from "@mui/material";
 import React from "react";
 
 const MyMenuItem = React.forwardRef((props, ref) => {

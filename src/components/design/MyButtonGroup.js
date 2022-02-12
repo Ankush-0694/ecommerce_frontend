@@ -1,4 +1,4 @@
-import { ButtonGroup } from "@material-ui/core";
+import { ButtonGroup } from "@mui/material";
 import React from "react";
 
 const MyButtonGroup = ({ children, variant, color, arialabel, size }) => {

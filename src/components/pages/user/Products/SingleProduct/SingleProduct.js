@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../queries/Product/productQueries";
-import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm";
 import ProductReviewList from "./Component/ProductReviewList/ProductReviewList";
 import { MyGridContainer } from "../../../../design/MyGrid";
 import { MyGridItem } from "../../../../design/MyGrid";
@@ -22,7 +21,12 @@ import { SingleProductStyles } from "./CSS/SingleProductStyles";
 
 const SingleProduct = (props) => {
   const classes = SingleProductStyles();
-  const productid = props.match.params.id.split(":")[1];
+  console.log({props})
+  const productid = props.match.params.id;
+  console.log({productid})
+
+
+  
   const { history, isAuthenticated, userData } = props;
   // console.log(props);
 
@@ -111,7 +115,7 @@ const SingleProduct = (props) => {
   const onClickBuyNow = (e) => {
     e.preventDefault();
     history.push({
-      pathname: `/checkout/:${productid}`,
+      pathname: `/checkout/${productid}`,
       state: [productid],
     });
   };
@@ -206,19 +210,7 @@ const SingleProduct = (props) => {
 
       <div style={{ margin: "8px 0px" }}></div>
 
-      {/* review Form Component */}
-
-      {/* {isAuthenticated && (
-        <MyGridContainer justify="center">
-          <MyGridItem xs={8}>
-            <ProductReviewForm
-              currentReview={currentReview}
-              setCurrentReview={setCurrentReview}
-              productid={productid}
-            />
-          </MyGridItem>
-        </MyGridContainer>
-      )} */}
+      
 
       <MyDivider />
 

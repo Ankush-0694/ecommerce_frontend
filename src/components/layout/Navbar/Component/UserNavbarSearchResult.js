@@ -1,11 +1,13 @@
-import { makeStyles } from "@material-ui/core";
+ import { makeStyles } from '@mui/styles';
 import React from "react";
 import { Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
 import ShowError from "../../ErrorComponent/ShowError";
 import ShowLoading from "../../LoadingComponent/ShowLoading";
+import { withRouter } from '../../../../helpers/customHooks/withRouter';
+
 
 const useStyles = makeStyles({
   resultPaper: {

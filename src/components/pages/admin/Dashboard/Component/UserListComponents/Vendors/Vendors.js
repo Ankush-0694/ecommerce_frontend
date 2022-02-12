@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import UserList from "../UserTableBody/UserTableBody";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { MyPaper } from "../../../../../../design/MyPaper";
 import {
@@ -13,7 +13,7 @@ import {
   MyTableRow,
 } from "../../../../../../design/MyTableComponents";
 import CreateVendor from "../CreateVendor/CreateVendor";
-import { Divider } from "@material-ui/core";
+import { Divider } from "@mui/material";
 import { GET_ALL_USERS_BY_ROLE } from "../../../../../../../queries/user/userQueries";
 import ShowError from "../../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../../layout/LoadingComponent/ShowLoading";

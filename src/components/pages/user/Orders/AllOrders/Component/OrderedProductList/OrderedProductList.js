@@ -7,7 +7,7 @@ import { MyPaper } from "../../../../../../design/MyPaper";
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { OrderedProductListStyles } from "../../CSS/OrderedProductListStyles";
 import OrderStatus from "./OrderStatus/OrderStatus";
-import { withRouter } from "react-router";
+import { withRouter } from "../../../../../../../helpers/customHooks/withRouter";
 
 /** This Component will be mapped from order Data Array and
  *
@@ -118,7 +118,7 @@ const OrderedProductList = ({ productData, orderID, filters, history }) => {
                     color="primary"
                     size="small"
                     onClick={(e) => {
-                      history.push(`review/create/${productId}`);
+                      history.push(`review/${productId}`);
 
                       // well , it worked but don't know how
                       e.preventDefault();

@@ -1,4 +1,4 @@
-// import { makeStyles } from "@material-ui/styles";
+//  import { makeStyles } from '@mui/styles';;
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 

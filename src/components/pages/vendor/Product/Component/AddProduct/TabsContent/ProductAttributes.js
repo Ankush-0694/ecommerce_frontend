@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+ import { makeStyles } from '@mui/styles';
 import React from "react";
 import { MyTextInput } from "../../../../../../design/MyFormFieldComponent";
 import { AddProductStyles } from "../../../CSS/AddProductStyles";

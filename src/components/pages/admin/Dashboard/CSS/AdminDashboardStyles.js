@@ -1,6 +1,6 @@
 import { makeStyles } from "../../../../design/MyUseStyles";
 
-const AdminDashboardStyles = makeStyles((theme) => ({
+const AdminDashboardStyles = makeStyles(() => ({
   root: {
     display: "flex",
   },

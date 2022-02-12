@@ -3,19 +3,17 @@ import {
   FormControlLabel,
   Checkbox,
   Typography,
-} from "@material-ui/core";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+} from "@mui/material";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 
-// we will override these styles using other classes instead of this in our component, (this is for example)
 
-// https://stackblitz.com/edit/material-ui-custom-outline-color?file=ValidField.js - this is the all thing which i need
 
 const useStyles = makeStyles({
   root: {
     margin: "10px 0px",
 
+    
     //We can change input css from here
     "& .MuiInputBase-input": {
       backgroundColor: "white",
@@ -34,20 +32,11 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createTheme({
-  // overrides: {
-  //   // Style sheet name ⚛️
-  //   "": {
-  //     // Name of the rule
-  //     border: "10px solid black",
-  //   },
-  // },
-});
 
 const MyTextInput = ({ style, onChange, ...others }) => {
   const classes = useStyles();
   return (
-    <ThemeProvider theme={theme}>
+    
       <TextField
         {...others}
         onChange={onChange}
@@ -56,12 +45,13 @@ const MyTextInput = ({ style, onChange, ...others }) => {
         fullWidth
         className={classes.root}
         size="medium"
+        margin="normal"
 
         // inputProps={{
         //   style: { color: "black" },
         // }} // input props are  to overide pre defined css
       />
-    </ThemeProvider>
+    
   );
 };
 

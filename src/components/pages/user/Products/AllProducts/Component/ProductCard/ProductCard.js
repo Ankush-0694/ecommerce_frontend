@@ -1,12 +1,13 @@
-import { Star } from "@material-ui/icons";
+import { Star } from "@mui/icons-material";
 import React, { Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MyCardContainer } from "../../../../../../design/MyCardComponents";
 import { MyCardContent } from "../../../../../../design/MyCardComponents";
 import { MyCardMedia } from "../../../../../../design/MyCardComponents";
 import { MyGridItem } from "../../../../../../design/MyGrid";
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { ProductCardStyles } from "../../CSS/ProductCardStyles";
+import { withRouter } from "../../../../../../../helpers/customHooks/withRouter";
 
 const ProductCard = ({ details, link, history, selectedRating }) => {
   const classes = ProductCardStyles();

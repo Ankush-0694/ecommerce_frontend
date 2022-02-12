@@ -14,7 +14,7 @@ const Products = ({ productData, selectedRating }) => {
               selectedRating={selectedRating}
               key={product.id}
               details={product}
-              link={`/products/:${product.id}`}
+              link={`/products/${product.id}`}
             />
           );
         })}

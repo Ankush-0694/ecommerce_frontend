@@ -1,7 +1,8 @@
-import { Divider, makeStyles } from "@material-ui/core";
-import Drawer from "@material-ui/core/Drawer";
+import { Divider } from "@mui/material";
+import {makeStyles, useTheme } from "../design/MyUseStyles";
+import Drawer from "@mui/material/Drawer";
 import { Fragment } from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "../../helpers/customHooks/withRouter";
 import { MyIcon } from "./MyIcons";
 import {
   MyListContainer,
@@ -48,7 +49,8 @@ const SideDrawerStyles = makeStyles((theme) => ({
 
 /** List Item  for side Drawer */
 const MySideDrawerList = withRouter(({ history, listData }) => {
-  const classes = SideDrawerStyles();
+  const theme = useTheme();
+  const classes = SideDrawerStyles(theme);
 
   return (
     <div>

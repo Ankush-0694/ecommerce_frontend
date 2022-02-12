@@ -1,11 +1,11 @@
-import { TableHead } from "@material-ui/core";
+import { TableHead } from "@mui/material";
 import {
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 
 const MyTableContainer = ({ className, children, component }) => {

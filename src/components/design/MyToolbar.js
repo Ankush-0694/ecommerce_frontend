@@ -1,5 +1,6 @@
-import { makeStyles } from "@material-ui/core";
+
 import React from "react";
+import {makeStyles, useTheme } from "../design/MyUseStyles";
 
 const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
@@ -12,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyToolbar = ({ style }) => {
-  const classes = useStyles();
+  const theme = useTheme()
+  const classes = useStyles(theme);
   return <div style={style} className={classes.toolbar}></div>;
 };
 

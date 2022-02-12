@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { Link, Redirect, withRouter } from "react-router-dom";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Link } from "react-router-dom";
+import { withRouter } from "../../../helpers/customHooks/withRouter" ;
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useQuery } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../queries/Cart/cartQueries";
 import { StyledBadge, userNavbarStyles } from "./Css/UserNavbarStyles";
@@ -12,7 +13,9 @@ import ShowLoading from "../LoadingComponent/ShowLoading";
 import { GET_ME } from "../../../queries/user/userQueries";
 import { useApolloClient } from "@apollo/client";
 
+
 const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
+  
   const classes = userNavbarStyles();
 
   const client = useApolloClient(); // getting client to clear cache on logout
@@ -106,7 +109,8 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               onClick={() => {
                 history.push("/orders");
               }}
-              color="inherit">
+              color="inherit"
+              >
               My Orders
             </MyButtonComponent>
 
@@ -202,8 +206,8 @@ export default withRouter(UserNavbar);
 // import { MyMenuAppBar } from "../../Design/MyMenuAppBar";
 // import { MyMenuItem } from "../../Design/MyMenuItem";
 // import { MyMenuIcon } from "../../Design/MyIcons";
-// import { useTheme } from "@material-ui/core/styles";
-// import { useMediaQuery } from "@material-ui/core";
+// import { useTheme } from "@mui/material/styles";
+// import { useMediaQuery } from "@mui/material";
 
 // const theme = useTheme();
 // const [anchorEl, setAnchorEl] = React.useState(null);

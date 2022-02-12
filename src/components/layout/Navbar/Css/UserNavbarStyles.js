@@ -1,7 +1,8 @@
-import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
-import { Badge } from "@material-ui/core";
+import {  makeStyles, withStyles } from "@mui/styles";
+import { Badge } from "@mui/material";
 
 const userNavbarStyles = makeStyles((theme) => ({
+  
   /* Doubt - May be use in vendor navbar */
   NavbarContainer: {
     width: "90%",

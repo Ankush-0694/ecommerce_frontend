@@ -49,7 +49,7 @@ const CheckoutSingle = (props) => {
    * This id passed through param by which we can fetch the product
    * @type {string} - Contain id of the product
    */
-  const productid = props.match.params.id.split(":")[1];
+  const productid = props.match.params.id;
 
   /**  getting single product item  */
   const {

@@ -9,7 +9,7 @@ import {
   UPDATE_REVIEW,
 } from "../../../../../../../queries/Review/ReviewMutations";
 
-const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
+const ProductReviewForm = ({ productid, currentReview, setCurrentReview , setReviewFormSubmitted}) => {
   const [reviewFormData, setReviewFormData] = useState({
     review: "",
   });
@@ -64,6 +64,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview }) => {
     setReviewFormData({
       review: "",
     });
+    setReviewFormSubmitted(true);
     setRatingValue(0);
     setCurrentReview(null);
   };

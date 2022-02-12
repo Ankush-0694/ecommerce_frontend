@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 import { Route } from "react-router-dom";
 import { AdminDashboardStyles } from "./CSS/AdminDashboardStyles";
 import {

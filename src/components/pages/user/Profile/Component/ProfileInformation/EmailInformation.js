@@ -1,4 +1,4 @@
-import { Email } from "@material-ui/icons";
+import { Email } from "@mui/icons-material";
 import React, { useState } from "react";
 
 import { ProfileInformationStyles } from "../../CSS/ProfileInformationStyles";

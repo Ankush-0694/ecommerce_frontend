@@ -7,7 +7,7 @@ import { validateLoginForm } from "../../../layout/clientFormValidations/authFor
 import { USER_LOGIN } from "../../../../queries/user/userMutations";
 import MyAlert from "../../../design/MyAlert";
 import { errorVar } from "../../../../helpers/ReactiveVariables/ReactiveVariables";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -16,11 +16,13 @@ const Login = (props) => {
     password: "",
     passwordError: "",
   });
+  const location = useLocation();
+  console.log({location})
   const { email, emailError, password, passwordError } = userDetails;
 
   /** Fetching user identity from url then doing user login according to that */
 
-  let identity = props.history.location.pathname.split("/")[1];
+  let identity = location.pathname.split("/")[1];
 
   if (identity === "login") identity = "customer";
 
@@ -113,15 +115,15 @@ const Login = (props) => {
        *  And Show that message as an alert
        *
        */}
-      {props.location.state && props.location.state.errorMsg && (
-        <MyAlert type="error">{props.location.state.errorMsg}</MyAlert>
+      {location.state && location.state.errorMsg && (
+        <MyAlert type="error">{location.state.errorMsg}</MyAlert>
       )}
       {/* if signup got successfull then we need to come to this page with a alert msg
 
        * state is cleared after using window.history
        */}
-      {props.location.state && props.location.state.successMsg && (
-        <MyAlert type="success">{props.location.state.successMsg}</MyAlert>
+      {location.state && location.state.successMsg && (
+        <MyAlert type="success">{location.state.successMsg}</MyAlert>
       )}
       {/* Clearing the state passed from redirection to prevent it from showing error on reload */}
       {window.history.replaceState({}, document.title)}
@@ -194,3 +196,13 @@ const Login = (props) => {
 };
 
 export default Login;
+// import React from 'react'
+
+// const Login = (props) => {
+//   console.log({props})
+//   return (
+//     <div>Login</div>
+//   )
+// }
+
+// export default Login;

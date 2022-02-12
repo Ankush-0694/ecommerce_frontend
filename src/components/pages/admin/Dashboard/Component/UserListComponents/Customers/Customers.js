@@ -1,6 +1,6 @@
 import React from "react";
 import UserList from "../UserTableBody/UserTableBody";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@mui/styles';
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { MyPaper } from "../../../../../../design/MyPaper";
 import { useQuery } from "@apollo/client";

@@ -1,6 +1,7 @@
-import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
+import { useTheme,  } from "@mui/material/styles";
+import {  makeStyles, withStyles } from "@mui/styles";
 
-export const VendorNavbarStyles = makeStyles((theme) => ({
+export const VendorNavbarStyles = makeStyles({
   navbar: {
     display: "flex",
     width: "90%",
@@ -20,4 +21,4 @@ export const VendorNavbarStyles = makeStyles((theme) => ({
       color: "black",
     },
   },
-}));
+});

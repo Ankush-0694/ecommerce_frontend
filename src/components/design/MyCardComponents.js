@@ -1,9 +1,9 @@
-import { CardActions } from "@material-ui/core";
-import { Card } from "@material-ui/core";
-import { CardContent } from "@material-ui/core";
-import { CardMedia } from "@material-ui/core";
+import { CardActions } from "@mui/material";
+import { Card } from "@mui/material";
+import { CardContent } from "@mui/material";
+import { CardMedia } from "@mui/material";
 
-import { makeStyles } from "@material-ui/core/styles";
+import {useTheme, makeStyles} from './MyUseStyles';
 
 const useStyles = makeStyles((theme) => ({
   cardStyle: {
@@ -32,7 +32,8 @@ const MyCardContainer = ({ children }) => {
 };
 
 const MyCardContent = ({ children }) => {
-  const classes = useStyles();
+  const theme = useTheme(); 
+  const classes = useStyles(theme);
   return <CardContent className={classes.cardContent}>{children}</CardContent>;
 };
 
