@@ -7,7 +7,8 @@ import { validateLoginForm } from "../../../layout/clientFormValidations/authFor
 import { USER_LOGIN } from "../../../../queries/user/userMutations";
 import MyAlert from "../../../design/MyAlert";
 import { errorVar } from "../../../../helpers/ReactiveVariables/ReactiveVariables";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
 const Login = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -16,8 +17,11 @@ const Login = (props) => {
     password: "",
     passwordError: "",
   });
-  const location = useLocation();
-  console.log({location})
+
+  console.log({props})
+  
+  const { location, Navigate, setIsAuthenticated } = props;
+
   const { email, emailError, password, passwordError } = userDetails;
 
   /** Fetching user identity from url then doing user login according to that */
@@ -42,18 +46,18 @@ const Login = (props) => {
          *
          * Need to set this state to make Authenticated true after Login
          */
-        props.setIsAuthenticated(true);
+        setIsAuthenticated(true);
 
         /**This push will depend on the identity of the user
          * If user is vendor then push to his product
          * if admin then push to dashboard
          */
         if (identity === "admin") {
-          props.history.push("/admin/dashboard");
+          Navigate("/admin/dashboard");
         } else if (identity === "vendor") {
-          props.history.push("/vendor/products");
+          Navigate("/vendor/products");
         } else {
-          props.history.push("/");
+          Navigate("/");
         }
       },
     });
@@ -127,6 +131,7 @@ const Login = (props) => {
       )}
       {/* Clearing the state passed from redirection to prevent it from showing error on reload */}
       {window.history.replaceState({}, document.title)}
+
       <MyFullScreenBox display="flex" width="100%" height="90vh">
         <form
           onSubmit={onSubmit}
@@ -195,14 +200,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
-// import React from 'react'
-
-// const Login = (props) => {
-//   console.log({props})
-//   return (
-//     <div>Login</div>
-//   )
-// }
-
-// export default Login;
+export default withRouter(Login);

@@ -1,7 +1,7 @@
 import React from "react";
 // import { makeStyles } from "../../Design/MyUseStyles";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
-import { withRouter } from "../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../helpers/HOC/withRouter";
 import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { useQuery } from "@apollo/client";
@@ -10,7 +10,7 @@ import { GET_ME } from "../../../queries/user/userQueries";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
 // const drawerWidth = 250;
 
-const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
+const AdminNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
   const classes = VendorNavbarStyles(); //same styling as vendor
 
   /** Need to use this because we may need to show the tabs (logout) only to the admin
@@ -42,14 +42,16 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
    */
   if (getMeData) {
     if (getMeData.getMe.role === "customer") {
-      history.push({
-        pathname: "/", // redirecting to main page of customer
-        state: { message: "You Need to Logout First" },
-      });
+      // Navigate(
+      // {
+      //   pathname: "/", // redirecting to main page of customer
+      //   state: { message: "You Need to Logout First" },
+      // });
+      Navigate('/', { state : { message: "You Need to Logout First"} } )
     }
 
     if (getMeData.getMe.role === "vendor") {
-      history.push({
+      Navigate({
         pathname: "/vendor/products", // redirecting to main page of vendor
         state: { message: "You Need to Logout First" },
       });
@@ -62,7 +64,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
         <MyButtonComponent
           className={classes.navBtn}
           onClick={() => {
-            history.push("/admin/dashboard");
+            Navigate("/admin/dashboard");
           }}
           color="inherit">
           <MyTypography variant="body1" noWrap>
@@ -76,7 +78,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
           <MyButtonComponent
             className={classes.navBtn}
             onClick={() => {
-              history.push("/admin/login");
+              Navigate("/admin/login");
             }}
             color="inherit">
             <MyTypography variant="body1" noWrap>
@@ -93,7 +95,7 @@ const AdminNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
 
               localStorage.removeItem("token");
               setIsAuthenticated(false);
-              history.push("/admin/login");
+              Navigate("/admin/login");
             }}
             color="inherit">
             <MyTypography variant="body1" noWrap>

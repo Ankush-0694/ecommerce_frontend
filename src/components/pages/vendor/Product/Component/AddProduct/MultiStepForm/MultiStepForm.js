@@ -242,7 +242,6 @@ const MultiStepForm = ({ current, setCurrent }) => {
                 disabled={activeStep === 0}
                 onClick={handleStepPrev}
                 variant="contained"
-                color="default"
                 className={`${classes.navigation} ${classes.prevBtn}`}>
                 Back
               </MyButtonComponent>

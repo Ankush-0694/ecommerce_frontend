@@ -18,16 +18,17 @@ import { MyPaper } from "../../../../design/MyPaper";
 import MyDivider from "../../../../design/MyDivider";
 import { Fragment } from "react";
 import { SingleProductStyles } from "./CSS/SingleProductStyles";
+import { withRouter } from "../../../../../helpers/HOC/withRouter";
 
 const SingleProduct = (props) => {
   const classes = SingleProductStyles();
-  console.log({props})
-  const productid = props.match.params.id;
+  // console.log({props})
+ 
+  const { Navigate, isAuthenticated, userData , params} = props;
+
+  const productid = params.id;
   console.log({productid})
 
-
-  
-  const { history, isAuthenticated, userData } = props;
   // console.log(props);
 
   /** For adding and updating the data using same form */
@@ -114,10 +115,7 @@ const SingleProduct = (props) => {
    */
   const onClickBuyNow = (e) => {
     e.preventDefault();
-    history.push({
-      pathname: `/checkout/${productid}`,
-      state: [productid],
-    });
+    Navigate(`/checkout/${productid}`, { state : [productid]})
   };
 
   return (
@@ -256,7 +254,7 @@ const SingleProduct = (props) => {
   );
 };
 
-export default SingleProduct;
+export default withRouter(SingleProduct);
 
 // if need to use go to cart on adding cart in myAlert
 {
@@ -266,7 +264,7 @@ export default SingleProduct;
             color="primary"
             style={{ padding: "3px 5px", marginLeft: "5px" }}
             onClick={() => {
-              history.push("/cart");
+              Navigate("/cart");
             }}>
             Go To cart
           </MyButtonComponent> */

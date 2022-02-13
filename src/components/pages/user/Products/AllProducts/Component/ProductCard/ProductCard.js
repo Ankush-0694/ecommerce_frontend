@@ -7,9 +7,9 @@ import { MyCardMedia } from "../../../../../../design/MyCardComponents";
 import { MyGridItem } from "../../../../../../design/MyGrid";
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { ProductCardStyles } from "../../CSS/ProductCardStyles";
-import { withRouter } from "../../../../../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../../../../../helpers/HOC/withRouter";
 
-const ProductCard = ({ details, link, history, selectedRating }) => {
+const ProductCard = ({ details, link, Navigate, selectedRating }) => {
   const classes = ProductCardStyles();
   const { id, productName, productPrice, productImageUrl, reviews } = details;
 

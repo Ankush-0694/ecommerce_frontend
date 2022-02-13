@@ -9,10 +9,12 @@ import MyDivider from "../../../design/MyDivider";
 // import { MyPaper } from "../../../Design/MyPaper";
 import ProductFilter from "./Component/ProductFilter";
 import { ShopByStyles } from "./CSS/ShopByStyles";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
 const ShopBy = (props) => {
   const classes = ShopByStyles();
-  const queryParameter = queryString.parse(props.location.search);
+  const { location } = props;
+  const queryParameter = queryString.parse(location.search);
 
   const searchText = queryParameter.q;
 
@@ -81,4 +83,4 @@ const ShopBy = (props) => {
   );
 };
 
-export default ShopBy;
+export default withRouter(ShopBy);

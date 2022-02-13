@@ -7,6 +7,7 @@ import { MyTextInput, MyCheckbox } from "../../../design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
 import MyAlert from "../../../design/MyAlert";
 import { validateSignupForm } from "../../../layout/clientFormValidations/authFormValidation";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
 const Signup = (props) => {
   const [userDetails, setUserDetails] = useState({
@@ -38,7 +39,7 @@ const Signup = (props) => {
         //handling the rejected promise when calling mutation
       },
       onCompleted: (data) => {
-        props.history.push({
+        props.Navigate({
           pathname: "/login",
           state: { successMsg: "SignUp Successful, Please Login..." },
         });
@@ -195,4 +196,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default withRouter(Signup);

@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 import { GET_SINGLE_PRODUCT } from "../../../../queries/Product/productQueries";
 import MyAlert from "../../../design/MyAlert";
 import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
 import { MyGridContainer, MyGridItem } from "../../../design/MyGrid";
-import MyModal from "../../../design/MyModal";
+// import MyModal from "../../../design/MyModal";
 import { MyPaper } from "../../../design/MyPaper";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
@@ -12,7 +13,8 @@ import SingleProductDetails from "../Checkout/Component/CheckoutProductDetails/S
 import ProductReviewForm from "../Products/SingleProduct/Component/ProductReviewForm/ProductReviewForm";
 
 const ReviewFormComponent = (props) => {
-  const productid = props.match.params.productId;
+  const { params } = props;
+  const productid = params.productId;
   const [currentReview, setCurrentReview] = useState(null);
 
   const [reviewFormSubmitted, setReviewFormSubmitted] = useState(false);
@@ -37,7 +39,7 @@ const ReviewFormComponent = (props) => {
 
   return (
     <div style={{ width: "95%", margin: "auto", marginTop: "16px" }}>
-      <MyModal />
+      {/* <MyModal /> */}
       {reviewFormSubmitted && (
           <MyAlert type="success">
             Review submitted successfully
@@ -74,4 +76,4 @@ const ReviewFormComponent = (props) => {
   );
 };
 
-export default ReviewFormComponent;
+export default withRouter(ReviewFormComponent);

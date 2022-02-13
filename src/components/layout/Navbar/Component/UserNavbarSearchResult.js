@@ -6,7 +6,7 @@ import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
 import ShowError from "../../ErrorComponent/ShowError";
 import ShowLoading from "../../LoadingComponent/ShowLoading";
-import { withRouter } from '../../../../helpers/customHooks/withRouter';
+import { withRouter } from '../../../../helpers/HOC/withRouter';
 
 
 const useStyles = makeStyles({
@@ -29,7 +29,7 @@ const UserNavbarSearchResult = ({
   productData,
   searchError,
   // searchLoading,
-  history,
+  Navigate,
   searchText,
 }) => {
   const classes = useStyles();
@@ -64,7 +64,7 @@ const UserNavbarSearchResult = ({
                   <div
                     onMouseDown={() => {
                       // this event is used to counter the onBlur event happen on search input
-                      history.push(`/ShopBy?q=${searchText}`);
+                      Navigate(`/ShopBy?q=${searchText}`);
                     }}>
                     <div>
                       {productName} , Price - ₹{productPrice}

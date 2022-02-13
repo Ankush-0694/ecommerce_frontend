@@ -10,8 +10,10 @@ import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
 import { DELETE_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartMutations";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
-const Cart = ({ history }) => {
+const Cart = (props) => {
+  const { Navigate } = props;
   const classes = CartStyles();
 
   //to Get data from cart
@@ -62,7 +64,7 @@ const Cart = ({ history }) => {
     cartData.map((cartDataItem) => {
       productIDArray.push(cartDataItem.productData.productID);
     });
-    history.push({
+    Navigate({
       pathname: `/checkout`,
       state: [...productIDArray],
     });
@@ -153,4 +155,4 @@ const Cart = ({ history }) => {
   );
 };
 
-export default Cart;
+export default withRouter(Cart);

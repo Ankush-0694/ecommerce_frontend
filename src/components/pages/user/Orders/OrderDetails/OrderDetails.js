@@ -9,9 +9,12 @@ import ProductList from "./Component/OrderDetailsProductList/ProductList";
 import OrderedProductList from "../AllOrders/Component/OrderedProductList/OrderedProductList";
 import ShowError from "../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../layout/LoadingComponent/ShowLoading";
+import { withRouter } from "../../../../../helpers/HOC/withRouter";
 
 const OrderDetails = (props) => {
   const classes = OrderDetailsStyles();
+  const { location }= props;
+
   /* Get order details using order id but must use cache first */
 
   /**
@@ -19,7 +22,7 @@ const OrderDetails = (props) => {
    * @param {ID} orderId Id of the Order
    * @param {ID} productId ProductID of that Product on Which we have click to check the status
    */
-  const queryParameter = queryString.parse(props.location.search);
+  const queryParameter = queryString.parse(location.search);
 
   const { orderId, productId } = queryParameter;
 
@@ -152,7 +155,7 @@ const OrderDetails = (props) => {
   );
 };
 
-export default OrderDetails;
+export default withRouter(OrderDetails);
 
 // .slice(0)
 //                 .reverse()

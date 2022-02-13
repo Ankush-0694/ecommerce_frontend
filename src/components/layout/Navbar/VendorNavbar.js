@@ -8,10 +8,11 @@ import ShowLoading from "../LoadingComponent/ShowLoading";
 import { VendorNavbarStyles } from "./Css/VendorNavbarStyles";
 import { useApolloClient } from "@apollo/client";
 import { MyIcon } from "../../design/MyIcons";
-import { withRouter } from "../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../helpers/HOC/withRouter";
 
-const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
+const VendorNavbar = (props) => {
   const classes = VendorNavbarStyles();
+  const { Navigate, isAuthenticated, setIsAuthenticated } = props; 
 
   const client = useApolloClient(); // getting client to clear cache on logout
 
@@ -44,14 +45,11 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
    */
   if (getMeData) {
     if (getMeData.getMe.role === "customer") {
-      history.push({
-        pathname: "/", // redirecting to main page of customer
-        state: { message: "You Need to Logout First" },
-      });
+      Navigate('/', { state : { message: "You Need to Logout First"} })
     }
 
     if (getMeData.getMe.role === "admin") {
-      history.push({
+      Navigate({
         pathname: "/admin/dashboard", // redirecting to main page of admin
         state: { message: "You Need to Logout First" },
       });
@@ -69,7 +67,7 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
 
     client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
 
-    history.push("/vendor/login");
+    Navigate("/vendor/login");
   };
 
   // tabs need to show when user is not logged in
@@ -79,7 +77,7 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
         <MyButtonComponent
           className={classes.navBtn}
           onClick={() => {
-            history.push("/vendor/login");
+            Navigate("/vendor/login");
           }}
           color="inherit">
           <MyTypography variant="body1" noWrap>
@@ -106,7 +104,7 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
         <MyButtonComponent
           className={classes.navBtn}
           onClick={() => {
-            history.push("/vendor/account");
+            Navigate("/vendor/account");
           }}
           color="inherit">
           <MyIcon>account_circle_Icon</MyIcon>
@@ -131,7 +129,7 @@ const VendorNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
           <MyButtonComponent
             className={classes.navBtn}
             onClick={() => {
-              history.push("/vendor/products");
+              Navigate("/vendor/products");
             }}
             color="inherit">
             <MyTypography variant="body1" noWrap>

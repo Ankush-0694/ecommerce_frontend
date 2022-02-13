@@ -41,7 +41,7 @@ const CheckoutMultiple = (props) => {
    * Can be useful if things go south
    * @type {string[]} ID's
    */
-  // const productIDArray = props.history.location.state || [];
+  // const productIDArray = props.Navigate.location.state || [];
 
   // getting all cart item because we place order from the  cart
   const {

@@ -1,6 +1,6 @@
 import React from "react";
 import ProductLayout from "./ProductLayout/ProductLayout";
-import { withRouter } from "../../../../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../../../../helpers/HOC/withRouter";
 
 
 /* Used to show order Summary on the Single checkout page */

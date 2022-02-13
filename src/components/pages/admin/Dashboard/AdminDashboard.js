@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { AdminDashboardStyles } from "./CSS/AdminDashboardStyles";
 import {
   MySideDrawerContainer,
@@ -51,11 +51,12 @@ const AdminDashboard = () => {
         {/* This is working we remove exact from app.js in this route
             And we are using exact here
          */}
-
-        {/* <Route exact path="/admin/dashboard" component={Customers} /> */}
-        <Route exact path="/admin/dashboard" component={Customers} />
-        <Route exact path="/admin/dashboard/vendors" component={Vendors} />
-        <Route exact path="/admin/dashboard/products" component={ProductList} />
+         
+        <Routes>
+          <Route exact path="/admin/dashboard" component={Customers} />
+          <Route exact path="/admin/dashboard/vendors" component={Vendors} />
+          <Route exact path="/admin/dashboard/products" component={ProductList} />
+        </Routes>
       </div>
     </div>
   );

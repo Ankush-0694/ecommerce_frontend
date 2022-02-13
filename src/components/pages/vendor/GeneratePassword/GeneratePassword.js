@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 import { GENERATE_PASSWORD } from "../../../../queries/user/userMutations";
 import MyAlert from "../../../design/MyAlert";
 import { MyButtonComponent } from "../../../design/MyButtonComponent";
@@ -8,8 +8,9 @@ import { MyTextInput } from "../../../design/MyFormFieldComponent";
 import { MyFullScreenBox } from "../../../design/MyFullScreenBox";
 import { validateGeneratePassword } from "../../../layout/clientFormValidations/authFormValidation";
 
-const GeneratePassword = ({ history }) => {
-  const { token } = useParams();
+const GeneratePassword = (props) => {
+  const { params : {token} , Navigate  } = props;
+
 
   // can add a query to check,  is there any refresh token or not  , then we show a component with a msg
 
@@ -34,7 +35,7 @@ const GeneratePassword = ({ history }) => {
       });
     },
     onCompleted: (data) => {
-      history.push({
+      Navigate({
         pathname: "/vendor/login",
         state: {
           successMsg: data.generatePassword.successMsg,
@@ -150,4 +151,4 @@ const GeneratePassword = ({ history }) => {
   );
 };
 
-export default GeneratePassword;
+export default withRouter(GeneratePassword);

@@ -3,7 +3,7 @@ import {
   MySideDrawerContainer,
   MySideDrawerList,
 } from "../../../design/MySideDrawer";
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
  import { makeStyles } from '@mui/styles';
 import ProfileInformation from "./Component/ProfileInformation/ProfileInformation";
 import AddressContainer from "../Checkout/AddressContainer";
@@ -54,32 +54,34 @@ const MyProfile = ({ userData }) => {
         {/* This is working because we remove exact from app.js in this route
             And we are using exact here
          */}
-        <Route
-          exact
-          path="/account"
-          render={(props) => {
-            return <ProfileInformation userData={userData} {...props} />;
-          }}
-        />
-        {/* Coming From /user/checkout/addressContainer */}
-        <Route
-          exact
-          path="/account/address"
-          render={(props) => {
-            return (
+        <Routes>
+          <Route
+            path="/account"
+            element={
+              <ProfileInformation userData={userData} />
+            }
+          />
+
+          {/* Coming From /user/checkout/addressContainer */}
+
+          <Route
+            path="/account/address"
+            element={
               <div className={classes.addressContainerDiv}>
-                <AddressContainer {...props} />
+                <AddressContainer />
               </div>
-            );
-          }}
-        />
-        <Route
-          exact
-          path="/account/review"
-          render={(props) => {
-            return <RatingAndReview userData={userData} {...props} />;
-          }}
-        />
+            }
+          />
+
+          <Route
+            exact
+            path="/account/review"
+            element={
+              <RatingAndReview userData={userData} />
+            }
+          />
+          
+        </Routes>
       </div>
     </div>
   );

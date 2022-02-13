@@ -5,9 +5,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import UserNavbarSearchResult from "./UserNavbarSearchResult";
 import { GET_PRODUCT_BY_SEARCH_TEXT } from "../../../../queries/Product/productQueries";
 import { useLazyQuery } from "@apollo/client";
-import { withRouter } from "../../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
-const UserNavbarSearch = ({ history }) => {
+const UserNavbarSearch = ({ Navigate }) => {
   const classes = userNavbarStyles();
 
   /** this is to store the searched text */
@@ -70,7 +70,7 @@ const UserNavbarSearch = ({ history }) => {
         className={classes.searchIcon}
         onMouseDown={() => {
           if (searchText.trim() === "") return; //don't search if there are only whitespaces
-          history.push(`/ShopBy?q=${searchText}`);
+          Navigate(`/ShopBy?q=${searchText}`);
         }}>
         <SearchIcon />
       </MyButtonComponent>

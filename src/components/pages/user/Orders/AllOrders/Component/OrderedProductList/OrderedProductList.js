@@ -7,7 +7,7 @@ import { MyPaper } from "../../../../../../design/MyPaper";
 import { MyTypography } from "../../../../../../design/MyTypography";
 import { OrderedProductListStyles } from "../../CSS/OrderedProductListStyles";
 import OrderStatus from "./OrderStatus/OrderStatus";
-import { withRouter } from "../../../../../../../helpers/customHooks/withRouter";
+import { withRouter } from "../../../../../../../helpers/HOC/withRouter";
 
 /** This Component will be mapped from order Data Array and
  *
@@ -16,7 +16,7 @@ import { withRouter } from "../../../../../../../helpers/customHooks/withRouter"
  * This component used in Order.js (to show all products in the orders)
  *  and OrderDetails.js(to show others products in order(other than on which we clicked)  )
  */
-const OrderedProductList = ({ productData, orderID, filters, history }) => {
+const OrderedProductList = ({ productData, orderID, filters, Navigate }) => {
   const classes = OrderedProductListStyles();
 
   const { ByStatus } = filters;
@@ -118,7 +118,7 @@ const OrderedProductList = ({ productData, orderID, filters, history }) => {
                     color="primary"
                     size="small"
                     onClick={(e) => {
-                      history.push(`review/${productId}`);
+                      Navigate(`review/${productId}`);
 
                       // well , it worked but don't know how
                       e.preventDefault();

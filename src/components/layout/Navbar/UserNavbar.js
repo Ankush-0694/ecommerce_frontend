@@ -3,7 +3,7 @@ import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
 import { Link } from "react-router-dom";
-import { withRouter } from "../../../helpers/customHooks/withRouter" ;
+import { withRouter } from "../../../helpers/HOC/withRouter" ;
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useQuery } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../queries/Cart/cartQueries";
@@ -14,8 +14,7 @@ import { GET_ME } from "../../../queries/user/userQueries";
 import { useApolloClient } from "@apollo/client";
 
 
-const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
-  
+const UserNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
   const classes = userNavbarStyles();
 
   const client = useApolloClient(); // getting client to clear cache on logout
@@ -60,14 +59,14 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
    */
   if (getMeData) {
     if (getMeData.getMe.role === "vendor") {
-      history.push({
+      Navigate({
         pathname: "/vendor/products", // redirecting to main page of vendor
         state: { message: "You Need to Logout First" },
       });
     }
 
     if (getMeData.getMe.role === "admin") {
-      history.push({
+      Navigate({
         pathname: "/admin/dashboard", // redirecting to main page of admin
         state: { message: "You Need to Logout First" },
       });
@@ -107,7 +106,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
-                history.push("/orders");
+                Navigate("/orders");
               }}
               color="inherit"
               >
@@ -121,7 +120,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
-                history.push("/cart");
+                Navigate("/cart");
               }}
               color="inherit">
               {/* If error just show the text */}
@@ -144,7 +143,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
             <MyButtonComponent
               className={classes.NavbarLink}
               onClick={() => {
-                history.push("/account");
+                Navigate("/account");
               }}
               color="inherit">
               My Account
@@ -154,7 +153,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               <MyButtonComponent
                 className={classes.NavbarLink}
                 onClick={() => {
-                  history.push("/signup");
+                  Navigate("/signup");
                 }}
                 color="inherit">
                 Signup
@@ -167,7 +166,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
               <MyButtonComponent
                 className={classes.NavbarLink}
                 onClick={() => {
-                  history.push("/login");
+                  Navigate("/login");
                 }}
                 color="inherit">
                 Login
@@ -185,7 +184,7 @@ const UserNavbar = ({ history, isAuthenticated, setIsAuthenticated }) => {
 
                   client.clearStore(); // important step to do because we need to clear the cache or else it will be give same data to another if we don't reload
 
-                  history.push("/login");
+                  Navigate("/login");
                 }}
                 color="inherit">
                 Logout

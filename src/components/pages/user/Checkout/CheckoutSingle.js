@@ -14,6 +14,7 @@ import MyAlert from "../../../design/MyAlert";
 import ShowError from "../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../layout/LoadingComponent/ShowLoading";
 import { GET__ORDERS_BY_CUSTOMERID } from "../../../../queries/Order/orderQueries";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
 /**
  * When we are trying to buy only single item directly without going to cart.
@@ -22,10 +23,13 @@ import { GET__ORDERS_BY_CUSTOMERID } from "../../../../queries/Order/orderQuerie
  */
 const CheckoutSingle = (props) => {
   const classes = CheckoutStyles();
+  const { Navigate , params, location } = props;
+  console.log({props})
+  
+  /** we check , if Navigate.location.state have any array or not , if not then just push to cart Checkout (as flipkart)  */
+  const productIdStateArray = location.state;
 
-  /** we check , if history.location.state have any array or not , if not then just push to cart Checkout (as flipkart)  */
-  const productIdStateArray = props.history.location.state;
-  if (!productIdStateArray) props.history.push("/checkout");
+  if (!productIdStateArray) Navigate("/checkout");
 
   /** it is also  total quantity of the order for single product */
   const [quantity, setQuantity] = useState(1);
@@ -49,7 +53,7 @@ const CheckoutSingle = (props) => {
    * This id passed through param by which we can fetch the product
    * @type {string} - Contain id of the product
    */
-  const productid = props.match.params.id;
+  const productid = params.id;
 
   /**  getting single product item  */
   const {
@@ -181,4 +185,4 @@ const CheckoutSingle = (props) => {
   );
 };
 
-export default CheckoutSingle;
+export default withRouter(CheckoutSingle);

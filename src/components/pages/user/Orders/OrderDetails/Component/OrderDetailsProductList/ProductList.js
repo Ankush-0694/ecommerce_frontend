@@ -67,7 +67,7 @@ const ProductList = ({ productData, orderedDate }) => {
             </MyGridContainer>
           </MyGridItem>
 
-          {/* Real Time Status and History of the status */}
+          {/* Real Time Status and Navigate of the status */}
           <MyGridItem xs={5}>
             <div>Order Date -{orderedDate} </div>
             <div>Delivery Date - {} </div>

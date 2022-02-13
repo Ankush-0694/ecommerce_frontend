@@ -2,7 +2,7 @@ import { Divider } from "@mui/material";
 import {makeStyles, useTheme } from "../design/MyUseStyles";
 import Drawer from "@mui/material/Drawer";
 import { Fragment } from "react";
-import { withRouter } from "../../helpers/customHooks/withRouter";
+import { withRouter } from "../../helpers/HOC/withRouter";
 import { MyIcon } from "./MyIcons";
 import {
   MyListContainer,
@@ -48,7 +48,7 @@ const SideDrawerStyles = makeStyles((theme) => ({
 }));
 
 /** List Item  for side Drawer */
-const MySideDrawerList = withRouter(({ history, listData }) => {
+const MySideDrawerList = withRouter(({ Navigate, listData }) => {
   const theme = useTheme();
   const classes = SideDrawerStyles(theme);
 
@@ -68,7 +68,7 @@ const MySideDrawerList = withRouter(({ history, listData }) => {
                 <MyListItem
                   button
                   onClick={() => {
-                    history.push(item.url);
+                    Navigate(item.url);
                   }}>
                   {item.icon && (
                     <MyListItemIcon>

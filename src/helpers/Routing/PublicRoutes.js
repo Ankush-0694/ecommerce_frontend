@@ -35,69 +35,34 @@ const PublicCustomerRoute = (props) => {
 };
 
 /** Public Vendor Route */
-const PublicVendorRoute = ({
-  exact,
-  path,
-  isAuthenticated,
-  setIsAuthenticated,
-  component: Component,
-  ...restProps
-}) => {
+const PublicVendorRoute = (props) => {
+  const { isAuthenticated, setIsAuthenticated ,Component } = props;
   return (
-    <Route
-      exact={exact}
-      path={path}
-      {...restProps}
-      render={(routeProps) => {
-        return (
-          <>
-            <VendorNavbar
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-              {...routeProps}
-            />
-            <Component
-              {...routeProps}
-              setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
-            />
-          </>
-        );
-      }}
-    />
+    <>
+      <VendorNavbar
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
+      <Component
+        setIsAuthenticated={setIsAuthenticated} // need to pass for use in login page
+      />
+    </>     
   );
 };
 
 /** Public Admin Route */
-const PublicAdminRoute = ({
-  exact,
-  path,
-  isAuthenticated,
-  setIsAuthenticated,
-  component: Component,
-  ...restProps
-}) => {
+const PublicAdminRoute = (props) => {
+  const { isAuthenticated, setIsAuthenticated , Component }= props;
   return (
-    <Route
-      exact={exact}
-      path={path}
-      {...restProps}
-      render={(routeProps) => {
-        return (
-          <>
-            <AdminNavbar
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-              {...routeProps}
-            />
+    <>
+      <AdminNavbar
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
 
-            <Component
-              {...routeProps}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          </>
-        );
-      }}
-    />
+      <Component setIsAuthenticated={setIsAuthenticated}
+      />
+    </>
   );
 };
 

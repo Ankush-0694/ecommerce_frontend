@@ -80,153 +80,214 @@ const App = () => {
             }
           />
 
-          {/* <PublicCustomerRoute
-            exact
+           <Route
             path="/Signup"
-            component={Signup}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
+            element={
+              <PublicCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={Signup} 
+              />
+            }
           />
 
-          <PublicCustomerRoute
-            exact
+          <Route
             path="/"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            component={Home}
+            element={
+              <PublicCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={Home} 
+              />
+            }
           />
 
-          <PublicCustomerRoute
-            exact
+          <Route
             path="/Products/:id"
-            component={SingleProduct}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
+            element={
+              <PublicCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={SingleProduct} 
+                user={getMeData}
+              />
+            }
           />
 
-          <PublicCustomerRoute
-            exact
+
+          <Route
             path="/ShopBy"
-            component={ShopBy}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
+            element={
+              <PublicCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={ShopBy}
+              />
+            }
           />
 
-          <ProtectedCustomerRoute
-            exact
+
+          <Route
             path="/cart"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-            component={Cart}
+            element={
+              <ProtectedCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+                Component={Cart}
+              />
+            }
           />
 
-          <ProtectedCustomerRoute
-            exact
+
+          <Route
             path="/review/:productId"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-            component={ReviewFormComponent}
+            element={
+              <ProtectedCustomerRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+                Component={ReviewFormComponent}
+              />
+            }
           />
 
-          <ProtectedCustomerRoute
-            exact
+          <Route
+            path="/checkout/:id"
+            element={
+              <ProtectedCustomerRoute
+                Component={CheckoutSingle}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedCustomerRoute
+                Component={CheckoutMultiple}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            }
+          />
+
+          <Route
             path="/orders"
-            component={Orders}
-            isAuthenticated={isAuthenticated}
-            user={getMeData}
-            setIsAuthenticated={setIsAuthenticated}
+            element={
+              <ProtectedCustomerRoute
+                Component={Orders}
+                isAuthenticated={isAuthenticated}
+                user={getMeData}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            } 
           />
 
-          <ProtectedCustomerRoute
+          <Route
             exact
             path="/orders/details"
-            component={OrderDetails}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
+            element={
+              <ProtectedCustomerRoute
+                Component={OrderDetails}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            }
           />
 
-          <ProtectedCustomerRoute
-            exact
-            path="/checkout/:id"
-            component={CheckoutSingle}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-          />
-
-          <ProtectedCustomerRoute
-            exact
-            path="/checkout"
-            component={CheckoutMultiple}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-          />
-          <ProtectedCustomerRoute
+          <Route
             path="/account"
-            component={MyProfile}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-          /> */}
+            element={
+              <ProtectedCustomerRoute
+                Component={MyProfile}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            }
+          /> 
 
           {/* Vendor Routes */}
 
-          {/* <PublicVendorRoute
+          <Route
             exact
             path="/vendor/login"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            component={Login}
+            element={
+              <PublicVendorRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={Login}
+              />
+            }
           />
 
-          <PublicVendorRoute
+          <Route
             exact
-            path="/vendor/generatePassword/:token"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            component={GeneratePassword}
+            path="/vendor/products"
+            element={
+              <ProtectedVendorRoute
+                Component={VendorProduct}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            } 
           />
 
-          <ProtectedVendorRoute
-            exact
-            path="/Vendor/products"
-            component={VendorProduct}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-          />
-
-          <ProtectedVendorRoute
+          <Route
             exact
             path="/Vendor/account"
-            component={VendorProfile}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            user={getMeData}
-          /> */}
+            element={
+              <ProtectedVendorRoute
+                Component={VendorProfile}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+              />
+            }
+          />
+          
+          {/*
+            <PublicVendorRoute
+              exact
+              path="/vendor/generatePassword/:token"
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+              component={GeneratePassword}
+            />
+          */}
 
           {/* Admin Routes */}
 
-          {/* <PublicAdminRoute
-            exact
+          <Route
             path="/admin/login"
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            component={Login}
+            element={
+              <PublicAdminRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={Login}
+              />
+            }
+            
           />
 
-          <ProtectedAdminRoute
+          <Route
             path="/admin/Dashboard"
-            component={AdminDashboard}
-            user={getMeData}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-          /> */}
+            element={
+              <ProtectedAdminRoute
+                Component={AdminDashboard}
+                user={getMeData}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            }
+          />
 
           {/* InValid Route */}
           <Route exact path="/unAuth" component={Unauthorized} />
