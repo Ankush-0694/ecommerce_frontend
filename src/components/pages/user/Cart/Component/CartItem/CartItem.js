@@ -3,7 +3,6 @@ import { MyCardMedia } from "../../../../../design/MyCardComponents";
 import { MyTypography } from "../../../../../design/MyTypography";
 import { MyButtonComponent } from "../../../../../design/MyButtonComponent";
 import { MyPaper } from "../../../../../design/MyPaper";
-import { CartItemStyles } from "../../CSS/CartItemStyles";
 import {
   DELETE_CART,
   UPDATE_CART_QUANTITY,
@@ -11,6 +10,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { GET_CART_BY_CUSTOMERID } from "../../../../../../queries/Cart/cartQueries";
 import { MyDeleteIcon } from "../../../../../design/MyIcons";
+import { CartItemStyles } from "../../CSS/CartItemStyles";
 
 const CartItem = ({ cartItemData }) => {
   const classes = CartItemStyles();

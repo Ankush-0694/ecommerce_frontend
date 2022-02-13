@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MyNavbar } from "../../design/MyNavbar";
 import { MyTypography } from "../../design/MyTypography";
 import { MyButtonComponent } from "../../design/MyButtonComponent";
@@ -12,7 +12,6 @@ import UserNavbarSearch from "./Component/UserNavbarSearch";
 import ShowLoading from "../LoadingComponent/ShowLoading";
 import { GET_ME } from "../../../queries/user/userQueries";
 import { useApolloClient } from "@apollo/client";
-
 
 const UserNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
   const classes = userNavbarStyles();
@@ -103,7 +102,7 @@ const UserNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
                 Navigate("/orders");
               }}
               color="inherit"
-              >
+            >
               My Orders
             </MyButtonComponent>
 
@@ -116,7 +115,8 @@ const UserNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
               onClick={() => {
                 Navigate("/cart");
               }}
-              color="inherit">
+              color="inherit"
+            >
               {/* If error just show the text */}
               {getCartError && <>Cart</>}
 

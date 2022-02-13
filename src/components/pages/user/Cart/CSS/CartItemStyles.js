@@ -1,4 +1,5 @@
 import { makeStyles } from "../../../../design/MyUseStyles";
+
 const CartItemStyles = makeStyles({
   cartItem: {
     margin: "10px",
@@ -38,15 +39,16 @@ const CartItemStyles = makeStyles({
       outline: "none",
     },
   },
+  
   quantityButton: {
-    maxWidth: "30px",
-    maxHeight: "30px",
-    minWidth: "30px",
-    minHeight: "30px",
-    borderRadius: "15px",
+    maxWidth: "30px!important",
+    maxHeight: "30px!important",
+    minWidth: "30px!important",
+    minHeight: "30px!important",
+    borderRadius: "15px!important",
     "&:hover": {
-      backgroundColor: "#f50057",
-      color: "white",
+      backgroundColor: "#f50057!important",
+      color: "white!important",
     },
     "&:focus": {
       border: "none",

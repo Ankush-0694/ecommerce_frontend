@@ -3,11 +3,9 @@ import {
   MySideDrawerContainer,
   MySideDrawerList,
 } from "../../../design/MySideDrawer";
-import { Outlet, Route, Routes } from "react-router-dom";
- import { makeStyles } from '@mui/styles';
-import ProfileInformation from "./Component/ProfileInformation/ProfileInformation";
-import AddressContainer from "../Checkout/AddressContainer";
-import RatingAndReview from "./Component/RatingAndReview/RatingAndReview";
+import { Outlet } from "react-router-dom";
+import { makeStyles } from '@mui/styles';
+
 
 const useStyles = makeStyles({
   root: {

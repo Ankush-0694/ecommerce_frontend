@@ -11,14 +11,14 @@ export const VendorNavbarStyles = makeStyles({
   },
   navBtn: {
     marginLeft: "8px",
-    color: "white",
+    color: "white!important",
     "&:focus": {
       border: "none",
       outline: "none",
     },
     "&:hover": {
-      backgroundColor: "white",
-      color: "black",
+      backgroundColor: "white!important",
+      color: "black!important",
     },
   },
 });
