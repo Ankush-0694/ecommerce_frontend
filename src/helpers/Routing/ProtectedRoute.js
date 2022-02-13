@@ -17,12 +17,7 @@ const ProtectedCustomerRoute = (props) => {
 
   if (!isAuthenticated) {
     return (
-      <Navigate
-        to={{
-          pathname: "/login",
-          state: { errorMsg: "You must login to access this page" },
-        }}
-      />
+      <Navigate to="/login"  state={{ errorMsg: "You must login to access this page" }} />
     );
   }
   //if Role does not match to require role then Navigate to unAuth page
@@ -49,12 +44,7 @@ const ProtectedVendorRoute = (props) => {
   
   if (!isAuthenticated) {
     return (
-      <Navigate
-        to={{
-          pathname: "/vendor/login",
-          state: { errorMsg: "You have to login first..." },
-        }}
-      />
+      <Navigate to="/vendor/login"  state={{ errorMsg: "You must login to access this page" }} />
     );
   } else if (user && user.getMe.role !== "vendor") {
     return <Navigate to="/unAuth" />;
@@ -65,7 +55,7 @@ const ProtectedVendorRoute = (props) => {
           isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
         />
-        <Component userData={user.getMe}  />
+        <Component userData={user && user.getMe}  />
       </>
     );
   }
@@ -78,12 +68,7 @@ const ProtectedAdminRoute = (props) => {
   
   if (!isAuthenticated) {
     return (
-      <Navigate
-        to={{
-          pathname: "/admin/login",
-          state: { errorMsg: "You have to login first..." },
-        }}
-      />
+      <Navigate to="/admin/login"  state={{ errorMsg: "You must login to access this page" }} />
     );
   } else if (user && user.getMe.role !== "admin") {
     /** Routed to unauth page if user role is not admin */

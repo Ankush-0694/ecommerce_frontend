@@ -11,8 +11,9 @@ import MultiStepForm from "./Component/AddProduct/MultiStepForm/MultiStepForm";
 import { VendorProductStyles } from "./CSS/VendorProductStyles";
 import { MyPaper } from "../../../design/MyPaper";
 import MyDivider from "../../../design/MyDivider";
+import { withRouter } from "../../../../helpers/HOC/withRouter";
 
-const VendorProduct = () => {
+const VendorProduct = (props) => {
   const classes = VendorProductStyles();
 
   const [current, setCurrent] = useState(null);
@@ -76,4 +77,4 @@ const VendorProduct = () => {
   );
 };
 
-export default VendorProduct;
+export default withRouter(VendorProduct);

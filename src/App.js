@@ -35,6 +35,12 @@ import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
 import VendorProfile from "./components/pages/vendor/VendorProfile/VendorProfile";
 import ReviewFormComponent from "./components/pages/user/Review/ReviewFormComponent";
+import ProfileInformation from "./components/pages/user/Profile/Component/ProfileInformation/ProfileInformation";
+import AddressContainer from "./components/pages/user/Checkout/AddressContainer";
+import RatingAndReview from "./components/pages/user/Profile/Component/RatingAndReview/RatingAndReview";
+import Customers from "./components/pages/admin/Dashboard/Component/UserListComponents/Customers/Customers";
+import Vendors from "./components/pages/admin/Dashboard/Component/UserListComponents/Vendors/Vendors";
+import ProductList from "./components/pages/admin/Dashboard/Component/ProductListComponent/ProductList";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -201,6 +207,7 @@ const App = () => {
             }
           />
 
+          {/* This route have nested routes for my account and used using Outlet  */}
           <Route
             path="/account"
             element={
@@ -211,7 +218,24 @@ const App = () => {
                 user={getMeData}
               />
             }
-          /> 
+          >
+
+            <Route path="/account/"  element={
+                <ProfileInformation userData={getMeData && getMeData.getMe} />
+              }
+            />
+            <Route path="/account/address" element={
+                <div style={{ marginTop: "24px" }}>
+                  <AddressContainer />
+                 </div>
+              }
+            />
+            <Route path="/account/review" element={
+                <RatingAndReview userData={getMeData && getMeData.getMe} />
+              }
+            />
+
+          </Route> 
 
           {/* Vendor Routes */}
 
@@ -277,8 +301,9 @@ const App = () => {
             
           />
 
+          {/* This route have nested routes for my account and used using Outlet  */}
           <Route
-            path="/admin/Dashboard"
+            path="/admin/dashboard"
             element={
               <ProtectedAdminRoute
                 Component={AdminDashboard}
@@ -287,12 +312,18 @@ const App = () => {
                 setIsAuthenticated={setIsAuthenticated}
               />
             }
-          />
+          >
+
+            <Route path="/admin/dashboard/" element={<Customers />} />
+            <Route path="/admin/dashboard/vendors" element={<Vendors />} />
+            <Route path="/admin/dashboard/products" element={<ProductList />} />
+
+          </Route>
 
           {/* InValid Route */}
-          <Route exact path="/unAuth" component={Unauthorized} />
-          <Route exact path="/NetworkError" component={NetworkError} />
-          <Route render={() => <h1>Invalid URL</h1>} />
+          <Route path="/unAuth" element={<Unauthorized/>} />
+          <Route path="/NetworkError" element={<NetworkError/>} />
+          <Route path="*" element={<h1>Invalid URL</h1>} />
         </Routes>
       </div>
     </BrowserRouter>

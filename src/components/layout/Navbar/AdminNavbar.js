@@ -42,19 +42,11 @@ const AdminNavbar = ({ Navigate, isAuthenticated, setIsAuthenticated }) => {
    */
   if (getMeData) {
     if (getMeData.getMe.role === "customer") {
-      // Navigate(
-      // {
-      //   pathname: "/", // redirecting to main page of customer
-      //   state: { message: "You Need to Logout First" },
-      // });
       Navigate('/', { state : { message: "You Need to Logout First"} } )
     }
 
     if (getMeData.getMe.role === "vendor") {
-      Navigate({
-        pathname: "/vendor/products", // redirecting to main page of vendor
-        state: { message: "You Need to Logout First" },
-      });
+      Navigate('/vendor/products', { state : { message: "You Need to Logout First"} } )
     }
   }
 
