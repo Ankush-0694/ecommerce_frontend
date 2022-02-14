@@ -4,6 +4,7 @@ import { MyButtonComponent } from "../../../../../../design/MyButtonComponent";
 import { DELETE_REVIEW } from "../../../../../../../queries/Review/ReviewMutations";
 import { useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../../../../../../../queries/Product/productQueries";
+import { GET_REVIEWS_BY_CUSTOMERID } from "../../../../../../../queries/Review/ReviewQueries";
 
 const ProductReviewList = ({ reviewData, setCurrentReview, userData }) => {
   const { id, productID, rating, review, customerId } = reviewData;
@@ -14,6 +15,7 @@ const ProductReviewList = ({ reviewData, setCurrentReview, userData }) => {
     {
       refetchQueries: [
         { query: GET_SINGLE_PRODUCT, variables: { id: productID } }, // reftech full page , not good approach
+        { query : GET_REVIEWS_BY_CUSTOMERID  }
       ],
     }
   );

@@ -31,7 +31,7 @@ const AllProductStyles = makeStyles({
   },
 
   update_btn: {
-    marginRight: "8px",
+    marginRight: "8px!important",
     marginBottom: "8px",
   },
   delete_btn: {

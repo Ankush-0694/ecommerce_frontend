@@ -26,7 +26,7 @@ const AllProducts = ({ data, setCurrent, role }) => {
     productCategory,
     productImageUrl,
   } = data;
-  const [deleteProduct, { data: deletedProductData }] = useMutation(
+  const [deleteProduct, { data: deletedProductData }] = useMutation( 
     DELETE_PRODUCT,
     {
       onError: () => {},
@@ -107,31 +107,36 @@ const AllProducts = ({ data, setCurrent, role }) => {
             <div className={classes.buttonContainerParent}>
               <div className={classes.buttonContainerChild}>
                 {role === "vendor" && (
-                  <MyButtonComponent
-                    onClick={() => {
-                      setCurrent(data);
-                      window.scroll({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    className={classes.update_btn}>
-                    <MyEditButton />
-                  </MyButtonComponent>
-                )}
+                  <>
 
-                <MyButtonComponent
-                  variant="outlined"
-                  color="secondary"
-                  size="small"
-                  onClick={onDeleteProduct}
-                  className={classes.delete_btn}>
-                  <MyDeleteIcon />
-                </MyButtonComponent>
+                    <MyButtonComponent
+                      onClick={() => {
+                        setCurrent(data);
+                        window.scroll({
+                          top: 0,
+                          left: 0,
+                          behavior: "smooth",
+                        });
+                      }}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      className={classes.update_btn}>
+                      <MyEditButton />
+                    </MyButtonComponent>
+                
+
+                    <MyButtonComponent
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                      onClick={onDeleteProduct}
+                      className={classes.delete_btn}>
+                      <MyDeleteIcon />
+                    </MyButtonComponent>
+
+                  </>
+                )}
               </div>
             </div>
           </MyGridItem>

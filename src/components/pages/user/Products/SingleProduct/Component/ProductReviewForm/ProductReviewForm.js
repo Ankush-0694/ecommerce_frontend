@@ -64,7 +64,7 @@ const ProductReviewForm = ({ productid, currentReview, setCurrentReview , setRev
     setReviewFormData({
       review: "",
     });
-    setReviewFormSubmitted(true);
+    setReviewFormSubmitted && setReviewFormSubmitted(true);
     setRatingValue(0);
     setCurrentReview(null);
   };

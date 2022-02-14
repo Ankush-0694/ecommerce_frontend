@@ -19,17 +19,20 @@ import { withRouter } from "../../../../../../../helpers/HOC/withRouter";
 const OrderedProductList = ({ productData, orderID, filters, Navigate }) => {
   const classes = OrderedProductListStyles();
 
-  const { ByStatus } = filters;
 
-  /**
-   * Filtering data according to their order Status
-   * Don't want to use filter if selelected filter is empty
-   * */
-  if (ByStatus.length > 0) {
-    productData = productData.filter((singleProduct) =>
-      ByStatus.includes(singleProduct.orderStatus)
-    );
+  if(filters){
+    const { ByStatus } = filters;
+    /**
+     * Filtering data according to their order Status
+     * Don't want to use filter if selelected filter is empty
+     * */
+    if (ByStatus.length > 0) {
+      productData = productData.filter((singleProduct) =>
+        ByStatus.includes(singleProduct.orderStatus)
+      );
+    }
   }
+  
 
   return (
     <div>
@@ -118,7 +121,7 @@ const OrderedProductList = ({ productData, orderID, filters, Navigate }) => {
                     color="primary"
                     size="small"
                     onClick={(e) => {
-                      Navigate(`review/${productId}`);
+                      Navigate(`/review/${productId}`);
 
                       // well , it worked but don't know how
                       e.preventDefault();

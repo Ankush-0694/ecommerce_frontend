@@ -49,38 +49,6 @@ const MyProfile = ({ userData }) => {
       </MySideDrawerContainer>
 
       <div style={{ flexGrow: 2, marginLeft: "20px" }}>
-        {/* This is working because we remove exact from app.js in this route
-            And we are using exact here
-         */}
-        {/* <Routes>
-          <Route
-            path="/account"
-            element={
-              <ProfileInformation userData={userData} />
-            }
-          /> */}
-
-          {/* Coming From /user/checkout/addressContainer */}
-
-          {/* <Route
-            path="/account/address"
-            element={
-              <div className={classes.addressContainerDiv}>
-                <AddressContainer />
-              </div>
-            }
-          />
-
-          <Route
-            exact
-            path="/account/review"
-            element={
-              <RatingAndReview userData={userData} />
-            }
-          />
-          
-          
-        </Routes> */}
         <Outlet/>
       </div>
     </div>

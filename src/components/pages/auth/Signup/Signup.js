@@ -48,7 +48,7 @@ const Signup = (props) => {
   );
 
   const onChange = (e) => {
-    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value.trim()});
   };
 
   /** this function is added to remove that input error when user

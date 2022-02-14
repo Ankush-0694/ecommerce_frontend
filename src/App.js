@@ -34,7 +34,7 @@ import MyProfile from "./components/pages/user/Profile/MyProfile";
 import ShopBy from "./components/pages/user/ShopBy/ShopBy";
 import GeneratePassword from "./components/pages/vendor/GeneratePassword/GeneratePassword";
 import VendorProfile from "./components/pages/vendor/VendorProfile/VendorProfile";
-import ReviewFormComponent from "./components/pages/user/Review/ReviewFormComponent";
+import AddReview from "./components/pages/user/Review/AddReview";
 import ProfileInformation from "./components/pages/user/Profile/Component/ProfileInformation/ProfileInformation";
 import AddressContainer from "./components/pages/user/Checkout/AddressContainer";
 import RatingAndReview from "./components/pages/user/Profile/Component/RatingAndReview/RatingAndReview";
@@ -153,7 +153,7 @@ const App = () => {
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
-                Component={ReviewFormComponent}
+                Component={AddReview}
               />
             }
           />

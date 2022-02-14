@@ -19,6 +19,7 @@ import MyDivider from "../../../../design/MyDivider";
 import { Fragment } from "react";
 import { SingleProductStyles } from "./CSS/SingleProductStyles";
 import { withRouter } from "../../../../../helpers/HOC/withRouter";
+import ProductReviewForm from "./Component/ProductReviewForm/ProductReviewForm"
 
 const SingleProduct = (props) => {
   const classes = SingleProductStyles();
@@ -208,8 +209,6 @@ const SingleProduct = (props) => {
 
       <div style={{ margin: "8px 0px" }}></div>
 
-      
-
       <MyDivider />
 
       {/* this style for making some space at the end of reviews  */}
@@ -221,6 +220,17 @@ const SingleProduct = (props) => {
         {/* review List  Component */}
 
         <MyGridContainer justify="center">
+          <MyGridItem xs={8}>
+            {currentReview && 
+              <ProductReviewForm
+                currentReview={currentReview}
+                setCurrentReviewFMy={setCurrentReview} 
+              />
+            }
+          </MyGridItem> 
+
+          <MyDivider />
+
           <MyGridItem xs={8}>
             {productData.reviews.length > 0 ? (
               <MyPaper style={{ padding: "20px", marginTop: "5px" }}>
