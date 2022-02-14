@@ -11,6 +11,7 @@ import MyDivider from "../../../design/MyDivider";
 import { MyPaper } from "../../../design/MyPaper";
 import { DELETE_CART_BY_CUSTOMERID } from "../../../../queries/Cart/cartMutations";
 import { withRouter } from "../../../../helpers/HOC/withRouter";
+import EmptyCart from "./Component/EmptyCart/EmptyCart";
 
 const Cart = (props) => {
   const { Navigate } = props;
@@ -144,7 +145,8 @@ const Cart = (props) => {
                     textAlign: "center",
                     padding: "20px",
                   }}>
-                  Your Cart is Empty
+                  {/* Your Cart is Empty */}
+                  <EmptyCart />
                 </p>
               </div>
             </div>

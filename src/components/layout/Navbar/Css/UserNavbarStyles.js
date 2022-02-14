@@ -26,7 +26,7 @@ const userNavbarStyles = makeStyles((theme) => ({
   },
 
   NavbarLink: {
-    color: "white!important",
+    color: "white !important",
     padding: "6px 3px",
     "&:hover": {
       color: "#f50057!important",
