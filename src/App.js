@@ -14,18 +14,12 @@ import OrderDetails from "./components/pages/user/Orders/OrderDetails/OrderDetai
 import MyToolbar from "./components/design/MyToolbar";
 import { GET_ME } from "./queries/user/userQueries";
 import { useQuery } from "@apollo/client";
-import Unauthorized from "./components/layout/ErrorComponent/Unauthorized";
+import Unauthorize  from "./components/layout/ErrorComponent/Unauthorize";
+
+import { ProtectedRoute } from "./helpers/Routing/ProtectedRoutes";
 
 import {
-  ProtectedAdminRoute,
-  ProtectedCustomerRoute,
-  ProtectedVendorRoute,
-} from "./helpers/Routing/ProtectedRoute";
-
-import {
-  PublicCustomerRoute,
-  PublicVendorRoute,
-  PublicAdminRoute,
+  PublicRoute
 } from "./helpers/Routing/PublicRoutes";
 
 import ShowLoading from "./components/layout/LoadingComponent/ShowLoading";
@@ -64,9 +58,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/** Toolbar added to make content below app bar because
-        app bar is fixed */}
-      <MyToolbar />
+      
+      
 
       {/* This styling for stop responsiveness */}
       <div>
@@ -78,21 +71,23 @@ const App = () => {
           <Route
             path="/login"
             element={
-            <PublicCustomerRoute
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-              Component={Login} 
-            />
+              <PublicRoute
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                Component={Login} 
+                role="customer"
+              />
             }
           />
 
            <Route
             path="/Signup"
             element={
-              <PublicCustomerRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={Signup} 
+                role="customer"
               />
             }
           />
@@ -100,10 +95,11 @@ const App = () => {
           <Route
             path="/"
             element={
-              <PublicCustomerRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={Home} 
+                role="customer"
               />
             }
           />
@@ -111,11 +107,12 @@ const App = () => {
           <Route
             path="/Products/:id"
             element={
-              <PublicCustomerRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={SingleProduct} 
                 user={getMeData}
+                role="customer"
               />
             }
           />
@@ -124,10 +121,11 @@ const App = () => {
           <Route
             path="/ShopBy"
             element={
-              <PublicCustomerRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={ShopBy}
+                role="customer"
               />
             }
           />
@@ -136,24 +134,29 @@ const App = () => {
           <Route
             path="/cart"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
                 Component={Cart}
+                role="customer"
               />
             }
           />
 
 
+          
+
+
           <Route
             path="/review/:productId"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
                 Component={AddReview}
+                role="customer"
               />
             }
           />
@@ -161,11 +164,12 @@ const App = () => {
           <Route
             path="/checkout/:id"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 Component={CheckoutSingle}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="customer"
               />
             }
           />
@@ -173,11 +177,12 @@ const App = () => {
           <Route
             path="/checkout"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 Component={CheckoutMultiple}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="customer"
               />
             }
           />
@@ -185,11 +190,12 @@ const App = () => {
           <Route
             path="/orders"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 Component={Orders}
                 isAuthenticated={isAuthenticated}
                 user={getMeData}
                 setIsAuthenticated={setIsAuthenticated}
+                role="customer"
               />
             } 
           />
@@ -198,11 +204,12 @@ const App = () => {
             exact
             path="/orders/details"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 Component={OrderDetails}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="customer"
               />
             }
           />
@@ -211,11 +218,12 @@ const App = () => {
           <Route
             path="/account"
             element={
-              <ProtectedCustomerRoute
+              <ProtectedRoute
                 Component={MyProfile}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="customer"
               />
             }
           >
@@ -243,10 +251,11 @@ const App = () => {
             exact
             path="/vendor/login"
             element={
-              <PublicVendorRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={Login}
+                role="vendor"
               />
             }
           />
@@ -255,11 +264,12 @@ const App = () => {
             exact
             path="/vendor/products"
             element={
-              <ProtectedVendorRoute
+              <ProtectedRoute
                 Component={VendorProduct}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="vendor"
               />
             } 
           />
@@ -268,11 +278,12 @@ const App = () => {
             exact
             path="/Vendor/account"
             element={
-              <ProtectedVendorRoute
+              <ProtectedRoute
                 Component={VendorProfile}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
+                role="vendor"
               />
             }
           />
@@ -292,24 +303,27 @@ const App = () => {
           <Route
             path="/admin/login"
             element={
-              <PublicAdminRoute
+              <PublicRoute
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 Component={Login}
+                role="admin"
               />
             }
             
           />
 
           {/* This route have nested routes for my account and used using Outlet  */}
+          
           <Route
             path="/admin/dashboard"
             element={
-              <ProtectedAdminRoute
+              <ProtectedRoute
                 Component={AdminDashboard}
                 user={getMeData}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
+                role="admin"
               />
             }
           >
@@ -321,7 +335,7 @@ const App = () => {
           </Route>
 
           {/* InValid Route */}
-          <Route path="/unAuth" element={<Unauthorized/>} />
+          <Route path="/unAuthorize" element={<Unauthorize />} />
           <Route path="/NetworkError" element={<NetworkError/>} />
           <Route path="*" element={<h1>Invalid URL</h1>} />
         </Routes>
