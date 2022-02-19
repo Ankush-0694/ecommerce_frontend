@@ -18,7 +18,7 @@ const Login = (props) => {
     passwordError: "",
   });
 
-  console.log({props})
+  // console.log({props})
   
   const { location, Navigate, setIsAuthenticated } = props;
 

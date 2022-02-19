@@ -6,6 +6,7 @@ import MyDivider from "../../../../../design/MyDivider";
 import { MyFullScreenBox } from "../../../../../design/MyFullScreenBox";
 import { MyGridContainer, MyGridItem } from "../../../../../design/MyGrid";
 import { MyPaper } from "../../../../../design/MyPaper";
+import { MyTypography } from "../../../../../design/MyTypography";
 import ShowError from "../../../../../layout/ErrorComponent/ShowError";
 import ShowLoading from "../../../../../layout/LoadingComponent/ShowLoading";
 import ProductReviewForm from "../../../Products/SingleProduct/Component/ProductReviewForm/ProductReviewForm";
@@ -76,7 +77,7 @@ const RatingAndReview = ({ userData }) => {
 
           <MyGridContainer justify="center" style={{ paddingBottom: "16px" }}>
             <MyGridItem xs={8}>
-              {reviewData.map((review, index) => {
+              {reviewData.length > 0 ? reviewData.map((review, index) => {
                 /** Mappping of data - ReviewByUserID */
 
                 return (
@@ -95,7 +96,11 @@ const RatingAndReview = ({ userData }) => {
                     )}
                   </Fragment>
                 );
-              })}
+              }) :
+                <MyTypography variant="h6" component="h2" style={{paddingTop: "16px" , textAlign: "center"}}>
+                  No Review Added By You &#128533;
+                </MyTypography> 
+              }
             </MyGridItem>
           </MyGridContainer>
         </MyPaper>
