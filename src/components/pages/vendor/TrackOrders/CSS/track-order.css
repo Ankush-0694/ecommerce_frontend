@@ -1,0 +1,16 @@
+.main-heading{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.container{
+    padding: 16px;
+    margin:  16px auto;
+    border: 1px solid black;
+    max-width: 80%;
+    display: flex;
+}
+
+.right-part{
+    margin-left: 16px;
+}

@@ -111,4 +111,18 @@ const GET__ORDERS_BY_CUSTOMERID = gql`
   }
 `;
 
-export { GET_ALL_ORDERS, GET_SINGLE_ORDER_BY_ID, GET__ORDERS_BY_CUSTOMERID };
+const GET_ORDERS_BY_VENDOR_ID = gql`
+  query {
+    getOrdersByVendorIdOfProduct {
+      productId
+      vendorId
+      productName
+      productDescription
+      productPrice
+      productImageUrl
+      orderId 
+    }
+  }
+`
+
+export { GET_ALL_ORDERS, GET_SINGLE_ORDER_BY_ID, GET__ORDERS_BY_CUSTOMERID, GET_ORDERS_BY_VENDOR_ID };

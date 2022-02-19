@@ -35,6 +35,7 @@ import RatingAndReview from "./components/pages/user/Profile/Component/RatingAnd
 import Customers from "./components/pages/admin/Dashboard/Component/UserListComponents/Customers/Customers";
 import Vendors from "./components/pages/admin/Dashboard/Component/UserListComponents/Vendors/Vendors";
 import ProductList from "./components/pages/admin/Dashboard/Component/ProductListComponent/ProductList";
+import TrackOrders from "./components/pages/vendor/TrackOrders/TrackOrders";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -276,10 +277,25 @@ const App = () => {
 
           <Route
             exact
-            path="/Vendor/account"
+            path="/vendor/account"
             element={
               <ProtectedRoute
                 Component={VendorProfile}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={getMeData}
+                role="vendor"
+              />
+            }
+          />
+         
+
+           <Route
+            exact
+            path="/vendor/trackOrder"
+            element={
+              <ProtectedRoute
+                Component={TrackOrders}
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
                 user={getMeData}
