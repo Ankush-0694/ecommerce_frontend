@@ -85,28 +85,28 @@ const Orders = () => {
   }
 
   // we will filter orders using searchOrder state value
-  const SearchOrderByKeyword = (e) => {
-    e.preventDefault();
-    const searchKeyword = searchOrderKeyword;
+  // const SearchOrderByKeyword = (e) => {
+  //   e.preventDefault();
+  //   const searchKeyword = searchOrderKeyword;
 
-    orderData = orderData.map((singleOrder) => {
-      const regex = new RegExp(`${searchKeyword}`, "gi");
+  //   orderData = orderData.map((singleOrder) => {
+  //     const regex = new RegExp(`${searchKeyword}`, "gi");
 
-      // singleOrder.productDetailsWithQuantity =
+  //     // singleOrder.productDetailsWithQuantity =
 
-      // return {
-      //   ...singleOrder,
-      //   productDetailsWithQuantity:
-      //     singleOrder.productDetailsWithQuantity.filter((singleProduct) => {
-      //       const { productName, productDescription } =
-      //         singleProduct.productDetails;
-      //       // console.log(singleProduct.productDetails);
-      //       // return productName.match(regex) || productDescription.match(regex);
-      //       return true;
-      //     }),
-      // };
-    });
-  };
+  //     // return {
+  //     //   ...singleOrder,
+  //     //   productDetailsWithQuantity:
+  //     //     singleOrder.productDetailsWithQuantity.filter((singleProduct) => {
+  //     //       const { productName, productDescription } =
+  //     //         singleProduct.productDetails;
+  //     //       // console.log(singleProduct.productDetails);
+  //     //       // return productName.match(regex) || productDescription.match(regex);
+  //     //       return true;
+  //     //     }),
+  //     // };
+  //   });
+  // };
 
   return (
     <div className={classes.pageContainer}>

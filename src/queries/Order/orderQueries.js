@@ -120,7 +120,12 @@ const GET_ORDERS_BY_VENDOR_ID = gql`
       productDescription
       productPrice
       productImageUrl
-      orderId 
+      orderId
+      customerId
+      orderedDate
+      quantity
+      orderStatus
+      deliveredDate 
     }
   }
 `
