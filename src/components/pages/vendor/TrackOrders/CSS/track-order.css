@@ -14,3 +14,12 @@
 .right-part{
     margin-left: 16px;
 }
+
+.button-grp{
+    display: flex;
+}
+
+.button-grp > div{
+    margin-top : 4px;
+    margin-right: 8px;
+}

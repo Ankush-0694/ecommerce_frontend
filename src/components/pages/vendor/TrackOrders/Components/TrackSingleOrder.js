@@ -4,7 +4,7 @@ import { MyButtonComponent } from '../../../../design/MyButtonComponent';
 import "../CSS/track-order.css"
 
 const TrackSingleOrder = (props) => {
-    const {getVendorOrderData} = props;
+    const { getVendorOrderData } = props;
 
     const {
         orderId, productId , productName , productPrice, productImageUrl, productDescription,
@@ -14,6 +14,8 @@ const TrackSingleOrder = (props) => {
     let orderedDateFormatted = new Date(Number(orderedDate)).toDateString();
 
     // console.log({orderId, productId})
+
+    
     return (
         <div className="container">
             <div className='left-part'>
@@ -38,11 +40,21 @@ const TrackSingleOrder = (props) => {
 
                 <div>Total Price : {productPrice*quantity}</div>
 
-                <div>
-                    <MyButtonComponent variant="outlined" color="primary" size="small">
-                        Change Order Status
-                    </MyButtonComponent>
+                <div className='button-grp'>
+                    <div>
+                        <MyButtonComponent variant="outlined" color="primary" size="small">
+                            Change Order Status
+                        </MyButtonComponent>
+                    </div>
+
+                    {/* <div>
+                        <MyButtonComponent disabled={true} variant="outlined" color="primary" size="small">
+                            Assign Delivery Partner
+                        </MyButtonComponent>
+                    </div> */}
                 </div>
+
+                
 
             </div>
            

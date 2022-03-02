@@ -25,10 +25,10 @@ const TrackOrders = () => {
     const dataToRender = getVendorOrderData.getOrdersByVendorIdOfProduct;
     
 
-    console.log({dataToRender})
+    // console.log({dataToRender})
     return (
         <div>
-            <h3 className='main-heading'>Product Ordered</h3>
+            <h3 className='main-heading'>Total Orders : {dataToRender.length}</h3>
             {dataToRender.map((singleOrder,index)=>{
                 return <TrackSingleOrder key={index} getVendorOrderData={singleOrder}/>
             })}

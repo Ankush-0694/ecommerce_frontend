@@ -29,7 +29,7 @@ const OrderStatus = ({ orderStatus }) => {
     iconColor = "orange";
     statusMessage = "You returned this order";
   }
-  if (orderStatus === "On The Way") {
+  if (orderStatus === "on the way") {
     iconColor = "lightblue";
     statusMessage = "Your order is on the way";
   }
