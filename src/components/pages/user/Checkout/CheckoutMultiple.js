@@ -133,8 +133,7 @@ const CheckoutMultiple = (props) => {
         </MyAlert>
       )}
 
-      {/* For showing sucess alert message when wep placed the order   */}
-
+      {/* For showing sucess alert message when we placed the order   */}
       {orderSubmitEvent && selectedAddress && (
         <MyAlert type="success" stateToClear={setOrderSubmitEvent}>
           {orderSubmitEvent}

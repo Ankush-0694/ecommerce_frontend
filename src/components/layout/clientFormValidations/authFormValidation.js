@@ -75,13 +75,18 @@ const validateLoginForm = (userDetails, setUserDetails) => {
     passwordError: "",
   };
 
-  // if (!email) {
-  //   isError = true;
-  //   errors.emailError = "Email is required";
-  // } else if (!/\S+@\S+\.\S+/.test(email)) {
-  //   isError = true;
-  //   errors.emailError = "Email invalid";
-  // }
+  if (!email) {
+    isError = true;
+    errors.emailError = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(email)) {
+    isError = true;
+    errors.emailError = "Email invalid";
+  }
+
+  if (password.length < 6) {
+    isError = true;
+    errors.passwordError = "Password should have atleast 6 characters";
+  }
 
   setUserDetails({
     ...userDetails,

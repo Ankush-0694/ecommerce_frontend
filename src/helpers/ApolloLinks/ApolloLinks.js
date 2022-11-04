@@ -2,10 +2,10 @@ import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "apollo-link-error";
 import { errorVar } from "../ReactiveVariables/ReactiveVariables";
-import { createBrowserHistory } from "history";
+// import { createBrowserHistory } from "history";
 
 /** imported for pushing on error */
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 // const httplink = createUploadLink({ uri: "http://ec2-65-1-132-213.ap-south-1.compute.amazonaws.com/graphql" });
 const httplink = createUploadLink({ uri: "http://localhost:4010/graphql" });
@@ -34,7 +34,7 @@ const errorLink = onError(({ graphQLErrors, networkError, response }) => {
     if (networkError.message.includes("Unexpected token ")) {
       localStorage.removeItem("token");
       // console.log("push to some Error Page");
-      history.push("/NetworkError");
+      // history.push("/NetworkError");
     }
   }
 });

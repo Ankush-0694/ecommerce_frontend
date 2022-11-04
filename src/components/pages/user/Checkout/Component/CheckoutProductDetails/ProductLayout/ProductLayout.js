@@ -48,11 +48,14 @@ const ProductLayout = ({
           <div style={{ fontWeight: "300" }}>
             Single Item Price : {productPrice}
           </div>
-          {showQuantitySection && (
-            <MyTypography variant="body1" component="p">
+           <MyTypography variant="body1" component="p">
               Total Price : {productPrice * quantity}
             </MyTypography>
-          )}
+          {!showQuantitySection&& (
+           <MyTypography variant="body1" component="p">
+              Total Quantity : { quantity}
+            </MyTypography>)
+            }
         </div>
 
         {/* Button and quantity */}

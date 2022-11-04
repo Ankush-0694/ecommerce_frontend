@@ -17,7 +17,6 @@ const MyButtonComponent = ({
 }) => {
 
   return (
-   
       <Button
         disableRipple
         variant={variant}
